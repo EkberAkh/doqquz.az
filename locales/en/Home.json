@@ -1,0 +1,46 @@
+{
+    "Header": {
+        "title":"Hire experts or be hired for any job, any time.",
+        "subTitle":"Thousands of small businesses use <0>Doqquz</0> to turn their ideas into reality.",
+        "questions":{
+            "where":"Where?",
+            "jobType":"What job do you want?"
+        },
+        "placeholders":{
+            "jobType":"Job Title or Keyword"
+        }
+    },
+    "JobAnnouncement":{
+        "title":"Latest Job Announcements",
+        "actions":{
+            "shortLink":"Browse All Jobs"
+        }
+        
+    },
+    "RegisteredJobseekers":{
+        "title":"Latest Registered Jobseekers",
+        "actions":{
+            "shortLink":"Browse All Jobseekers",
+            "viewProfile":"View profile"
+        }
+    },
+    "Footer":{
+        "Nav":{
+            "forCandidates":{
+                "label":"For Candidates",
+                "addResume":"Add Resume"
+            },
+            "forEmployers":{
+                "label":"For Employers"
+            },
+            "helpfulLinks": "Helpful Links",
+            "account":"Account",
+            "privacyPolice":"Privacy policy"
+        },
+        "Subscribe":{
+            "title":"Sign Up For a Newsletter",
+            "description":"Weekly breaking news, analysis and cutting edge advices on job searching.",
+            "placeholder":"Email address"
+        }
+    }
+}

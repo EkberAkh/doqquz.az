@@ -1,0 +1,35 @@
+{
+    "titles": {
+        "contactInfo": "Əlaqə Məlumatı",
+        "profileInfo": "Profil Məlumatı",
+        "education": "Təhsil",
+        "experience": "Təcrübə",
+        "portfolio": "Portfolio",
+        "security": "Şifrə və təhlükəsizlik"
+    },
+    "ProfileInfo": {
+        "name": "Ad",
+        "birthday": "Doğum tarixi",
+        "expectedSalary": "Maaş gözləntiniz",
+        "resume": "CV",
+        "establishmentDate": "Yaranma tarixi"
+    },
+    "Education": {
+        "header": "Təhsil əlavə et",
+        "name": "Universitet adı",
+        "major": "İxtisas",
+        "degree": "Dərəcə"
+    },
+    "Experience": {
+        "header": "Təcrübə əlavə et",
+        "name": "Şirkətin adı",
+        "title": "Vəzifə"
+    },
+    "Portfolio": {
+        "header": {
+            "add": "Portfolio əlavə et",
+            "update":"Portfeli yeniləyin"
+        },
+        "title":"Başlıq"
+    }
+}

@@ -1,0 +1,33 @@
+{
+    "name": "Company name",
+    "candidates":"Candidates",
+    "ManageJobs": {
+        "title": "Manage Jobs",
+        "subTitle": "My Job Listings",
+        "empty": "You don't have any job post",
+        "postedOn":"Posted on {{date}}",
+        "actions": {
+            "candidates":"Manage Candidates",
+            "postAJob":"Post a Job"
+        }
+    },
+    "PostAJob":{
+        "title":{
+            "post":"Post a Job",
+            "update":"Update the job post"
+        },
+        "subTitle":"Job Submission Form",
+        "fields":{
+            "title":"Title",
+            "notificationEmail": "Notify me to"
+        }
+    },
+    "ViewJob":{
+        "summary":"Job Summary",
+        "datePosted":"Date Posted",
+        "requiredSkills":"Required Skills",
+        "contactInformation": "How to apply?",
+        "description":"Job Description",
+        "share":"Interesting? <0>Share It!</0>"
+    }
+}

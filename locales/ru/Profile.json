@@ -1,0 +1,35 @@
+{
+    "titles": {
+        "contactInfo": "Контакты",
+        "profileInfo": "Профиль",
+        "education": "Oбразование",
+        "experience": "Опыт",
+        "portfolio": "Портфолио",
+        "security": "Пароль и безопасность"
+    },
+    "ProfileInfo": {
+        "name": "Название компании",
+        "birthday": "День рождения",
+        "expectedSalary": "Ожидаемая Зарплата",
+        "resume": "Резюме",
+        "establishmentDate": "Дата основания"
+    },
+    "Education": {
+        "header": "Добавить образование",
+        "name": "Название университета",
+        "major": "Специальность",
+        "degree": "Степень"
+    },
+    "Experience": {
+        "header": "Добавить опыт",
+        "name": "Название компании",
+        "title": "Заглавие"
+    },
+    "Portfolio": {
+        "header": {
+            "add": "Добавить элемент портфолио",
+            "update": "Обновить элемент портфолио"
+        },
+        "title": "Заглавие"
+    }
+}
