@@ -1,0 +1,462 @@
+{
+    "Action": {
+        "ACCEPT": "Razıyam",
+        "ADD": "Əlavə et",
+        "ADD_ANOTHER": "Növbətini əlavə et",
+        "ALL": "Bütün",
+        "APPLY": "Tətbiq et",
+        "APPROVE": "Təsdiq et",
+        "BACK": "Geri",
+        "BEGIN": "Başla",
+        "CANCEL": "Ləğv et",
+        "CHOOSE": "Seç",
+        "CLEAR": "Təmizlə",
+        "CLEAR_ALL": "Hamısını təmizlə",
+        "CLOSE": "Bağla",
+        "CLOSE_FILTER": "Filtri bağla",
+        "COMPLETE": "Tamamla",
+        "CONFIRM": "Təsdiqlə",
+        "CONTINUE": "Davam et",
+        "COPY": "Surətini köçür",
+        "CREATE": "Yarat",
+        "CREATE_SIGN": "Yarat və imzala",
+        "DELETE": "Sil",
+        "DELETE_ALL": "Hamısını sil",
+        "DOWNLOAD": "Yüklə",
+        "DOWNLOAD_FORM": "Formanı yüklə",
+        "DOWNLOAD_FORMAL": "Yükləyin",
+        "DOWNLOAD_AS_DOCUMENT": "Sənəd kimi yüklə",
+        "EDIT": "Düzəliş et",
+        "GET_STARTED": "İstifadəyə başla",
+        "GO_TO_MAIN": "Əsas səhifəyə qayıt",
+        "JOIN_LIVE": "Canlı DEMO görüşü",
+        "LOGIN": "Daxil ol",
+        "REGISTER":"Qeydiyyatdan keç",
+        "MODIFY_INFORMATION": "Məlumatları dəyiş",
+        "NEXT": "Növbəti",
+        "NO": "Xeyr",
+        "OK": "OK",
+        "OPEN": "Aç",
+        "ORDER": "Sifariş et",
+        "PAY": "Ödə",
+        "PRINT": "Çap et",
+        "REJECT": "İmtina et",
+        "REMOVE_DRAFT": "Qaralamanı sil",
+        "REQUEST": "Müraciət et",
+        "RESET_FILTER": "Filtri sıfırla",
+        "SAVE": "Yadda saxla",
+        "SAVE_AND_CLOSE": "Yadda saxla və çıx",
+        "SEARCH": "Axtar",
+        "SELECT": "Seç",
+        "SELECT_FILE": "Faylları seçin",
+        "SEND": "Göndər",
+        "SEND_AGAIN": "Yenidən göndər",
+        "SEND_TO_BANK": "Banka göndər",
+        "SEND_TO_EMAIL": "E-poçta göndər",
+        "SHOW_DETAILS": "Ətraflı məlumatı göstər",
+        "SIGN": "İmzala",
+        "UPLOAD": "Yüklə",
+        "USE": "İstifadə et",
+        "VIEW": "Baxış",
+        "YES": "Bəli",
+        "SUBSCRIBE": "Abunə ol",
+        "REQUEST_CALL": "Zəng sorğula",
+        "INVITE": "Dəvət et",
+        "JOIN": "Qoşul",
+        "JOINED": "Qoşulmusunuz",
+        "BOOKMARK":"Gözaltı et",
+        "BOOKMARKED":"Gözaltı edilib"
+    },
+    "Contacts": "{{email}} / {{phone}} / {{hotLine}}",
+    "Copyrights": "© {{year}} <0>Doqquz</0>.Bütün hüquqlar qorunur.",
+    "CountrySelect": {
+        "emptyList": "Ölkə tapılmadı"
+    },
+    "Warning":{
+        "completeAccount":"Hesabınızı tamamlayın"
+    },
+    "Error": {
+        "default": "Əməliyyat hazırda mümkün deyil. Əlavə məlumat üçün müraciət edin: {{contacts}}.",
+        "contactToGetInfo":"Əlavə məlumat üçün müraciət edin: {{contacts}}.",
+        "validation": {
+            "empty": "Bu xana mütləqdir",
+            "format": "Format yanlışdır",
+            "min": "Bu xana minimum {{count}} simvol olmalıdır",
+            "repeatPassword": "Parol xanası ilə eyni olmalıdır"
+        }
+    },
+    "Success":{
+        "default": "Əməliyyat uğurla icra olundu"
+    },
+    "General": {
+        "None": "Yoxdur",
+        "Soon": "Tezliklə"
+    },
+    "Header": {
+        "action": "Hərəkət",
+        "help": "Kömək",
+        "Login": {
+            "label": "Daxil olmaq"
+        },
+        "settings": "Ayarlar"
+    },
+    "Lexical": {
+        "or": "və ya"
+    },
+    "Nav": {
+        "LOG_OUT": {
+            "label": "Çıxış"
+        },
+        "home": "Ana səhifə",
+        "jobs": "Vakansiyalar",
+        "browse_jobs": "Vakansiyaları axtar",
+        "browse_companies": "Şirkətləri axtar",
+        "employees": "İstifadəçilər",
+        "browse_jobseekers": "İstifadəçiləri tap",
+        "manage_jobs": "Vakansiyaları idarə et",
+        "post_a_job": "Vakansiya elanı paylaş",
+        "contact": "Əlaqə",
+        "bookmarks": "Gözaltılar",
+        "about":"Haqqımızda"
+    },
+    "Footer": {},
+    "Pagination": {
+        "itemsCountPerPageLabel": "Səhifədə göstər"
+    },
+    "Placeholder": {
+        "dateInputFormat": "gg.aa.iiii"
+    },
+    "Range": {
+        "amount": {
+            "max": "Maks.",
+            "min": "Min."
+        },
+        "date": {
+            "from": "Başlama",
+            "option": {
+                "lastMonth": "Keçən ay",
+                "lastWeek": "Keçən həftə",
+                "lastYear": "Keçən il"
+            },
+            "to": "Bitmə"
+        }
+    },
+    "Currency": {
+        "emptyList": "Məzmun tapılmadı",
+        "label": "Valyuta",
+        "placeholder": "Bütün Valyutalar"
+    },
+    "Unit": {
+        "DATA": {
+            "B": "B",
+            "GB": "GB",
+            "KB": "KB",
+            "MB": "MB",
+            "TB": "TB"
+        },
+        "DURATION": {
+            "DAY": {
+                "key": "{{count}} gün"
+            },
+            "HOUR": {
+                "key": "{{count}} saat"
+            },
+            "MONTH": {
+                "key": "{{count}} ay"
+            },
+            "WEEK": {
+                "key": "{{count}} həftə"
+            },
+            "YEAR": {
+                "key": "{{count}} il"
+            }
+        }
+    },
+    "UploadFile": {
+        "title": "Sənədlər",
+        "error": {
+            "format": "Yanlış sənəd formatı",
+            "size": "Əlavə edilmiş sənədlərin ümumi ölçüsü ({{actualSize}}) icazə verilən {{maxSize}} maksimal ölçüdən çoxdur"
+        },
+        "primary": "Sənədi bura atın və ya seçin",
+        "secondary": "Dəstəklənən sənəd formatları: {{fileTypes}}"
+    },
+    "Menu": {
+        "profile": {
+            "label": "Mənim Profilim",
+            "items": {
+                "settings": "Ayarlar",
+                "bookmarks": "Gözaltılar",
+                "logout": "Çıxış"
+            }
+        }
+    },
+    "FormInputs": {
+        "fullname": {
+            "label": "Ad və Soyad"
+        },
+        "companyName": {
+            "label": "Şirkətin adı",
+            "placeholder": "Şirkətin adını daxil edin"
+        },
+        "firstName": {
+            "label": "Ad",
+            "placeholder": "Adı daxil edin"
+        },
+        "lastName": {
+            "label": "Soyad",
+            "placeholder": "Soyadı daxil edin"
+        },
+        "phoneNumber": {
+            "label": "Telefon nömrəsi"
+        },
+        "email": {
+            "label": "E-poçt ünvanı",
+            "placeholder": "example@domain.com"
+        },
+        "password": {
+            "label": "Parol",
+            "placeholder": "Parolunuzu daxil edin"
+        },
+        "description": {
+            "label": "Təsvir"
+        },
+        "contactInformation": {
+            "label": "Müraciyyət üçün"
+        },
+        "subject": {
+            "label": "Mövzu"
+        },
+        "message": {
+            "label": "Mesaj"
+        },
+        "websiteUrl": {
+            "label": "Web sayt Url"
+        },
+        "startingDate": {
+            "label": "Başlama tarixi"
+        },
+        "endDate": {
+            "label": "Bitmə tarixi"
+        },
+        "currentPassword":{
+            "label":"Hazırkı şifrə"
+        },
+        "newPassword": {
+            "label": "Yeni şifrə"
+        },
+        "repeatNewPassword": {
+            "label": "Yeni şifrəni təkrarlayın"
+        },
+        "file":{
+            "max":"Maksimum fayl ölçüsü: {{size}}",
+            "types":"Fayl növləri: {{types}}"
+        }
+    },
+    "present":"Halhazırda",
+    "location": "Ünvan",
+    "noRecord":"<0>Ups! 😔</0><1></1><2>Heç bir məlumat tapılmadı</2>",
+    "noData":"Bu bölmədə heç bir qeyd yoxdur",
+    "bookmark":{
+        "post":"Gözaltı etdiyim Vakansiyalar",
+        "jobseeker":"Gözaltı etdiyim İş axtaranlar"
+    },
+    "INDUSTRIES": {
+        "label": "İş Kateqoriyası",
+        "INDUSTRY": "Sənaye",
+        "ACCOUNTING": "Mühasibat",
+        "AIRLINES_OR_AVIATION": "Aviaşirkətlər / Aviasiya",
+        "ALTERNATIVE_DISPUTE_RESOLUTION": "Alternativ Mübahisələrin Həlli",
+        "ALTERNATIVE_MEDICINE": "Alternativ tibb",
+        "ANIMATION": "Animasiya",
+        "APPAREL_OR_FASHION": "Geyim / Moda",
+        "ARCHITECTURE_OR_PLANNING": "Memarlıq / Planlaşdırma",
+        "ARTS_OR_CRAFTS": "İncəsənət / Əl işi",
+        "AUTOMOTIVE": "Avtomobil sənayesi",
+        "AVIATION_OR_AEROSPACE": "Aviasiya / Aerokosmik",
+        "BANKING_OR_MORTGAGE": "Bankçılıq / İpoteka",
+        "BIOTECHNOLOGY_OR_GREENTECH": "Biotexnologiya / Greentech",
+        "BROADCAST_MEDIA": "Media yayımçılıq",
+        "BUILDING_MATERIALS": "Tikinti materiallari",
+        "BUSINESS_SUPPLIES_OR_EQUIPMENT": "İş ləvazimatları / Avadanlıq",
+        "CAPITAL_MARKETS_OR_HEDGE_FUND_OR_PRIVATE_EQUITY": "Kapital Bazarları / Çit Fondu / Şəxsi Kapital",
+        "CHEMICALS": "Kimyəvi maddələr",
+        "CIVIC_OR_SOCIAL_ORGANIZATION": "Vətəndaş / Sosial Təşkilat",
+        "CIVIL_ENGINEERING": "Mülki mühəndislik",
+        "COMMERCIAL_REAL_ESTATE": "Daşınmaz əmlak ticarəti",
+        "COMPUTER_GAMES": "Kompüter oyunları",
+        "COMPUTER_HARDWARE": "Kompüter Təchizatı",
+        "COMPUTER_NETWORKING": "Kompüter Şəbəkəsi",
+        "COMPUTER_SOFTWARE_OR_ENGINEERING": "Kompüter proqramlaşdırması / Mühəndisliyi",
+        "COMPUTER_OR_NETWORK_SECURITY": "Kompüter / Şəbəkə Təhlükəsizliyi",
+        "CONSTRUCTION": "Tikinti",
+        "CONSUMER_ELECTRONICS": "Məişət elektronikası",
+        "CONSUMER_GOODS": "İstehlak malları",
+        "CONSUMER_SERVICES": "İstehlakçı xidmətləri",
+        "COSMETICS": "Kosmetika",
+        "DAIRY": "Süd məhsulları",
+        "DEFENSE_OR_SPACE": "Müdafiə / Kosmik",
+        "DESIGN": "Dizayn",
+        "E_LEARNING": "E - Təhsil",
+        "EDUCATION_MANAGEMENT": "Təhsil üzrə idarəçilik",
+        "ELECTRICAL_OR_ELECTRONIC_MANUFACTURING": "Elektrik cihazları / Elektron İstehsalı",
+        "ENTERTAINMENT_OR_MOVIE_PRODUCTION": "Əyləncə / Film istehsalı",
+        "ENVIRONMENTAL_SERVICES": "Ekoloji xidmətlər",
+        "EVENTS_SERVICES": "Tədbir xidmətləri",
+        "EXECUTIVE_OFFICE": "İcra vəzifə",
+        "FACILITIES_SERVICES": "Obyekt xidmətləri",
+        "FARMING": "Kənd təsərrüfatı",
+        "FINANCIAL_SERVICES": "Maliyyə xidmətləri",
+        "FINE_ART": "Təsviri incəsənət",
+        "FISHERY": "Balıqçılıq",
+        "FOOD_PRODUCTION": "Qida İstehsalatı",
+        "FOOD_OR_BEVERAGES": "Qida / İçkilər",
+        "FUNDRAISING": "Vəsait toplanışı",
+        "FURNITURE": "Mebel",
+        "GAMBLING_OR_CASINOS": "Qumar / Kazinolar",
+        "GLASS_OR_CERAMICS_OR_CONCRETE": "Şüşə / Keramik / Beton",
+        "GOVERNMENT_ADMINISTRATION": "Dövlət İdarəçiliyi",
+        "GOVERNMENT_RELATIONS": "Hökümətlə əlaqələr",
+        "GRAPHIC_DESIGN_OR_WEB_DESIGN": "Qrafik Dizayn / Veb Dizayn",
+        "HEALTH_OR_FITNESS": "Sağlamlıq / Fitness",
+        "HIGHER_EDUCATION_OR_ACADAMIA": "Ali Təhsil / Akademiya",
+        "HOSPITAL_OR_HEALTH_CARE": "Xəstəxana / Səhiyyə xidməti",
+        "HOSPITALITY": "Qonaqpərvərlik",
+        "HUMAN_RESOURCES_OR_HR": "İnsan Resursları / HR",
+        "IMPORT_OR_EXPORT": "İdxal-ixrac",
+        "INDIVIDUAL_OR_FAMILY_SERVICES": "Fərdi / Ailə xidmətləri",
+        "INDUSTRIAL_AUTOMATION": "Sənaye avtomatlaşdırması",
+        "INFORMATION_SERVICES": "Məlumat xidmətləri",
+        "INFORMATION_TECHNOLOGY_OR_IT": "İnformasiya Texnologiyaları / İT",
+        "INSURANCE": "Sığorta",
+        "INTERNATIONAL_AFFAIRS": "Beynəlxalq əlaqələr",
+        "INTERNATIONAL_TRADE_OR_DEVELOPMENT": "Beynəlxalq Ticarət / İnkişaf",
+        "INTERNET": "İnternet",
+        "INVESTMENT_BANKING_OR_VENTURE": "İnvestisiya Bankçılığı / Müəssisəsi",
+        "INVESTMENT_MANAGEMENT_OR_HEDGE_FUND_OR_PRIVATE_EQUITY": "İnvestisiyaların idarəsi / Çit Fondu / Şəxsi kapital",
+        "JUDICIARY": "Məhkəmə idarəsi",
+        "LAW_ENFORCEMENT": "Hüquq-mühafizə",
+        "LAW_PRACTICE_OR_LAW_FIRMS": "Hüquq Təcrübəsi / Hüquq firmaları",
+        "LEGAL_SERVICES": "Hüquq xidmətləri",
+        "LEGISLATIVE_OFFICE": "Qanunvericilik İdarəsi",
+        "LEISURE_OR_TRAVEL": "İstirahət / Səyahət",
+        "LIBRARY": "Kitabxana",
+        "LOGISTICS_OR_PROCUREMENT": "Logistika / Satınalma",
+        "LUXURY_GOODS_OR_JEWELRY": "Lüks məhsullar / Zərgərlik",
+        "MACHINERY": "Mexanika ",
+        "MANAGEMENT_CONSULTING": "İdarəçilik üzrə məsləhətlər",
+        "MARITIME": "Dənizçilik",
+        "MARKET_RESEARCH": "Bazar araşdırması",
+        "MARKETING_OR_ADVERTISING_OR_SALES": "Marketinq / Reklam / Satış",
+        "MECHANICAL_OR_INDUSTRIAL_ENGINEERING": "Mexanika və ya sənaye mühəndisliyi",
+        "MEDIA_PRODUCTION": "Media istehsalı",
+        "MEDICAL_EQUIPMENT": "Tibbi avadanlıq",
+        "MEDICAL_PRACTICE": "Tibbi Təcrübə",
+        "MENTAL_HEALTH_CARE": "Ruhi Sağlamlıq",
+        "MILITARY_INDUSTRY": "Hərbi Sənaye",
+        "MINING_OR_METALS": "Mədənçilik / Metallar",
+        "MOTION_PICTURES_OR_FILM": "Filmlər",
+        "MUSEUMS_OR_INSTITUTIONS": "Muzeylər / Müəssisələr",
+        "MUSIC": "Musiqi",
+        "NANOTECHNOLOGY": "Nanotexnologiya",
+        "NEWSPAPERS_OR_JOURNALISM": "Qəzetlər / Jurnalistika",
+        "NON_PROFIT_OR_VOLUNTEERING": "Qeyri-kommersiya / könüllü",
+        "OIL_OR_ENERGY_OR_SOLAR_OR_GREENTECH": "Neft / Enerji / Günəş / Greentech",
+        "ONLINE_PUBLISHING": "Onlayn Nəşriyyat",
+        "OTHER_INDUSTRY": "Digər Sənaye",
+        "OUTSOURCING_OR_OFFSHORING": "Outsourcing / Offshoring",
+        "PACKAGE_OR_FREIGHT_DELIVERY": "Paketləmə / Yük çatdırılması",
+        "PACKAGING_OR_CONTAINERS": "Qablaşdırma / Konteynerlər",
+        "PAPER_OR_FOREST_PRODUCTS": "Kağız / Meşə Məhsulları",
+        "PERFORMING_ARTS": "İfaçılıq sənəti",
+        "PHARMACEUTICALS": "Əczaçılıq məhsulları",
+        "PHILANTHROPY": "Xeyriyyəçilik",
+        "PHOTOGRAPHY": "Fotoqrafiya",
+        "PLASTICS": "Plastiklər",
+        "POLITICAL_ORGANIZATION": "Siyasi təşkilat",
+        "PRIMARY_OR_SECONDARY_EDUCATION": "İbtidai / Orta Təhsil",
+        "PRINTING": "Çap işləri",
+        "PROFESSIONAL_TRAINING": "Peşəkar təlim",
+        "PROGRAM_DEVELOPMENT": "Proqramın hazırlanması",
+        "PUBLIC_RELATIONS_OR_PR": "İctimaiyyətlə əlaqələr / PR",
+        "PUBLIC_SAFETY": "İctimai təhlükəsizlik",
+        "PUBLISHING_INDUSTRY": "Nəşriyyat sənayesi",
+        "RAILROAD_MANUFACTURE": "Dəmiryol istehsalı",
+        "RANCHING": "Heyvandarlıq",
+        "REAL_ESTATE_OR_MORTGAGE": "Daşınmaz əmlak / İpoteka",
+        "RECREATIONAL_FACILITIES_OR_SERVICES": "İstirahət obyektləri / xidmətlər",
+        "RELIGIOUS_INSTITUTIONS": "Dini qurumlar",
+        "RENEWABLES_OR_ENVIRONMENT": "Bərpa olunan mənbələr / Ətraf mühit",
+        "RESEARCH_INDUSTRY": "Tədqiqat sənayesi",
+        "RESTAURANTS": "Restoranlar",
+        "RETAIL_INDUSTRY": "Pərakəndə sənayesi",
+        "SECURITY_OR_INVESTIGATIONS": "Təhlükəsizlik / araşdırmalar",
+        "SEMICONDUCTORS": "Yarımkeçiricilər",
+        "SHIPBUILDING": "Gəmiqayırma",
+        "SPORTING_GOODS": "İdman malları",
+        "SPORTS": "İdman",
+        "STAFFING_OR_RECRUITING": "İşçi heyəti / İşə qəbul",
+        "SUPERMARKETS": "Supermarketlər",
+        "TELECOMMUNICATIONS": "Telekommunikasiya",
+        "TEXTILES": "Tekstil",
+        "THINK_TANKS": "Analitik mərkəzlər",
+        "TOBACCO": "Tütün məhsulları",
+        "TRANSLATION_OR_LOCALIZATION": "Tərcümə / Lokallaşdırma",
+        "TRANSPORTATION": "Nəqliyyat",
+        "UTILITIES": "Kommunal xidmətlər",
+        "VENTURE_CAPITAL_OR_VC": "Venture Capital / VC",
+        "VETERINARY": "Baytarlıq",
+        "WAREHOUSING": "Anbar",
+        "WHOLESALE": "Topdan satış",
+        "WINE_OR_SPIRITS": "Şərab / Spirtli içkilər",
+        "WIRELESS": "Simsiz əlaqə",
+        "WRITING_OR_EDITING": "Yazı / Redaktə"
+    },
+    "GENDER": {
+        "label": "Cins",
+        "MALE": "Kişi",
+        "FEMALE": "Qadın"
+    },
+    "SalaryType": {
+        "label": "Maaş Növü",
+        "ANNUALLY": "İllik",
+        "MONTHLY": "Aylıq",
+        "HOURLY": "Saatlıq"
+    },
+    "JobType": {
+        "label": "İş Növü",
+        "FULL": "Tam gün",
+        "PART": "Yarım gün",
+        "FREELANCE": "Frilans",
+        "INTERSHIP": "Təcrübə",
+        "TEMPORARY": "Müvəqqəti"
+    },
+    "Salary": {
+        "label": "Maaş"
+    },
+    "Keyword": {
+        "label": "Açar Söz",
+        "placeholder": "Nümunə: vəzifə, bacarıqlar",
+        "placeholderJobSeeker": "Bacarıqlar"
+    },
+    "PostStatus": {
+        "ACTIVE": "Aktiv",
+        "INACTIVE": "Deaktiv",
+        "INREVIEW": "Yoxlamada",
+        "BLOCKED": "Bloklanıb"
+    },
+    "Skills": {
+        "label": "Bacarıqlar",
+        "placeholder": "Bacarıqlarını əlavə et"
+    },
+    "Questions": {
+        "report":"Xəta tapdınız?",
+        "contact": "Sualınız var? Bizimlə əlaqə qurmaqdan çəkinməyin!"
+    },
+    "Role": {
+        "JOBSEEKER": "İstifadəçi",
+        "COMPANY": "Şirkət",
+        "RECRUITER": "İşəgötürən",
+        "ADMIN": "Admin"
+    }
+}

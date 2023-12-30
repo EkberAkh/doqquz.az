@@ -1,0 +1,28 @@
+{
+    "title": "Haqqımızda",
+    "mission": {
+        "title": "Missiyamız",
+        "body": "İnsanlara olduqları yerdən asılı olmayaraq, xəyallarındakı işi tapmağa və işinə sadiq işçiyə çatmağa kömək etməkdir."
+    },
+    "value": {
+        "title": "Dəyərlərimiz",
+        "body": {
+            "transparent": {
+                "subtitle": "Şəffafıq.",
+                "caption": "Açıq və dürüstük. Yaxşı və pis olmasından asılı olmayaraq məlumatları paylaşırıq. Davamlı olaraq təcrübələrimizdən öyrənirik."
+            },
+            "innovative": {
+                "subtitle": "Yenilikçiyik.",
+                "caption": "Biz fəal şəkildə Doqquz-un missiyasını davam etdirmək üçün yeni və fərqli yollar izləyirik. Özümüzə meydan oxuyaraq öz yolumuzu cızırıq."
+            },
+            "team": {
+                "subtitle": "Biz bir komandayıq.",
+                "caption": "Hörmət və bir-birimizə qayğı ilə birlikdə işləyirik. Birlikdə əylənirik. Komandamız vəzifə və hədəflərimizə əsaslanaraq çox çalışır."
+            },
+            "tenacity": {
+                "subtitle": "Biz əzmkarıq.",
+                "caption": "Dözümlü və təşəbbüskarıq. Çətinlikləri fürsət kimi görürük. Həvəs və cəsarətlə işi başa çatdırmaq üçün bir araya gəlirik."
+            }
+        }
+    }
+}

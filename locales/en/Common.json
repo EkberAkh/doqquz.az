@@ -1,0 +1,468 @@
+{
+    "Action": {
+        "ACCEPT": "Accept",
+        "ADD": "Add",
+        "ADD_ANOTHER": "Add next",
+        "ALL": "All",
+        "APPLY": "Apply",
+        "APPROVE": "Approve",
+        "BACK": "Back",
+        "BEGIN": "Begin",
+        "CANCEL": "Cancel",
+        "CHOOSE": "Choose",
+        "CLEAR": "Clear",
+        "CLEAR_ALL": "Clear all",
+        "CLOSE": "Close",
+        "CLOSE_FILTER": "Close filter",
+        "COMPLETE": "Complete",
+        "CONFIRM": "Confirm",
+        "CONTINUE": "Continue",
+        "COPY": "Copy",
+        "CREATE": "Create",
+        "CREATE_SIGN": "Create and sign",
+        "DELETE": "Delete",
+        "DELETE_ALL": "Delete all",
+        "DOWNLOAD": "Download",
+        "DOWNLOAD_FORM": "Download form",
+        "DOWNLOAD_FORMAL": "Download",
+        "DOWNLOAD_AS_DOCUMENT": "Download as document",
+        "EDIT": "Edit",
+        "GET_STARTED": "Get started",
+        "GO_TO_MAIN": "Go to main page",
+        "JOIN_LIVE": "Live product DEMO",
+        "LOGIN": "Sign in",
+        "REGISTER": "Sign up",
+        "MODIFY_INFORMATION": "Modify information",
+        "NEXT": "Next",
+        "NO": "No",
+        "OK": "OK",
+        "OPEN": "Open",
+        "ORDER": "Order",
+        "PAY": "Pay",
+        "PRINT": "Print",
+        "REJECT": "Reject",
+        "REMOVE_DRAFT": "Delete draft",
+        "REQUEST": "Request",
+        "RESET_FILTER": "Reset filter",
+        "SAVE": "Save",
+        "SAVE_AND_CLOSE": "Save and close",
+        "SEARCH": "Search",
+        "SELECT": "Select",
+        "SELECT_FILE": "Select files",
+        "SEND": "Send",
+        "SEND_AGAIN": "Send again",
+        "SEND_TO_BANK": "Send to bank",
+        "SEND_TO_EMAIL": "Send to e-mail",
+        "SHOW_DETAILS": "Details",
+        "SIGN": "Sign",
+        "UPLOAD": "Upload",
+        "USE": "Use",
+        "VIEW": "View",
+        "YES": "Yes",
+        "SUBSCRIBE": "Subscribe",
+        "REQUEST_CALL": "Request a call",
+        "INVITE": "Invite",
+        "JOIN": "Join",
+        "JOINED": "You've joined",
+        "BOOKMARK": "Bookmark",
+        "BOOKMARKED": "Bookmarked"
+    },
+    "Contacts": "{{email}} / {{phone}} / {{hotLine}}",
+    "Copyrights": "© {{year}} <0>Doqquz</0>.All Rights Reserved.",
+    "CountrySelect": {
+        "emptyList": "Country not found"
+    },
+    "Warning":{
+        "completeAccount":"Complete your account"
+    },
+    "Error": {
+        "default": "Service is not available. For additional info contact: {{contacts}}.",
+        "contactToGetInfo": "For additional info contact: {{contacts}}.",
+        "validation": {
+            "empty": "This field is required",
+            "format": "Incorrect format",
+            "min": "This field must be minimum {{count}} symbols",
+            "repeatPassword": "This field must be the same with password field"
+        }
+    },
+    "Success": {
+        "default": "Operation has successfully been compeleted"
+    },
+    "General": {
+        "None": "None",
+        "Soon": "Soon"
+    },
+    "Header": {
+        "action": "Action",
+        "help": "Help",
+        "Login": {
+            "label": "Login"
+        },
+        "settings": "Settings"
+    },
+    "Lexical": {
+        "or": "or"
+    },
+    "Nav": {
+        "LOG_OUT": {
+            "label": "Log out"
+        },
+        "home": "Home",
+        "jobs": "Jobs",
+        "browse_jobs": "Browse Jobs",
+        "browse_companies": "Browse Companies",
+        "employees": "Users",
+        "browse_jobseekers": "Browse Users",
+        "manage_jobs": "Manage Jobs",
+        "post_a_job": "Post a Job",
+        "contact": "Contact",
+        "bookmarks": "Bookmarks",
+        "about": "About"
+    },
+    "Pagination": {
+        "itemsCountPerPageLabel": "Show on page"
+    },
+    "Placeholder": {
+        "dateInputFormat": "dd.mm.yyyy"
+    },
+    "Range": {
+        "amount": {
+            "max": "Max.",
+            "min": "Min."
+        },
+        "date": {
+            "from": "From",
+            "option": {
+                "lastMonth": "Last month",
+                "lastWeek": "Last week",
+                "lastYear": "Last year"
+            },
+            "to": "To"
+        }
+    },
+    "Currency": {
+        "emptyList": "No content",
+        "label": "Currency",
+        "placeholder": "All Currencies"
+    },
+    "Unit": {
+        "DATA": {
+            "B": "B",
+            "GB": "GB",
+            "KB": "KB",
+            "MB": "MB",
+            "TB": "TB"
+        },
+        "DURATION": {
+            "DAY": {
+                "key": "{{count}} day",
+                "key-plural": "{{count}} days"
+            },
+            "HOUR": {
+                "key": "{{count}} hour",
+                "key-plural": "{{count}} hours"
+            },
+            "MONTH": {
+                "key": "{{count}} month",
+                "key-plural": "{{count}} months"
+            },
+            "WEEK": {
+                "key": "{{count}} week",
+                "key-plural": "{{count}} weeks"
+            },
+            "YEAR": {
+                "key": "{{count}} year",
+                "key-plural": "{{count}} years"
+            }
+        }
+    },
+    "UploadFile": {
+        "title": "Documents",
+        "error": {
+            "format": "Wrong file format",
+            "size": "Total size of attached files ({{actualSize}}) exceeds maximum allowed {{maxSize}}"
+        },
+        "primary": "Drop file(s) here or click to upload",
+        "secondary": "Supported file formats: {{fileTypes}}"
+    },
+    "Menu": {
+        "profile": {
+            "label": "My Profile",
+            "items": {
+                "bookmarks": "Bookmarks",
+                "settings": "Settings",
+                "logout": "Log out"
+            }
+        },
+        "showMore": "Show more",
+        "showLess": "Show less"
+    },
+    "FormInputs": {
+        "fullname": {
+            "label": "Fullname"
+        },
+        "companyName": {
+            "label": "Company name",
+            "placeholder": "Enter Company name"
+        },
+        "firstName": {
+            "label": "Name",
+            "placeholder": "Enter name"
+        },
+        "lastName": {
+            "label": "Surname",
+            "placeholder": "Enter surname"
+        },
+        "phoneNumber": {
+            "label": "Mobile phone"
+        },
+        "email": {
+            "label": "E-mail",
+            "placeholder": "example@domain.com"
+        },
+        "password": {
+            "label": "Password",
+            "placeholder": "Enter your password"
+        },
+        "description": {
+            "label": "Description"
+        },
+        "contactInformation": {
+            "label": "Contact information"
+        },
+        "subject": {
+            "label": "Subject"
+        },
+        "message": {
+            "label": "Message"
+        },
+        "websiteUrl": {
+            "label": "Website Url"
+        },
+        "startingDate": {
+            "label": "Starting Date"
+        },
+        "endDate": {
+            "label": "End Date"
+        },
+        "currentPassword": {
+            "label": "Current Password"
+        },
+        "newPassword": {
+            "label": "New Password"
+        },
+        "repeatNewPassword": {
+            "label": "Repeat New Password"
+        },
+        "file": {
+            "max": "Maximum file size: {{size}}",
+            "types": "File Types: {{types}}"
+        }
+    },
+    "present": "Present",
+    "bookmark": {
+        "post": "Bookmarked vacancies",
+        "jobseeker": "Bookmarked joobseekers"
+    },
+    "location": "Location",
+    "noRecord": "<0>Oops! 😔</0><1></1><2>No records found</2>",
+    "noData": "There are no records in this section",
+    "INDUSTRIES": {
+        "label": "Job Category",
+        "INDUSTRY": "INDUSTRY",
+        "ACCOUNTING": "ACCOUNTING",
+        "AIRLINES_OR_AVIATION": "AIRLINES/AVIATION",
+        "ALTERNATIVE_DISPUTE_RESOLUTION": "ALTERNATIVE DISPUTE RESOLUTION",
+        "ALTERNATIVE_MEDICINE": "ALTERNATIVE MEDICINE",
+        "ANIMATION": "ANIMATION",
+        "APPAREL_OR_FASHION": "APPAREL/FASHION",
+        "ARCHITECTURE_OR_PLANNING": "ARCHITECTURE/PLANNING",
+        "ARTS_OR_CRAFTS": "ARTS/CRAFTS",
+        "AUTOMOTIVE": "AUTOMOTIVE",
+        "AVIATION_OR_AEROSPACE": "AVIATION/AEROSPACE",
+        "BANKING_OR_MORTGAGE": "BANKING/MORTGAGE",
+        "BIOTECHNOLOGY_OR_GREENTECH": "BIOTECHNOLOGY/GREENTECH",
+        "BROADCAST_MEDIA": "BROADCAST MEDIA",
+        "BUILDING_MATERIALS": "BUILDING MATERIALS",
+        "BUSINESS_SUPPLIES_OR_EQUIPMENT": "BUSINESS SUPPLIES/EQUIPMENT",
+        "CAPITAL_MARKETS_OR_HEDGE_FUND_OR_PRIVATE_EQUITY": "CAPITAL MARKETS/HEDGE FUND/PRIVATE EQUITY",
+        "CHEMICALS": "CHEMICALS",
+        "CIVIC_OR_SOCIAL_ORGANIZATION": "CIVIC/SOCIAL ORGANIZATION",
+        "CIVIL_ENGINEERING": "CIVIL ENGINEERING",
+        "COMMERCIAL_REAL_ESTATE": "COMMERCIAL REAL ESTATE",
+        "COMPUTER_GAMES": "COMPUTER GAMES",
+        "COMPUTER_HARDWARE": "COMPUTER HARDWARE",
+        "COMPUTER_NETWORKING": "COMPUTER NETWORKING",
+        "COMPUTER_SOFTWARE_OR_ENGINEERING": "COMPUTER SOFTWARE/ENGINEERING",
+        "COMPUTER_OR_NETWORK_SECURITY": "COMPUTER/NETWORK SECURITY",
+        "CONSTRUCTION": "CONSTRUCTION",
+        "CONSUMER_ELECTRONICS": "CONSUMER ELECTRONICS",
+        "CONSUMER_GOODS": "CONSUMER GOODS",
+        "CONSUMER_SERVICES": "CONSUMER SERVICES",
+        "COSMETICS": "COSMETICS",
+        "DAIRY": "DAIRY",
+        "DEFENSE_OR_SPACE": "DEFENSE/SPACE",
+        "DESIGN": "DESIGN",
+        "E_LEARNING": "E-LEARNING",
+        "EDUCATION_MANAGEMENT": "EDUCATION MANAGEMENT",
+        "ELECTRICAL_OR_ELECTRONIC_MANUFACTURING": "ELECTRICAL/ELECTRONIC MANUFACTURING",
+        "ENTERTAINMENT_OR_MOVIE_PRODUCTION": "ENTERTAINMENT/MOVIE PRODUCTION",
+        "ENVIRONMENTAL_SERVICES": "ENVIRONMENTAL SERVICES",
+        "EVENTS_SERVICES": "EVENTS SERVICES",
+        "EXECUTIVE_OFFICE": "EXECUTIVE OFFICE",
+        "FACILITIES_SERVICES": "FACILITIES SERVICES",
+        "FARMING": "FARMING",
+        "FINANCIAL_SERVICES": "FINANCIAL SERVICES",
+        "FINE_ART": "FINE ART",
+        "FISHERY": "FISHERY",
+        "FOOD_PRODUCTION": "FOOD PRODUCTION",
+        "FOOD_OR_BEVERAGES": "FOOD/BEVERAGES",
+        "FUNDRAISING": "FUNDRAISING",
+        "FURNITURE": "FURNITURE",
+        "GAMBLING_OR_CASINOS": "GAMBLING/CASINOS",
+        "GLASS_OR_CERAMICS_OR_CONCRETE": "GLASS/CERAMICS/CONCRETE",
+        "GOVERNMENT_ADMINISTRATION": "GOVERNMENT ADMINISTRATION",
+        "GOVERNMENT_RELATIONS": "GOVERNMENT RELATIONS",
+        "GRAPHIC_DESIGN_OR_WEB_DESIGN": "GRAPHIC DESIGN/WEB DESIGN",
+        "HEALTH_OR_FITNESS": "HEALTH/FITNESS",
+        "HIGHER_EDUCATION_OR_ACADAMIA": "HIGHER EDUCATION/ACADAMIA",
+        "HOSPITAL_OR_HEALTH_CARE": "HOSPITAL/HEALTH CARE",
+        "HOSPITALITY": "HOSPITALITY",
+        "HUMAN_RESOURCES_OR_HR": "HUMAN RESOURCES/HR",
+        "IMPORT_OR_EXPORT": "IMPORT/EXPORT",
+        "INDIVIDUAL_OR_FAMILY_SERVICES": "INDIVIDUAL/FAMILY SERVICES",
+        "INDUSTRIAL_AUTOMATION": "INDUSTRIAL AUTOMATION",
+        "INFORMATION_SERVICES": "INFORMATION SERVICES",
+        "INFORMATION_TECHNOLOGY_OR_IT": "INFORMATION TECHNOLOGY/IT",
+        "INSURANCE": "INSURANCE",
+        "INTERNATIONAL_AFFAIRS": "INTERNATIONAL AFFAIRS",
+        "INTERNATIONAL_TRADE_OR_DEVELOPMENT": "INTERNATIONAL TRADE/DEVELOPMENT",
+        "INTERNET": "INTERNET",
+        "INVESTMENT_BANKING_OR_VENTURE": "INVESTMENT_BANKING/VENTURE",
+        "INVESTMENT_MANAGEMENT_OR_HEDGE_FUND_OR_PRIVATE_EQUITY": "INVESTMENT MANAGEMENT/HEDGE FUND/PRIVATE EQUITY",
+        "JUDICIARY": "JUDICIARY",
+        "LAW_ENFORCEMENT": "LAW_ENFORCEMENT",
+        "LAW_PRACTICE_OR_LAW_FIRMS": "LAW PRACTICE/LAW FIRMS",
+        "LEGAL_SERVICES": "LEGAL SERVICES",
+        "LEGISLATIVE_OFFICE": "LEGISLATIVE OFFICE",
+        "LEISURE_OR_TRAVEL": "LEISURE/TRAVEL",
+        "LIBRARY": "LIBRARY",
+        "LOGISTICS_OR_PROCUREMENT": "LOGISTICS/PROCUREMENT",
+        "LUXURY_GOODS_OR_JEWELRY": "LUXURY GOODS/JEWELRY",
+        "MACHINERY": "MACHINERY",
+        "MANAGEMENT_CONSULTING": "MANAGEMENT CONSULTING",
+        "MARITIME": "MARITIME",
+        "MARKET_RESEARCH": "MARKET_RESEARCH",
+        "MARKETING_OR_ADVERTISING_OR_SALES": "MARKETING/ADVERTISING/SALES",
+        "MECHANICAL_OR_INDUSTRIAL_ENGINEERING": "MECHANICAL/INDUSTRIAL ENGINEERING",
+        "MEDIA_PRODUCTION": "MEDIA PRODUCTION",
+        "MEDICAL_EQUIPMENT": "MEDICAL EQUIPMENT",
+        "MEDICAL_PRACTICE": "MEDICAL PRACTICE",
+        "MENTAL_HEALTH_CARE": "MENTAL HEALTH CARE",
+        "MILITARY_INDUSTRY": "MILITARY INDUSTRY",
+        "MINING_OR_METALS": "MINING/METALS",
+        "MOTION_PICTURES_OR_FILM": "MOTION PICTURES/FILM",
+        "MUSEUMS_OR_INSTITUTIONS": "MUSEUMS/INSTITUTIONS",
+        "MUSIC": "MUSIC",
+        "NANOTECHNOLOGY": "NANOTECHNOLOGY",
+        "NEWSPAPERS_OR_JOURNALISM": "NEWSPAPERS/JOURNALISM",
+        "NON_PROFIT_OR_VOLUNTEERING": "NON-PROFIT/VOLUNTEERING",
+        "OIL_OR_ENERGY_OR_SOLAR_OR_GREENTECH": "OIL/ENERGY/SOLAR/GREENTECH",
+        "ONLINE_PUBLISHING": "ONLINE PUBLISHING",
+        "OTHER_INDUSTRY": "OTHER INDUSTRY",
+        "OUTSOURCING_OR_OFFSHORING": "OUTSOURCING/OFFSHORING",
+        "PACKAGE_OR_FREIGHT_DELIVERY": "PACKAGE/FREIGHT DELIVERY",
+        "PACKAGING_OR_CONTAINERS": "PACKAGING/CONTAINERS",
+        "PAPER_OR_FOREST_PRODUCTS": "PAPER/FOREST PRODUCTS",
+        "PERFORMING_ARTS": "PERFORMING ARTS",
+        "PHARMACEUTICALS": "PHARMACEUTICALS",
+        "PHILANTHROPY": "PHILANTHROPY",
+        "PHOTOGRAPHY": "PHOTOGRAPHY",
+        "PLASTICS": "PLASTICS",
+        "POLITICAL_ORGANIZATION": "POLITICAL ORGANIZATION",
+        "PRIMARY_OR_SECONDARY_EDUCATION": "PRIMARY/SECONDARY EDUCATION",
+        "PRINTING": "PRINTING",
+        "PROFESSIONAL_TRAINING": "PROFESSIONAL TRAINING",
+        "PROGRAM_DEVELOPMENT": "PROGRAM DEVELOPMENT",
+        "PUBLIC_RELATIONS_OR_PR": "PUBLIC RELATIONS/PR",
+        "PUBLIC_SAFETY": "PUBLIC SAFETY",
+        "PUBLISHING_INDUSTRY": "PUBLISHING INDUSTRY",
+        "RAILROAD_MANUFACTURE": "RAILROAD MANUFACTURE",
+        "RANCHING": "RANCHING",
+        "REAL_ESTATE_OR_MORTGAGE": "REAL ESTATE/MORTGAGE",
+        "RECREATIONAL_FACILITIES_OR_SERVICES": "RECREATIONAL FACILITIES/SERVICES",
+        "RELIGIOUS_INSTITUTIONS": "RELIGIOUS INSTITUTIONS",
+        "RENEWABLES_OR_ENVIRONMENT": "RENEWABLES/ENVIRONMENT",
+        "RESEARCH_INDUSTRY": "RESEARCH INDUSTRY",
+        "RESTAURANTS": "RESTAURANTS",
+        "RETAIL_INDUSTRY": "RETAIL INDUSTRY",
+        "SECURITY_OR_INVESTIGATIONS": "SECURITY/INVESTIGATIONS",
+        "SEMICONDUCTORS": "SEMICONDUCTORS",
+        "SHIPBUILDING": "SHIPBUILDING",
+        "SPORTING_GOODS": "SPORTING GOODS",
+        "SPORTS": "SPORTS",
+        "STAFFING_OR_RECRUITING": "STAFFING/RECRUITING",
+        "SUPERMARKETS": "SUPERMARKETS",
+        "TELECOMMUNICATIONS": "TELECOMMUNICATIONS",
+        "TEXTILES": "TEXTILES",
+        "THINK_TANKS": "THINK TANKS",
+        "TOBACCO": "TOBACCO",
+        "TRANSLATION_OR_LOCALIZATION": "TRANSLATION/LOCALIZATION",
+        "TRANSPORTATION": "TRANSPORTATION",
+        "UTILITIES": "UTILITIES",
+        "VENTURE_CAPITAL_OR_VC": "VENTURE CAPITAL/VC",
+        "VETERINARY": "VETERINARY",
+        "WAREHOUSING": "WAREHOUSING",
+        "WHOLESALE": "WHOLESALE",
+        "WINE_OR_SPIRITS": "WINE/SPIRITS",
+        "WIRELESS": "WIRELESS",
+        "WRITING_OR_EDITING": "WRITING/EDITING"
+    },
+    "GENDER": {
+        "label": "Gender",
+        "MALE": "Male",
+        "FEMALE": "Female"
+    },
+    "SalaryType": {
+        "label": "Salary Type",
+        "ANNUALLY": "Annually",
+        "MONTHLY": "Monthly",
+        "HOURLY": "Hourly"
+    },
+    "JobType": {
+        "label": "Job Type",
+        "FULL": "Full-time",
+        "PART": "Part-time",
+        "FREELANCE": "Freelance",
+        "INTERSHIP": "Internship",
+        "TEMPORARY": "Temporary"
+    },
+    "Salary": {
+        "label": "Salary"
+    },
+    "Keyword": {
+        "label": "Keywords",
+        "placeholder": "e.g. jobTitle, skills",
+        "placeholderJobSeeker": "Skills"
+    },
+    "PostStatus": {
+        "ACTIVE": "Active",
+        "INACTIVE": "Inactive",
+        "INREVIEW": "Inreview",
+        "BLOCKED": "Blocked"
+    },
+    "Skills": {
+        "label": "Skills",
+        "placeholder": "Add your skills"
+    },
+    "Questions": {
+        "report": "Found an error?",
+        "contact": "Any questions? Feel free to contact us!"
+    },
+    "Role": {
+        "JOBSEEKER": "User",
+        "COMPANY": "Company",
+        "RECRUITER": "Recruiter",
+        "ADMIN": "Admin"
+    }
+}
