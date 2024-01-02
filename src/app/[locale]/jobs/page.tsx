@@ -1,12 +1,33 @@
-import React from 'react'
+"use client";
+import { Box, Flex, Img, Text } from "@chakra-ui/react";
+
+import { useTranslations } from "next-intl";
+import React from "react";
+import JobsFilter from "./JobsFilter";
 
 const Jobs = () => {
-  return (
-    <>
-    <div>Jobs</div>
-    
-    </>
-  )
-}
+  const t = useTranslations();
 
-export default Jobs
+  return (
+    <Box display="flex" w="100%" flexWrap="wrap">
+      <JobsFilter />
+      <Flex
+        justifyContent="center"
+        alignItems="center"
+        width="calc(100% - 379px)"
+        flexDirection="column"
+      >
+        <Img marginBottom="16px" src="../../../../images/noRecord.png" />
+        <Text>
+          {t.markup("Common.noRecord", {
+            emoji: (chunks) => `<Emoji>${chunks}</Emoji>`,
+            span: (chunks) => `<span>${chunks}</span>`,
+            b: (chunks) => `<b>${chunks}</b>`,
+          })}
+        </Text>
+      </Flex>
+    </Box>
+  );
+};
+
+export default Jobs;
