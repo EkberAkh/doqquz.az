@@ -10,7 +10,11 @@ import JobType from "./JobType";
 import SalaryType from "./SalaryType";
 import CurrencyType from "./CurrencyType";
 import Salary from "./Salary";
-const JobsFilter = () => {
+
+interface IJobFilter {
+  jobType:boolean
+}
+const JobsFilter: React.FC<IJobFilter> = ({jobType}) => {
   const t = useTranslations();
 
   return (
@@ -31,7 +35,7 @@ const JobsFilter = () => {
         <LocationInput />
         <KeywordInput />
         <JobCategories />
-        <JobType />
+       {jobType && <JobType /> } 
         <SalaryType />
         <CurrencyType />
         <Salary />
