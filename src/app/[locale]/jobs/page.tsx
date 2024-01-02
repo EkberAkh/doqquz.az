@@ -10,7 +10,7 @@ const Jobs = () => {
 
   return (
     <Box display="flex" w="100%" flexWrap="wrap">
-      <JobsFilter />
+      <JobsFilter jobType />
       <Flex
         justifyContent="center"
         alignItems="center"
