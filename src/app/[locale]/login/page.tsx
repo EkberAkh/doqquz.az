@@ -123,7 +123,7 @@ const  Login1: React.FC = () => {
 
 
           <FormHelperText m="20px 0 ">
-               <Link _hover={{ color: "blue", textDecoration: "none" }} >{t("Auth.Login.question")}</Link>
+               <Link _hover={{ color: "blue", textDecoration: "none" }} href="/az/forgotPassword" >{t("Auth.Login.question")}</Link>
           </FormHelperText>
 
           <Box
