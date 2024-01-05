@@ -3,6 +3,7 @@ import React from 'react';
 interface IProps {
     width: string;
     height: string;
+    mr: string;
 }
 const ArrowForwardIcon: React.FC<IProps> = ({ width, height, mr }) => {
     return (
