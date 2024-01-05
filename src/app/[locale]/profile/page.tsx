@@ -4,6 +4,7 @@ import React from 'react'
 import { useTranslations } from 'next-intl'
 import { Card, Box, CardBody, CardHeader, Heading, Flex, Button, Text, Input, useDisclosure, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, InputGroup, InputLeftAddon, InputRightAddon, FormControl, FormHelperText, FormLabel } from '@chakra-ui/react'
 import { colorObjects } from '@/consts'
+import { transform } from 'next/dist/build/swc'
 
 
 const Profile = () => {
@@ -41,7 +42,36 @@ const Profile = () => {
 
                                 </Box>
                             </Flex>
-                            <Button variant='primary'>{t('Common.Action.SAVE')}</Button>
+                            <Button color={'#2a41e8'}
+                                border={'2px solid #2a41e8'}
+                                p={'23px 19px'}
+                                borderRadius={'4px'}
+                                letterSpacing={'0.1em'}
+                                fontWeight={500}
+                                box-shadow={'0 5px 10px rgba(0, 0, 0, 0.1)'}
+                                transition='all 0.3s linear'
+                                position={'relative'}
+                                zIndex={'1'}
+                                _hover={{
+                                    color: '#fff',
+                                    _before: {
+                                        transform: "scaleX(1)",
+                                    },
+                                }}
+                                _before={{
+                                    content: '""',
+                                    position: "absolute",
+                                    left: '0',
+                                    top: '0',
+                                    width: '100%',
+                                    height: '100%',
+                                    bg: '#2a41e8',
+                                    zIndex: '-1',
+                                    transition: ' transform 0.8s cubic-bezier(0.5,1.6,0.4,0.7)',
+                                    transformOrigin: '0 0',
+                                    transform: 'scaleX(0)'
+                                }}
+                                variant='primary'>{t('Common.Action.SAVE')} </Button>
                         </Box>
                     </Flex>
                 </CardBody>
