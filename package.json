@@ -17,10 +17,15 @@
     "chakra-react-select": "^4.7.6",
     "next": "14.0.4",
     "next-intl": "^3.4.0",
+
+   
+    "react-hook-form": "^7.49.2",
+
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.12.0",
     "react-phone-number-input": "^3.3.8"
+
   },
   "devDependencies": {
     "@types/node": "^20",
