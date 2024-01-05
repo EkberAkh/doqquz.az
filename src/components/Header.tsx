@@ -56,7 +56,7 @@ function Header() {
                     color='rgb(102, 102, 102)'
                     _hover={{ color: 'rgb(42, 65, 232)' }}
                     fontWeight={'500'}>
-                    <ArrowForwardIcon width={'20'} height={'24'} />
+                    <ArrowForwardIcon width={'20'} height={'24'} mr={''} />
                     <Button p={0} bg={'white'} variant=''>{`${t('Common.Action.LOGIN')} / ${t('Common.Action.REGISTER')} `}</Button>
                 </HStack>
 
