@@ -30,7 +30,7 @@ export default function RootLayout({ children, params: { locale } }: IProps) {
 
         <NextIntlClientProvider locale={locale} messages={messages}>
           <Header />
-          <Box bgColor='#f9f9f9'>
+          <Box padding='24px 0' bgColor='#f9f9f9'>
             <Providers>{children}</Providers>
           </Box>
 

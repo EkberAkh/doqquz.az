@@ -9,27 +9,12 @@ const Privacy = () => {
   return (
     <Container bg="white">
       <Box>
-        <Heading>MƏXFİLİK BİLDİRİŞİ</Heading>
+        <Heading>{t("PrivacyPolice.header")}</Heading>
         <Text>
-          Doqquz ( " Doqquz ", " biz ", " bizə ", " bizim "). Şəxsi
-          məlumatlarınızı və gizlilik hüququnuzu qorumağa borcluyuq. Bu məxfilik
-          bildirişi və ya şəxsi məlumatlarınızla bağlı hər hansı bir sualınız və
-          ya narahatlığınız varsa,legal@doqquz.az ilə əlaqə saxlayın. Veb
-          saytımızı ziyarət etdiyiniz zaman https: //doqquz.az ( "Veb səhifə " )
-          və ümumiyyətlə, hər hansı bir xidmətlərimizdən (Veb sayt daxil olmaqla
-          "Xidmətlər " ) istifadə etdikdə, bizə şəxsi məlumatlarınızı etibar
-          etdiyiniz üçün minnətdarıq. Məxfiliyinizə çox ciddi yanaşırıq. Bu
-          məxfilik bildirişində sizə hansı məlumatları topladığımızı, necə
-          istifadə etdiyimizi və bununla bağlı hansı hüquqlara malik olduğunuzu
-          ən aydın şəkildə izah etməyə çalışırıq. Vacib olduğu üçün diqqətlə
-          oxumağa vaxt ayıracağınıza ümid edirik. Əgər bu məxfilik
-          bildirişindəki hər hansı bir şərtlə razı deyilsinizsə,
-          xidmətlərimizdən istifadəni dərhal dayandırmağı xahiş edirik. Bu
-          məxfilik bildirişi xidmətlərimiz vasitəsilə toplanan bütün məlumatlara
-          (yuxarıda qeyd olunduğu kimi veb saytımız da daxil olmaqla), eləcə də
-          əlaqəli xidmətlər, satışlar, marketinq və tədbirlərə aiddir.
-          Topladığımız məlumatlarla nə etdiyimizi başa düşməyinizə kömək edəcək
-          bu məxfilik bildirişini, zəhmət olmasa diqqətlə oxuyun
+          {t.rich("PrivacyPolice.mainSection", {
+            span: (chunks) => <span>{chunks}</span>,
+            b: (chunks) => <b>{chunks}</b>,
+          })}
         </Text>
         <br />
         <Heading as="b" size="xl">
