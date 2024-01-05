@@ -14,7 +14,7 @@ export const DJobSeekers: IJobSeekers[] = [
   },
   {
     id: 2,
-    name: "Ramin Axundov",
+    name: "Ramin Emrahov",
     gender: "male",
     salary: 1100,
   },
