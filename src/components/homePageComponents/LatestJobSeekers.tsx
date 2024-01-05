@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import React from "react";
 import { DJobSeekers } from "../data/DJobSeekers";
 import { useTranslations } from "next-intl";
+import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 
 
 export const LatestJobSeekers = () => {
@@ -36,7 +37,7 @@ export const LatestJobSeekers = () => {
             </Flex>
             <Flex alignItems='center' w='100%' justifyContent='space-between'>
                 <Button onClick={handlePrevSlide}>
-                    ff
+                <ChevronLeftIcon height='20px' width='20px'/>
                 </Button>
                 <Flex paddingX='40px' columnGap='50px' >
 
@@ -76,7 +77,7 @@ export const LatestJobSeekers = () => {
 
                 </Flex>
                 <Button onClick={handleNextSlide}>
-                    ff
+                    <ChevronRightIcon height='20px' width='20px'/>
                 </Button>
             </Flex>
         </Box >

@@ -9,7 +9,6 @@ import { LockIcon } from '@chakra-ui/icons';
 import { FaRegEnvelope } from "react-icons/fa6";
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
-import Header from '../header/page';
 
 type FormData = {
   email: string;
@@ -39,7 +38,7 @@ const  Login1: React.FC = () => {
 
   return (
     <>
-    <Header/>
+    
       <Box bg="white" w="600px" m="auto" pb="30px">
         <Flex>
           <Text p="15px 60px"  color="gray.300" cursor="pointer" _hover={{ color: "black" }} ><Link  href="/az/login">{t("Auth.tabs.login")}</Link></Text>
@@ -54,7 +53,7 @@ const  Login1: React.FC = () => {
         <Box w="490px" m="auto">
           <FormControl>
         <form onSubmit={handleSubmit(onSubmit)} >
-        <FormControl isInvalid={errors.email}>
+        <FormControl isInvalid={!!errors.email}>
 
 
           <InputGroup>

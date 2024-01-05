@@ -9,7 +9,6 @@ import { LockIcon } from '@chakra-ui/icons';
 import { FaRegEnvelope } from "react-icons/fa6";
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
-import Header from '../header/page';
 
 type FormData = {
   email: string;
@@ -41,9 +40,9 @@ const  Login1: React.FC = () => {
   };
 
   return (
-    <>
-    <Header/>
-      <Box bg="white" w="600px" m="auto" pb="30px">
+
+    
+    <Box boxShadow='0 2px 8px rgba(0,0,0,.08)'  bg="white" w="600px" m="auto" pb="30px">
         <Flex>
           <Text p="15px 60px" borderBottom="2px solid blue" color="blue" cursor="pointer" _hover={{ color: "black" }} >{t("Auth.tabs.login")}</Text>
           <Text p="15px 60px" color="black.300" cursor="pointer" _hover={{ color: "black" }}> <Link  href="/az/register">{t("Auth.tabs.register")}</Link></Text>
@@ -57,7 +56,7 @@ const  Login1: React.FC = () => {
         <Box w="490px" m="auto">
           <FormControl>
         <form onSubmit={handleSubmit(onSubmit)} >
-        <FormControl isInvalid={errors.email}>
+        <FormControl isInvalid={!!errors.email}>
 
 
           <InputGroup>
@@ -90,12 +89,13 @@ const  Login1: React.FC = () => {
           </FormErrorMessage>
         </FormControl>
 
-        <FormControl isInvalid={errors.password}>
+        <FormControl isInvalid={!!errors.password}>
 
           <InputGroup mt="30px">
             <InputLeftElement
+            backgroundColor='#eee'
+            borderRadius='5px'
               p="25px 10px"
-              borderRight="1px solid white"
               pointerEvents="none"
             >
               <LockIcon color={backgroundColor2} />
@@ -140,7 +140,7 @@ const  Login1: React.FC = () => {
       </FormControl>
         </Box>
       </Box>
-    </>
+   
   )
 }
 
