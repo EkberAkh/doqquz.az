@@ -5,7 +5,9 @@ import "./globals.css";
 
 import React from "react";
 import { NextIntlClientProvider, useMessages } from "next-intl";
-
+import Header from "@/components/Header";
+import { Footer } from "@/components/Footer";
+import { Box } from "@chakra-ui/react";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -21,14 +23,21 @@ interface IProps {
 }
 
 export default function RootLayout({ children, params: { locale } }: IProps) {
-  const messages = useMessages() 
+  const messages = useMessages()
   return (
     <html lang={locale}>
       <body className={inter.className}>
+
         <NextIntlClientProvider locale={locale} messages={messages}>
-          <Providers>{children}</Providers>
+          <Header />
+          <Box bgColor='#f9f9f9'>
+            <Providers>{children}</Providers>
+          </Box>
+
+          <Footer />
         </NextIntlClientProvider>
+
       </body>
-    </html>
+    </html >
   );
 }
