@@ -15,7 +15,7 @@ type FormData = {
   password: string;
 };
 
-const  Login1: React.FC = () => {
+const Login1: React.FC = () => {
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const [isHovered, setIsHovered] = useState<boolean>(false);
 
@@ -38,67 +38,73 @@ const  Login1: React.FC = () => {
 
   return (
     <>
-    
+
       <Box bg="white" w="600px" m="auto" pb="30px">
         <Flex>
-          <Text p="15px 60px"  color="gray.300" cursor="pointer" _hover={{ color: "black" }} ><Link  href="/az/login">{t("Auth.tabs.login")}</Link></Text>
-          <Text p="15px 60px" color="gray.300" cursor="pointer" _hover={{ color: "black" }}> <Link  href="/az/register">{t("Auth.tabs.register")}</Link></Text>
+          <Text p="15px 60px" color="gray.500" cursor="pointer"><Link _hover={{ color: "black" }} href="/az/login">{t("Auth.tabs.login")}</Link></Text>
+          <Text p="15px 60px" color="gray.500" cursor="pointer"> <Link _hover={{ color: "black" }} href="/az/register">{t("Auth.tabs.register")}</Link></Text>
         </Flex>
 
         <Flex alignItems="center" flexDirection="column" m="30px" gap="10px">
           <Text fontWeight="bold" fontSize="26px">{t("Auth.Login.title")}</Text>
-          <Text>Hesabınız yoxdur? <span style={{ color: "blue", cursor: "pointer" }}> <Link  href="/az/register">Qeydiyyatdan kecin</Link> </span></Text>
+          <Text>    {t.rich("Auth.Login.subTitle", {
+            a: (chunks) => <a href="/az/register" style={{ color: "blue", cursor: "pointer" }}>{chunks}</a>,
+            span: (chunks) => <span style={{ color: "gray" }}> {chunks}</span>
+          })}</Text>
         </Flex>
 
         <Box w="490px" m="auto">
           <FormControl>
-        <form onSubmit={handleSubmit(onSubmit)} >
-        <FormControl isInvalid={!!errors.email}>
+            <form onSubmit={handleSubmit(onSubmit)} >
+              <FormControl isInvalid={!!errors.email}>
 
 
-          <InputGroup>
-            <InputLeftElement
-              p="25px 10px"
-              borderRight="1px solid white"
-              pointerEvents="none" >
-              <FaRegEnvelope color={backgroundColor} />
+                <InputGroup>
+                  <InputLeftElement
+                    w="50px"
+                    backgroundColor='#eee'
+                    borderRadius='5px'
+                    p="25px 10px"
+                    borderRight="1px solid white"
+                    pointerEvents="none" >
+                    <FaRegEnvelope color={backgroundColor} />
 
-            </InputLeftElement>
+                  </InputLeftElement>
 
-            <Input
-              {...register('email', {
-                required: 'This is required',
-                validate: {
-                  containsAt: (value) => value.includes("@") && value.includes('.') || 'Format yalnisdir',
-                },
-              })}
-              id='email'
-              type="email"
-              placeholder="example@gmail.com"
-              onFocus={handleFocus}
-              onBlur={handleBlur}
-              p="25px 70px"
-          
-            />
-          </InputGroup>
-          <FormErrorMessage>
-            {errors.email && errors.email.message}
-          </FormErrorMessage>
-        </FormControl>
+                  <Input
+                    {...register('email', {
+                      required: 'This is required',
+                      validate: {
+                        containsAt: (value) => value.includes("@") && value.includes('.') || 'Format yalnisdir',
+                      },
+                    })}
+                    id='email'
+                    type="email"
+                    placeholder="example@gmail.com"
+                    onFocus={handleFocus}
+                    onBlur={handleBlur}
+                    p="25px 70px"
 
-          <Box
-          mt="30px"
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}>
-            {isHovered ? (
-              <Button w="490px" backgroundColor="blue" color="white" _hover={{ backgroundColor: "blue" }} p="25px" type='submit'>{t("Auth.tabs.login")} <Icon as={FaArrowRight} /></Button>
-            ) :
-              (<Button w="490px" backgroundColor="blue" color="white" p="25px" type='submit'>{t("Auth.tabs.login")}  </Button>)}
-          </Box>
+                  />
+                </InputGroup>
+                <FormErrorMessage>
+                  {errors.email && errors.email.message}
+                </FormErrorMessage>
+              </FormControl>
+
+              <Box
+                mt="30px"
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}>
+                {isHovered ? (
+                  <Button w="490px" backgroundColor="blue" color="white" _hover={{ backgroundColor: "blue" }} p="25px" type='submit'>{t("Auth.tabs.login")} <Icon as={FaArrowRight} /></Button>
+                ) :
+                  (<Button w="490px" backgroundColor="blue" color="white" p="25px" type='submit'>{t("Auth.tabs.login")}  </Button>)}
+              </Box>
 
 
-      </form>
-      </FormControl>
+            </form>
+          </FormControl>
         </Box>
       </Box>
     </>

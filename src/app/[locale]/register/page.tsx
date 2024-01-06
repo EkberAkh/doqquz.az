@@ -20,7 +20,7 @@ import { useForm } from "react-hook-form";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 
-interface RegisterProps {}
+interface RegisterProps { }
 
 interface FormData {
   name: string;
@@ -81,7 +81,7 @@ const Register: React.FC<RegisterProps> = () => {
         <Flex>
           <Text
             p="15px 60px"
-            color="black.300"
+            color="gray.500"
             cursor="pointer"
             _hover={{ color: "black" }}
           >
@@ -129,6 +129,9 @@ const Register: React.FC<RegisterProps> = () => {
             <FormControl isInvalid={!!errors.name}>
               <InputGroup mt="30px">
                 <InputLeftElement
+                  w="50px"
+                  backgroundColor='#eee'
+                  borderRadius='5px'
                   p="25px 10px"
                   borderRight="1px solid white"
                   pointerEvents="none"
@@ -137,7 +140,7 @@ const Register: React.FC<RegisterProps> = () => {
                 </InputLeftElement>
 
                 <Input
-                
+
                   {...register("name", {
                     required: "This is required",
                     minLength: {
@@ -163,11 +166,14 @@ const Register: React.FC<RegisterProps> = () => {
               <FormControl isInvalid={!!errors.surname}>
                 <InputGroup mt="30px">
                   <InputLeftElement
+                    w="50px"
+                    backgroundColor='#eee'
+                    borderRadius='5px'
                     p="25px 10px"
                     borderRight="1px solid white"
                     pointerEvents="none"
                   >
-                    <PiUserListFill size={60} color={backgroundColor2} />
+                    <PiUserListFill size={20} color={backgroundColor2} />
                   </InputLeftElement>
 
                   <Input
@@ -178,11 +184,6 @@ const Register: React.FC<RegisterProps> = () => {
                         message: "Minimum length should be 3",
                       },
                     })}
-                //     {!isVisible &&
-                // <FormErrorMessage>
-                //   {errors.company && errors.company.message}
-                // </FormErrorMessage>
-                //     }
                     id="surname"
                     type="text"
                     placeholder={t("Common.FormInputs.lastName.placeholder")}
@@ -199,11 +200,14 @@ const Register: React.FC<RegisterProps> = () => {
               <FormControl isInvalid={!!errors.company}>
                 <InputGroup mt="30px " display={isVisible ? "none" : "block"}>
                   <InputLeftElement
+                    w="50px"
+                    backgroundColor='#eee'
+                    borderRadius='5px'
                     p="25px 10px"
                     borderRight="1px solid white"
                     pointerEvents="none"
                   >
-                    <FaRegBuilding size={60} color={backgroundColor3} />
+                    <FaRegBuilding size={20} color={backgroundColor3} />
                   </InputLeftElement>
                   <Input
                     {...register("company", {
@@ -221,14 +225,19 @@ const Register: React.FC<RegisterProps> = () => {
                     onBlur={handleBlur_3}
                   />
                 </InputGroup>
-                {errors.company && (
-                  <FormErrorMessage>{errors.company.message}</FormErrorMessage>
-                )}
+                {!isVisible &&
+                  <FormErrorMessage>
+                    {errors.company && errors.company.message}
+                  </FormErrorMessage>
+                }
               </FormControl>
 
               <FormControl isInvalid={!!errors.email}>
                 <InputGroup mt="30px">
                   <InputLeftElement
+                    w="50px"
+                    backgroundColor='#eee'
+                    borderRadius='5px'
                     p="25px 10px"
                     borderRight="1px solid white"
                     pointerEvents="none"
@@ -261,6 +270,9 @@ const Register: React.FC<RegisterProps> = () => {
               <FormControl isInvalid={!!errors.password}>
                 <InputGroup mt="30px">
                   <InputLeftElement
+                    w="50px"
+                    backgroundColor='#eee'
+                    borderRadius='5px'
                     p="25px 10px"
                     borderRight="1px solid white"
                     pointerEvents="none"

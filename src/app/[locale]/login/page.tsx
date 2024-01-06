@@ -45,12 +45,16 @@ const  Login1: React.FC = () => {
     <Box boxShadow='0 2px 8px rgba(0,0,0,.08)'  bg="white" w="600px" m="auto" pb="30px">
         <Flex>
           <Text p="15px 60px" borderBottom="2px solid blue" color="blue" cursor="pointer" _hover={{ color: "black" }} >{t("Auth.tabs.login")}</Text>
-          <Text p="15px 60px" color="black.300" cursor="pointer" _hover={{ color: "black" }}> <Link  href="/az/register">{t("Auth.tabs.register")}</Link></Text>
+          <Text p="15px 60px" color="gray.500" cursor="pointer" > <Link  href="/az/register" _hover={{color: "black" }}>{t("Auth.tabs.register")}</Link></Text>
         </Flex>
 
         <Flex alignItems="center" flexDirection="column" m="30px" gap="10px">
           <Text fontWeight="bold" fontSize="26px">{t("Auth.Login.title")}</Text>
-          <Text>Hesabınız yoxdur? <span style={{ color: "blue", cursor: "pointer" }}> <Link  href="/az/register">Qeydiyyatdan kecin</Link> </span></Text>
+          <Text>    {t.rich("Auth.Login.subTitle", {
+            a: (chunks) => <a href="/az/register" style={{color:"blue", cursor: "pointer"}}>{chunks}</a>,
+            span :(chunks) => <span style={{color:"gray"}}> {chunks}</span>
+          })}</Text>
+          {/* <Text color="gray.500">Hesabınız yoxdur? <span style={{ color: "blue", cursor: "pointer" }}> <Link  _hover={{color:"black"}} href="/az/register">Qeydiyyatdan kecin</Link> </span></Text> */}
         </Flex>
 
         <Box w="490px" m="auto">
@@ -61,8 +65,10 @@ const  Login1: React.FC = () => {
 
           <InputGroup>
             <InputLeftElement
+                 w="50px"
+                 backgroundColor='#eee'
+                 borderRadius='5px'
               p="25px 10px"
-              borderRight="1px solid white"
               pointerEvents="none" >
               <FaRegEnvelope color={backgroundColor} />
 
@@ -93,6 +99,7 @@ const  Login1: React.FC = () => {
 
           <InputGroup mt="30px">
             <InputLeftElement
+            w="50px"
             backgroundColor='#eee'
             borderRadius='5px'
               p="25px 10px"
@@ -123,7 +130,7 @@ const  Login1: React.FC = () => {
 
 
           <FormHelperText m="20px 0 ">
-               <Link _hover={{ color: "blue", textDecoration: "none" }} href="/az/forgotPassword" >{t("Auth.Login.question")}</Link>
+               <Link fontSize="17px" _hover={{ color: "blue", textDecoration: "none" }} href="/az/forgotPassword" >{t("Auth.Login.question")}</Link>
           </FormHelperText>
 
           <Box
