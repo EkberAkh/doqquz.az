@@ -21,12 +21,10 @@ const About = () => {
             backgroundRepeat="no-repeat"
           >
             <Heading as="h2">{t("About.value.title")}</Heading>
-            <Text width="400px">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repellat
-              odit quidem totam ipsam mollitia voluptatem corporis eius magnam
-              vel? Ratione delectus eos quaerat earum, doloremque esse eaque
-              officiis perspiciatis labore.
-            </Text>
+            <Container width="400px">
+              <Box>{t("About.mission.title")}</Box>
+              <Box>{t("About.mission.body")}</Box>
+            </Container>
           </Box>
           <Box
             flex="1"
