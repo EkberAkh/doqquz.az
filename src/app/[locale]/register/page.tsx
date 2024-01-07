@@ -119,7 +119,7 @@ const Register: React.FC<RegisterProps> = () => {
               onClick={toggleVisibility}
               color={isVisible ? "gray" : "blue"}
               bg={isVisible ? "white" : "gray.200"}
-              _hover={{ bg: "gray.200", color: "blue" }}
+              _hover={{ bg: "gray.200", color: "blue"}}
             >
               {t("Common.Role.COMPANY")}
             </Button>
