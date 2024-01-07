@@ -1,9 +1,13 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
 import { useTranslations } from 'next-intl'
 import { Card, Box, CardBody, CardHeader, Heading, Flex, Button, Text, Input, useDisclosure, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, InputGroup, InputLeftAddon, InputRightAddon, FormControl, FormHelperText, FormLabel } from '@chakra-ui/react'
 import { colorObjects } from '@/consts'
+import { MdOutlineAccountCircle } from "react-icons/md";
+import { MdOutlineFaceUnlock } from "react-icons/md";
+import PhoneInput from 'react-phone-input-2'
+import 'react-phone-input-2/lib/style.css'
 import { transform } from 'next/dist/build/swc'
 
 
@@ -14,12 +18,32 @@ const Profile = () => {
     const [webUrl, setWebUrl] = React.useState('—')
     const [establishmentDate, setEstablishmentDate] = React.useState('—')
     const [description, setDescription] = React.useState('—')
+    const [phoneNumber, setPhoneNumber] = useState('');
+    const [valid, setValid] = useState(true)
+
+    const handleChange = (value) => {
+        // const input = e.target.value;
+        setPhoneNumber(value);
+        setValid(validatePhoneNumber(value))
+    }
+
+    const validatePhoneNumber = (phoneNumber) => {
+        const phoneNumberPattern = /^\d{10}$/;
+        return phoneNumberPattern.test(phoneNumber);
+        // return phoneNumber.match("^[0-9]{10}$")
+    }
+
+
+
 
     return (
         <Box mx='15px'>
             <Card marginTop='30px' boxShadow='0 6px 10px rgba(1, 0, 0, 0.2)'>
                 <CardHeader borderBottom='1px solid #e4e4e4' display='flex' flexDirection='row' alignItems='center' justifyContent='space-between'>
-                    <Heading fontSize='16px' fontWeight={600}>{t('Profile.titles.contactInfo')}</Heading>
+                    <Flex align={'center'}>
+                        <MdOutlineAccountCircle color='rgb(42, 65, 232)' fontSize='1.4em' />
+                        <Heading ml={'8px'} fontSize='1rem' fontWeight={700}>{t('Profile.titles.contactInfo')}</Heading>
+                    </Flex>
                     <Box bgColor='#e0f5d7' color='#449626' p='5px' borderRadius='5px'>
                         {t('Common.Role.COMPANY')}
                     </Box>
@@ -27,7 +51,7 @@ const Profile = () => {
 
                 <CardBody p='30px'>
                     <Flex >
-                        <Box w='138px' h='138px' borderRadius='100px' bgColor={colorObjects.gray.border} marginRight='30px'>
+                        <Box w='138px' h='138px' borderRadius='100px' bgColor={colorObjects.gray.border} marginRight='30px' border={'1px solid #2a41e8'}>
 
                         </Box>
                         <Box w='87%'>
@@ -36,11 +60,15 @@ const Profile = () => {
                                     <Text mb='20px' fontSize='1.3rem'>{t('Common.FormInputs.email.label')}</Text>
                                     <Input placeholder='sales@yourbusinessname.com' h='48px'></Input>
                                 </Box>
+
                                 <Box w='50%'>
                                     <Text mb='20px' fontSize='1.3rem'>{t('Common.FormInputs.phoneNumber.label')}</Text>
-                                    <Input placeholder='sales@yourbusinessname.com' h='48px'></Input>
-
+                                    <PhoneInput country={'Us'} placeholder='sales@yourbusinessname.com' h='48px' value={phoneNumber} onChange={handleChange} inputProps={{
+                                        required: 'true'
+                                    }}></PhoneInput>
+                                    {!valid && <Text color={'red'} mt={'0.6rem'}>Please enter a valid phone number!</Text>}
                                 </Box>
+
                             </Flex>
                             <Button color={'#2a41e8'}
                                 border={'2px solid #2a41e8'}
@@ -78,7 +106,10 @@ const Profile = () => {
             </Card>
             <Card marginTop='30px' boxShadow='0 6px 10px rgba(1, 0, 0, 0.2)'>
                 <CardHeader borderBottom='1px solid #e4e4e4' display='flex' flexDirection='row' alignItems='center' justifyContent='space-between'>
-                    <Heading fontSize='16px' fontWeight={600}> Profil Məlumatı</Heading>
+                    <Flex align={'center'}>
+                        <MdOutlineFaceUnlock color='rgb(42, 65, 232)' fontSize='1.4em' />
+                        <Heading ml={'8px'} fontSize='1rem' fontWeight={700}> Profil Məlumatı</Heading>
+                    </Flex>
                     <Button bgColor='#e0f5d7' color='#449626' p='5px' borderRadius='5px' onClick={onOpen}>
                         Change
                     </Button>
@@ -144,7 +175,6 @@ const Profile = () => {
                         <FormControl w='50%'>
                             <FormLabel>{t('Profile.ProfileInfo.establishmentDate')}</FormLabel>
                             <InputGroup size='sm'>
-
 
                                 <Input
                                     height='48px'
