@@ -7,6 +7,7 @@ import React from "react";
 import { DJobSeekers } from "../data/DJobSeekers";
 import { useTranslations } from "next-intl";
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
+import { IoIosArrowRoundForward } from "react-icons/io";
 
 
 export const LatestJobSeekers = () => {
@@ -29,9 +30,10 @@ export const LatestJobSeekers = () => {
         setCurrentIndex((prevIndex) => (prevIndex + 3 >= DJobSeekers.length ? 0 : prevIndex + 3));
     };
     return (
-        <Box paddingX='24px' paddingBottom='80px' >
+        <Flex justify={'center'}>
+        <Box paddingX='24px' paddingBottom='80px' width={'90%'}>
             <Flex marginBottom='40px' marginTop='60px' justifyContent='space-between'>
-                <Text color={colorObjects.black.main} fontSize='1.6rem'>{t('Home.RegisteredJobseekers.title')}
+                <Text color={colorObjects.black.main} fontSize='1.5rem' >{t('Home.RegisteredJobseekers.title')}
                 </Text>
                 <Text color={colorObjects.black.secondary} fontSize='1rem' >{t('Home.RegisteredJobseekers.actions.shortLink')}</Text>
             </Flex>
@@ -39,7 +41,7 @@ export const LatestJobSeekers = () => {
                 <Button onClick={handlePrevSlide}>
                 <ChevronLeftIcon height='20px' width='20px'/>
                 </Button>
-                <Flex paddingX='40px' columnGap='50px' >
+                <Flex paddingX='40px' columnGap='30px' >
 
                     {DJobSeekers.slice(currentIndex, currentIndex + 3).map((seeker) => (
                         <MotionBox initial="hidden" animate="visible" variants={textVariants} transition={transition}>
@@ -55,7 +57,7 @@ export const LatestJobSeekers = () => {
                                         {seeker.name}
                                     </Text>
                                 </Center>
-                                <Box marginTop='35px' paddingY='35px' w='100%'>
+                                <Box marginTop='35px' paddingY='30px' w='100%'>
                                     <Flex justifyContent='space-between' fontSize='16px' mb='30px'>
                                         <Box fontWeight={600}>
                                             <Text color={colorObjects.black.secondary}>{t('Common.GENDER.label')}</Text>
@@ -66,7 +68,7 @@ export const LatestJobSeekers = () => {
                                             <Text>{seeker.salary}</Text>
                                         </Box>
                                     </Flex>
-                                    <Button w='100%' variant='primary' height='48px' >{t('Home.RegisteredJobseekers.actions.viewProfile')}</Button>
+                                    <Button w='100%' bg={'#2a41e8'} color={'#fff'} variant='primary' height='48px' >{t('Home.RegisteredJobseekers.actions.viewProfile')}</Button>
                                 </Box>
 
                             </Center>
@@ -81,6 +83,7 @@ export const LatestJobSeekers = () => {
                 </Button>
             </Flex>
         </Box >
+        </Flex>
     )
 }
 

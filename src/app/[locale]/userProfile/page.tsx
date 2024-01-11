@@ -9,6 +9,7 @@ import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 import { transform } from 'next/dist/build/swc'
 import { AddIcon } from '@chakra-ui/icons'
+import ScrollToTop from '@/components/ScrollToTop'
 // import "react-datepicker/dist/react-datepicker.css";
 // import DatePicker from "react-datepicker";
 
@@ -461,6 +462,7 @@ const Profile = () => {
                 </Modal>}
 
             </Box>
+            <ScrollToTop/>
         </Flex>
     )
 }
