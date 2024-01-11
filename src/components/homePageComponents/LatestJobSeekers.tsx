@@ -43,8 +43,8 @@ export const LatestJobSeekers = () => {
                 </Button>
                 <Flex paddingX='40px' columnGap='30px' >
 
-                    {DJobSeekers.slice(currentIndex, currentIndex + 3).map((seeker) => (
-                        <MotionBox initial="hidden" animate="visible" variants={textVariants} transition={transition}>
+                    {DJobSeekers.slice(currentIndex, currentIndex + 3).map((seeker,index) => (
+                        <MotionBox key={index} initial="hidden" animate="visible" variants={textVariants} transition={transition}>
                             <Center key={seeker.id} padding='35px' position='relative' boxShadow='0 6px 10px rgba(1, 0, 0, 0.2)' flexDirection='column' w='340px'>
                                 <Box position='absolute' bgColor={colorObjects.gray.light} w='39px' h='39px' top='15px' right='15px' borderRadius='100px'>
 
