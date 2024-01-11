@@ -7,7 +7,6 @@ import { colorObjects } from '@/consts'
 import { MdOutlineAccountCircle, MdOutlineFaceUnlock, MdOutlineDesktopMac, MdOutlineLibraryBooks } from "react-icons/md";
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
-import { transform } from 'next/dist/build/swc'
 import { AddIcon } from '@chakra-ui/icons'
 import ScrollToTop from '@/components/ScrollToTop'
 // import "react-datepicker/dist/react-datepicker.css";

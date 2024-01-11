@@ -18,7 +18,9 @@ export const Banner = () => {
 
             <Text color={colorObjects.black.secondary} fontSize='1.6rem' maxW='649px'>
                {t.rich('Home.Header.subTitle', {
-                  'span': (chunks) => <span style={{ color: colorObjects.blue.main, fontWeight: 600 }}>{chunks}</span>,
+
+                  span: (chunks) => <span style={{ color: colorObjects.blue.main }}>{chunks}</span>,
+
                })}
             </Text>
             <Search />
