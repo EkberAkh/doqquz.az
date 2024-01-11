@@ -243,7 +243,7 @@ export const Footer = () => {
                   <NavigationLink href='/managejobs'>{t("Common.Nav.manage_jobs")}</NavigationLink>
                 </Text>
                 <Text fontSize="14px" color="#c0c0c0">
-                  <NavigationLink href='/postjob'>{t("Common.Nav.post_a_job")}</NavigationLink>
+                  <NavigationLink href='/postJobs'>{t("Common.Nav.post_a_job")}</NavigationLink>
                 </Text>
               </Flex>
             </Box>
@@ -259,7 +259,7 @@ export const Footer = () => {
                  <NavigationLink href='/contact'> {t("Common.Nav.contact")}</NavigationLink>
                 </Text>
                 <Text fontSize="14px" color="#c0c0c0">
-                  <NavigationLink href='provacy-police'>{t("Home.Footer.Nav.privacyPolice")}</NavigationLink>
+                  <NavigationLink href='privacy-police'>{t("Home.Footer.Nav.privacyPolice")}</NavigationLink>
                 </Text>
               </Flex>
             </Box>
