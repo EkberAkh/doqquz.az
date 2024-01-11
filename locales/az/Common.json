@@ -255,7 +255,7 @@
   },
   "present": "Halhazırda",
   "location": "Ünvan",
-  "noRecord": "<emoji>Ups! 😔</emoji><span></span><b>Heç bir məlumat tapılmadı</b>",
+  "noRecord": "<div>Ups! 😔</div><span></span><span>Heç bir məlumat tapılmadı</span>",
   "noData": "Bu bölmədə heç bir qeyd yoxdur",
   "bookmark": {
     "post": "Gözaltı etdiyim Vakansiyalar",

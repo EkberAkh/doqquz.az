@@ -41,14 +41,11 @@ const JobsFilter: React.FC<IJobFilter> = ({jobType}) => {
         <Salary />
 
         <Button
+        marginTop='16px'
           height="52px"
           _hover={{}}
-          margin="0 0 12px 12px"
-          left="0"
-          w="352px"
-          bottom="0"
+          w="100%"
           color="#fff"
-          position="fixed"
           backgroundColor="#2a41e8"
         >
           {t("Common.Action.SEARCH")}
