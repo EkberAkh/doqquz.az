@@ -8,7 +8,7 @@ export const Search = () => {
     const t = useTranslations()
     return (
         <Flex width='100%' mt='100px' w={'100%'} justify={'center'}>
-            <Flex width={'90%'} >
+            <Flex width={'100%'} >
             <Box w='45%'>
                 <Button variant='primary' mb='20px' bg={'#2a41e8'} color={'#fff'} fontWeight='400' cursor='auto'>
                     {t('Home.Header.questions.where')}
@@ -26,9 +26,9 @@ export const Search = () => {
                     {t('Home.Header.questions.jobType')}
                 </Button>
                 <Box width='100%'>
-                    <InputGroup bgColor={colorObjects.white.main} w='100%' p='10px 12px'
+                    <InputGroup bgColor={colorObjects.white.main} w='100%' p='10px'
                         boxShadow='0 2px 4px rgba(0, 0, 0, 0.1)' borderRightRadius='5px' >
-                        <Input placeholder={t('Home.Header.placeholders.jobType')} fontSize='1.2rem' outline='none' border='none' />
+                        <Input placeholder={t('Home.Header.placeholders.jobType')} fontSize='1.2rem' width={'81%'} outline='none' border='none' />
                         <InputRightElement width='8rem' h={'100%'} >
                                 <Button
                                     // pr={'10px'}
