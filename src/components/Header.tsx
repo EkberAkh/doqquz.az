@@ -10,22 +10,25 @@ import {
     MenuList,
     MenuItem,
     HStack,
-    ThemeProvider
+    ThemeProvider,
+    color
 } from "@chakra-ui/react"
 import ChevronDownIcon from '@/icons/ChewronDownIcon'
 import ArrowForwardIcon from '@/icons/ArrowForwardIcon'
 import { extendedTheme } from '@/consts'
 import { useTranslations } from 'next-intl'
+import { usePathname } from 'next/navigation'
 
 
 function Header() {
     const t = useTranslations()
+    const path = usePathname();
     return (
         <ThemeProvider theme={extendedTheme}>
             <HStack align={'center'} minH={20} p='10px 25px' justifyContent={'space-between'} boxShadow='0 0 18px 0 rgba(0, 0, 0, 0.12)'>
                 <HStack color='rgb(102, 102, 102)'>
                     <Image src={logo.src} alt="Logo" h='60px' pr="16px" borderRight='1px solid rgb(102, 102, 102)' />
-                    <Link href='/' p='6px 16px' _hover={{ textDecoration: 'none', color: 'rgb(42, 65, 232)' }}>
+                    <Link href='/' p='6px 16px' _hover={{ textDecoration: 'none', color: 'rgb(42, 65, 232)' }} {...path.startsWith('/') ? {color: '#2a41e8'} : null}>
                         {t('Common.Nav.home')}
                     </Link>
                     <Menu  >

@@ -9,7 +9,7 @@ export const Search = () => {
     return (
         <Flex width='100%' mt='100px'>
             <Box w='45%'>
-                <Button variant='primary' mb='20px' fontWeight='400' cursor='auto'>
+                <Button variant='primary' mb='20px' bg={'#2a41e8'} color={'#fff'} fontWeight='400' cursor='auto'>
                     {t('Home.Header.questions.where')}
                 </Button>
 
@@ -21,7 +21,7 @@ export const Search = () => {
 
             </Box>
             <Box w='55%'>
-                <Button variant='primary' mb='20px' fontWeight='400' cursor='auto'>
+                <Button variant='primary' mb='20px' bg={'#2a41e8'} color={'#fff'} fontWeight='400' cursor='auto'>
                     {t('Home.Header.questions.jobType')}
                 </Button>
                 <Box width='100%'>

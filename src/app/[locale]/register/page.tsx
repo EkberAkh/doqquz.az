@@ -19,6 +19,7 @@ import { FaRegBuilding } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
+import ScrollToTop from "@/components/ScrollToTop";
 
 interface RegisterProps { }
 
@@ -324,6 +325,7 @@ const Register: React.FC<RegisterProps> = () => {
             </FormControl>
           </form>
         </Box>
+        <ScrollToTop/>
       </Box>
     </>
   );
