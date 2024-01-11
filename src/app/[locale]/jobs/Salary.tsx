@@ -23,7 +23,7 @@ const Salary = () => {
     setMaxSalary(max);
   };
   return (
-    <VStack spacing={4} align="stretch">
+    <VStack marginBottom='16px' spacing={4} align="stretch">
       <FormControl>
         <FormLabel marginBottom="16px" fontSize="18px">
           {t("Common.Salary.label")}
