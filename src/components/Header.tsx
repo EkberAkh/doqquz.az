@@ -84,12 +84,12 @@ function Header() {
                 </NavigationLink>
               </MenuItem>
               <MenuItem>
-                <NavigationLink href="/managejobs">
+                <NavigationLink href="/manageJobs">
                   {t("Common.Nav.manage_jobs")}
                 </NavigationLink>
               </MenuItem>
               <MenuItem>
-                <NavigationLink href="/postjob">
+                <NavigationLink href="/postJobs">
                   {t("Common.Nav.post_a_job")}
                 </NavigationLink>
               </MenuItem>
