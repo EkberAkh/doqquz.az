@@ -28,7 +28,8 @@ const  Login1: React.FC = () => {
   const backgroundColor: string = isFocused ? 'blue' : 'gray';
   const backgroundColor2: string = isFocused2 ? 'blue' : 'gray';
   const t = useTranslations();
-
+  const [email,setEmail] = useState("")
+  const [password,setPassoword] = useState("")
   const {
     handleSubmit,
     register,
@@ -37,6 +38,17 @@ const  Login1: React.FC = () => {
 
   const onSubmit = (values: FormData) => {
     console.log("salam");
+    const data = {email,password}
+    console.log("salam")
+    fetch("https://neo-814m.onrender.com/v1/auth/login", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(data)
+    }).then((data) => {
+      data.text().then((token) => {
+          console.log(token)
+      })
+  })
   };
 
   return (
@@ -75,18 +87,19 @@ const  Login1: React.FC = () => {
             </InputLeftElement>
 
             <Input
-              {...register('email', {
-                required: 'This is required',
-                validate: {
-                  containsAt: (value) => value.includes("@") && value.includes('.') || 'Format yalnisdir',
-                },
-              })}
+              // {...register('email', {
+              //   required: 'This is required',
+              //   validate: {
+              //     containsAt: (value) => value.includes("@") && value.includes('.') || 'Format yalnisdir',
+              //   },
+              // })}
               id='email'
               type="email"
               placeholder="example@gmail.com"
               onFocus={handleFocus}
               onBlur={handleBlur}
               p="25px 70px"
+              onChange={(e) => setEmail(e.target.value)}
           
             />
           </InputGroup>
@@ -108,19 +121,20 @@ const  Login1: React.FC = () => {
               <LockIcon color={backgroundColor2} />
             </InputLeftElement>
             <Input
-            {...register('password', {
-              required: 'This is required',
-              minLength: { value: 6, message: 'Minimum length should be 6' },
-              validate: {
-                containsLetterAndNumber: (value) => 
-                /[a-z]/.test(value) && /[0-9]/.test(value) || 'Password must contain both letters (a-z) and numbers (0-9)',                },
-            })}
+            // {...register('password', {
+            //   required: 'This is required',
+            //   minLength: { value: 6, message: 'Minimum length should be 6' },
+            //   validate: {
+            //     containsLetterAndNumber: (value) => 
+            //     /[a-z]/.test(value) && /[0-9]/.test(value) || 'Password must contain both letters (a-z) and numbers (0-9)',                },
+            // })}
               id='password'
               type="password"
               placeholder= {t("Common.FormInputs.password.placeholder")}
               p="25px 70px"
               onFocus={handleFocus_2}
               onBlur={handleBlur_2}
+              onChange={(e) => setPassoword(e.target.value)}
                />
           </InputGroup>
           <FormErrorMessage>
