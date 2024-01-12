@@ -13,8 +13,9 @@ import Salary from "./Salary";
 
 interface IJobFilter {
   jobType:boolean
+  locationInput:boolean
 }
-const JobsFilter: React.FC<IJobFilter> = ({jobType}) => {
+const JobsFilter: React.FC<IJobFilter> = ({jobType,locationInput}) => {
   const t = useTranslations();
 
   return (
@@ -32,7 +33,7 @@ const JobsFilter: React.FC<IJobFilter> = ({jobType}) => {
         flexDirection="column"
         flexShrink={0}
       >
-        <LocationInput />
+      {locationInput &&  <LocationInput />}
         <KeywordInput />
         <JobCategories />
        {jobType && <JobType /> } 
