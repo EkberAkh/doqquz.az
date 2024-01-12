@@ -26,7 +26,6 @@ import { useFormik } from "formik"
 <<<<<<< HEAD
 import { NavigationLink } from "@/components/NavigationLink";
 
-
 interface RegisterProps {}
 =======
 
