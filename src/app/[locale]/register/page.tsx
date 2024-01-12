@@ -23,15 +23,9 @@ import ScrollToTop from "@/components/ScrollToTop";
 import { basicSchema } from "./const";
 import { useFormik } from "formik"
 
-<<<<<<< HEAD
 import { NavigationLink } from "@/components/NavigationLink";
 
 interface RegisterProps {}
-=======
-
-interface RegisterProps { }
->>>>>>> 4ef4ae7 (add register-company)
-
 
 
 
@@ -266,12 +260,7 @@ const Register: React.FC<RegisterProps> = () => {
                 {!isVisible && errors.companyName && <Text color="red" mt="5px">{errors.companyName}</Text>}
 
 
-<<<<<<< HEAD
-
-              </FormControl>
-=======
               </FormControl> */}
->>>>>>> 4ef4ae7 (add register-company)
 
               <FormControl >
                 <InputGroup mt="30px">
