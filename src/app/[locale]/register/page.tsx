@@ -20,8 +20,9 @@ import { useForm } from "react-hook-form";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import ScrollToTop from "@/components/ScrollToTop";
+import { NavigationLink } from "@/components/NavigationLink";
 
-interface RegisterProps { }
+interface RegisterProps {}
 
 interface FormData {
   name: string;
@@ -58,24 +59,85 @@ const Register: React.FC<RegisterProps> = () => {
 
   const [isVisible, setIsVisible] = useState(true);
   const t = useTranslations();
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [companyName, setCompanyName] = useState("");
+  const [email, setEamil] = useState("");
+  const [password, setPassoword] = useState("");
+  const [salam, setSalam] = useState(true);
+  const [role, setRole] = useState("JOBSEEKER");
 
   const toggleVisibility = () => {
     setIsVisible(false);
+    setSalam(false);
+    setRole("COMPANY");
   };
 
   const toggleVisibility1 = () => {
     setIsVisible(true);
+    setSalam(true);
+    setRole("JOBSEEKER");
+  };
+  const onSubmit = async (e:any) => {
+    e.preventDefault();
+    const data = getValues(["name", "surname", "email", "company", "password"]);
+    const [name, surname, email, company, password] = data;
+    const role = salam ? "JOBSEEKER" : "COMPANY";
+    const formData = salam
+      ? { email, firstName: name, lastName: surname, password, role }
+      : {
+          companyName,
+          email,
+          firstName: name,
+          lastName: surname,
+          password,
+          role,
+        };
+    try {
+      await  fetch("https://neo-814m.onrender.com/v1/auth/register", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(formData),
+    }).then((res) => {
+      console.log(res);
+    });
+      // await fetch()
+    } catch (e) {
+      console.log(e);
+      
+    }
+  }
+
+  const handleClick =  async (e: any) => {
+    e.preventDefault();
+    const data = getValues(["name", "surname", "email", "company", "password"]);
+    const [name, surname, email, company, password] = data;
+    const role = salam ? "JOBSEEKER" : "COMPANY";
+    const formData = salam
+      ? { email, firstName: name, lastName: surname, password, role }
+      : {
+          companyName,
+          email,
+          firstName: name,
+          lastName: surname,
+          password,
+          role,
+        };
+        fetch("https://neo-814m.onrender.com/v1/auth/register", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify(formData),
+        }).then((res) => {
+          console.log(res);
+        });
+   
   };
   const {
     handleSubmit,
+    getValues,
     register,
     formState: { errors },
   } = useForm<FormData>();
-
-  const onSubmit = (values: FormData) => {
-    console.log("salam", values);
-  };
-
   return (
     <>
       <Box bg="white" w="600px" m="auto" pb="30px">
@@ -86,8 +148,9 @@ const Register: React.FC<RegisterProps> = () => {
             cursor="pointer"
             _hover={{ color: "black" }}
           >
-            {" "}
-            <Link href="/az/login">{t("Auth.tabs.login")}</Link>
+            <NavigationLink href="/login">
+              {t("Auth.tabs.login")}
+            </NavigationLink>
           </Text>
           <Text
             p="15px 60px"
@@ -120,7 +183,7 @@ const Register: React.FC<RegisterProps> = () => {
               onClick={toggleVisibility}
               color={isVisible ? "gray" : "blue"}
               bg={isVisible ? "white" : "gray.200"}
-              _hover={{ bg: "gray.200", color: "blue"}}
+              _hover={{ bg: "gray.200", color: "blue" }}
             >
               {t("Common.Role.COMPANY")}
             </Button>
@@ -131,8 +194,8 @@ const Register: React.FC<RegisterProps> = () => {
               <InputGroup mt="30px">
                 <InputLeftElement
                   w="50px"
-                  backgroundColor='#eee'
-                  borderRadius='5px'
+                  backgroundColor="#eee"
+                  borderRadius="5px"
                   p="25px 10px"
                   borderRight="1px solid white"
                   pointerEvents="none"
@@ -141,7 +204,10 @@ const Register: React.FC<RegisterProps> = () => {
                 </InputLeftElement>
 
                 <Input
-
+                  id="name"
+                  placeholder={t("Common.FormInputs.firstName.placeholder")}
+                  p="25px 70px"
+              
                   {...register("name", {
                     required: "This is required",
                     minLength: {
@@ -149,12 +215,6 @@ const Register: React.FC<RegisterProps> = () => {
                       message: "Minimum length should be 3",
                     },
                   })}
-                  id="name"
-                  type="email"
-                  placeholder={t("Common.FormInputs.firstName.placeholder")}
-                  p="25px 70px"
-                  onFocus={handleFocus}
-                  onBlur={handleBlur}
                 />
               </InputGroup>
               <FormErrorMessage>
@@ -168,8 +228,8 @@ const Register: React.FC<RegisterProps> = () => {
                 <InputGroup mt="30px">
                   <InputLeftElement
                     w="50px"
-                    backgroundColor='#eee'
-                    borderRadius='5px'
+                    backgroundColor="#eee"
+                    borderRadius="5px"
                     p="25px 10px"
                     borderRight="1px solid white"
                     pointerEvents="none"
@@ -178,6 +238,11 @@ const Register: React.FC<RegisterProps> = () => {
                   </InputLeftElement>
 
                   <Input
+                    id="surname"
+                    type="text"
+                    placeholder={t("Common.FormInputs.lastName.placeholder")}
+                    p="25px 70px"
+                 
                     {...register("surname", {
                       required: "This is required",
                       minLength: {
@@ -185,12 +250,6 @@ const Register: React.FC<RegisterProps> = () => {
                         message: "Minimum length should be 3",
                       },
                     })}
-                    id="surname"
-                    type="text"
-                    placeholder={t("Common.FormInputs.lastName.placeholder")}
-                    p="25px 70px"
-                    onFocus={handleFocus_2}
-                    onBlur={handleBlur_2}
                   />
                 </InputGroup>
                 <FormErrorMessage>
@@ -202,8 +261,8 @@ const Register: React.FC<RegisterProps> = () => {
                 <InputGroup mt="30px " display={isVisible ? "none" : "block"}>
                   <InputLeftElement
                     w="50px"
-                    backgroundColor='#eee'
-                    borderRadius='5px'
+                    backgroundColor="#eee"
+                    borderRadius="5px"
                     p="25px 10px"
                     borderRight="1px solid white"
                     pointerEvents="none"
@@ -211,6 +270,11 @@ const Register: React.FC<RegisterProps> = () => {
                     <FaRegBuilding size={20} color={backgroundColor3} />
                   </InputLeftElement>
                   <Input
+                    id="company"
+                    type="text"
+                    placeholder={t("Common.FormInputs.companyName.placeholder")}
+                    p="25px 70px"
+              
                     {...register("company", {
                       required: "This is required",
                       minLength: {
@@ -218,27 +282,21 @@ const Register: React.FC<RegisterProps> = () => {
                         message: "Minimum length should be 3",
                       },
                     })}
-                    id="company"
-                    type="text"
-                    placeholder={t("Common.FormInputs.companyName.placeholder")}
-                    p="25px 70px"
-                    onFocus={handleFocus_3}
-                    onBlur={handleBlur_3}
                   />
                 </InputGroup>
-                {!isVisible &&
+                {!isVisible && (
                   <FormErrorMessage>
                     {errors.company && errors.company.message}
                   </FormErrorMessage>
-                }
+                )}
               </FormControl>
 
               <FormControl isInvalid={!!errors.email}>
                 <InputGroup mt="30px">
                   <InputLeftElement
                     w="50px"
-                    backgroundColor='#eee'
-                    borderRadius='5px'
+                    backgroundColor="#eee"
+                    borderRadius="5px"
                     p="25px 10px"
                     borderRight="1px solid white"
                     pointerEvents="none"
@@ -247,6 +305,11 @@ const Register: React.FC<RegisterProps> = () => {
                   </InputLeftElement>
 
                   <Input
+                    id="email"
+                    type="email"
+                    placeholder="example@gmail.com"
+                
+                    p="25px 70px"
                     {...register("email", {
                       required: "This is required",
                       validate: {
@@ -255,12 +318,6 @@ const Register: React.FC<RegisterProps> = () => {
                           "Format yalnisdir",
                       },
                     })}
-                    id="email"
-                    type="email"
-                    placeholder="example@gmail.com"
-                    onFocus={handleFocus_4}
-                    onBlur={handleBlur_4}
-                    p="25px 70px"
                   />
                 </InputGroup>
                 <FormErrorMessage>
@@ -272,8 +329,8 @@ const Register: React.FC<RegisterProps> = () => {
                 <InputGroup mt="30px">
                   <InputLeftElement
                     w="50px"
-                    backgroundColor='#eee'
-                    borderRadius='5px'
+                    backgroundColor="#eee"
+                    borderRadius="5px"
                     p="25px 10px"
                     borderRight="1px solid white"
                     pointerEvents="none"
@@ -281,6 +338,11 @@ const Register: React.FC<RegisterProps> = () => {
                     <LockIcon color={backgroundColor5} />
                   </InputLeftElement>
                   <Input
+                    id="password"
+                    type="password"
+                    placeholder={t("Common.FormInputs.password.placeholder")}
+                    p="25px 70px"
+                
                     {...register("password", {
                       required: "This is required",
                       minLength: {
@@ -293,12 +355,6 @@ const Register: React.FC<RegisterProps> = () => {
                           "Password must contain both letters (a-z) and numbers (0-9)",
                       },
                     })}
-                    id="password"
-                    type="password"
-                    placeholder={t("Common.FormInputs.password.placeholder")}
-                    p="25px 70px"
-                    onFocus={handleFocus_5}
-                    onBlur={handleBlur_5}
                   />
                 </InputGroup>
                 <FormErrorMessage>
@@ -307,25 +363,24 @@ const Register: React.FC<RegisterProps> = () => {
               </FormControl>
               <Box
                 mt="30px"
-                onMouseEnter={() => setIsHovered(true)}
-                onMouseLeave={() => setIsHovered(false)}
-              >
-                <Button
-                  w="450px"
-                  backgroundColor="blue"
-                  color="white"
-                  p="25px"
-                  type="submit"
-                  _hover={{ backgroundColor: "blue" }}
-                >
-                  {t("Auth.Register.actions.register")}
-                  {isHovered && <Icon as={FaArrowRight} />}
-                </Button>
-              </Box>
+                // onMouseEnter={() => setIsHovered(true)}
+                // onMouseLeave={() => setIsHovered(false)}
+              ></Box>
             </FormControl>
+              <Button
+                type="submit"
+                w="450px"
+                backgroundColor="blue"
+                color="white"
+                p="25px"
+                _hover={{ backgroundColor: "blue" }}
+              >
+                {t("Auth.Register.actions.register")}
+                {isHovered && <Icon as={FaArrowRight} />}
+              </Button>
           </form>
         </Box>
-        <ScrollToTop/>
+        <ScrollToTop />
       </Box>
     </>
   );

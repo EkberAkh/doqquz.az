@@ -2,7 +2,20 @@ import { StarIcon } from '@chakra-ui/icons';
 import { Avatar, Box, Flex, GridItem, Img, Text } from '@chakra-ui/react';
 import React, { useState } from 'react'
 
-const Card = () => {
+
+interface ICardProps {
+  companyName:string;
+  title:string;
+  city:string;
+  type:string;
+  minEstimatedBudget:string;
+  maxEstimatedBudget:string;
+  currency:string;
+  createdAt:string;
+
+}
+
+const Card: React.FC<ICardProps> = ({companyName,title,city,type,minEstimatedBudget,maxEstimatedBudget,currency,createdAt}) => {
   const [isFav, setIsFav] = useState<boolean>(false);
 
   return (
@@ -22,10 +35,10 @@ const Card = () => {
           alignItems="flex-start"
         >
           <Text as="h4" color="grey" fontSize="16px">
-            Tech MMC
+            {companyName}
           </Text>
           <Text as="h3" fontSize="18px" fontWeight="bold">
-            Hekim
+            {title}
           </Text>
         </Box>
       </Flex>
@@ -69,7 +82,7 @@ const Card = () => {
               src="../../../images/image.png"
             />
             <Text color="#777" fontSize="14px">
-              Sumqayit
+              {city}
             </Text>
           </Box>
         </Box>
@@ -81,7 +94,7 @@ const Card = () => {
               src="../../../images/briefcase.png"
             />
             <Text color="#777" fontSize="14px">
-              Frilans
+              {type}
             </Text>
           </Box>
         </Box>
@@ -95,7 +108,7 @@ const Card = () => {
               src="../../../images/wallet.png"
             />
             <Text color="#777" fontSize="14px">
-              800-900 EUR
+              {`${minEstimatedBudget}-${maxEstimatedBudget} ${currency}`}
             </Text>
           </Box>
         </Box>
@@ -107,7 +120,7 @@ const Card = () => {
               src="../../../images/clock.png"
             />
             <Text color="#777" fontSize="14px">
-              01.29.2023
+              {createdAt}
             </Text>
           </Box>
         </Box>
