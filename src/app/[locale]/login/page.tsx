@@ -9,7 +9,8 @@ import { LockIcon } from '@chakra-ui/icons';
 import { FaRegEnvelope } from "react-icons/fa6";
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 type FormData = {
   email: string;
   password: string;
@@ -32,6 +33,7 @@ const  Login1: React.FC = () => {
   const [email,setEmail] = useState("")
   const [password,setPassoword] = useState("")
 
+  const [error, setError] = useState<string | null>(null);
 
   const {
     handleSubmit,
@@ -40,17 +42,40 @@ const  Login1: React.FC = () => {
   } = useForm<FormData>();
 
   const onSubmit = (values: FormData) => {
+  
+     
     const data = {email,password}
     console.log("salam")
     fetch("https://neo-814m.onrender.com/v1/auth/login", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(data)
-    }).then((data) => {
-      data.text().then((token) => {
-          console.log(token)
-      })
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify(data),
   })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error( "email or password is wrong");
+        
+      }
+      return response.text();
+    })
+    .then((token) => {
+      console.log(token);
+      // Handle successful response
+    })
+    .catch((error) => {
+      console.error("username or password is wrong");
+      setError("username or password is wrong");
+      toast.error(`🦄 ${error.message}`, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    });
   };
 
   return (
@@ -162,8 +187,18 @@ const  Login1: React.FC = () => {
       </form>
       </FormControl>
         </Box>
+        <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"/>
       </Box>
-   
   )
 }
 
