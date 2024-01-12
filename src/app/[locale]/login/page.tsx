@@ -57,6 +57,16 @@ const Login1: React.FC = () => {
       })
       .then((token1) => {
         setToken(token1)
+        toast.success(`🚀 Login successful!`, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
       })
       .catch((error) => {
         console.error("username or password is wrong");
