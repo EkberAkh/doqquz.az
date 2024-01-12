@@ -19,7 +19,7 @@ import { FaArrowRight } from "react-icons/fa";
 import { LockIcon } from "@chakra-ui/icons";
 import { FaRegEnvelope } from "react-icons/fa6";
 import { useForm } from "react-hook-form";
-import Cookies from 'js-cookie';
+import Cookies from "js-cookie";
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -45,7 +45,7 @@ const Login1: React.FC = () => {
   const backgroundColor: string = isFocused ? "blue" : "gray";
   const backgroundColor2: string = isFocused2 ? "blue" : "gray";
   const t = useTranslations();
-const router = useRouter()
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassoword] = useState("");
 
@@ -69,7 +69,7 @@ const router = useRouter()
       })
       .then((token1) => {
         setToken(token1);
-        Cookies.set('token', token1, { expires: 7 }); // expires in 7 days
+        Cookies.set("token", token1, { expires: 7 }); // expires in 7 days
         toast.success(`🚀 Login successful!`, {
           position: "top-center",
           autoClose: 5000,
@@ -80,7 +80,7 @@ const router = useRouter()
           progress: undefined,
           theme: "light",
         });
-router.push('/')
+        router.push("/");
       })
       .catch((error) => {
         console.error("username or password is wrong");
