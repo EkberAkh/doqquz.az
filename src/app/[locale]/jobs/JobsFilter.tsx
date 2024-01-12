@@ -22,7 +22,7 @@ const JobsFilter: React.FC<IJobFilter> = ({jobType}) => {
       overflowX="hidden"
       overflowY="auto"
       flexWrap="wrap"
-      height="calc(100vh - 82px)"
+      
     >
       <Box
         backgroundColor="#fafafa"
