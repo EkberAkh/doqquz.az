@@ -28,8 +28,11 @@ const  Login1: React.FC = () => {
   const backgroundColor: string = isFocused ? 'blue' : 'gray';
   const backgroundColor2: string = isFocused2 ? 'blue' : 'gray';
   const t = useTranslations();
+
   const [email,setEmail] = useState("")
   const [password,setPassoword] = useState("")
+
+
   const {
     handleSubmit,
     register,
@@ -37,7 +40,6 @@ const  Login1: React.FC = () => {
   } = useForm<FormData>();
 
   const onSubmit = (values: FormData) => {
-    console.log("salam");
     const data = {email,password}
     console.log("salam")
     fetch("https://neo-814m.onrender.com/v1/auth/login", {
