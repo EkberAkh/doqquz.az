@@ -58,13 +58,24 @@ const Register: React.FC<RegisterProps> = () => {
 
   const [isVisible, setIsVisible] = useState(true);
   const t = useTranslations();
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [companyName, setCompanyName] = useState("")
+  const [email, setEamil] = useState("");
+  const [password, setPassoword] = useState("");
+  const [salam, setSalam] = useState(true)
+  const [role, setRole] = useState("JOBSEEKER")
 
   const toggleVisibility = () => {
     setIsVisible(false);
+    setSalam(false)
+    setRole("COMPANY")
   };
 
   const toggleVisibility1 = () => {
     setIsVisible(true);
+    setSalam(true)
+    setRole("JOBSEEKER")
   };
   const {
     handleSubmit,
@@ -72,8 +83,17 @@ const Register: React.FC<RegisterProps> = () => {
     formState: { errors },
   } = useForm<FormData>();
 
-  const onSubmit = (values: FormData) => {
-    console.log("salam", values);
+  const onSubmit = () => {
+    const dataa = { email, firstName, lastName, password, role }
+    const data1 = { companyName, email, firstName, lastName, password, role }
+
+    fetch("https://neo-814m.onrender.com/v1/auth/register", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(salam ? dataa : data1)
+    }).then((res) => {
+      console.log(res)
+    })
   };
 
   return (
@@ -120,7 +140,7 @@ const Register: React.FC<RegisterProps> = () => {
               onClick={toggleVisibility}
               color={isVisible ? "gray" : "blue"}
               bg={isVisible ? "white" : "gray.200"}
-              _hover={{ bg: "gray.200", color: "blue"}}
+              _hover={{ bg: "gray.200", color: "blue" }}
             >
               {t("Common.Role.COMPANY")}
             </Button>
@@ -141,20 +161,20 @@ const Register: React.FC<RegisterProps> = () => {
                 </InputLeftElement>
 
                 <Input
-
-                  {...register("name", {
-                    required: "This is required",
-                    minLength: {
-                      value: 3,
-                      message: "Minimum length should be 3",
-                    },
-                  })}
+                    {...register("name", {
+                      required: "This is required",
+                      minLength: {
+                        value: 3,
+                        message: "Minimum length should be 3",
+                      },
+                    })}
                   id="name"
-                  type="email"
                   placeholder={t("Common.FormInputs.firstName.placeholder")}
                   p="25px 70px"
                   onFocus={handleFocus}
                   onBlur={handleBlur}
+                  onChange={(e) => setFirstName(e.target.value)}
+             
                 />
               </InputGroup>
               <FormErrorMessage>
@@ -178,19 +198,20 @@ const Register: React.FC<RegisterProps> = () => {
                   </InputLeftElement>
 
                   <Input
-                    {...register("surname", {
-                      required: "This is required",
-                      minLength: {
-                        value: 3,
-                        message: "Minimum length should be 3",
-                      },
-                    })}
+                    // {...register("surname", {
+                    //   required: "This is required",
+                    //   minLength: {
+                    //     value: 3,
+                    //     message: "Minimum length should be 3",
+                    //   },
+                    // })}
                     id="surname"
                     type="text"
                     placeholder={t("Common.FormInputs.lastName.placeholder")}
                     p="25px 70px"
                     onFocus={handleFocus_2}
                     onBlur={handleBlur_2}
+                    onChange={(e) => setLastName(e.target.value)}
                   />
                 </InputGroup>
                 <FormErrorMessage>
@@ -211,19 +232,271 @@ const Register: React.FC<RegisterProps> = () => {
                     <FaRegBuilding size={20} color={backgroundColor3} />
                   </InputLeftElement>
                   <Input
-                    {...register("company", {
-                      required: "This is required",
-                      minLength: {
-                        value: 3,
-                        message: "Minimum length should be 3",
-                      },
-                    })}
+                    // {...register("company", {
+                    //   required: "This is required",
+                    //   minLength: {
+                    //     value: 3,
+                    //     message: "Minimum length should be 3",
+                    //   },
+                    // })}
                     id="company"
                     type="text"
                     placeholder={t("Common.FormInputs.companyName.placeholder")}
                     p="25px 70px"
-                    onFocus={handleFocus_3}
+                    onFocus={handleFocus_3}import React from 'react'
+                    import { Box, Button, Flex, FormControl, Text, InputGroup, InputLeftElement, Input, FormErrorMessage } from '@chakra-ui/react'
+                    import { useNavigate } from 'react-router-dom'
+                    import { FaUser, FaArrowRight, FaRegEnvelope } from 'react-icons/fa'
+                    import { useState } from 'react'
+                    import { Icon, LockIcon } from '@chakra-ui/icons'
+                    import { PiUserListFill } from "react-icons/pi";
+                    import { FaRegBuilding } from "react-icons/fa";
+                    import { useFormik } from 'formik'
+                    import { basicSchema } from '../App2'
+                    
+                    
+                    export const Register = () => {
+                      const navigate = useNavigate();
+                    
+                      const [isFocused, setIsFocused] = useState(false);
+                      const [isFocused2, setIsFocused2] = useState(false);
+                      const [isFocused3, setIsFocused3] = useState(false);
+                      const [isFocused4, setIsFocused4] = useState(false);
+                      const [isFocused5, setIsFocused5] = useState(false);
+                    
+                      const [isHovered, setIsHovered] = useState(false);
+                    
+                      const handleFocus = () => setIsFocused(true);
+                      const handleBlur = () => setIsFocused(false);
+                      const handleFocus_2 = () => setIsFocused2(true);
+                      const handleBlur_2 = () => setIsFocused2(false);
+                      const handleFocus_3 = () => setIsFocused3(true);
+                      const handleBlur_3 = () => setIsFocused3(false);
+                      const handleFocus_4 = () => setIsFocused4(true);
+                      const handleBlur_4 = () => setIsFocused4(false);
+                      const handleFocus_5 = () => setIsFocused5(true);
+                      const handleBlur_5 = () => setIsFocused5(false);
+                      const backgroundColor = isFocused ? 'blue' : 'gray';
+                      const backgroundColor2 = isFocused2 ? 'blue' : 'gray';
+                      const backgroundColor3 = isFocused3 ? 'blue' : 'gray';
+                      const backgroundColor4 = isFocused4 ? 'blue' : 'gray';
+                      const backgroundColor5 = isFocused5 ? 'blue' : 'gray';
+                    
+                      const [isVisible, setIsVisible] = useState(true);
+                      const [role, setRole] = useState("JOBSEEKER")
+                      const [isSubmitted, setIsSubmitted] = useState(false);
+                    
+                      const toggleVisibility = () => {
+                        setIsVisible(false);
+                      };
+                    
+                      const toggleVisibility1 = () => {
+                        setIsVisible(true);
+                      };
+                      const { values, handleChange, handleSubmit, errors } = useFormik({
+                        initialValues: {
+                          firstName: '',
+                          lastName: '',
+                          email: '',
+                          password: '',
+                        },
+                        validationSchema: basicSchema,
+                        onSubmit,
+                      });
+                    
+                    
+                      function onSubmit(e) {
+                        console.log(values);
+                        fetch("https://neo-814m.onrender.com/v1/auth/register", {
+                          method: "POST",
+                          headers: { "content-type": "application/json" },
+                          body: JSON.stringify({ ...values, role })
+                        }).then((res) => {
+                          console.log(res);
+                        });
+                    
+                        setIsSubmitted(true); // Set the form as submitted
+                      }
+                    
+                      return (
+                        <>
+                          <Box bg="white" w="600px" m="auto" pb="30px">
+                            <Flex>
+                              <Text p="15px 60px" color="black.300" cursor="pointer" _hover={{ color: "black" }} onClick={() => navigate("/")}  >Daxil ol</Text>
+                              <Text p="15px 60px" borderBottom="2px solid blue" color="blue" cursor="pointer" _hover={{ color: "black" }} >Qeydiyyat</Text>
+                            </Flex>
+                    
+                            <Text fontSize="26px" mt="30px" textAlign="center" fontWeight="bold">Gəlin hesab açaq!</Text>
+                            <Box w="490px" m="auto">
+                              <Flex justifyContent="space-between" mt="30px">
+                                <Button
+                                  w="240px"
+                                  onClick={toggleVisibility1}
+                                  color={isVisible ? 'blue' : 'gray'}
+                                  bg={isVisible ? 'gray.200' : 'white'}
+                                  _hover={{ bg: "gray.200", color: "blue" }}
+                                >Istifadeci</Button>
+                    
+                                <Button
+                                  w="240px"
+                                  onClick={toggleVisibility}
+                                  color={isVisible ? 'gray' : 'blue'}
+                                  bg={isVisible ? 'white' : 'gray.200'}
+                                  _hover={{ bg: "gray.200", color: "blue" }}
+                                >Sirket</Button>
+                              </Flex>
+                    
+                              <form onSubmit={(e) => { setIsSubmitted(true); handleSubmit(e); }} autoComplete='off'>
+                                <FormControl>
+                                  <InputGroup mt="30px" >
+                                    <InputLeftElement
+                                      p="25px 10px"
+                                      borderRight="1px solid white"
+                                      pointerEvents="none" >
+                                      <FaUser color={backgroundColor} />
+                                    </InputLeftElement>
+                    
+                                    <Input
+                                      value={values.firstName}
+                                      onChange={handleChange}
+                                      id='name'
+                                      type="text"
+                                      placeholder="Adi daxil edin"
+                                      p="25px 70px"
+                                      onFocus={handleFocus}
+                                      onBlur={handleBlur}
+                                    />
+                                  </InputGroup>
+                                  {isSubmitted && errors.firstName && <Text color="red" mt="5px">{errors.firstName}</Text>}
+                                </FormControl>
+                    
+                                <FormControl>
+                                  {/* nezere alinacaq */}
+                                  <FormControl  >
+                    
+                                    <InputGroup mt="30px">
+                                      <InputLeftElement
+                                        p="25px 10px"
+                                        borderRight="1px solid white"
+                                        pointerEvents="none"
+                                      >
+                                        <PiUserListFill size={60} color={backgroundColor2} />
+                                      </InputLeftElement>
+                    
+                                      <Input
+                                        value={values.lastName}
+                                        onChange={handleChange}
+                                        id='surname'
+                                        type="text"
+                                        placeholder="Soyadi daxil edin"
+                                        p="25px 70px"
+                                        onFocus={handleFocus_2}
+                                        onBlur={handleBlur_2}
+                                      />
+                                    </InputGroup>
+                                    {isSubmitted && errors.lastName && <Text color="red" mt="5px">{errors.lastName}</Text>}
+                    
+                                  </FormControl>
+                    
+                                  <FormControl>
+                                    <InputGroup mt="30px " display={isVisible ? 'none' : 'block'}>
+                                      <InputLeftElement
+                                        p="25px 10px"
+                                        borderRight="1px solid white"
+                                        pointerEvents="none"
+                                      >
+                                        <FaRegBuilding size={60} color={backgroundColor3} />
+                    
+                                      </InputLeftElement>
+                                      <Input
+                                        value={values.companyName}
+                                        onChange={handleChange}
+                                        type="text"
+                                        placeholder="sirket adini daxil edin"
+                                        p="25px 70px"
+                                        onFocus={handleFocus_3}
+                                        onBlur={handleBlur_3}
+                                      />
+                                    </InputGroup>
+                                    {isSubmitted && errors.companyName && <Text color="red" mt="5px">{errors.companyName}</Text>}
+                                  </FormControl>
+                    
+                                  <FormControl >
+                                    <InputGroup mt="30px">
+                                      <InputLeftElement
+                                        p="25px 10px"
+                                        borderRight="1px solid white"
+                                        pointerEvents="none" >
+                                        <FaRegEnvelope color={backgroundColor4} />
+                    
+                                      </InputLeftElement>
+                    
+                                      <Input
+                                        value={values.email}
+                                        onChange={handleChange}
+                                        id='email'
+                                        type="email"
+                                        placeholder="example@gmail.com"
+                                        onFocus={handleFocus_4}
+                                        onBlur={handleBlur_4}
+                                        p="25px 70px"
+                                      />
+                                    </InputGroup>
+                                    {isSubmitted && errors.email && <Text color="red" mt="5px">{errors.email}</Text>}
+                    
+                                  </FormControl>
+                    
+                                  <FormControl isInvalid={errors.password}>
+                    
+                                    <InputGroup mt="30px">
+                                      <InputLeftElement
+                                        p="25px 10px"
+                                        borderRight="1px solid white"
+                                        pointerEvents="none"
+                                      >
+                                        <LockIcon color={backgroundColor5} />
+                                      </InputLeftElement>
+                                      <Input
+                                        value={values.password}
+                                        onChange={handleChange}
+                                        id='password'
+                                        type="password"
+                                        placeholder="Sifrenizi daxil edin"
+                                        p="25px 70px"
+                                      />
+                                    </InputGroup>
+                                    {isSubmitted && errors.password && <Text color="red" mt="5px">{errors.password}</Text>}
+                                  
+                                  </FormControl>
+                                  <Box mt="30px"
+                                    onMouseEnter={() => setIsHovered(true)}
+                                    onMouseLeave={() => setIsHovered(false)}>
+                                    <Button
+                                      w="450px"
+                                      backgroundColor="blue"
+                                      color="white"
+                                      p="25px"
+                                      type='submit'
+                                      _hover={{ backgroundColor: "blue" }}
+                                    >
+                                      Qeydiyyatdan keç
+                                      {isHovered && <Icon as={FaArrowRight} />}
+                                    </Button>
+                                  </Box>
+                                </FormControl>
+                    
+                              </form>
+                    
+                    
+                            </Box>
+                    
+                          </Box>
+                        </>
+                      )
+                    }
+                    
                     onBlur={handleBlur_3}
+                    onChange={(e) => setCompanyName(e.target.value)}
                   />
                 </InputGroup>
                 {!isVisible &&
@@ -247,20 +520,21 @@ const Register: React.FC<RegisterProps> = () => {
                   </InputLeftElement>
 
                   <Input
-                    {...register("email", {
-                      required: "This is required",
-                      validate: {
-                        containsAt: (value) =>
-                          (value.includes("@") && value.includes(".")) ||
-                          "Format yalnisdir",
-                      },
-                    })}
+                    // {...register("email", {
+                    //   required: "This is required",
+                    //   validate: {
+                    //     containsAt: (value) =>
+                    //       (value.includes("@") && value.includes(".")) ||
+                    //       "Format yalnisdir",
+                    //   },
+                    // })}
                     id="email"
                     type="email"
                     placeholder="example@gmail.com"
                     onFocus={handleFocus_4}
                     onBlur={handleBlur_4}
                     p="25px 70px"
+                    onChange={(e) => setEamil(e.target.value)}
                   />
                 </InputGroup>
                 <FormErrorMessage>
@@ -281,24 +555,25 @@ const Register: React.FC<RegisterProps> = () => {
                     <LockIcon color={backgroundColor5} />
                   </InputLeftElement>
                   <Input
-                    {...register("password", {
-                      required: "This is required",
-                      minLength: {
-                        value: 6,
-                        message: "Minimum length should be 6",
-                      },
-                      validate: {
-                        containsLetterAndNumber: (value) =>
-                          (/[a-z]/.test(value) && /[0-9]/.test(value)) ||
-                          "Password must contain both letters (a-z) and numbers (0-9)",
-                      },
-                    })}
+                    // {...register("password", {
+                    //   required: "This is required",
+                    //   minLength: {
+                    //     value: 6,
+                    //     message: "Minimum length should be 6",
+                    //   },
+                    //   validate: {
+                    //     containsLetterAndNumber: (value) =>
+                    //       (/[a-z]/.test(value) && /[0-9]/.test(value)) ||
+                    //       "Password must contain both letters (a-z) and numbers (0-9)",
+                    //   },
+                    // })}
                     id="password"
                     type="password"
                     placeholder={t("Common.FormInputs.password.placeholder")}
                     p="25px 70px"
                     onFocus={handleFocus_5}
                     onBlur={handleBlur_5}
+                    onChange={(e) => setPassoword(e.target.value)}
                   />
                 </InputGroup>
                 <FormErrorMessage>
@@ -325,10 +600,11 @@ const Register: React.FC<RegisterProps> = () => {
             </FormControl>
           </form>
         </Box>
-        <ScrollToTop/>
+        <ScrollToTop />
       </Box>
     </>
   );
 };
 
 export default Register;
+
