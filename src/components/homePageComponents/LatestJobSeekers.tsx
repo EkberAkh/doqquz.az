@@ -4,6 +4,8 @@ import { colorObjects } from "@/consts"
 import { Flex, Box, Text, Button, Center } from "@chakra-ui/react"
 import { motion } from "framer-motion";
 import React from "react";
+import { useState } from "react";
+import { useEffect } from "react";
 import { DJobSeekers } from "../data/DJobSeekers";
 import { useTranslations } from "next-intl";
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
@@ -11,6 +13,23 @@ import { IoIosArrowRoundForward } from "react-icons/io";
 
 
 export const LatestJobSeekers = () => {
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const response = await fetch('https://neo-814m.onrender.com/v1/jobseeker/list?skip=0&take=9');
+          const result = await response.json();
+          console.log(result.list[0].firstName);
+          setData(result.list);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      };
+  
+      fetchData();
+    }, []); 
+
     const t = useTranslations()
     const MotionBox = motion(Box);
     const textVariants = {
@@ -43,7 +62,7 @@ export const LatestJobSeekers = () => {
                 </Button>
                 <Flex paddingX='40px' columnGap='30px' >
 
-                    {DJobSeekers.slice(currentIndex, currentIndex + 3).map((seeker,index) => (
+                    {data && data.slice(currentIndex, currentIndex + 3).map((seeker,index) => (
                         <MotionBox key={index} initial="hidden" animate="visible" variants={textVariants} transition={transition}>
                             <Center key={seeker.id} padding='35px' position='relative' boxShadow='0 6px 10px rgba(1, 0, 0, 0.2)' flexDirection='column' w='340px'>
                                 <Box position='absolute' bgColor={colorObjects.gray.light} w='39px' h='39px' top='15px' right='15px' borderRadius='100px'>
@@ -54,7 +73,7 @@ export const LatestJobSeekers = () => {
                                     <Box bgColor={colorObjects.gray.light} w='104px' height='104px' borderRadius='100px' flexDirection='column' mb='8px'>
                                     </Box>
                                     <Text fontSize='16px' color={colorObjects.black.main} fontWeight={600} >
-                                        {seeker.name}
+                                        {seeker.firstName}
                                     </Text>
                                 </Center>
                                 <Box marginTop='35px' paddingY='30px' w='100%'>
