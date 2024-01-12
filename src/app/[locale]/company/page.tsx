@@ -15,6 +15,7 @@ const Company = () => {
                             h='4rem'
                             size={'md'}
                             color='#808080'
+                            bg={'#fff'}
                             outline='none'
                             pr='8rem'
                             type='text'
@@ -28,6 +29,7 @@ const Company = () => {
                                     h='3rem'
                                     fontSize='14px'
                                     borderRadius='4px'
+                                    mr={'0.6rem'}
                                     color='#fff'
                                     bg="#2a41e8"
                                     boxShadow=" 0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12)"
