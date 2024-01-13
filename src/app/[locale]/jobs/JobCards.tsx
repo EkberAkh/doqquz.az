@@ -48,6 +48,7 @@ const JobCards =  () => {
       
        {currentPageJobs.map((job:any) => (
         <Card
+        id={job.id}
           key={job.id}
           title={job.title}
           minEstimatedBudget={job.minEstimatedBudget}
