@@ -46,7 +46,8 @@ function Header() {
   const [isLoading, setIsLoading] = useState(true);
   const [role, setRole] = useState("");
   console.log(token);
-
+const router = useRouter()
+const path = usePathname()
   const t = useTranslations();
 
   const logOutHandler = () => {
@@ -173,15 +174,25 @@ function Header() {
           </Menu>
           <Menu>
             <MenuButton
+            onClick={() => {
+              if (role === 'JOBSEEKER' || role === '') {
+                
+                router.push(`${path}/employees`);
+              }
+            }}
               as={Button}
               fontWeight={500}
               bgColor="transparent"
-              rightIcon={<ChevronDownIcon width={"20"} height={"22"} />}
+              {...(role === 'COMPANY' && { rightIcon: <ChevronDownIcon width={"20"} height={"22"} /> })}
               _hover={{ textDecoration: "none", color: "rgb(42, 65, 232)" }}
             >
-              {t("Common.Nav.employees")}
+               {role === 'JOBSEEKER'  ? (
+      <NavigationLink href="/employees">{t("Common.Nav.employees")}</NavigationLink>
+    ) : (
+      t("Common.Nav.employees")
+    )}
             </MenuButton>
-            <MenuList>
+            {role === 'COMPANY' &&  <MenuList>
               <MenuItem>
                 <NavigationLink href="/employees">
                   {t("Common.Nav.browse_jobseekers")}
@@ -189,17 +200,18 @@ function Header() {
               </MenuItem>
               <MenuItem>
                 <NavigationLink
-                  href={role === "JOBSEEKER" ? "/" : "/managejobs"}
+                  href="/managejobs"
                 >
                   {t("Common.Nav.manage_jobs")}
                 </NavigationLink>
               </MenuItem>
               <MenuItem>
-                <NavigationLink href={role === "JOBSEEKER" ? "/" : "/postJobs"}>
+                <NavigationLink href="/postJobs">
                   {t("Common.Nav.post_a_job")}
                 </NavigationLink>
               </MenuItem>
-            </MenuList>
+            </MenuList> }
+           
           </Menu>
           <NavigationLink
             href="/contact"
