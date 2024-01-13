@@ -13,6 +13,7 @@ import { IoIosArrowRoundForward } from "react-icons/io";
 
 
 export const LatestJobSeekers = () => {
+    
     const [data, setData] = useState([]);
 
     useEffect(() => {
