@@ -34,6 +34,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { NavigationLink } from "./NavigationLink";
 import { EditIcon } from "@chakra-ui/icons";
 import { setMaxIdleHTTPParsers } from "http";
+import { useCurrentLang } from "@/hooks";
 
 interface IData {
   firstName: string;
@@ -47,6 +48,7 @@ function Header() {
   const [role, setRole] = useState("");
   console.log(token);
 const router = useRouter()
+const currentLang = useCurrentLang()
 const path = usePathname()
   const t = useTranslations();
 
@@ -80,6 +82,8 @@ const path = usePathname()
       setRole(data.role);
       localStorage.setItem('role', data.role);
       // Directly return the role and id from this function
+      Cookies.set('userId', data.id );
+
       return { id: data.id, role: data.role };
     } catch (error) {
       console.error("There was an error fetching the user data:", error);
@@ -177,7 +181,7 @@ const path = usePathname()
             onClick={() => {
               if (role === 'JOBSEEKER' || role === '') {
                 
-                router.push(`${path}/employees`);
+                router.push(path==='/az'?`${currentLang}/employees`:'/employees');
               }
             }}
               as={Button}
