@@ -31,8 +31,12 @@ export const Footer = () => {
   const t = useTranslations();
   const [selectedLanguage, setSelectedLanguage] = useState("Azərbaycanca");
   const router = useRouter();
-
   const currentPath = usePathname()
+  let role = localStorage.getItem('role');
+  
+
+
+
   useEffect(() => {
     if (currentPath.startsWith('/en')) {
       setSelectedLanguage('English');
@@ -240,10 +244,10 @@ export const Footer = () => {
                   <NavigationLink href='employees'>{t("Common.Nav.browse_jobseekers")}</NavigationLink>
                 </Text>
                 <Text fontSize="14px" color="#c0c0c0">
-                  <NavigationLink href='/managejobs'>{t("Common.Nav.manage_jobs")}</NavigationLink>
+                  <NavigationLink href={role === 'JOBSEEKER' || role === null ? '/' : '/managejobs'}>{t("Common.Nav.manage_jobs")}</NavigationLink>
                 </Text>
                 <Text fontSize="14px" color="#c0c0c0">
-                  <NavigationLink href='/postJobs'>{t("Common.Nav.post_a_job")}</NavigationLink>
+                  <NavigationLink href={role === 'JOBSEEKER' || role === null ? '/' : '/postJobs'}>{t("Common.Nav.post_a_job")}</NavigationLink>
                 </Text>
               </Flex>
             </Box>

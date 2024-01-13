@@ -34,85 +34,99 @@ import { usePathname, useRouter } from "next/navigation";
 import { NavigationLink } from "./NavigationLink";
 import { EditIcon } from "@chakra-ui/icons";
 import { setMaxIdleHTTPParsers } from "http";
+import { useCurrentLang } from "@/hooks";
 
-
- interface IData {
-  firstName:string;
-  lastName:string;
- }
+interface IData {
+  firstName: string;
+  lastName: string;
+  name: string;
+}
 function Header() {
   const token = Cookies.get("token");
-  const [data,setData] = useState<IData>();
+  const [data, setData] = useState<IData>();
   const [isLoading, setIsLoading] = useState(true);
+  const [role, setRole] = useState("");
   console.log(token);
-
-  const route = useRouter();
+const router = useRouter()
+const currentLang = useCurrentLang()
+const path = usePathname()
   const t = useTranslations();
-  const path = usePathname();
 
   const logOutHandler = () => {
     Cookies.remove("token");
+    localStorage.removeItem('role')
     location.reload();
   };
 
   async function fetchUserData() {
-     // Assuming you have the token stored in cookies
-  
+    // Assuming you have the token stored in cookies
+
     const requestOptions = {
-      method: 'GET',
+      method: "GET",
       headers: {
-        'Content-Type': 'application/json',
-        'Token': `${token}` // Include the token in the Authorization header
+        "Content-Type": "application/json",
+        Token: `${token}`, // Include the token in the Authorization header
       },
     };
-  
+
     try {
-      const response = await fetch('https://neo-814m.onrender.com/v1/user', requestOptions);
+      const response = await fetch(
+        "https://neo-814m.onrender.com/v1/user",
+        requestOptions
+      );
       if (!response.ok) {
         throw new Error(`Error: ${response.status}`);
       }
       const data = await response.json();
+      console.log(data.role);
+      setRole(data.role);
+      localStorage.setItem('role', data.role);
+      // Directly return the role and id from this function
+      Cookies.set('userId', data.id );
 
-      
-      return data.id;
+      return { id: data.id, role: data.role };
     } catch (error) {
-      console.error('There was an error fetching the user data:', error);
+      console.error("There was an error fetching the user data:", error);
     }
   }
-  async function fetchJobseekerData(userId:number) {
+  async function fetchJobseekerData(id: number, role: string) {
+    const url =
+      role === "JOBSEEKER"
+        ? `https://neo-814m.onrender.com/v1/jobseeker/userId/${id}`
+        : `https://neo-814m.onrender.com/v1/company/userId/${id}`;
     const requestOptions = {
-      method: 'GET',
+      method: "GET",
       headers: {
-        'Content-Type': 'application/json',
-        'Token': `${token}` // Include the token in the Authorization header
+        "Content-Type": "application/json",
+        Token: `${token}`, // Include the token in the Authorization header
       },
     };
 
     try {
-      const response = await fetch(`https://neo-814m.onrender.com/v1/jobseeker/userId/${userId}`, requestOptions);
+      const response = await fetch(url, requestOptions);
       if (!response.ok) {
         throw new Error(`Error: ${response.status}`);
       }
       const jobseekerData = await response.json();
-      setData(jobseekerData)
-      
+      setData(jobseekerData);
+
       return jobseekerData;
     } catch (error) {
-      console.error('There was an error fetching the jobseeker data:', error);
+      console.error("There was an error fetching the jobseeker data:", error);
     }
   }
 
   useEffect(() => {
     async function fetchData() {
       setIsLoading(true);
-      const userId = await fetchUserData();
+      const userData = await fetchUserData();
 
-      if (userId) {
-        await fetchJobseekerData(userId);
+      if (userData) {
+        await fetchJobseekerData(userData.id, userData.role);
       }
       setIsLoading(false);
     }
-    
+
     if (token) {
       fetchData();
     } else {
@@ -164,22 +178,34 @@ function Header() {
           </Menu>
           <Menu>
             <MenuButton
+            onClick={() => {
+              if (role === 'JOBSEEKER' || role === '') {
+                
+                router.push(path==='/az'?`${currentLang}/employees`:'/employees');
+              }
+            }}
               as={Button}
               fontWeight={500}
               bgColor="transparent"
-              rightIcon={<ChevronDownIcon width={"20"} height={"22"} />}
+              {...(role === 'COMPANY' && { rightIcon: <ChevronDownIcon width={"20"} height={"22"} /> })}
               _hover={{ textDecoration: "none", color: "rgb(42, 65, 232)" }}
             >
-              {t("Common.Nav.employees")}
+               {role === 'JOBSEEKER'  ? (
+      <NavigationLink href="/employees">{t("Common.Nav.employees")}</NavigationLink>
+    ) : (
+      t("Common.Nav.employees")
+    )}
             </MenuButton>
-            <MenuList>
+            {role === 'COMPANY' &&  <MenuList>
               <MenuItem>
                 <NavigationLink href="/employees">
                   {t("Common.Nav.browse_jobseekers")}
                 </NavigationLink>
               </MenuItem>
               <MenuItem>
-                <NavigationLink href="/manageJobs">
+                <NavigationLink
+                  href="/managejobs"
+                >
                   {t("Common.Nav.manage_jobs")}
                 </NavigationLink>
               </MenuItem>
@@ -188,7 +214,8 @@ function Header() {
                   {t("Common.Nav.post_a_job")}
                 </NavigationLink>
               </MenuItem>
-            </MenuList>
+            </MenuList> }
+           
           </Menu>
           <NavigationLink
             href="/contact"
@@ -201,9 +228,14 @@ function Header() {
         {token ? (
           <Popover>
             <PopoverTrigger>
-              <Button backgroundColor="transparent" _active={{}} _hover={{}}>
+              <Box
+                cursor="pointer"
+                backgroundColor="transparent"
+                _active={{}}
+                _hover={{}}
+              >
                 <Avatar size="md"></Avatar>
-              </Button>
+              </Box>
             </PopoverTrigger>
             <PopoverContent padding="10px" backgroundColor="white">
               <PopoverArrow />
@@ -211,7 +243,14 @@ function Header() {
               <PopoverHeader gap="10px" display="flex">
                 <Avatar size="md"></Avatar>
                 <Box>
-                {!isLoading && data && <Text>{`${data.firstName} ${data.lastName}`}</Text>}
+                  {!isLoading && data && (
+                    <Text>
+                      {" "}
+                      {role === "JOBSEEKER"
+                        ? `${data.firstName} ${data.lastName}`
+                        : `${data.name}`}
+                    </Text>
+                  )}
                   <Text textDecoration="underline" color="#ECA400">
                     <NavigationLink href="/userProfile">
                       {t("Common.Warning.completeAccount")}
