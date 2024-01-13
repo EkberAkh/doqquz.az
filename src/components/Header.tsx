@@ -23,7 +23,9 @@ import {
   PopoverHeader,
   PopoverBody,
   Avatar,
-  Img,
+  Flex,
+  Divider,
+  Img
 } from "@chakra-ui/react";
 import ChevronDownIcon from "@/icons/ChewronDownIcon";
 import ArrowForwardIcon from "@/icons/ArrowForwardIcon";
@@ -34,6 +36,11 @@ import { usePathname, useRouter } from "next/navigation";
 import { NavigationLink } from "./NavigationLink";
 import { EditIcon } from "@chakra-ui/icons";
 import { setMaxIdleHTTPParsers } from "http";
+import NotificationIcon from "@/icons/NotificationIcon";
+import NotifiedIcon from "@/icons/NotifiedIcon";
+import { BiDockRight } from "react-icons/bi";
+import { relative } from "path";
+import GhostPng from './../../public/images/ghost.png'
 
 interface IData {
   firstName: string;
@@ -46,8 +53,8 @@ function Header() {
   const [isLoading, setIsLoading] = useState(true);
   const [role, setRole] = useState("");
   console.log(token);
-const router = useRouter()
-const path = usePathname()
+  const router = useRouter()
+  const path = usePathname()
   const t = useTranslations();
 
   const logOutHandler = () => {
@@ -130,7 +137,7 @@ const path = usePathname()
     }
   }, [token]);
   return (
-    <ThemeProvider theme={extendedTheme}>
+    <ThemeProvider theme={extendedTheme} >
       <HStack
         align={"center"}
         minH={20}
@@ -174,25 +181,25 @@ const path = usePathname()
           </Menu>
           <Menu>
             <MenuButton
-            onClick={() => {
-              if (role === 'JOBSEEKER' || role === '') {
-                
-                router.push(`${path}/employees`);
-              }
-            }}
+              onClick={() => {
+                if (role === 'JOBSEEKER' || role === '') {
+
+                  router.push(`${path}/employees`);
+                }
+              }}
               as={Button}
               fontWeight={500}
               bgColor="transparent"
               {...(role === 'COMPANY' && { rightIcon: <ChevronDownIcon width={"20"} height={"22"} /> })}
               _hover={{ textDecoration: "none", color: "rgb(42, 65, 232)" }}
             >
-               {role === 'JOBSEEKER'  ? (
-      <NavigationLink href="/employees">{t("Common.Nav.employees")}</NavigationLink>
-    ) : (
-      t("Common.Nav.employees")
-    )}
+              {role === 'JOBSEEKER' ? (
+                <NavigationLink href="/employees">{t("Common.Nav.employees")}</NavigationLink>
+              ) : (
+                t("Common.Nav.employees")
+              )}
             </MenuButton>
-            {role === 'COMPANY' &&  <MenuList>
+            {role === 'COMPANY' && <MenuList>
               <MenuItem>
                 <NavigationLink href="/employees">
                   {t("Common.Nav.browse_jobseekers")}
@@ -210,85 +217,114 @@ const path = usePathname()
                   {t("Common.Nav.post_a_job")}
                 </NavigationLink>
               </MenuItem>
-            </MenuList> }
-           
+            </MenuList>}
+
           </Menu>
           <NavigationLink
             href="/contact"
             style={{ padding: "6px 16px" }}
-            // _hover={{ textDecoration: "none", color: "rgb(42, 65, 232)" }}
+          // _hover={{ textDecoration: "none", color: "rgb(42, 65, 232)" }}
           >
             {t("Common.Nav.contact")}
           </NavigationLink>
         </HStack>
         {token ? (
-          <Popover>
-            <PopoverTrigger>
-              <Box
-                cursor="pointer"
-                backgroundColor="transparent"
-                _active={{}}
-                _hover={{}}
-              >
-                <Avatar size="md"></Avatar>
-              </Box>
-            </PopoverTrigger>
-            <PopoverContent padding="10px" backgroundColor="white">
-              <PopoverArrow />
-              <PopoverCloseButton />
-              <PopoverHeader gap="10px" display="flex">
-                <Avatar size="md"></Avatar>
-                <Box>
-                  {!isLoading && data && (
-                    <Text>
-                      {" "}
-                      {role === "JOBSEEKER"
-                        ? `${data.firstName} ${data.lastName}`
-                        : `${data.name}`}
-                    </Text>
-                  )}
-                  <Text textDecoration="underline" color="#ECA400">
-                    <NavigationLink href="/userProfile">
-                      {t("Common.Warning.completeAccount")}
-                    </NavigationLink>
-                  </Text>
-                </Box>
-              </PopoverHeader>
-              <PopoverBody display="flex" flexDirection="column" gap="8px">
-                <Box alignItems="center" display="flex">
-                  <EditIcon />
-                  <Text>
-                    <NavigationLink href="/userProfile">
-                      {t("Common.Menu.profile.label")}
-                    </NavigationLink>
-                  </Text>
-                </Box>
-                <Box alignItems="center" display="flex">
-                  <EditIcon />
+          <Flex >
+            <Box w={'4rem'} borderRight={'1px solid black'}>
+              <Popover>
+                <PopoverTrigger>
+                  <Box
+                    h={'100%'}
+                    textAlign={'center'}>
+                    <NotificationIcon width="28" height="28" />
+                  </Box>
+                </PopoverTrigger>
+                <PopoverContent right={'1rem'} bg={'#fff'}>
+                  <Flex borderBottom={'1px solid rgb(119, 119, 119)'}>
+                    <Flex justify={'space-between'} w={'100%'} p={'1rem'} >
+                      <PopoverHeader color={'red'} border={'none'} fontWeight={600} fontSize={'1.1rem'}>Notifications</PopoverHeader>
+                      <NotifiedIcon width="24" height="24" color="red" />
+                    </Flex>
+                  </Flex>
+                  <PopoverBody h={'25rem'}>
+                    <Flex justify={'center'} h={'100%'} align={'center'}>
+                      <Img src={GhostPng.src} w={'8rem'} />
+                    </Flex>
+                  </PopoverBody>
+                </PopoverContent>
+              </Popover>
+            </Box>
 
-                  <Text>
-                    <NavigationLink href="/bookmarks">
-                      {t("Common.Nav.bookmarks")}
-                    </NavigationLink>
-                  </Text>
-                </Box>
-                <Box alignItems="center" display="flex">
-                  <EditIcon />
 
-                  <Button
-                    _hover={{}}
-                    _active={{}}
-                    height="auto"
+            <Box ml={'2rem'}>
+              <Popover>
+                <PopoverTrigger>
+                  <Box
+                    cursor="pointer"
                     backgroundColor="transparent"
-                    padding={0}
-                    onClick={logOutHandler}
+                    _active={{}}
+                    _hover={{}}
                   >
-                    {t("Common.Nav.LOG_OUT.label")}
-                  </Button>
-                </Box>
-              </PopoverBody>
-            </PopoverContent>
-          </Popover>
+                    <Avatar size="md"></Avatar>
+                  </Box>
+                </PopoverTrigger>
+                <PopoverContent padding="10px" right={'1rem'} bg="white">
+                  <PopoverCloseButton />
+                  <PopoverHeader gap="10px" display="flex">
+                    <Avatar size="md"></Avatar>
+                    <Box>
+                      {!isLoading && data && (
+                        <Text>
+                          {" "}
+                          {role === "JOBSEEKER"
+                            ? `${data.firstName} ${data.lastName}`
+                            : `${data.name}`}
+                        </Text>
+                      )}
+                      <Text textDecoration="underline" color="#ECA400">
+                        <NavigationLink href="/userProfile">
+                          {t("Common.Warning.completeAccount")}
+                        </NavigationLink>
+                      </Text>
+                    </Box>
+                  </PopoverHeader>
+                  <PopoverBody display="flex" flexDirection="column" gap="8px">
+                    <Box alignItems="center" display="flex">
+                      <EditIcon />
+                      <Text>
+                        <NavigationLink href="/userProfile">
+                          {t("Common.Menu.profile.label")}
+                        </NavigationLink>
+                      </Text>
+                    </Box>
+                    <Box alignItems="center" display="flex">
+                      <EditIcon />
+
+                      <Text>
+                        <NavigationLink href="/bookmarks">
+                          {t("Common.Nav.bookmarks")}
+                        </NavigationLink>
+                      </Text>
+                    </Box>
+                    <Box alignItems="center" display="flex">
+                      <EditIcon />
+
+                      <Button
+                        _hover={{}}
+                        _active={{}}
+                        height="auto"
+                        backgroundColor="transparent"
+                        padding={0}
+                        onClick={logOutHandler}
+                      >
+                        {t("Common.Nav.LOG_OUT.label")}
+                      </Button>
+                    </Box>
+                  </PopoverBody>
+                </PopoverContent>
+              </Popover>
+            </Box>
+          </Flex>
         ) : (
           <HStack
             align={"center"}
