@@ -63,14 +63,7 @@ const Register: React.FC<RegisterProps> = () => {
   const backgroundColor5 = isFocused5 ? "blue" : "gray";
 
   const t = useTranslations();
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [companyName, setCompanyName] = useState("");
-  const [email, setEamil] = useState("");
-  const [password, setPassoword] = useState("");
-  const [salam, setSalam] = useState(true);
-  const [role, setRole] = useState("JOBSEEKER");
-
+ 
   const [isVisible, setIsVisible] = useState(true);
 
 
