@@ -44,7 +44,7 @@ const Employees = () => {
         width="calc(100% - 379px)"
       >
    {employees.map((employee) =>(
-    <Card key={employee.id} firstName={employee.firstName} expectedSalary={employee.expectedSalary} lastName={employee.lastName} salaryType={employee.salaryType}/>
+    <Card  key={employee.id} id={employee.id} firstName={employee.firstName} expectedSalary={employee.expectedSalary} lastName={employee.lastName} salaryType={employee.salaryType}/>
    ))}
       </Grid>
     </Box>
