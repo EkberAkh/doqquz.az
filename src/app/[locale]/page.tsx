@@ -7,10 +7,10 @@ import { Banner } from "@/components/homePageComponents/Banner";
 import { LatestJobPostings } from "@/components/homePageComponents/LatestJobPostings";
 // import { LatestJobPostings } from "@/components/homePageComponents/LatestJobPostings";
 import { LatestJobSeekers } from "@/components/homePageComponents/LatestJobSeekers";
-import { Spacer } from "@chakra-ui/react";
 import React from "react";
 
 export default function Home() {
+
   return (
     <>
       <Banner />

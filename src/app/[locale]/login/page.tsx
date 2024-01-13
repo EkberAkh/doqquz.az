@@ -80,6 +80,7 @@ const Login1: React.FC = () => {
           progress: undefined,
           theme: "light",
         });
+        
         router.push("/");
       })
       .catch((error) => {
