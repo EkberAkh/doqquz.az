@@ -2,8 +2,16 @@ import { ArrowForwardIcon, StarIcon } from "@chakra-ui/icons";
 import { Avatar, Box, Button, GridItem, Img, Text } from "@chakra-ui/react";
 import { useTranslations } from "next-intl";
 import React, { useState } from "react";
+interface ICardProps {
 
-const Card = () => {
+  firstName:string;
+  lastName:string;
+  expectedSalary:string;
+  salaryType:string;
+
+
+}
+const Card:React.FC<ICardProps> = ({firstName,lastName,expectedSalary,salaryType}) => {
   const [isFav, setIsFav] = useState<boolean>(false);
   const [isHover, setisHover] = useState<boolean>(false);
   const t = useTranslations();
@@ -14,10 +22,10 @@ const Card = () => {
       _hover={{ transform: "auto", translateY: "-4px" }}
       boxShadow="0 2px 18px rgba(0,0,0,.14)"
     >
-      <Box height="55%" padding="20px" textAlign="center" position="relative">
+      <Box backgroundColor='white' height="55%" padding="20px" textAlign="center" position="relative">
         <Avatar marginBottom="14px" size="xl" />
         <Text fontSize="20px" fontWeight="bold">
-          Akhundov Akbar
+          {`${firstName} ${lastName}`}
         </Text>
 
         <StarIcon
@@ -57,7 +65,7 @@ const Card = () => {
                 width="16px"
                 src="../../../images/briefcase.png"
               />
-              <Text fontWeight="bold">--</Text>
+              <Text fontWeight="bold">{salaryType?salaryType:'--'}</Text>
             </Box>
           </Box>
           <Box display="flex" flexDirection="column">
@@ -68,7 +76,7 @@ const Card = () => {
                 width="16px"
                 src="../../../images/wallet.png"
               />
-              <Text fontWeight="bold">--</Text>
+              <Text fontWeight="bold">{expectedSalary?expectedSalary:'--'}</Text>
             </Box>
           </Box>
         </Box>

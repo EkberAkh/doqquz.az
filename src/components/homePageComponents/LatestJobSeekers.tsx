@@ -4,8 +4,6 @@ import { colorObjects } from "@/consts"
 import { Flex, Box, Text, Button, Center } from "@chakra-ui/react"
 import { motion } from "framer-motion";
 import React from "react";
-import { useState } from "react";
-import { useEffect } from "react";
 import { DJobSeekers } from "../data/DJobSeekers";
 import { useTranslations } from "next-intl";
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
@@ -13,24 +11,6 @@ import { IoIosArrowRoundForward } from "react-icons/io";
 
 
 export const LatestJobSeekers = () => {
-    
-    const [data, setData] = useState([]);
-
-    useEffect(() => {
-      const fetchData = async () => {
-        try {
-          const response = await fetch('https://neo-814m.onrender.com/v1/jobseeker/list?skip=0&take=9');
-          const result = await response.json();
-          console.log(result.list[0].firstName);
-          setData(result.list);
-        } catch (error) {
-          console.error('Error fetching data:', error);
-        }
-      };
-  
-      fetchData();
-    }, []); 
-
     const t = useTranslations()
     const MotionBox = motion(Box);
     const textVariants = {
