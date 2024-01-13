@@ -47,14 +47,15 @@ function Header() {
   const [isLoading, setIsLoading] = useState(true);
   const [role, setRole] = useState("");
   console.log(token);
-const router = useRouter()
-const currentLang = useCurrentLang()
-const path = usePathname()
+  const router = useRouter();
+  const currentLang = useCurrentLang();
+  const path = usePathname();
   const t = useTranslations();
 
   const logOutHandler = () => {
     Cookies.remove("token");
-    localStorage.removeItem('role')
+    Cookies.remove("userId");
+    localStorage.removeItem("role");
     location.reload();
   };
 
@@ -80,9 +81,9 @@ const path = usePathname()
       const data = await response.json();
       console.log(data.role);
       setRole(data.role);
-      localStorage.setItem('role', data.role);
+      localStorage.setItem("role", data.role);
       // Directly return the role and id from this function
-      Cookies.set('userId', data.id );
+      Cookies.set("userId", data.id);
 
       return { id: data.id, role: data.role };
     } catch (error) {
@@ -177,45 +178,47 @@ const path = usePathname()
             </MenuList>
           </Menu>
           <Menu>
-            <MenuButton
-            onClick={() => {
-              if (role === 'JOBSEEKER' || role === '') {
-                
-                router.push(path==='/az'?`${currentLang}/employees`:'/employees');
-              }
-            }}
-              as={Button}
-              fontWeight={500}
-              bgColor="transparent"
-              {...(role === 'COMPANY' && { rightIcon: <ChevronDownIcon width={"20"} height={"22"} /> })}
-              _hover={{ textDecoration: "none", color: "rgb(42, 65, 232)" }}
-            >
-               {role === 'JOBSEEKER'  ? (
-      <NavigationLink href="/employees">{t("Common.Nav.employees")}</NavigationLink>
-    ) : (
-      t("Common.Nav.employees")
-    )}
-            </MenuButton>
-            {role === 'COMPANY' &&  <MenuList>
-              <MenuItem>
+            {role === "COMPANY" ? (
+              <MenuButton
+                as={Button}
+                fontWeight={500}
+                bgColor="transparent"
+                {...(role === "COMPANY" && {
+                  rightIcon: <ChevronDownIcon width={"20"} height={"22"} />,
+                })}
+                _hover={{ textDecoration: "none", color: "rgb(42, 65, 232)" }}
+              >
+                {t("Common.Nav.employees")}
+              </MenuButton>
+            ) : (
+              <Box
+                bgColor="transparent"
+                _hover={{ textDecoration: "none", color: "rgb(42, 65, 232)" }}
+              >
                 <NavigationLink href="/employees">
-                  {t("Common.Nav.browse_jobseekers")}
+                  {t("Common.Nav.employees")}
                 </NavigationLink>
-              </MenuItem>
-              <MenuItem>
-                <NavigationLink
-                  href="/managejobs"
-                >
-                  {t("Common.Nav.manage_jobs")}
-                </NavigationLink>
-              </MenuItem>
-              <MenuItem>
-                <NavigationLink href="/postJobs">
-                  {t("Common.Nav.post_a_job")}
-                </NavigationLink>
-              </MenuItem>
-            </MenuList> }
-           
+              </Box>
+            )}
+            {role === "COMPANY" && (
+              <MenuList>
+                <MenuItem>
+                  <NavigationLink href="/employees">
+                    {t("Common.Nav.browse_jobseekers")}
+                  </NavigationLink>
+                </MenuItem>
+                <MenuItem>
+                  <NavigationLink href="/managejobs">
+                    {t("Common.Nav.manage_jobs")}
+                  </NavigationLink>
+                </MenuItem>
+                <MenuItem>
+                  <NavigationLink href="/postJobs">
+                    {t("Common.Nav.post_a_job")}
+                  </NavigationLink>
+                </MenuItem>
+              </MenuList>
+            )}
           </Menu>
           <NavigationLink
             href="/contact"
