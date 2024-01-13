@@ -1,3 +1,4 @@
+
 'use client'
 import { Button, Card, Flex, FormControl, Input, InputGroup, InputRightElement, VStack,Text } from '@chakra-ui/react'
 import { useTranslations } from 'next-intl'
@@ -5,13 +6,14 @@ import React, { useState, useEffect } from 'react'
 import CompanyItem from './CompanyItem';
 import CompanyFooter from './CompanyFooter';
 import Search from './SearchButton';
-import { log } from 'console';
 import NotFound from './NotFound';
 
+
 interface ICompanyProps {
-    name: string;
-    id: number,
+  name: string;
+  id: number;
 }
+
 
 export default function Company() {
     const [companies, setCompanies] = useState<ICompanyProps[]>([]);
@@ -54,3 +56,4 @@ export default function Company() {
         </>
     )
 }
+
