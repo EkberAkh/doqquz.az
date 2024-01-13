@@ -52,7 +52,7 @@ const Login1: React.FC = () => {
   const [token, setToken] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   console.log(token);
-  const [isSubmitted, setIsSubmitted] = useState(false);
+    const [isSubmitted, setIsSubmitted] = useState(false);
 
   function onSubmit() {
     console.log(values);

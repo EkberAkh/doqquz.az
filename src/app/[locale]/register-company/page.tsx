@@ -19,20 +19,15 @@ import { FaRegBuilding } from "react-icons/fa";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import ScrollToTop from "@/components/ScrollToTop";
-
 import { basicSchema } from "./const";
 import { useFormik } from "formik"
 
-import { NavigationLink } from "@/components/NavigationLink";
-
-interface RegisterProps {}
-
-
+interface RegisterProps { }
 
 interface FormData {
   name: string;
   surname: string;
-  company?: string;
+  companyName: string;
   email: string;
   password: string;
 }
@@ -63,34 +58,23 @@ const Register: React.FC<RegisterProps> = () => {
   const backgroundColor5 = isFocused5 ? "blue" : "gray";
 
   const t = useTranslations();
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [companyName, setCompanyName] = useState("");
-  const [email, setEamil] = useState("");
-  const [password, setPassoword] = useState("");
-  const [salam, setSalam] = useState(true);
-  const [role, setRole] = useState("JOBSEEKER");
 
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
 
+
+  const [role, setRole] = useState("COMPANY")
 
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const toggleVisibility = () => {
-    
-    setIsVisible(false);
+//   const toggleVisibility = () => {
+//     setIsVisible(false);
+//     setRole("COMPANY")
+//   };
 
-    setSalam(false)
-    setRole("COMPANY")
-
-  };
-
-  const toggleVisibility1 = () => {
-    setIsVisible(true);
-
-    setSalam(true)
-    setRole("JOBSEEKER")
-  };
+//   const toggleVisibility1 = () => {
+//     setIsVisible(true);
+//     setRole("JOBSEEKER")
+//   };
 
   function onSubmit() {
     console.log(values);
@@ -108,13 +92,13 @@ const Register: React.FC<RegisterProps> = () => {
     initialValues: {
       firstName: '',
       lastName: '',
+      companyName: '',
       email: '',
       password: '',
     },
     validationSchema: basicSchema,
     onSubmit,
   });
-
 
 
   return (
@@ -127,9 +111,8 @@ const Register: React.FC<RegisterProps> = () => {
             cursor="pointer"
             _hover={{ color: "black" }}
           >
-            <NavigationLink href="/login">
-              {t("Auth.tabs.login")}
-            </NavigationLink>
+            {" "}
+            <Link href="/az/login">{t("Auth.tabs.login")}</Link>
           </Text>
           <Text
             p="15px 60px"
@@ -156,7 +139,8 @@ const Register: React.FC<RegisterProps> = () => {
             >
               {t("Common.Role.JOBSEEKER")}
             </Button> */}
-            <Link href="" >istifadeci</Link>
+            <Link href="/az/register"> Istifadeci</Link>
+            <Link href=""> sirket</Link>
 
             {/* <Button
               w="240px"
@@ -164,10 +148,9 @@ const Register: React.FC<RegisterProps> = () => {
               color={isVisible ? "gray" : "blue"}
               bg={isVisible ? "white" : "gray.200"}
               _hover={{ bg: "gray.200", color: "blue" }}
+            >
               {t("Common.Role.COMPANY")}
-            </Button>
-            > */}
-              <Link href="/az/register-company">sirket</Link>
+            </Button> */}
           </Flex>
 
           <form onSubmit={(e) => { setIsSubmitted(true); handleSubmit(e); }} autoComplete='off'>
@@ -175,8 +158,8 @@ const Register: React.FC<RegisterProps> = () => {
               <InputGroup mt="30px">
                 <InputLeftElement
                   w="50px"
-                  backgroundColor="#eee"
-                  borderRadius="5px"
+                  backgroundColor='#eee'
+                  borderRadius='5px'
                   p="25px 10px"
                   borderRight="1px solid white"
                   pointerEvents="none"
@@ -185,7 +168,6 @@ const Register: React.FC<RegisterProps> = () => {
                 </InputLeftElement>
 
                 <Input
-
                   value={values.firstName}
                   onChange={handleChange}
                   id="firstName"
@@ -193,7 +175,6 @@ const Register: React.FC<RegisterProps> = () => {
                   p="25px 70px"
                   onFocus={handleFocus}
                   onBlur={handleBlur}
-
 
                 />
               </InputGroup>
@@ -207,8 +188,8 @@ const Register: React.FC<RegisterProps> = () => {
                 <InputGroup mt="30px">
                   <InputLeftElement
                     w="50px"
-                    backgroundColor="#eee"
-                    borderRadius="5px"
+                    backgroundColor='#eee'
+                    borderRadius='5px'
                     p="25px 10px"
                     borderRight="1px solid white"
                     pointerEvents="none"
@@ -217,7 +198,6 @@ const Register: React.FC<RegisterProps> = () => {
                   </InputLeftElement>
 
                   <Input
-
                     value={values.lastName}
                     onChange={handleChange}
                     id="lastName"
@@ -226,19 +206,18 @@ const Register: React.FC<RegisterProps> = () => {
                     p="25px 70px"
                     onFocus={handleFocus_2}
                     onBlur={handleBlur_2}
-
                   />
                 </InputGroup>
 
               </FormControl>
               {isSubmitted && errors.lastName && <Text color="red" mt="5px">{errors.lastName}</Text>}
 
-              {/* <FormControl >
+              <FormControl >
                 <InputGroup mt="30px " display={isVisible ? "none" : "block"}>
                   <InputLeftElement
                     w="50px"
-                    backgroundColor="#eee"
-                    borderRadius="5px"
+                    backgroundColor='#eee'
+                    borderRadius='5px'
                     p="25px 10px"
                     borderRight="1px solid white"
                     pointerEvents="none"
@@ -246,7 +225,6 @@ const Register: React.FC<RegisterProps> = () => {
                     <FaRegBuilding size={20} color={backgroundColor3} />
                   </InputLeftElement>
                   <Input
-
                     value={values.companyName}
                     onChange={handleChange}
                     id="companyName"
@@ -257,17 +235,17 @@ const Register: React.FC<RegisterProps> = () => {
                     onBlur={handleBlur_3}
                   />
                 </InputGroup>
-                {!isVisible && errors.companyName && <Text color="red" mt="5px">{errors.companyName}</Text>}
+                {isSubmitted && errors.companyName && <Text color="red" mt="5px">{errors.companyName}</Text>}
 
 
-              </FormControl> */}
+              </FormControl>
 
               <FormControl >
                 <InputGroup mt="30px">
                   <InputLeftElement
                     w="50px"
-                    backgroundColor="#eee"
-                    borderRadius="5px"
+                    backgroundColor='#eee'
+                    borderRadius='5px'
                     p="25px 10px"
                     borderRight="1px solid white"
                     pointerEvents="none"
@@ -276,7 +254,6 @@ const Register: React.FC<RegisterProps> = () => {
                   </InputLeftElement>
 
                   <Input
-
                     value={values.email}
                     onChange={handleChange}
                     id="email"
@@ -285,7 +262,6 @@ const Register: React.FC<RegisterProps> = () => {
                     onFocus={handleFocus_4}
                     onBlur={handleBlur_4}
                     p="25px 70px"
-
                   />
                 </InputGroup>
 
@@ -296,8 +272,8 @@ const Register: React.FC<RegisterProps> = () => {
                 <InputGroup mt="30px">
                   <InputLeftElement
                     w="50px"
-                    backgroundColor="#eee"
-                    borderRadius="5px"
+                    backgroundColor='#eee'
+                    borderRadius='5px'
                     p="25px 10px"
                     borderRight="1px solid white"
                     pointerEvents="none"
@@ -305,18 +281,14 @@ const Register: React.FC<RegisterProps> = () => {
                     <LockIcon color={backgroundColor5} />
                   </InputLeftElement>
                   <Input
-
                     value={values.password}
                     onChange={handleChange}
-
                     id="password"
                     type="password"
                     placeholder={t("Common.FormInputs.password.placeholder")}
                     p="25px 70px"
-
                     onFocus={handleFocus_5}
                     onBlur={handleBlur_5}
-
                   />
                 </InputGroup>
                 {isSubmitted && errors.password && <Text color="red" mt="5px">{errors.password}</Text>}
@@ -324,21 +296,22 @@ const Register: React.FC<RegisterProps> = () => {
               </FormControl>
               <Box
                 mt="30px"
-                // onMouseEnter={() => setIsHovered(true)}
-                // onMouseLeave={() => setIsHovered(false)}
-              ></Box>
-            </FormControl>
-              <Button
-                type="submit"
-                w="450px"
-                backgroundColor="blue"
-                color="white"
-                p="25px"
-                _hover={{ backgroundColor: "blue" }}
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
               >
-                {t("Auth.Register.actions.register")}
-                {isHovered && <Icon as={FaArrowRight} />}
-              </Button>
+                <Button
+                  w="450px"
+                  backgroundColor="blue"
+                  color="white"
+                  p="25px"
+                  type="submit"
+                  _hover={{ backgroundColor: "blue" }}
+                >
+                  {t("Auth.Register.actions.register")}
+                  {isHovered && <Icon as={FaArrowRight} />}
+                </Button>
+              </Box>
+            </FormControl>
           </form>
         </Box>
         <ScrollToTop />
