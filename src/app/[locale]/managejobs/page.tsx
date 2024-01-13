@@ -15,7 +15,7 @@ const ManageJobs = () => {
     const [jobdata, setJobdata] = useState([]);
 
     useEffect(() => {
-        fetch("https://neo-814m.onrender.com/v1/post/userId/2").then((res) => {
+        fetch("https://neo-814m.onrender.com/v1/post/userId/17").then((res) => {
             return res.json();
         }).then((resp) => {
             setJobdata(resp);

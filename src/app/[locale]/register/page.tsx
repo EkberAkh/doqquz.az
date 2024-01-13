@@ -194,7 +194,6 @@ const Register: React.FC<RegisterProps> = () => {
                   onFocus={handleFocus}
                   onBlur={handleBlur}
 
-
                 />
               </InputGroup>
 
