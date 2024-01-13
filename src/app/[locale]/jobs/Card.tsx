@@ -1,7 +1,8 @@
 import { StarIcon } from '@chakra-ui/icons';
 import { Avatar, Box, Flex, GridItem, Img, Text } from '@chakra-ui/react';
-import React, { useState } from 'react'
-
+import React, { useEffect, useState } from 'react'
+import Cookies from "js-cookie";
+import { useRouter } from 'next/navigation';
 
 interface ICardProps {
   companyName:string;
@@ -12,14 +13,76 @@ interface ICardProps {
   maxEstimatedBudget:string;
   currency:string;
   createdAt:string;
+  id:number;
 
 }
 
-const Card: React.FC<ICardProps> = ({companyName,title,city,type,minEstimatedBudget,maxEstimatedBudget,currency,createdAt}) => {
-  const [isFav, setIsFav] = useState<boolean>(false);
+const Card: React.FC<ICardProps> = ({id,companyName,title,city,type,minEstimatedBudget,maxEstimatedBudget,currency,createdAt}) => {
+  const initialIsFav = localStorage.getItem(`fav-jobs-${id}`) === 'true';
+  const [isFav, setIsFav] = useState<boolean>(initialIsFav);
+  const [bookmarkId, setBookmarkId] = useState<number | null>(null);
+  useEffect(() => {
+    // Update local storage when isFav changes
+    localStorage.setItem(`fav-jobs-${id}`, isFav.toString());
+  }, [isFav, id]);
+  const handleFavClick = async () => {
+    setIsFav(!isFav);
+    const token = Cookies.get("token");
+    let url, method, payload;
 
+    if (!isFav) {
+      // Preparing for POST request
+      url = "https://neo-814m.onrender.com/v1/bookmark/";
+      method = "POST";
+      payload = {
+        type: "JOBSEEKER",
+        jobseeker: { id: id },
+        post: null,
+      };
+    } else {
+      // Preparing for DELETE request
+      if (!bookmarkId) {
+        console.error("No bookmark ID available for deletion");
+        return;
+      }
+      url = `https://neo-814m.onrender.com/v1/bookmark/${bookmarkId}`;
+      method = "DELETE";
+      payload = null;
+    }
+    try {
+      const response = await fetch(url, {
+        method: method,
+        headers: {
+          "Content-Type": "application/json",
+          Token: `${token}`,
+        },
+        body: payload ? JSON.stringify(payload) : null,
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      if (!isFav) {
+        const data = await response.json();
+        setBookmarkId(data.id); // Store the bookmark ID when adding a bookmark
+      }
+
+      // Toggle the favorite state only on successful request
+      setIsFav(!isFav);
+      console.log(
+        isFav ? "Bookmark removed successfully" : "Bookmark added successfully"
+      );
+    } catch (error) {
+      console.error("Error in updating bookmark:", error);
+    }
+  };
+  const router = useRouter()
+  const clickHandler = ()=>{
+router.push(`viewJobs?jobId=${encodeURIComponent(id)}`)
+  }
   return (
-    <GridItem maxHeight="210px" boxShadow="0 2px 18px rgba(0,0,0,.14)">
+    <GridItem onClick={clickHandler}  cursor='pointer' maxHeight="210px" boxShadow="0 2px 18px rgba(0,0,0,.14)">
     <Box
       backgroundColor="white"
       height="55%"
@@ -45,9 +108,7 @@ const Card: React.FC<ICardProps> = ({companyName,title,city,type,minEstimatedBud
 
       <StarIcon
         margin="18px"
-        onClick={() => {
-          setIsFav(!isFav);
-        }}
+        onClick={handleFavClick}
         transition="all .4s"
         _hover={isFav ? {} : { backgroundColor: "black", color: "white" }}
         borderRadius="50%"
