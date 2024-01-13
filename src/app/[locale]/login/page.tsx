@@ -45,14 +45,14 @@ const Login1: React.FC = () => {
   const backgroundColor: string = isFocused ? "blue" : "gray";
   const backgroundColor2: string = isFocused2 ? "blue" : "gray";
   const t = useTranslations();
-  const router = useRouter();
+const router = useRouter()
   const [email, setEmail] = useState("");
   const [password, setPassoword] = useState("");
 
   const [token, setToken] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   console.log(token);
-    const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   function onSubmit() {
     console.log(values);
@@ -80,8 +80,7 @@ const Login1: React.FC = () => {
           progress: undefined,
           theme: "light",
         });
-        
-        router.push("/");
+router.push('/')
       })
       .catch((error) => {
         console.error("username or password is wrong");
