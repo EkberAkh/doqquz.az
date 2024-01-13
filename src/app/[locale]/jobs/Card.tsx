@@ -2,6 +2,7 @@ import { StarIcon } from '@chakra-ui/icons';
 import { Avatar, Box, Flex, GridItem, Img, Text } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react'
 import Cookies from "js-cookie";
+import { useRouter } from 'next/navigation';
 
 interface ICardProps {
   companyName:string;
@@ -76,8 +77,12 @@ const Card: React.FC<ICardProps> = ({id,companyName,title,city,type,minEstimated
       console.error("Error in updating bookmark:", error);
     }
   };
+  const router = useRouter()
+  const clickHandler = ()=>{
+router.push(`viewJobs?jobId=${encodeURIComponent(id)}`)
+  }
   return (
-    <GridItem maxHeight="210px" boxShadow="0 2px 18px rgba(0,0,0,.14)">
+    <GridItem onClick={clickHandler}  cursor='pointer' maxHeight="210px" boxShadow="0 2px 18px rgba(0,0,0,.14)">
     <Box
       backgroundColor="white"
       height="55%"
