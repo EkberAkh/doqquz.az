@@ -7,7 +7,7 @@ import { FaBook } from "react-icons/fa";
 import { useState } from 'react';
 import { useForm } from "react-hook-form";
 import { useTranslations } from 'next-intl';
-
+import Cookies from 'js-cookie';
 
 interface RegisterProps { }
 
@@ -33,6 +33,7 @@ const Contact: React.FC<RegisterProps> = () => {
   const backgroundColor = isFocused ? "blue" : "gray";
   const backgroundColor2 = isFocused2 ? "blue" : "gray";
   const backgroundColor3 = isFocused3 ? "blue" : "gray";
+
   const t = useTranslations();
 
   const {
@@ -41,8 +42,41 @@ const Contact: React.FC<RegisterProps> = () => {
     formState: { errors },
   } = useForm<FormData>();
 
-  const onSubmit = (values: FormData) => {
+  const token = Cookies.get("token");
+  
+  
+  const onSubmit = async (values: FormData) => {
     console.log("salam", values);
+    
+    const url = 'https://neo-814m.onrender.com/v1/contact/';
+    const method = 'POST';
+   
+    const payload = {
+      fullname: values.name,
+      email: values.email,
+      subject: values.topic,
+      message: values.textarea
+    }
+try {
+      const response = await fetch(url, {
+      method: method,
+      headers: {
+        'Content-type': 'application/json',
+        Token: `${token}`,
+      },
+      body: JSON.stringify(payload),
+    })
+
+    if(!response.ok) {
+      throw new Error(`HTTP Error! Status: ${response.status} `)
+    }
+
+    const data = await response.json();
+    console.log(data);
+    
+} catch (error) {
+  console.error('Data is not Posted')
+} 
   };
 
 

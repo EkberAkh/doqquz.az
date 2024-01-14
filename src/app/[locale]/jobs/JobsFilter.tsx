@@ -2,7 +2,7 @@
 import { Box, Button, Flex } from "@chakra-ui/react";
 
 import { useTranslations } from "next-intl";
-import React from "react";
+import React, { useState } from "react";
 import LocationInput from "./LocationInput";
 import KeywordInput from "./KeywordInput";
 import JobCategories from "./JobCategories";
@@ -12,19 +12,20 @@ import CurrencyType from "./CurrencyType";
 import Salary from "./Salary";
 
 interface IJobFilter {
-  jobType:boolean
-  locationInput:boolean
+  jobType: boolean;
+  locationInput: boolean;
 }
-const JobsFilter: React.FC<IJobFilter> = ({jobType,locationInput}) => {
+const JobsFilter: React.FC<IJobFilter> = ({ jobType, locationInput }) => {
   const t = useTranslations();
+  const [selectedCurrency, setSelectedCurrency] = useState('');
+  const [selectedJobCategory, setSelectedJobCategory] = useState('');
 
+  const handleSearchClick = () => {
+    console.log("Selected Currency:", selectedCurrency);
+    console.log("Selected Job cat:", selectedJobCategory);
+  };
   return (
-    <Flex
-      overflowX="hidden"
-      overflowY="auto"
-      flexWrap="wrap"
-      
-    >
+    <Flex overflowX="hidden" overflowY="auto" flexWrap="wrap">
       <Box
         backgroundColor="#fafafa"
         padding="24px"
@@ -33,21 +34,22 @@ const JobsFilter: React.FC<IJobFilter> = ({jobType,locationInput}) => {
         flexDirection="column"
         flexShrink={0}
       >
-      {locationInput &&  <LocationInput />}
+        {locationInput && <LocationInput />}
         <KeywordInput />
-        <JobCategories />
-       {jobType && <JobType /> } 
+        <JobCategories setSelectedJobCategory={setSelectedJobCategory} />
+        {jobType && <JobType />}
         <SalaryType />
-        <CurrencyType />
+        <CurrencyType selectedCurrency={selectedCurrency} setSelectedCurrency={setSelectedCurrency}/>
         <Salary />
 
         <Button
-        marginTop='16px'
+          marginTop="16px"
           height="52px"
           _hover={{}}
           w="100%"
           color="#fff"
           backgroundColor="#2a41e8"
+          onClick={handleSearchClick}
         >
           {t("Common.Action.SEARCH")}
         </Button>
