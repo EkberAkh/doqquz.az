@@ -18,6 +18,7 @@ import PlaceIcon from "@/icons/PlaceIcon";
 import ExperienceIcon from "@/icons/ExperienceIcon";
 import OclockIcon from "@/icons/OclockIcon";
 import { useEffect, useState } from "react";
+import { NavigationLink } from "../NavigationLink";
 interface ICardProps {
   title: string;
 id:number
@@ -72,7 +73,7 @@ export const LatestJobPostings = () => {
             fontSize="1rem"
             mr={"0.7rem"}
           >
-            {t("Home.JobAnnouncement.actions.shortLink")}
+            <NavigationLink href='/jobs'>{t("Home.JobAnnouncement.actions.shortLink")}</NavigationLink>
             <ArrowRightIcon width={"25"} height={"25"} />
           </Text>
         </Flex>

@@ -8,6 +8,7 @@ import { useState } from 'react';
 import { useForm } from "react-hook-form";
 import { useTranslations } from 'next-intl';
 import Cookies from 'js-cookie';
+
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -36,6 +37,7 @@ const Contact: React.FC<RegisterProps> = () => {
   const backgroundColor = isFocused ? "blue" : "gray";
   const backgroundColor2 = isFocused2 ? "blue" : "gray";
   const backgroundColor3 = isFocused3 ? "blue" : "gray";
+
   const t = useTranslations();
 
   const {
@@ -47,10 +49,12 @@ const Contact: React.FC<RegisterProps> = () => {
 
   const token = Cookies.get("token");
 
+
   const onSubmit = async (values: FormData) => {
 
     const url = 'https://neo-814m.onrender.com/v1/contact/';
     const method = 'POST';
+
 
     const payload = {
       fullname: values.name,
@@ -58,6 +62,7 @@ const Contact: React.FC<RegisterProps> = () => {
       subject: values.topic,
       message: values.textarea
     }
+
 
     try {
       const response = await fetch(url, {
@@ -99,6 +104,7 @@ const Contact: React.FC<RegisterProps> = () => {
       console.error('Data is not Posted', error.message)
       toast.error('Əməliyyat icra olunmadi')
     }
+
   };
 
   return (

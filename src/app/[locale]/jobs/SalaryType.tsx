@@ -60,20 +60,7 @@ const SalaryType = () => {
                   />
                 }
               />
-              {isHovering && (
-                <InputRightElement
-                  children={
-                    <Icon
-                      marginRight="65px"
-                      cursor="pointer"
-                      marginTop="5px"
-                      fontSize="12px"
-                      color="gray"
-                      as={CloseButton}
-                    />
-                  }
-                />
-              )}
+            
             </InputGroup>
             <AutoCompleteList>
               {salaries.map((salary, cid) => (
