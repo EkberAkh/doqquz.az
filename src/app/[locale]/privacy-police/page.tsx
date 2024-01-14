@@ -11,9 +11,8 @@ const Privacy = () => {
       <Box>
         <Heading>{t("PrivacyPolice.header")}</Heading>
         <Text>
-          {t.rich("Auth.Login.subTitle", {
+          {t.rich("PrivacyPolice.mainSection", {
             span: (chunks) => <span>{chunks}</span>,
-            b: (chunks) => <b>{chunks}</b>,
           })}
         </Text>
         <br />

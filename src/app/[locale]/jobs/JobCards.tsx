@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 import React, { useEffect, useState } from "react";
 import Card from "./Card";
 
-const JobCards =  () => {
+const JobCards = () => {
   const t = useTranslations();
   const [allJobs, setAllJobs] = useState([]); // Store all jobs
   const [currentPageJobs, setCurrentPageJobs] = useState([]); // Jobs to display on current page
@@ -28,7 +28,7 @@ const JobCards =  () => {
     fetchJobs();
   }, []);
 
-  const changePage = (newPage:number) => {
+  const changePage = (newPage: number) => {
     const startIndex = (newPage - 1) * jobsPerPage;
     const endIndex = startIndex + jobsPerPage;
     setCurrentPageJobs(allJobs.slice(startIndex, endIndex));
@@ -36,7 +36,7 @@ const JobCards =  () => {
   };
 
   const totalPages = Math.ceil(allJobs.length / jobsPerPage);
-  
+  console.log('currentPageJobs', currentPageJobs)
   return (
     <>
       <Grid
@@ -45,22 +45,22 @@ const JobCards =  () => {
         gap="14px"
         width="calc(100% - 379px)"
       >
-      
-       {currentPageJobs.map((job:any) => (
-        <Card
-        id={job.id}
-          key={job.id}
-          title={job.title}
-          minEstimatedBudget={job.minEstimatedBudget}
-          maxEstimatedBudget={job.maxEstimatedBudget}
-          type={job.type}
-          currency={job.currency}
-          createdAt={job.createdAt}
-          companyName={job.companyName}
-          city={job.location.city}
-        />
-      ))}
-     
+
+        {currentPageJobs.map((job: any) => (
+          <Card
+            id={job.id}
+            key={job.id}
+            title={job.title}
+            minEstimatedBudget={job.minEstimatedBudget}
+            maxEstimatedBudget={job.maxEstimatedBudget}
+            type={job.type}
+            currency={job.currency}
+            createdAt={job.createdAt}
+            companyName={job.companyName}
+            city={job.location.city}
+          />
+        ))}
+
       </Grid>
       {/* <Flex justifyContent="center" alignItems="center" marginTop="20px">
         <Button
@@ -82,7 +82,7 @@ const JobCards =  () => {
         </Button>
       </Flex> */}
 
-      
+
       {/* <Flex
         justifyContent="center"
         alignItems="center"

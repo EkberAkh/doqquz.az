@@ -32,8 +32,8 @@ export const Footer = () => {
   const [selectedLanguage, setSelectedLanguage] = useState("Azərbaycanca");
   const router = useRouter();
   const currentPath = usePathname()
-  let role = localStorage.getItem('role');
-  
+  let role = window!==undefined && localStorage.getItem('role');
+
 
 
 
@@ -47,10 +47,10 @@ export const Footer = () => {
     }
   }, [currentPath]);
 
-  const handleLanguageChange = (language:string) => {
+  const handleLanguageChange = (language: string) => {
     setSelectedLanguage(language);
 
-    
+
     let langPrefix = '';
     switch (language) {
       case 'English':
@@ -228,7 +228,7 @@ export const Footer = () => {
                   <NavigationLink href='/jobs'>{t("Common.Nav.browse_jobs")}</NavigationLink>
                 </Text>
                 <Text fontSize="14px" color="#c0c0c0">
-                 <NavigationLink href='/useProfile'> {t("Home.Footer.Nav.forCandidates.addResume")}</NavigationLink>
+                  <NavigationLink href='/useProfile'> {t("Home.Footer.Nav.forCandidates.addResume")}</NavigationLink>
                 </Text>
                 <Text fontSize="14px" color="#c0c0c0">
                   <NavigationLink href='/companies'>{t("Common.Nav.browse_companies")}</NavigationLink>
@@ -257,10 +257,10 @@ export const Footer = () => {
               </Text>
               <Flex flexDirection="column" rowGap="0.8rem">
                 <Text fontSize="14px" color="#c0c0c0">
-                 <NavigationLink href='/about'> {t("Common.Nav.about")}</NavigationLink>
+                  <NavigationLink href='/about'> {t("Common.Nav.about")}</NavigationLink>
                 </Text>
                 <Text fontSize="14px" color="#c0c0c0">
-                 <NavigationLink href='/contact'> {t("Common.Nav.contact")}</NavigationLink>
+                  <NavigationLink href='/contact'> {t("Common.Nav.contact")}</NavigationLink>
                 </Text>
                 <Text fontSize="14px" color="#c0c0c0">
                   <NavigationLink href='privacy-police'>{t("Home.Footer.Nav.privacyPolice")}</NavigationLink>
