@@ -8,7 +8,7 @@ import { useTranslations } from 'next-intl'
 import React from 'react'
 import { MdOutlineBusinessCenter } from 'react-icons/md'
 
-export function BookmarkedPosts() {
+ function BookmarkedPosts({bookmark,handleDelete}) {
     const t = useTranslations();
     return (
         <Card mt={'20px'} boxShadow='0 6px 10px rgba(1, 0, 0, 0.2)' w={'100%'}>
@@ -18,7 +18,7 @@ export function BookmarkedPosts() {
                     <Heading ml={'8px'} fontSize='1rem' fontWeight={700}> {t('Common.bookmark.post')}</Heading>
                 </Flex>
             </CardHeader>
-            <CardBody p={'2.5rem 1rem'}>
+            {bookmark.map((markedpost)=> markedpost.post ? <CardBody p={'2.5rem 1rem'}>
                 <Flex width={"100%"} justify={"space-between"}>
                     <Flex>
                         <Flex
@@ -33,7 +33,7 @@ export function BookmarkedPosts() {
                         </Flex>
                         <VStack ml={"1rem"}>
                             <Flex w={"96%"} justify={"flex-start"} fontWeight={700}>
-                                Helpdesk
+                                {markedpost.post.title}
                             </Flex>
                             <HStack columnGap={"1.3rem"}>
                                 <Flex columnGap={"0.2rem"}>
@@ -50,7 +50,7 @@ export function BookmarkedPosts() {
                                         height="25"
                                         color="rgb(119, 119, 119)"
                                     />
-                                    <Text>{t('Common.JobType.PART')}</Text>
+                                    <Text>{markedpost.post.type}</Text>
                                 </Flex>
                                 <Flex columnGap={"0.2rem"}>
                                     <OclockIcon
@@ -58,7 +58,7 @@ export function BookmarkedPosts() {
                                         height="25"
                                         color="rgb(119, 119, 119)"
                                     />
-                                    <Text>09.01.2024</Text>
+                                    <Text>{markedpost.post.createdAt}</Text>
                                 </Flex>
                             </HStack>
                         </VStack>
@@ -71,12 +71,14 @@ export function BookmarkedPosts() {
                         borderRadius="4px"
                         p={'0.8rem'}
                         _hover={{}}
+                        onClick={()=>handleDelete(markedpost.post.id)}
                     >
                         <DeleteIcon width="20" height="50" color="#f50057" />
                     </Box>
-                </Flex>
-            </CardBody>
+                </Flex> 
+            </CardBody> : null)}
         </Card>
     )
 }
 
+export default BookmarkedPosts;
