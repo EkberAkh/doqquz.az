@@ -14,16 +14,35 @@ import Salary from "./Salary";
 interface IJobFilter {
   jobType: boolean;
   locationInput: boolean;
+  onFilterChange: (filterData: any) => void;
 }
-const JobsFilter: React.FC<IJobFilter> = ({ jobType, locationInput }) => {
+const JobsFilter: React.FC<IJobFilter> = ({ jobType, locationInput,onFilterChange  }) => {
   const t = useTranslations();
   const [selectedCurrency, setSelectedCurrency] = useState('');
   const [selectedJobCategory, setSelectedJobCategory] = useState('');
-
-  const handleSearchClick = () => {
-    console.log("Selected Currency:", selectedCurrency);
-    console.log("Selected Job cat:", selectedJobCategory);
+  const [selectedLocation, setSelectedLocation] = useState('');
+  const [selectedSalary, setSelectedSalary] = useState('');
+  const [selectedJobTypes, setSelectedJobTypes] = useState<string[]>([]);
+  const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
+  const [salaryRange, setSalaryRange] = useState({ min: 1, max: 100000 });
+  const handleSalaryChange = (min: number, max: number) => {
+    setSalaryRange({ min, max });
   };
+  const handleSearchClick = () => {
+    const filterData = {
+      currency: selectedCurrency,
+      category: selectedJobCategory,
+      locObj: selectedLocation,
+      salaryType: selectedSalary,
+      type: selectedJobTypes[0] === undefined ? '' :selectedJobTypes[0]  ,
+      keyword: selectedKeywords[0] === undefined ? '': selectedKeywords[0],
+      maxEstimatedBudget: salaryRange.max,
+      minEstimatedBudget:salaryRange.min 
+    };
+
+    onFilterChange(filterData);
+  };
+
   return (
     <Flex overflowX="hidden" overflowY="auto" flexWrap="wrap">
       <Box
@@ -34,13 +53,13 @@ const JobsFilter: React.FC<IJobFilter> = ({ jobType, locationInput }) => {
         flexDirection="column"
         flexShrink={0}
       >
-        {locationInput && <LocationInput />}
-        <KeywordInput />
+        {locationInput && <LocationInput setSelectedLocation={setSelectedLocation} />}
+        <KeywordInput setSelectedKeywords={setSelectedKeywords} />
         <JobCategories setSelectedJobCategory={setSelectedJobCategory} />
-        {jobType && <JobType />}
-        <SalaryType />
+        {jobType && <JobType selectedJobTypes={selectedJobTypes} setSelectedJobTypes={setSelectedJobTypes} />}
+        <SalaryType setSelectedSalary={setSelectedSalary}   />
         <CurrencyType selectedCurrency={selectedCurrency} setSelectedCurrency={setSelectedCurrency}/>
-        <Salary />
+        <Salary  onSalaryChange={handleSalaryChange}/>
 
         <Button
           marginTop="16px"

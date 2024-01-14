@@ -146,3 +146,9 @@ export enum EINDUSTRY {
     WIRELESS = 'WIRELESS',
     WRITING_OR_EDITING = 'WRITING_OR_EDITING',
 }
+
+export enum ESalaryType {
+    ANNUALLY = 'ANNUALLY',
+    MONTHLY = 'MONTHLY',
+    HOURLY = 'HOURLY',
+}

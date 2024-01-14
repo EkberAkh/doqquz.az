@@ -12,15 +12,20 @@ import {
   TagLabel,
 } from "@chakra-ui/react";
 import { useTranslations } from "next-intl";
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
+interface IKeyword {
+  setSelectedKeywords: Dispatch<SetStateAction<string[]>>;
 
-const KeywordInput = () => {
+
+  
+}
+const KeywordInput:React.FC<IKeyword> = ({setSelectedKeywords}) => {
   const t = useTranslations();
-  const [selectedKeywords, setSelectedKeywords] = useState<any>([]);
+  const [selectedKeywordsLocal, setSelectedKeywordsLocal] = useState<any>([]);
   const [inputValue, setInputValue] = useState<any>("");
   const addKeyword = (newKeyword: any) => {
     if (newKeyword) {
-      setSelectedKeywords([...selectedKeywords, newKeyword]);
+      setSelectedKeywordsLocal([...selectedKeywordsLocal, newKeyword]);
       setInputValue("");
     }
   };
@@ -31,8 +36,9 @@ const KeywordInput = () => {
     addKeyword(inputValue);
   };
   const handleRemoveKeyword = (keyword: any) => {
-    setSelectedKeywords(selectedKeywords.filter((k: string) => k !== keyword));
+    setSelectedKeywordsLocal(selectedKeywordsLocal.filter((k: string) => k !== keyword));
   };
+  setSelectedKeywords(selectedKeywordsLocal)
   return (
     <FormControl marginBottom="16px" w="100%">
       <FormLabel marginBottom="16px" fontSize="18px">
@@ -77,7 +83,7 @@ const KeywordInput = () => {
         />
       </InputGroup>
       <HStack flexWrap="wrap" spacing={4} mt={2}>
-        {selectedKeywords.map((keyword: any, index: any) => (
+        {selectedKeywordsLocal.map((keyword: any, index: any) => (
           <Tag
             color="#fff"
             padding="4px 8px"
