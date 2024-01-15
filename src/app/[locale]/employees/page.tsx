@@ -13,30 +13,47 @@ interface Employee {
 
 }
 const Employees = () => {
+  const [filterData, setFilterData] = useState<any>({});
+  const handleFilterChange = (newFilterData: any) => {
+    // Update the state with the new filter data
+    setFilterData(newFilterData);
+  };
   const [employees, setEmployees] = useState<Employee[]>([]);
   const t = useTranslations();
   useEffect(() => {
-    // Function to fetch job data
     const fetchJobs = async () => {
       try {
-        const response = await fetch('https://neo-814m.onrender.com/v1/jobseeker/list?skip=0&take=9');
+        // Construct the query parameters based on filterData
+        const queryParams = new URLSearchParams(filterData);
+
+        // Append the query parameters to the API endpoint
+        const apiUrl =
+          Object.keys(filterData).length > 0
+            ? `https://neo-814m.onrender.com/v1/jobseeker/list?${queryParams.toString()}`
+            : `https://neo-814m.onrender.com/v1/jobseeker/list?skip=0&take=9`;
+
+        const response = await fetch(apiUrl);
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
+
         const data = await response.json();
-        setEmployees(data.list)
-       
+        console.log(data.list);
+        setEmployees(data.list);
       } catch (error) {
         console.error('Fetching jobs failed:', error);
       }
     };
-    fetchJobs();
-  }, []);
 
+    fetchJobs();
+  }, [filterData]);
+
+  
+  console.log(filterData);
   
   return (
     <Box display="flex" w="100%" flexWrap="wrap">
-      <JobsFilter locationInput={false} jobType={false} />
+      <JobsFilter onFilterChange={handleFilterChange} locationInput={false} jobType={false} />
       <Grid
         padding="18px"
         templateColumns="1fr 1fr"

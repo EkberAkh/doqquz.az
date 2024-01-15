@@ -39,6 +39,7 @@ const JobCards:React.FC<IJobCards> =  ({ filterData }) => {
   }, [filterData]);
 
 
+console.log(allJobs);
 
   
   return (
