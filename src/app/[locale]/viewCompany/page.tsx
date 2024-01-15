@@ -14,7 +14,8 @@ const Profile = () => {
     const t = useTranslations()
 
     const searchParams = useSearchParams();
-    const jobId = searchParams.get("jobId");
+    const companyId = searchParams.get("companyId");
+    console.log(companyId);
     const [data, setData] = useState(null); 
     const [data1,setData1] = useState(null)
     

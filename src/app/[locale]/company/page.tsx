@@ -7,6 +7,7 @@ import CompanyItem from './CompanyItem';
 import CompanyFooter from './CompanyFooter';
 import Search from './SearchButton';
 import NotFound from './NotFound';
+import { log } from 'console';
 
 
 interface ICompanyProps {
@@ -43,6 +44,8 @@ export default function Company() {
         }
         fetchCompany();
     }, [query])
+    console.log(companies);
+    
     return (
         <>
             <Flex justify='center'>
