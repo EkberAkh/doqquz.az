@@ -28,7 +28,7 @@ interface YourJobType {
 }
 const ViewJobs = () => {
   const [allJobs, setAllJobs] = useState<YourJobType[]>([]);
-
+  const [jobSeeker,setJobSeeker]=useState([])
   useEffect(() => {
     const fetchJobs = async () => {
       try {
@@ -58,15 +58,50 @@ const ViewJobs = () => {
   const userRole = localStorage.getItem('role')
 
   const token = Cookies.get("token");
+
+
+  
+  useEffect(()=>{
+    async function fetchUserData() {
+      // Assuming you have the token stored in cookies
+  
+      const requestOptions = {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Token: `${token}`, // Include the token in the Authorization header
+        },
+      };
+  
+      try {
+        const response = await fetch(
+          `https://neo-814m.onrender.com/v1/post/${jobId}`,
+          requestOptions
+        );
+        if (!response.ok) {
+          throw new Error(`Error: ${response.status}`);
+        }
+        const data = await response.json();
+        setJobSeeker(data.jobseekers)
+       
+        console.log('viewJobdata',data);
+        
+        // Directly return the role and id from this functio
+      } catch (error) {
+        console.error("There was an error fetching the user data:", error);
+      }
+    } 
+     fetchUserData()
+  },[])
+
+  console.log('jobSeeker',jobSeeker)
   const handleApplyClick = async () => {
     try {
       const payload = {
-        type: "JOBSEEKER",
-        jobseeker: { storedJob },
-        post: null,
+       jobseekers:jobSeeker
       };
   
-      const response = await fetch(`https://neo-814m.onrender.com/v1/post/apply/${storedJob.id}`, {
+      const response = await fetch(`https://neo-814m.onrender.com/v1/post/apply/${jobId}`, {
         method: 'POST',
         headers: {
           "Content-Type": "application/json",
@@ -84,6 +119,7 @@ const ViewJobs = () => {
       console.error('Error submitting application:', error);
     }
   };
+
   return (
     <>
       <>
@@ -123,7 +159,7 @@ const ViewJobs = () => {
               <Text p="30px 40px 30px 0">{storedJob?.type}</Text>
               <Text fontWeight="bold">Tələb olunan bacarıqlar</Text>
               <Box p="30px 40px 0 0">
-                <Text>{storedJob?.skills[0].name}</Text>
+                <Text></Text>
               </Box>
               <Text fontWeight="bold" p="30px 40px 30px 0">
                 Müraciyyət üçün{" "}

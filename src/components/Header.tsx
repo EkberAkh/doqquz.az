@@ -71,37 +71,8 @@ function Header() {
     location.reload();
   };
 
-  async function fetchUserData() {
-    // Assuming you have the token stored in cookies
 
-    const requestOptions = {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Token: `${token}`, // Include the token in the Authorization header
-      },
-    };
 
-    try {
-      const response = await fetch(
-        "https://neo-814m.onrender.com/v1/user",
-        requestOptions
-      );
-      if (!response.ok) {
-        throw new Error(`Error: ${response.status}`);
-      }
-      const data = await response.json();
-      console.log(data.role);
-      setRole(data.role);
-      localStorage.setItem("role", data.role);
-      // Directly return the role and id from this function
-      Cookies.set("userId", data.id);
-
-      return { id: data.id, role: data.role };
-    } catch (error) {
-      console.error("There was an error fetching the user data:", error);
-    }
-  }
   async function fetchJobseekerData(id: number, role: string) {
     const url =
       role === "JOBSEEKER"
@@ -122,6 +93,7 @@ function Header() {
       }
       const jobseekerData = await response.json();
       setData(jobseekerData);
+      console.log('jobseekerData', jobseekerData)
 
       return jobseekerData;
     } catch (error) {
@@ -146,6 +118,8 @@ function Header() {
       setIsLoading(false); // Set loading to false if there is no token
     }
   }, [token]);
+
+  Cookies.set("userData", data as any)
   return (
     <ThemeProvider theme={extendedTheme} >
       <HStack
@@ -298,7 +272,7 @@ function Header() {
                         </Text>
                       )}
                       <Text textDecoration="underline" color="#ECA400">
-                        <NavigationLink href="/userProfile">
+                        <NavigationLink href='/userProfile/${}'>
                           {t("Common.Warning.completeAccount")}
                         </NavigationLink>
                       </Text>
@@ -357,7 +331,7 @@ function Header() {
           </HStack>
         )}
       </HStack>
-    </ThemeProvider>
+    </ThemeProvider >
   );
 }
 export default Header;

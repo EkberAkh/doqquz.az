@@ -9,6 +9,7 @@ import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 import { AddIcon } from '@chakra-ui/icons'
 import ScrollToTop from '@/components/ScrollToTop'
+import Cookies from "js-cookie";
 // import "react-datepicker/dist/react-datepicker.css";
 // import DatePicker from "react-datepicker";
 
@@ -26,12 +27,12 @@ const Profile = () => {
     const [universityName, setUniversityName] = useState('')
     const [educationMajor, setEducationMajor] = useState('')
     const [educationDegree, setEducationDegree] = useState('')
-    const [company,setCompany] = useState('')
+    const [company, setCompany] = useState('')
     const [duty, setDuty] = useState('')
     // const [startDate, setStartDate] = useState(new Date());
     // const [endtDate, setEndDate] = useState(new Date());
 
-    const handleOpenModal = (modalContent) => {
+    const handleOpenModal = (modalContent: React.SetStateAction<string>) => {
         setActiveModal(modalContent);
         onOpen();
     }
@@ -49,8 +50,8 @@ const Profile = () => {
     }
 
 
-
-
+    const userData = Cookies.get("userData");
+    console.log('userData', userData)
     return (
         <Flex justify={'center'}>
             <Box mx='15px' width={'81%'}>
@@ -82,8 +83,8 @@ const Profile = () => {
                                         <PhoneInput country={'az'} placeholder='+111 (11) 111-11-11' value={phoneNumber} onChange={handleChange} inputProps={{
                                             required: 'true'
                                         }}
-                                        inputStyle={{ height: '48px', width: '30rem' , borderRadius: '0.3rem' }}
-                                        buttonStyle={{background: '#fff', borderRight: 'none',}}
+                                            inputStyle={{ height: '48px', width: '30rem', borderRadius: '0.3rem' }}
+                                            buttonStyle={{ background: '#fff', borderRight: 'none', }}
                                         />
                                         {!valid && <Text color={'red'} mt={'0.6rem'}>Please enter a valid phone number!</Text>}
                                     </Box>
@@ -246,11 +247,11 @@ const Profile = () => {
                             <Flex flexWrap={'wrap'} columnGap={'1.5rem'} width={'100%'}>
                                 <FormControl minH={'7.1rem'} flexBasis={'calc(50% - 0.8rem)'}>
                                     <FormLabel fontSize={'1.1rem'} mb={'0.9rem'}>{t('Profile.Education.name')}</FormLabel>
-                                    <Input type='text' value={universityName} onChange={(e)=> setUniversityName(e.target.value)} placeholder={t('Profile.Education.name')} h={'3.1rem'}></Input>
+                                    <Input type='text' value={universityName} onChange={(e) => setUniversityName(e.target.value)} placeholder={t('Profile.Education.name')} h={'3.1rem'}></Input>
                                 </FormControl>
                                 <FormControl minH={'7.1rem'} flexBasis={'calc(50% - 0.8rem)'}>
                                     <FormLabel fontSize={'1.1rem'} mb={'0.9rem'}>{t('Profile.Education.major')}</FormLabel>
-                                    <Input type='text' value={educationMajor} onChange={(e)=>setEducationMajor(e.target.value)} placeholder={t('Profile.Education.major')} h={'3.1rem'}></Input>
+                                    <Input type='text' value={educationMajor} onChange={(e) => setEducationMajor(e.target.value)} placeholder={t('Profile.Education.major')} h={'3.1rem'}></Input>
                                 </FormControl>
                                 <FormControl minH={'7.1rem'} flexBasis={'calc(50% - 0.8rem)'}>
                                     <FormLabel fontSize={'1.1rem'} mb={'0.9rem'}>{t('Common.FormInputs.startingDate.label')}</FormLabel>
@@ -272,7 +273,7 @@ const Profile = () => {
                                 </FormControl>
                                 <FormControl minH={'7.1rem'} flexBasis={'calc(50% - 0.8rem)'}>
                                     <FormLabel fontSize={'1.1rem'} mb={'0.9rem'}>{t('Profile.Education.degree')}</FormLabel>
-                                    <Input type='text' value={educationDegree} onChange={(e)=> setEducationDegree(e.target.value)} placeholder={t('Profile.Education.degree')} h={'3.1rem'}></Input>
+                                    <Input type='text' value={educationDegree} onChange={(e) => setEducationDegree(e.target.value)} placeholder={t('Profile.Education.degree')} h={'3.1rem'}></Input>
                                 </FormControl>
                             </Flex>
                         </ModalBody>
@@ -336,11 +337,11 @@ const Profile = () => {
                             <Flex flexWrap={'wrap'} columnGap={'1.5rem'} width={'100%'}>
                                 <FormControl minH={'7.1rem'} flexBasis={'calc(50% - 0.8rem)'}>
                                     <FormLabel fontSize={'1.1rem'} mb={'0.9rem'}>{t('Profile.Experience.name')}</FormLabel>
-                                    <Input type='text' value={company} onChange={(e)=> setCompany(e.target.value)} placeholder={t('Profile.Experience.name')} h={'3.1rem'}></Input>
+                                    <Input type='text' value={company} onChange={(e) => setCompany(e.target.value)} placeholder={t('Profile.Experience.name')} h={'3.1rem'}></Input>
                                 </FormControl>
                                 <FormControl minH={'7.1rem'} flexBasis={'calc(50% - 0.8rem)'}>
                                     <FormLabel fontSize={'1.1rem'} mb={'0.9rem'}>{t('Profile.Experience.title')}</FormLabel>
-                                    <Input type='text' value={duty} onChange={(e)=>setDuty(e.target.value)} placeholder={t('Profile.Experience.title')} h={'3.1rem'}></Input>
+                                    <Input type='text' value={duty} onChange={(e) => setDuty(e.target.value)} placeholder={t('Profile.Experience.title')} h={'3.1rem'}></Input>
                                 </FormControl>
                                 <FormControl minH={'7.1rem'} flexBasis={'calc(50% - 0.8rem)'}>
                                     <FormLabel fontSize={'1.1rem'} mb={'0.9rem'}>{t('Common.FormInputs.startingDate.label')}</FormLabel>
@@ -362,11 +363,11 @@ const Profile = () => {
                                 </FormControl>
                                 <FormControl minH={'7.1rem'} flexBasis={'calc(50% - 0.8rem)'}>
                                     <FormLabel fontSize={'1.1rem'} mb={'0.9rem'}>{t('Common.JobType.label')}</FormLabel>
-                                    <Input type='text'  placeholder={t('Common.JobType.label')} h={'3.1rem'}></Input>
+                                    <Input type='text' placeholder={t('Common.JobType.label')} h={'3.1rem'}></Input>
                                 </FormControl>
                                 <FormControl minH={'7.1rem'} flexBasis={'calc(50% - 0.8rem)'}>
                                     <FormLabel fontSize={'1.1rem'} mb={'0.9rem'}>{t('Common.FormInputs.description.label')}</FormLabel>
-                                    <Textarea placeholder={t('Common.FormInputs.description.label')} value={description} onChange={(e)=>setDescription(e.target.value)} minH={'5rem'} p={'1.1rem'} resize={'none'}></Textarea>
+                                    <Textarea placeholder={t('Common.FormInputs.description.label')} value={description} onChange={(e) => setDescription(e.target.value)} minH={'5rem'} p={'1.1rem'} resize={'none'}></Textarea>
                                 </FormControl>
                             </Flex>
                         </ModalBody>
@@ -461,7 +462,7 @@ const Profile = () => {
                 </Modal>}
 
             </Box>
-            <ScrollToTop/>
+            <ScrollToTop />
         </Flex>
     )
 }
