@@ -14,14 +14,39 @@ import {
   AutoCompleteList,
 } from "@choc-ui/chakra-autocomplete";
 import { useTranslations } from "next-intl";
-import React, { useState } from "react";
-
-const SalaryType = () => {
+import React, { Dispatch, SetStateAction, useState } from "react";
+import { ESalaryType } from "./enums";
+interface IJobCategory {
+  setSelectedSalary:Dispatch<SetStateAction<string>>
+}
+const SalaryType:React.FC<IJobCategory> = ({setSelectedSalary}) => {
   const t = useTranslations();
-  const salaries = ["ANNUALLY", "MONTHLY", "HOURLY"];
+  const salaries = Object.entries(ESalaryType);
 
-  const [isHovering, setIsHovering] = useState<any>(false);
+  
   const [salaryInputValue, setSalaryInputValue] = useState<any>("");
+  const [selectedLabel, setSelectedLabel] = useState("");
+  const [inputValue, setInputValue] = useState("");
+
+  const handleCategorySelect = (label: string, originalValue: string) => {
+    setInputValue(label);
+    setSelectedLabel(label); 
+    const selectedEntry = salaries.find(([key, val]) => val === originalValue);
+    if (selectedEntry) {
+    
+      setSelectedSalary(selectedEntry[1]); 
+    }
+  };
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = event.target.value;
+    setInputValue(newValue); 
+
+    const found = salaries.some(([key, value]) => t(`Common.INDUSTRIES.${value}`) === newValue);
+    if (!found && newValue === "") {
+      setSelectedLabel("");
+      setSelectedSalary(""); 
+    }
+  };
   return (
     <FormControl marginBottom="16px" w="100%">
       <FormLabel marginBottom="16px" fontSize="18px">
@@ -31,10 +56,11 @@ const SalaryType = () => {
         {({ isOpen }: any) => (
           <>
             <InputGroup
-              onMouseEnter={() => setIsHovering(true)}
-              onMouseLeave={() => setIsHovering(false)}
+            
             >
               <AutoCompleteInput
+                 value={inputValue}
+                 onChange={handleInputChange}
                 id="salaryInput"
                 borderRadius="4px"
                 minH="48px"
@@ -46,7 +72,7 @@ const SalaryType = () => {
                 maxW="100%"
                 variant="filled"
                 placeholder={t("Common.SalaryType.label")}
-                onChange={(e: any) => setSalaryInputValue(e.target.value)}
+                
               />
 
               <InputRightElement
@@ -63,16 +89,16 @@ const SalaryType = () => {
             
             </InputGroup>
             <AutoCompleteList>
-              {salaries.map((salary, cid) => (
+              {salaries.map(([key, value], cid) => (
                 <AutoCompleteItem
                   key={`option-${cid}`}
-                  value={t(`Common.SalaryType.${salary}`)}
+                  value={value}
                   textTransform="capitalize"
                   onClick={() =>
-                    setSalaryInputValue(t(`Common.SalaryType.${salary}`))
+                    handleCategorySelect(t(`Common.SalaryType.${value}`), value)
                   }
                 >
-                  {t(`Common.SalaryType.${salary}`)}
+                  {t(`Common.SalaryType.${value}`)}
                 </AutoCompleteItem>
               ))}
             </AutoCompleteList>

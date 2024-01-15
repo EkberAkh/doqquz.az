@@ -15,12 +15,27 @@ import {
   AutoCompleteList,
 } from "@choc-ui/chakra-autocomplete";
 import { useTranslations } from "next-intl";
-import React from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+interface IJobCategory {
+  setSelectedLocation:Dispatch<SetStateAction<string>>
+}
+interface LocationItem {
+  city: string;
+  // include other properties if needed
+}
+const LocationInput:React.FC<IJobCategory> = ({setSelectedLocation}) => {
+  const [locations, setLocations] = useState<LocationItem[]>([]);
+  const [inputValue, setInputValue] = useState('');
+  useEffect(() => {
+    if (inputValue) {
+      fetch(`https://neo-814m.onrender.com/v1/location/${inputValue}`)
+        .then(response => response.json())
+        .then(data => setLocations(data.list))
+        .catch(error => console.error('Error fetching locations:', error));
+    }
+  }, [inputValue]);
 
-const LocationInput = () => {
-  const locations = ["Yasamal", "Bayil", "Genclik"];
   const t = useTranslations();
-
   return (
     <FormControl marginBottom="16px" w="100%">
       <FormLabel marginBottom="16px" fontSize="18px">
@@ -42,6 +57,7 @@ const LocationInput = () => {
                 maxW="100%"
                 variant="filled"
                 placeholder={t("Common.location")}
+                onChange={(e:React.ChangeEvent<HTMLInputElement>) => setInputValue(e.target.value)}
               />
               <InputLeftElement
                 children={
@@ -65,13 +81,15 @@ const LocationInput = () => {
               />
             </InputGroup>
             <AutoCompleteList>
-              {locations.map((country, cid) => (
+              {locations.map((item, cid) => (
+
+  
                 <AutoCompleteItem
                   key={`option-${cid}`}
-                  value={country}
+                  value={item.city}
                   textTransform="capitalize"
                 >
-                  {country}
+                  {item.city}
                 </AutoCompleteItem>
               ))}
             </AutoCompleteList>

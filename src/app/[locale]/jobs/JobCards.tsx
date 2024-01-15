@@ -4,28 +4,44 @@ import { useTranslations } from "next-intl";
 import React, { useEffect, useState } from "react";
 import Card from "./Card";
 
-const JobCards = () => {
+interface IJobCards {
+  filterData: any;
+}
+const JobCards:React.FC<IJobCards> =  ({ filterData }) => {
+
   const t = useTranslations();
   const [allJobs, setAllJobs] = useState([]); 
-
+  console.log(filterData);
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const response = await fetch('https://neo-814m.onrender.com/v1/post/list');
+        // Construct the query parameters based on filterData
+        const queryParams = new URLSearchParams(filterData);
+
+        // Append the query parameters to the API endpoint
+        const apiUrl =
+          Object.keys(filterData).length > 0
+            ? `https://neo-814m.onrender.com/v1/post/list?${queryParams.toString()}`
+            : `https://neo-814m.onrender.com/v1/post/list`;
+
+        const response = await fetch(apiUrl);
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
+
         const data = await response.json();
-        console.log(data.list)
-        setAllJobs(data.list); 
+        console.log(data.list);
+        setAllJobs(data.list);
       } catch (error) {
         console.error('Fetching jobs failed:', error);
       }
     };
+
     fetchJobs();
-  }, []);
+  }, [filterData]);
 
 
+console.log(allJobs);
 
   
   return (

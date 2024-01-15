@@ -14,7 +14,7 @@ import {
 } from "@choc-ui/chakra-autocomplete";
 import { useTranslations } from "next-intl";
 import React, { Dispatch, SetStateAction, useState } from "react";
-import { EINDUSTRY } from "./EIndustry";
+import { EINDUSTRY } from "./enums";
 interface IJobCategory {
   setSelectedJobCategory:Dispatch<SetStateAction<string>>
 }
@@ -26,21 +26,21 @@ const JobCategories:React.FC<IJobCategory> = ({setSelectedJobCategory}) => {
 
   const handleCategorySelect = (label: string, originalValue: string) => {
     setInputValue(label);
-    setSelectedLabel(label); // Update the displayed label in UI
+    setSelectedLabel(label); 
     const selectedEntry = jobs.find(([key, val]) => val === originalValue);
     if (selectedEntry) {
     
-      setSelectedJobCategory(selectedEntry[1]); // Set the selected job category value
+      setSelectedJobCategory(selectedEntry[1]); 
     }
   };
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = event.target.value;
-    setInputValue(newValue); // Update input value as user types
+    setInputValue(newValue); 
 
     const found = jobs.some(([key, value]) => t(`Common.INDUSTRIES.${value}`) === newValue);
     if (!found && newValue === "") {
-      setSelectedLabel(""); // Reset if input is cleared
-      setSelectedJobCategory(""); // Reset job category selection
+      setSelectedLabel("");
+      setSelectedJobCategory(""); 
     }
   };
   return (

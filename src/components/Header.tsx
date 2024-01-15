@@ -78,7 +78,7 @@ function Header() {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Token: `${token}`, // Include the token in the Authorization header
+        Token: `${token}`,
       },
     };
 
