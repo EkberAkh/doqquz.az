@@ -48,9 +48,6 @@ const Profile = () => {
         // return phoneNumber.match("^[0-9]{10}$")
     }
 
-
-
-
     return (
         <Flex justify={'center'}>
             <Box mx='15px' width={'81%'}>
