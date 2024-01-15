@@ -21,14 +21,14 @@ const Profile = () => {
     
     async function fetchData() {
         try {
-            const response = await fetch(`https://neo-814m.onrender.com/v1/jobseeker/userId/${jobId}`);
+            const response = await fetch(`https://neo-814m.onrender.com/v1/user/${companyId}`);
             const data = await response.json();
             setData(data)
         } catch (error) {
             console.error(error);
         }
         try {
-            const response = await fetch(`https://neo-814m.onrender.com/v1/user/${jobId}`);
+            const response = await fetch(`https://neo-814m.onrender.com/v1/company/userId/${companyId}`);
             const data1 = await response.json();
             setData1(data1)
             console.log(data1);
@@ -67,11 +67,11 @@ const Profile = () => {
 
                             </Box>
 
-                            <Box w='87%'>
+                           {data && <Box w='87%'>
                                 <Flex columnGap='30px' mb='30px'>
                                     <Box w='50%'>
                                         <Text mb='20px' fontSize='1.3rem'>{t('Common.FormInputs.email.label')}</Text>
-                                        <Text>adsfgfh</Text>
+                                        <Text>{data.email}</Text>
                                     </Box>
 
                                     <Box w='50%'>
@@ -81,7 +81,7 @@ const Profile = () => {
 
                                 </Flex>
 
-                            </Box>
+                            </Box>}
                         </Flex>
                     </CardBody>
                 </Card>
@@ -98,27 +98,27 @@ const Profile = () => {
 
                     </CardHeader>
 
-                    <CardBody p='30px'>
+                  {data1 &&  <CardBody p='30px'>
                         <Flex >
 
                             <Box w='100%'>
                                 <Flex columnGap='30px' mb='30px' flexWrap='wrap'>
                                     <Box w='30%'>
                                         <Text mb='20px' fontSize='1.3rem'>{t('Profile.ProfileInfo.name')}</Text>
-                                        <Text mb='20px' fontSize='1.3rem'>ss</Text>
+                                        <Text mb='20px' fontSize='1.3rem'>{data1.name}</Text>
                                     </Box>
                                     <Box w='30%'>
-                                        <Text mb='20px' fontSize='1.3rem'>sdsfd</Text>
-                                        <Text mb='20px' fontSize='1.3rem'>dsfdg</Text>
+                                        <Text mb='20px' fontSize='1.3rem'> {t('Common.FormInputs.websiteUrl.label')}</Text>
+                                        <Text mb='20px' fontSize='1.3rem'>----</Text>
 
                                     </Box>
                                     <Box w='30%'>
-                                        <Text mb='20px' fontSize='1.3rem'>{t('Profile.ProfileInfo.birthday')}</Text>
+                                        <Text mb='20px' fontSize='1.3rem'> {t("Profile.ProfileInfo.establishmentDate")}</Text>
                                         <Text mb='20px' fontSize='1.3rem'>----</Text>
 
                                     </Box>
                                     <Box w='30%' mt='30px'>
-                                        <Text mb='20px' fontSize='1.3rem'>{t('Common.GENDER.label')}</Text>
+                                        <Text mb='20px' fontSize='1.3rem'>{t('Common.FormInputs.description.label')}</Text>
                                         <Text mb='20px' fontSize='1.3rem'>-----</Text>
                                     </Box>
                                 
@@ -127,6 +127,7 @@ const Profile = () => {
                             </Box>
                         </Flex>
                     </CardBody>
+}
                 </Card>
 
             </Box>
