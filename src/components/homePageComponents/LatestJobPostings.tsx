@@ -17,8 +17,8 @@ import ExperienceIcon from "@/icons/ExperienceIcon";
 import OclockIcon from "@/icons/OclockIcon";
 import { useEffect, useState } from "react";
 import { NavigationLink } from "../NavigationLink";
-import router, { useRouter } from "next/router";
 import { useCurrentLang } from "@/hooks";
+import { useRouter } from "next/navigation";
 interface ICardProps {
   title: string;
   id: number
@@ -32,7 +32,7 @@ interface ICardProps {
 export const LatestJobPostings = () => {
   const [currentJobId, setCurrentJobId] = useState<number>()
   const [currentJob, setCurrentJob] = useState([])
-
+const router = useRouter()
  
 
   const [hoverStates, setHoverStates] = useState<Record<number, boolean>>({});

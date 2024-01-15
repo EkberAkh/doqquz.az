@@ -10,6 +10,9 @@ interface Employee {
   lastName: string;
   expectedSalary: string;
   salaryType: string;
+  user:{
+    id:number
+  }
 
 }
 const Employees = () => {
@@ -49,7 +52,7 @@ const Employees = () => {
   }, [filterData]);
 
   
-  console.log(filterData);
+ 
   
   return (
     <Box display="flex" w="100%" flexWrap="wrap">
@@ -61,7 +64,7 @@ const Employees = () => {
         width="calc(100% - 379px)"
       >
    {employees.map((employee) =>(
-    <Card  key={employee.id} id={employee.id} firstName={employee.firstName} expectedSalary={employee.expectedSalary} lastName={employee.lastName} salaryType={employee.salaryType}/>
+    <Card  key={employee.id} id={employee.id} userId={employee.user.id} firstName={employee.firstName} expectedSalary={employee.expectedSalary} lastName={employee.lastName} salaryType={employee.salaryType}/>
    ))}
       </Grid>
     </Box>
