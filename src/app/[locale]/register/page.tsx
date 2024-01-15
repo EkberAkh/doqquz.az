@@ -8,14 +8,15 @@ import { PiUserListFill } from "react-icons/pi";
 import { FaRegBuilding } from "react-icons/fa";
 import { useForm } from 'react-hook-form';
 import { useTranslations } from "next-intl";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 interface RegisterProps { }
 
 interface FormData {
   firstName: string;
   lastName: string;
-  company?: string;
+  companyName: string;
   email: string;
   password: string;
 }
@@ -62,13 +63,24 @@ const Register: React.FC<RegisterProps> = () => {
     fetch("https://neo-814m.onrender.com/v1/auth/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(salam ? {...data,role} : { ...data, companyName, role })
+      body: JSON.stringify(salam ? {...data,role} : { ...data, role })
     })
     .then((res) => {
       if (!res.ok) {
         throw new Error(`HTTP error! Status: ${res.status}`);
       }
       return res.json();
+    }).then(() => {
+      toast.success(`🚀 Login successful!`, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     })
     .then((responseData) => {
       console.log('Response Data:', responseData);
@@ -187,7 +199,7 @@ const Register: React.FC<RegisterProps> = () => {
 
               </FormControl>
 
-              <FormControl isInvalid={!!errors.company}>
+              <FormControl isInvalid={!!errors.companyName}>
                 <InputGroup mt="30px " display={isVisible ? 'none' : 'block'}>
                   <InputLeftElement
                     p="25px 10px"
@@ -198,20 +210,20 @@ const Register: React.FC<RegisterProps> = () => {
 
                   </InputLeftElement>
                   <Input
-                  {...register('company', {
+                  {...register('companyName', {
                     required: salam ? false : 'This is required',  // Conditionally set the requirement
                     minLength: { value: 3, message: 'Minimum length should be 3' },
                   })}
-                    id='company'
+                    id='companyName'
                     placeholder={t("Common.FormInputs.companyName.placeholder")}
                     p="25px 70px"
                     onFocus={handleFocus_3}
                     onBlur={handleBlur_3}
                     />
                 </InputGroup>
-                {!isVisible && errors.company && (
+                {!isVisible && errors.companyName && (
                   <FormErrorMessage>
-                    {errors.company.message}
+                    {errors.companyName.message}
                   </FormErrorMessage>
                 )}
               </FormControl>
@@ -298,6 +310,18 @@ const Register: React.FC<RegisterProps> = () => {
 
 
         </Box>
+        <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
 
       </Box>
     </>
