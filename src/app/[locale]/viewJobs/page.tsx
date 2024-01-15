@@ -159,7 +159,7 @@ const ViewJobs = () => {
               <Text p="30px 40px 30px 0">{storedJob?.type}</Text>
               <Text fontWeight="bold">Tələb olunan bacarıqlar</Text>
               <Box p="30px 40px 0 0">
-                <Text></Text>
+              <Text>{storedJob?.skills && storedJob.skills.length > 0 ? storedJob.skills[0].name : ''}</Text>
               </Box>
               <Text fontWeight="bold" p="30px 40px 30px 0">
                 Müraciyyət üçün{" "}
@@ -241,7 +241,7 @@ const ViewJobs = () => {
               <LocationItem
                 icon={<BiDollarCircle color="blue" size="25px" />}
                 label="Maaş"
-                content={`${storedJob?.maxEstimatedBudget} ${storedJob?.currency}`}
+                content={`${storedJob?.maxEstimatedBudget ? storedJob.maxEstimatedBudget : ''} ${storedJob?.currency ? storedJob.currency : ''}`.trim()}
               />
               <LocationItem
                 icon={<GoClock color="blue" size="22px" />}

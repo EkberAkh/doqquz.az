@@ -71,8 +71,37 @@ function Header() {
     location.reload();
   };
 
+  async function fetchUserData() {
+    // Assuming you have the token stored in cookies
 
+    const requestOptions = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Token: `${token}`,
+      },
+    };
 
+    try {
+      const response = await fetch(
+        "https://neo-814m.onrender.com/v1/user",
+        requestOptions
+      );
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status}`);
+      }
+      const data = await response.json();
+      console.log(data.role);
+      setRole(data.role);
+      localStorage.setItem("role", data.role);
+      // Directly return the role and id from this function
+      Cookies.set("userId", data.id);
+
+      return { id: data.id, role: data.role };
+    } catch (error) {
+      console.error("There was an error fetching the user data:", error);
+    }
+  }
   async function fetchJobseekerData(id: number, role: string) {
     const url =
       role === "JOBSEEKER"

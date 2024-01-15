@@ -14,20 +14,21 @@ const Profile = () => {
     const t = useTranslations()
 
     const searchParams = useSearchParams();
-    const jobId = searchParams.get("jobId");
+    const companyId = searchParams.get("companyId");
+    console.log(companyId);
     const [data, setData] = useState(null); 
     const [data1,setData1] = useState(null)
     
     async function fetchData() {
         try {
-            const response = await fetch(`https://neo-814m.onrender.com/v1/jobseeker/userId/${jobId}`);
+            const response = await fetch(`https://neo-814m.onrender.com/v1/user/${companyId}`);
             const data = await response.json();
             setData(data)
         } catch (error) {
             console.error(error);
         }
         try {
-            const response = await fetch(`https://neo-814m.onrender.com/v1/user/${jobId}`);
+            const response = await fetch(`https://neo-814m.onrender.com/v1/company/userId/${companyId}`);
             const data1 = await response.json();
             setData1(data1)
             console.log(data1);
@@ -66,11 +67,11 @@ const Profile = () => {
 
                             </Box>
 
-                           {data1 && <Box w='87%'>
+                           {data && <Box w='87%'>
                                 <Flex columnGap='30px' mb='30px'>
                                     <Box w='50%'>
                                         <Text mb='20px' fontSize='1.3rem'>{t('Common.FormInputs.email.label')}</Text>
-                                        <Text>{data1.email}</Text>
+                                        <Text>{data.email}</Text>
                                     </Box>
 
                                     <Box w='50%'>
@@ -85,7 +86,7 @@ const Profile = () => {
                     </CardBody>
                 </Card>
 
-            {data && <Card marginTop='30px' boxShadow='0 6px 10px rgba(1, 0, 0, 0.2)'>
+             <Card marginTop='30px' boxShadow='0 6px 10px rgba(1, 0, 0, 0.2)'>
                     <CardHeader borderBottom='1px solid #e4e4e4' display='flex' alignItems='center' justifyContent='space-between'>
                         <Flex align={'center'}>
                             <MdOutlineFaceUnlock color='rgb(42, 65, 232)' fontSize='1.4em' />
@@ -97,93 +98,37 @@ const Profile = () => {
 
                     </CardHeader>
 
-                    <CardBody p='30px'>
+                  {data1 &&  <CardBody p='30px'>
                         <Flex >
 
                             <Box w='100%'>
                                 <Flex columnGap='30px' mb='30px' flexWrap='wrap'>
                                     <Box w='30%'>
                                         <Text mb='20px' fontSize='1.3rem'>{t('Profile.ProfileInfo.name')}</Text>
-                                        <Text mb='20px' fontSize='1.3rem'>{data.firstName}</Text>
+                                        <Text mb='20px' fontSize='1.3rem'>{data1.name}</Text>
                                     </Box>
                                     <Box w='30%'>
-                                        <Text mb='20px' fontSize='1.3rem'>Soyad</Text>
-                                        <Text mb='20px' fontSize='1.3rem'>{data.lastName}</Text>
+                                        <Text mb='20px' fontSize='1.3rem'> {t('Common.FormInputs.websiteUrl.label')}</Text>
+                                        <Text mb='20px' fontSize='1.3rem'>----</Text>
 
                                     </Box>
                                     <Box w='30%'>
-                                        <Text mb='20px' fontSize='1.3rem'>{t('Profile.ProfileInfo.birthday')}</Text>
+                                        <Text mb='20px' fontSize='1.3rem'> {t("Profile.ProfileInfo.establishmentDate")}</Text>
                                         <Text mb='20px' fontSize='1.3rem'>----</Text>
 
                                     </Box>
                                     <Box w='30%' mt='30px'>
-                                        <Text mb='20px' fontSize='1.3rem'>{t('Common.GENDER.label')}</Text>
+                                        <Text mb='20px' fontSize='1.3rem'>{t('Common.FormInputs.description.label')}</Text>
                                         <Text mb='20px' fontSize='1.3rem'>-----</Text>
                                     </Box>
-                                    <Box w='30%' mt='30px'>
-                                        <Text mb='20px' fontSize='1.3rem'>{t('Common.SalaryType.label')}</Text>
-                                        <Text mb='20px' fontSize='1.3rem'>-----</Text>
-                                    </Box>
-                                    <Box w='30%' mt='30px'>
-                                        <Text mb='20px' fontSize='1.3rem'>{t('Profile.ProfileInfo.expectedSalary')}</Text>
-                                        <Text mb='20px' fontSize='1.3rem'>-----</Text>
-                                    </Box>
+                                
                                 </Flex>
 
                             </Box>
                         </Flex>
                     </CardBody>
-                </Card>
 }
-
-                <Card mt={'30px'} boxShadow='0 6px 10px rgba(1, 0, 0, 0.2)'>
-                    <CardHeader borderBottom='1px solid #e4e4e4'>
-                        <Flex align={'center'}>
-                            <MdOutlineDesktopMac color='rgb(42, 65, 232)' fontSize='1.4em' />
-                            <Heading ml={'8px'} fontSize='1rem' fontWeight={700}> {t('Profile.titles.education')}</Heading>
-                        </Flex>
-                    </CardHeader>
-                    <CardBody>
-                        <Center flexDir={'column'}>
-                            <Text m={'2rem 0 1.5rem'}>Bu bölmədə heç bir qeyd yoxdur</Text>
-
-                        </Center>
-                    </CardBody>
                 </Card>
-
-
-                <Card mt={'30px'} boxShadow='0 6px 10px rgba(1, 0, 0, 0.2)'>
-                    <CardHeader borderBottom='1px solid #e4e4e4'>
-                        <Flex align={'center'}>
-                            <MdOutlineLibraryBooks color='rgb(42, 65, 232)' fontSize='1.4em' />
-                            <Heading ml={'8px'} fontSize='1rem' fontWeight={700}> {t('Profile.titles.experience')}</Heading>
-                        </Flex>
-                    </CardHeader>
-                    <CardBody>
-                        <Center flexDir={'column'}>
-                            <Text m={'2rem 0 1.5rem'}>Bu bölmədə heç bir qeyd yoxdur</Text>
-
-                        </Center>
-                    </CardBody>
-                </Card>
-
-
-                <Card mt={'30px'} boxShadow='0 6px 10px rgba(1, 0, 0, 0.2)'>
-                    <CardHeader borderBottom='1px solid #e4e4e4'>
-                        <Flex align={'center'}>
-                            <MdOutlineDesktopMac color='rgb(42, 65, 232)' fontSize='1.4em' />
-                            <Heading ml={'8px'} fontSize='1rem' fontWeight={700}> {t('Profile.titles.portfolio')}</Heading>
-                        </Flex>
-                    </CardHeader>
-                    <CardBody>
-                        <Center flexDir={'column'}>
-                            <Text m={'2rem 0 1.5rem'}>Bu bölmədə heç bir qeyd yoxdur</Text>
-
-                        </Center>
-                    </CardBody>
-                </Card>
-
-
 
             </Box>
             <ScrollToTop />

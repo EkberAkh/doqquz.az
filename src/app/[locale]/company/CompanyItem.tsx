@@ -1,16 +1,20 @@
 'use client'
 import CompanyIcon from '@/icons/CompanyIcon'
 import { Card, CardBody, Center, Flex, Spinner, Text } from '@chakra-ui/react'
+import { useRouter } from 'next/navigation'
 import React from 'react'
 
 const CompanyItem = ({companies}) => {
     // const [isLoading, setIsLoading] = useState(false);
-
+const router = useRouter()
     return (
         <Flex gap={'1.875rem'} mt={'1.875rem'} flexWrap={'wrap'}>
 
             {companies.map((company) =>
                 <Card
+                onClick={()=>{
+                    router.push(`viewCompany?companyId=${encodeURIComponent(company.user.id)}`)
+                }}
                     key={company.id}
                     align='center'
                     boxShadow={'0 2px 10px rgba(0,0,0,.1)'}

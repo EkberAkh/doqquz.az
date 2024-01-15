@@ -10,12 +10,16 @@ import { DJobSeekers } from "../data/DJobSeekers";
 import { useTranslations } from "next-intl";
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 import { IoIosArrowRoundForward } from "react-icons/io";
+import { useRouter } from "next/navigation";
+import { useCurrentLang } from "@/hooks";
 
 
 export const LatestJobSeekers = () => {
 
     const t = useTranslations()
     const MotionBox = motion(Box);
+    const router = useRouter()
+    const lang = useCurrentLang()
     const textVariants = {
         hidden: { opacity: 0 },
         visible: { opacity: 1 },
@@ -54,6 +58,8 @@ export const LatestJobSeekers = () => {
         
         fetchData();
     }, []);
+
+   
     return (
         <Flex justify={'center'}>
             <Box paddingX='24px' paddingBottom='80px' width={'90%'}>
@@ -93,7 +99,9 @@ export const LatestJobSeekers = () => {
                                                 <Text>{seeker.salary}</Text>
                                             </Box>
                                         </Flex>
-                                        <Button w='100%' bg={'#2a41e8'} color={'#fff'} variant='primary' height='48px' >{t('Home.RegisteredJobseekers.actions.viewProfile')}</Button>
+                                        <Button onClick={()=>{
+                                            router.push(`${lang}/profile?jobId=${encodeURIComponent(seeker.user.id)}`)
+                                        }} w='100%' bg={'#2a41e8'} color={'#fff'} variant='primary' height='48px' >{t('Home.RegisteredJobseekers.actions.viewProfile')}</Button>
                                     </Box>
 
                                 </Center>
