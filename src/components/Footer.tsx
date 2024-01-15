@@ -32,7 +32,7 @@ export const Footer = () => {
   const [selectedLanguage, setSelectedLanguage] = useState("Azərbaycanca");
   const router = useRouter();
   const currentPath = usePathname();
-  let role = typeof window !== "undefined" && localStorage.getItem("role");
+  let role = localStorage.getItem("role");
 
   useEffect(() => {
     if (currentPath.startsWith("/en")) {
