@@ -3,10 +3,12 @@ import { Button, Flex, Grid, Text } from "@chakra-ui/react";
 import { useTranslations } from "next-intl";
 import React, { useEffect, useState } from "react";
 import Card from "./Card";
+
 interface IJobCards {
   filterData: any;
 }
 const JobCards:React.FC<IJobCards> =  ({ filterData }) => {
+
   const t = useTranslations();
   const [allJobs, setAllJobs] = useState([]); 
   console.log(filterData);
@@ -87,7 +89,7 @@ console.log(allJobs);
         </Button>
       </Flex> */}
 
-      
+
       {/* <Flex
         justifyContent="center"
         alignItems="center"
