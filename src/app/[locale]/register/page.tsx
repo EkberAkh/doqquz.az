@@ -1,43 +1,29 @@
-"use client";
-import React from "react";
-import {
-  Box,
-  Button,
-  Flex,
-  FormControl,
-  Text,
-  InputGroup,
-  InputLeftElement,
-  Input,
-  FormErrorMessage,
-} from "@chakra-ui/react";
-import { FaUser, FaArrowRight, FaRegEnvelope } from "react-icons/fa";
-import { useState } from "react";
-import { Icon, LockIcon } from "@chakra-ui/icons";
+'use client'
+import React from 'react'
+import { Box, Button, Flex, FormControl, Text, InputGroup, InputLeftElement, Input, FormErrorMessage, Link } from '@chakra-ui/react'
+import { FaUser, FaArrowRight, FaRegEnvelope } from 'react-icons/fa'
+import { useState } from 'react'
+import { Icon, LockIcon } from '@chakra-ui/icons'
 import { PiUserListFill } from "react-icons/pi";
 import { FaRegBuilding } from "react-icons/fa";
-import Link from "next/link";
+import { useForm } from 'react-hook-form';
 import { useTranslations } from "next-intl";
-import ScrollToTop from "@/components/ScrollToTop";
-
-import { basicSchema } from "./const";
-import { useFormik } from "formik"
-
-import { NavigationLink } from "@/components/NavigationLink";
-
-interface RegisterProps {}
 
 
+interface RegisterProps { }
 
 interface FormData {
-  name: string;
-  surname: string;
+  firstName: string;
+  lastName: string;
   company?: string;
   email: string;
   password: string;
 }
 
+
 const Register: React.FC<RegisterProps> = () => {
+  const t = useTranslations();
+
   const [isFocused, setIsFocused] = useState(false);
   const [isFocused2, setIsFocused2] = useState(false);
   const [isFocused3, setIsFocused3] = useState(false);
@@ -56,223 +42,198 @@ const Register: React.FC<RegisterProps> = () => {
   const handleBlur_4 = () => setIsFocused4(false);
   const handleFocus_5 = () => setIsFocused5(true);
   const handleBlur_5 = () => setIsFocused5(false);
-  const backgroundColor = isFocused ? "blue" : "gray";
-  const backgroundColor2 = isFocused2 ? "blue" : "gray";
-  const backgroundColor3 = isFocused3 ? "blue" : "gray";
-  const backgroundColor4 = isFocused4 ? "blue" : "gray";
-  const backgroundColor5 = isFocused5 ? "blue" : "gray";
+  const backgroundColor = isFocused ? 'blue' : 'gray';
+  const backgroundColor2 = isFocused2 ? 'blue' : 'gray';
+  const backgroundColor3 = isFocused3 ? 'blue' : 'gray';
+  const backgroundColor4 = isFocused4 ? 'blue' : 'gray';
+  const backgroundColor5 = isFocused5 ? 'blue' : 'gray';
 
-  const t = useTranslations();
- 
+
+  const [companyName,setCompanyName] = useState("")
+
+  const [role,setRole] = useState("JOBSEEKER");
+
+  const [salam,setSalam] = useState(true)
+
   const [isVisible, setIsVisible] = useState(true);
+  function onSubmit(data: FormData) {
+    console.log('Form Data:', data);
+  
+    fetch("https://neo-814m.onrender.com/v1/auth/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(salam ? {...data,role} : { ...data, companyName, role })
+    })
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error(`HTTP error! Status: ${res.status}`);
+      }
+      return res.json();
+    })
+    .then((responseData) => {
+      console.log('Response Data:', responseData);
+      // Handle the response data as needed
+    })
+    .catch((error) => {
+      console.error("Error during fetch:", error);
+      // Handle errors
+    });
+  }
 
 
-  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const toggleVisibility = () => {
-    
     setIsVisible(false);
-
-    setSalam(false)
     setRole("COMPANY")
-
+    setSalam(false)
   };
 
   const toggleVisibility1 = () => {
     setIsVisible(true);
-
+    setRole("JOBSEEKER");
     setSalam(true)
-    setRole("JOBSEEKER")
   };
-
-  function onSubmit() {
-    console.log(values);
-    fetch("https://neo-814m.onrender.com/v1/auth/register", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({ ...values, role })
-    }).then((res) => {
-      console.log(res);
-    });
-
-    setIsSubmitted(true); // Set the form as submitted
-  }
-  const { values, handleChange, handleSubmit, errors } = useFormik({
-    initialValues: {
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: '',
-    },
-    validationSchema: basicSchema,
-    onSubmit,
-  });
-
-
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm<FormData>();
+  
 
   return (
     <>
       <Box bg="white" w="600px" m="auto" pb="30px">
         <Flex>
-          <Text
-            p="15px 60px"
-            color="gray.500"
-            cursor="pointer"
-            _hover={{ color: "black" }}
-          >
-            <NavigationLink href="/login">
-              {t("Auth.tabs.login")}
-            </NavigationLink>
+          <Text p="15px 60px" color="black.300" cursor="pointer" _hover={{ color: "black" }}><Link href="/az/login">{t("Auth.tabs.login")}</Link>
           </Text>
-          <Text
-            p="15px 60px"
-            borderBottom="2px solid blue"
-            color="blue"
-            cursor="pointer"
-            _hover={{ color: "black" }}
-          >
-            {t("Auth.tabs.register")}
-          </Text>
+          <Text p="15px 60px" borderBottom="2px solid blue" color="blue" cursor="pointer" _hover={{ color: "black" }} >  {t("Auth.tabs.register")}</Text>
         </Flex>
 
-        <Text fontSize="26px" mt="30px" textAlign="center" fontWeight="bold">
-          {t("Auth.Register.title")}
-        </Text>
+        <Text fontSize="26px" mt="30px" textAlign="center" fontWeight="bold">{t("Auth.Register.title")}</Text>
         <Box w="490px" m="auto">
           <Flex justifyContent="space-between" mt="30px">
-            {/* <Button
+            <Button
               w="240px"
               onClick={toggleVisibility1}
-              color={isVisible ? "blue" : "gray"}
-              bg={isVisible ? "gray.200" : "white"}
+              color={isVisible ? 'blue' : 'gray'}
+              bg={isVisible ? 'gray.200' : 'white'}
               _hover={{ bg: "gray.200", color: "blue" }}
-            >
-              {t("Common.Role.JOBSEEKER")}
-            </Button> */}
-            <Link href="" >istifadeci</Link>
+            > {t("Common.Role.JOBSEEKER")}</Button>
 
-            {/* <Button
+            <Button
               w="240px"
               onClick={toggleVisibility}
-              color={isVisible ? "gray" : "blue"}
-              bg={isVisible ? "white" : "gray.200"}
+              color={isVisible ? 'gray' : 'blue'}
+              bg={isVisible ? 'white' : 'gray.200'}
               _hover={{ bg: "gray.200", color: "blue" }}
-              {t("Common.Role.COMPANY")}
-            </Button>
-            > */}
-              <Link href="/az/register-company">sirket</Link>
+            > {t("Common.Role.COMPANY")}</Button>
           </Flex>
 
-          <form onSubmit={(e) => { setIsSubmitted(true); handleSubmit(e); }} autoComplete='off'>
-            <FormControl>
-              <InputGroup mt="30px">
+          <form  onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
+            <FormControl isInvalid={!!errors.firstName} >
+              <InputGroup mt="30px" >
                 <InputLeftElement
-                  w="50px"
-                  backgroundColor="#eee"
-                  borderRadius="5px"
                   p="25px 10px"
                   borderRight="1px solid white"
-                  pointerEvents="none"
-                >
+                  pointerEvents="none" >
                   <FaUser color={backgroundColor} />
                 </InputLeftElement>
 
                 <Input
-
-                  value={values.firstName}
-                  onChange={handleChange}
-                  id="firstName"
+                  {...register('firstName', {
+                    required: 'This is required',
+                    minLength: { value: 3, message: 'Minimum length should be 3' },
+                  })}
+                  id='firstName'
                   placeholder={t("Common.FormInputs.firstName.placeholder")}
                   p="25px 70px"
                   onFocus={handleFocus}
                   onBlur={handleBlur}
-
                 />
               </InputGroup>
-
+              <FormErrorMessage>
+                {errors.firstName && errors.firstName.message}
+              </FormErrorMessage>
             </FormControl>
-            {isSubmitted && errors.firstName && <Text color="red" mt="5px">{errors.firstName}</Text>}
 
             <FormControl>
               {/* nezere alinacaq */}
-              <FormControl>
+              <FormControl isInvalid={!!errors.lastName} >
+
                 <InputGroup mt="30px">
                   <InputLeftElement
-                    w="50px"
-                    backgroundColor="#eee"
-                    borderRadius="5px"
                     p="25px 10px"
                     borderRight="1px solid white"
                     pointerEvents="none"
                   >
-                    <PiUserListFill size={20} color={backgroundColor2} />
+                    <PiUserListFill size={60} color={backgroundColor2} />
                   </InputLeftElement>
 
                   <Input
-
-                    value={values.lastName}
-                    onChange={handleChange}
-                    id="lastName"
-                    type="text"
+                    {...register('lastName', {
+                      required: 'This is required',
+                      minLength: { value: 3, message: 'Minimum length should be 3' },
+                    })}
+                    id='lastName'
                     placeholder={t("Common.FormInputs.lastName.placeholder")}
                     p="25px 70px"
                     onFocus={handleFocus_2}
                     onBlur={handleBlur_2}
-
-                  />
+                    />
                 </InputGroup>
+                <FormErrorMessage>
+                  {errors.lastName && errors.lastName.message}
+                </FormErrorMessage>
 
               </FormControl>
-              {isSubmitted && errors.lastName && <Text color="red" mt="5px">{errors.lastName}</Text>}
 
-              {/* <FormControl >
-                <InputGroup mt="30px " display={isVisible ? "none" : "block"}>
+              <FormControl isInvalid={!!errors.company}>
+                <InputGroup mt="30px " display={isVisible ? 'none' : 'block'}>
                   <InputLeftElement
-                    w="50px"
-                    backgroundColor="#eee"
-                    borderRadius="5px"
                     p="25px 10px"
                     borderRight="1px solid white"
                     pointerEvents="none"
                   >
-                    <FaRegBuilding size={20} color={backgroundColor3} />
+                    <FaRegBuilding size={60} color={backgroundColor3} />
+
                   </InputLeftElement>
                   <Input
-
-                    value={values.companyName}
-                    onChange={handleChange}
-                    id="companyName"
-                    type="text"
+                  {...register('company', {
+                    required: salam ? false : 'This is required',  // Conditionally set the requirement
+                    minLength: { value: 3, message: 'Minimum length should be 3' },
+                  })}
+                    id='company'
                     placeholder={t("Common.FormInputs.companyName.placeholder")}
                     p="25px 70px"
                     onFocus={handleFocus_3}
                     onBlur={handleBlur_3}
-                  />
+                    />
                 </InputGroup>
-                {!isVisible && errors.companyName && <Text color="red" mt="5px">{errors.companyName}</Text>}
+                {!isVisible && errors.company && (
+                  <FormErrorMessage>
+                    {errors.company.message}
+                  </FormErrorMessage>
+                )}
+              </FormControl>
 
-
-              </FormControl> */}
-
-              <FormControl >
+              <FormControl isInvalid={!!errors.email}>
                 <InputGroup mt="30px">
                   <InputLeftElement
-                    w="50px"
-                    backgroundColor="#eee"
-                    borderRadius="5px"
                     p="25px 10px"
                     borderRight="1px solid white"
-                    pointerEvents="none"
-                  >
+                    pointerEvents="none" >
                     <FaRegEnvelope color={backgroundColor4} />
+
                   </InputLeftElement>
 
                   <Input
-
-                    value={values.email}
-                    onChange={handleChange}
-                    id="email"
-                    type="email"
+                    {...register('email', {
+                      required: 'This is required',
+                      validate: {
+                        containsAt: (value) => value.includes("@") && value.includes('.') || 'Format yalnisdir',
+                      },
+                    })}
+                    id='email'
                     placeholder="example@gmail.com"
                     onFocus={handleFocus_4}
                     onBlur={handleBlur_4}
@@ -280,16 +241,15 @@ const Register: React.FC<RegisterProps> = () => {
 
                   />
                 </InputGroup>
-
+                <FormErrorMessage>
+                  {errors.email && errors.email.message}
+                </FormErrorMessage>
               </FormControl>
-              {isSubmitted && errors.email && <Text color="red" mt="5px">{errors.email}</Text>}
 
-              <FormControl >
+              <FormControl isInvalid={!!errors.password}>
+
                 <InputGroup mt="30px">
                   <InputLeftElement
-                    w="50px"
-                    backgroundColor="#eee"
-                    borderRadius="5px"
                     p="25px 10px"
                     borderRight="1px solid white"
                     pointerEvents="none"
@@ -297,47 +257,51 @@ const Register: React.FC<RegisterProps> = () => {
                     <LockIcon color={backgroundColor5} />
                   </InputLeftElement>
                   <Input
-
-                    value={values.password}
-                    onChange={handleChange}
-
-                    id="password"
+                    {...register('password', {
+                      required: 'This is required',
+                      minLength: { value: 6, message: 'Minimum length should be 6' },
+                      validate: {
+                        containsLetterAndNumber: (value) =>
+                          /[a-z]/.test(value) && /[0-9]/.test(value) || 'Password must contain both letters (a-z) and numbers (0-9)',
+                      },
+                    })}
+                    id='password'
                     type="password"
                     placeholder={t("Common.FormInputs.password.placeholder")}
                     p="25px 70px"
-
                     onFocus={handleFocus_5}
                     onBlur={handleBlur_5}
-
                   />
                 </InputGroup>
-                {isSubmitted && errors.password && <Text color="red" mt="5px">{errors.password}</Text>}
-              
+                <FormErrorMessage>
+                  {errors.password && errors.password.message}
+                </FormErrorMessage>
               </FormControl>
-              <Box
-                mt="30px"
-                // onMouseEnter={() => setIsHovered(true)}
-                // onMouseLeave={() => setIsHovered(false)}
-              ></Box>
+              <Box mt="30px"
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}>
+                <Button
+                  w="450px"
+                  backgroundColor="blue"
+                  color="white"
+                  p="25px"
+                  type='submit'
+                  _hover={{ backgroundColor: "blue" }}
+                >
+                  {t("Auth.Register.actions.register")}
+                  {isHovered && <Icon as={FaArrowRight} />}
+                </Button>
+              </Box>
             </FormControl>
-              <Button
-                type="submit"
-                w="450px"
-                backgroundColor="blue"
-                color="white"
-                p="25px"
-                _hover={{ backgroundColor: "blue" }}
-              >
-                {t("Auth.Register.actions.register")}
-                {isHovered && <Icon as={FaArrowRight} />}
-              </Button>
+
           </form>
+
+
         </Box>
-        <ScrollToTop />
+
       </Box>
     </>
-  );
-};
+  )
+}
 
 export default Register;
-

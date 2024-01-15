@@ -3,12 +3,14 @@ import { Avatar, Box, Button, GridItem, Img, Text } from "@chakra-ui/react";
 import { useTranslations } from "next-intl";
 import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
 interface ICardProps {
   id: number;
   firstName: string;
   lastName: string;
   expectedSalary: string;
   salaryType: string;
+  userId:number;
 }
 const Card: React.FC<ICardProps> = ({
   id,
@@ -16,12 +18,14 @@ const Card: React.FC<ICardProps> = ({
   lastName,
   expectedSalary,
   salaryType,
+  userId
 }) => {
   const [isFav, setIsFav] = useState<boolean>(
     localStorage.getItem(`fav-${id}`) === "true"
   );
   const [isHover, setisHover] = useState<boolean>(false);
   const [bookmarkId, setBookmarkId] = useState<number | null>(null);
+  const router = useRouter()
   useEffect(() => {
     // Update local storage when isFav changes
     localStorage.setItem(`fav-${id}`, isFav.toString());
@@ -152,6 +156,9 @@ const Card: React.FC<ICardProps> = ({
           </Box>
         </Box>
         <Button
+        onClick={()=>{
+          router.push(`profile?jobId=${encodeURIComponent(userId)}`)
+        }}
           onMouseLeave={() => {
             setisHover(false);
           }}
