@@ -92,7 +92,7 @@ const Card: React.FC<ICardProps> = ({
   };
   return (
     <GridItem
-  
+
       maxHeight="210px"
       boxShadow="0 2px 18px rgba(0,0,0,.14)"
     >
@@ -105,12 +105,12 @@ const Card: React.FC<ICardProps> = ({
       >
         <Flex gap="20px" alignItems="center">
           <Avatar size="md" />
-      
-          <Box cursor="pointer"  onClick={clickHandler} display="flex" flexDirection="column" alignItems="flex-start">
-            <Text  as="h4" color="grey" fontSize="16px">
+
+          <Box cursor="pointer" onClick={clickHandler} display="flex" flexDirection="column" alignItems="flex-start">
+            <Text as="h4" color="grey" fontSize="16px">
               {companyName}
             </Text>
-            <Text    as="h3" fontSize="18px" fontWeight="bold">
+            <Text as="h3" fontSize="18px" fontWeight="bold">
               {title}
             </Text>
           </Box>

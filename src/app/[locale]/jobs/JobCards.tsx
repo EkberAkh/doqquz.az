@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 import React, { useEffect, useState } from "react";
 import Card from "./Card";
 
-const JobCards =  () => {
+const JobCards = () => {
   const t = useTranslations();
   const [allJobs, setAllJobs] = useState([]); 
 
@@ -73,7 +73,7 @@ const JobCards =  () => {
         </Button>
       </Flex> */}
 
-      
+
       {/* <Flex
         justifyContent="center"
         alignItems="center"
