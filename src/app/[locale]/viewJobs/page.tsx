@@ -9,7 +9,6 @@ import { FaTwitter } from "react-icons/fa";
 import { FaTelegram } from "react-icons/fa6";
 import { FaFacebookF } from "react-icons/fa";
 import { BsBagPlus } from "react-icons/bs";
-import { useParams } from "react-router-dom";
 import { useSearchParams } from "next/navigation";
 import Cookies from "js-cookie";
 interface YourJobType {
