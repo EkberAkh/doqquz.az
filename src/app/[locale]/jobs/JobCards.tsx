@@ -6,12 +6,9 @@ import Card from "./Card";
 
 const JobCards = () => {
   const t = useTranslations();
-  const [allJobs, setAllJobs] = useState([]); // Store all jobs
-  const [currentPageJobs, setCurrentPageJobs] = useState([]); // Jobs to display on current page
-  const [currentPage, setCurrentPage] = useState(1);
-  const jobsPerPage = 8; // Number of jobs per page
+  const [allJobs, setAllJobs] = useState([]); 
+
   useEffect(() => {
-    // Function to fetch job data
     const fetchJobs = async () => {
       try {
         const response = await fetch('https://neo-814m.onrender.com/v1/post/list');
@@ -19,8 +16,8 @@ const JobCards = () => {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const data = await response.json();
-        setAllJobs(data.list); // Assuming 'list' contains all jobs
-        setCurrentPageJobs(data.list.slice(0, jobsPerPage)); // Set initial page
+        console.log(data.list)
+        setAllJobs(data.list); 
       } catch (error) {
         console.error('Fetching jobs failed:', error);
       }
@@ -28,15 +25,9 @@ const JobCards = () => {
     fetchJobs();
   }, []);
 
-  const changePage = (newPage: number) => {
-    const startIndex = (newPage - 1) * jobsPerPage;
-    const endIndex = startIndex + jobsPerPage;
-    setCurrentPageJobs(allJobs.slice(startIndex, endIndex));
-    setCurrentPage(newPage);
-  };
 
-  const totalPages = Math.ceil(allJobs.length / jobsPerPage);
-  console.log('currentPageJobs', currentPageJobs)
+
+  
   return (
     <>
       <Grid
@@ -45,22 +36,22 @@ const JobCards = () => {
         gap="14px"
         width="calc(100% - 379px)"
       >
-
-        {currentPageJobs.map((job: any) => (
-          <Card
-            id={job.id}
-            key={job.id}
-            title={job.title}
-            minEstimatedBudget={job.minEstimatedBudget}
-            maxEstimatedBudget={job.maxEstimatedBudget}
-            type={job.type}
-            currency={job.currency}
-            createdAt={job.createdAt}
-            companyName={job.companyName}
-            city={job.location.city}
-          />
-        ))}
-
+      
+       {allJobs.map((job:any) => (
+        <Card
+        id={job.id}
+          key={job.id}
+          title={job.title}
+          minEstimatedBudget={job.minEstimatedBudget}
+          maxEstimatedBudget={job.maxEstimatedBudget}
+          type={job.type}
+          currency={job.currency}
+          createdAt={job.createdAt}
+          companyName={job.company[0].name}
+          city={job.location.city}
+        />
+      ))}
+     
       </Grid>
       {/* <Flex justifyContent="center" alignItems="center" marginTop="20px">
         <Button

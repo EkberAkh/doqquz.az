@@ -13,9 +13,12 @@ import {
   AutoCompleteList,
 } from "@choc-ui/chakra-autocomplete";
 import { useTranslations } from "next-intl";
-import React from "react";
-
-const CurrencyType = () => {
+import React, { Dispatch, SetStateAction } from "react";
+interface ICurrency {
+  selectedCurrency:string;
+  setSelectedCurrency: Dispatch<SetStateAction<string>>;
+}
+const CurrencyType:React.FC<ICurrency> = ({ selectedCurrency, setSelectedCurrency }) => {
   const t = useTranslations();
   const currencies = ["AZN", "TL", "USD", "EUR", "STR"];
 
@@ -24,7 +27,7 @@ const CurrencyType = () => {
       <FormLabel marginBottom="16px" fontSize="18px">
         {t("Common.Currency.label")}
       </FormLabel>
-      <AutoComplete openOnFocus>
+      <AutoComplete  onChange={setSelectedCurrency} openOnFocus>
         {({ isOpen }: any) => (
           <>
             <InputGroup>
@@ -52,19 +55,6 @@ const CurrencyType = () => {
                   />
                 }
               />
-
-              {/* <InputRightElement
-              children={
-                <Icon
-                  marginRight="65px"
-                  cursor="pointer"
-                  marginTop="5px"
-                  fontSize="12px"
-                  color="gray"
-                  as={CloseButton}
-                />
-              }
-            /> */}
             </InputGroup>
             <AutoCompleteList>
               {currencies.map((currency, cid) => (

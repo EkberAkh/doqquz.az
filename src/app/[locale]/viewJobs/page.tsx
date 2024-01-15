@@ -1,6 +1,6 @@
 "use client";
 import { Box, Flex, Text, Button } from "@chakra-ui/react";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { BiDollarCircle } from "react-icons/bi";
 import { GoClock } from "react-icons/go";

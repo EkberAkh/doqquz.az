@@ -18,8 +18,7 @@ import PlaceIcon from "@/icons/PlaceIcon";
 import ExperienceIcon from "@/icons/ExperienceIcon";
 import OclockIcon from "@/icons/OclockIcon";
 import { useEffect, useState } from "react";
-import { useRouter } from 'next/navigation';
-import { useCurrentLang } from "@/hooks";
+import { NavigationLink } from "../NavigationLink";
 interface ICardProps {
   title: string;
   id: number
@@ -33,6 +32,7 @@ interface ICardProps {
 export const LatestJobPostings = () => {
   const [currentJobId, setCurrentJobId] = useState<number>()
   const [currentJob, setCurrentJob] = useState([])
+  
   const router = useRouter();
 
   const [hoverStates, setHoverStates] = useState<Record<number, boolean>>({});
@@ -101,7 +101,7 @@ export const LatestJobPostings = () => {
             fontSize="1rem"
             mr={"0.7rem"}
           >
-            {t("Home.JobAnnouncement.actions.shortLink")}
+            <NavigationLink href='/jobs'>{t("Home.JobAnnouncement.actions.shortLink")}</NavigationLink>
             <ArrowRightIcon width={"25"} height={"25"} />
           </Text>
         </Flex>

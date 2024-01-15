@@ -1,8 +1,8 @@
-import { StarIcon } from '@chakra-ui/icons';
-import { Avatar, Box, Flex, GridItem, Img, Text } from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react'
+import { StarIcon } from "@chakra-ui/icons";
+import { Avatar, Box, Flex, GridItem, Img, Text } from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 
 interface ICardProps {
   companyName: string;
@@ -14,11 +14,20 @@ interface ICardProps {
   currency: string;
   createdAt: string;
   id: number;
-
 }
 
-const Card: React.FC<ICardProps> = ({ id, companyName, title, city, type, minEstimatedBudget, maxEstimatedBudget, currency, createdAt }) => {
-  const initialIsFav = localStorage.getItem(`fav-jobs-${id}`) === 'true';
+const Card: React.FC<ICardProps> = ({
+  id,
+  companyName,
+  title,
+  city,
+  type,
+  minEstimatedBudget,
+  maxEstimatedBudget,
+  currency,
+  createdAt,
+}) => {
+  const initialIsFav = localStorage.getItem(`fav-jobs-${id}`) === "true";
   const [isFav, setIsFav] = useState<boolean>(initialIsFav);
   const [bookmarkId, setBookmarkId] = useState<number | null>(null);
   useEffect(() => {
@@ -77,14 +86,16 @@ const Card: React.FC<ICardProps> = ({ id, companyName, title, city, type, minEst
       console.error("Error in updating bookmark:", error);
     }
   };
-  const router = useRouter()
+  const router = useRouter();
   const clickHandler = () => {
-    router.push(`viewJobs?jobId=${encodeURIComponent(id)}`)
-  }
-
-
+    router.push(`viewJobs?jobId=${encodeURIComponent(id)}`);
+  };
   return (
-    <GridItem onClick={clickHandler} cursor='pointer' maxHeight="210px" boxShadow="0 2px 18px rgba(0,0,0,.14)">
+    <GridItem
+
+      maxHeight="210px"
+      boxShadow="0 2px 18px rgba(0,0,0,.14)"
+    >
       <Box
         backgroundColor="white"
         height="55%"
@@ -94,11 +105,8 @@ const Card: React.FC<ICardProps> = ({ id, companyName, title, city, type, minEst
       >
         <Flex gap="20px" alignItems="center">
           <Avatar size="md" />
-          <Box
-            display="flex"
-            flexDirection="column"
-            alignItems="flex-start"
-          >
+
+          <Box cursor="pointer" onClick={clickHandler} display="flex" flexDirection="column" alignItems="flex-start">
             <Text as="h4" color="grey" fontSize="16px">
               {companyName}
             </Text>
@@ -139,11 +147,7 @@ const Card: React.FC<ICardProps> = ({ id, companyName, title, city, type, minEst
         <Box display="flex" gap="22px">
           <Box display="flex" flexDirection="column">
             <Box gap="5px" alignItems="center" display="flex">
-              <Img
-                height="16px"
-                width="16px"
-                src="../../../images/image.png"
-              />
+              <Img height="16px" width="16px" src="../../../images/image.png" />
               <Text color="#777" fontSize="14px">
                 {city}
               </Text>
@@ -177,11 +181,7 @@ const Card: React.FC<ICardProps> = ({ id, companyName, title, city, type, minEst
           </Box>
           <Box display="flex" flexDirection="column">
             <Box gap="10px" alignItems="center" display="flex">
-              <Img
-                height="16px"
-                width="16px"
-                src="../../../images/clock.png"
-              />
+              <Img height="16px" width="16px" src="../../../images/clock.png" />
               <Text color="#777" fontSize="14px">
                 {createdAt}
               </Text>
@@ -190,7 +190,7 @@ const Card: React.FC<ICardProps> = ({ id, companyName, title, city, type, minEst
         </Box>
       </Box>
     </GridItem>
-  )
-}
+  );
+};
 
-export default Card
+export default Card;

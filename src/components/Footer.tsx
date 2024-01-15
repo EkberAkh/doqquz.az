@@ -31,37 +31,33 @@ export const Footer = () => {
   const t = useTranslations();
   const [selectedLanguage, setSelectedLanguage] = useState("Azərbaycanca");
   const router = useRouter();
-  const currentPath = usePathname()
-  let role = localStorage.getItem('role');
-
-
-
+  const currentPath = usePathname();
+  let role = typeof window !== "undefined" && localStorage.getItem("role");
 
   useEffect(() => {
-    if (currentPath.startsWith('/en')) {
-      setSelectedLanguage('English');
-    } else if (currentPath.startsWith('/ru')) {
-      setSelectedLanguage('Pусский');
+    if (currentPath.startsWith("/en")) {
+      setSelectedLanguage("English");
+    } else if (currentPath.startsWith("/ru")) {
+      setSelectedLanguage("Pусский");
     } else {
-      setSelectedLanguage('Azərbaycanca');
+      setSelectedLanguage("Azərbaycanca");
     }
   }, [currentPath]);
 
   const handleLanguageChange = (language: string) => {
     setSelectedLanguage(language);
 
-
-    let langPrefix = '';
+    let langPrefix = "";
     switch (language) {
-      case 'English':
-        langPrefix = '/en';
+      case "English":
+        langPrefix = "/en";
         break;
-      case 'Pусский':
-        langPrefix = '/ru';
+      case "Pусский":
+        langPrefix = "/ru";
         break;
-      case 'Azərbaycanca':
+      case "Azərbaycanca":
       default:
-        langPrefix = '/az';
+        langPrefix = "/az";
         break;
     }
 
@@ -225,13 +221,20 @@ export const Footer = () => {
               </Text>
               <Flex flexDirection="column" rowGap="0.8rem">
                 <Text fontSize="14px" color="#c0c0c0">
-                  <NavigationLink href='/jobs'>{t("Common.Nav.browse_jobs")}</NavigationLink>
+                  <NavigationLink href="/jobs">
+                    {t("Common.Nav.browse_jobs")}
+                  </NavigationLink>
                 </Text>
                 <Text fontSize="14px" color="#c0c0c0">
-                  <NavigationLink href='/useProfile'> {t("Home.Footer.Nav.forCandidates.addResume")}</NavigationLink>
+                  <NavigationLink href="/useProfile">
+                    {" "}
+                    {t("Home.Footer.Nav.forCandidates.addResume")}
+                  </NavigationLink>
                 </Text>
                 <Text fontSize="14px" color="#c0c0c0">
-                  <NavigationLink href='/companies'>{t("Common.Nav.browse_companies")}</NavigationLink>
+                  <NavigationLink href="/companies">
+                    {t("Common.Nav.browse_companies")}
+                  </NavigationLink>
                 </Text>
               </Flex>
             </Box>
@@ -241,13 +244,29 @@ export const Footer = () => {
               </Text>
               <Flex flexDirection="column" rowGap="0.8rem">
                 <Text fontSize="14px" color="#c0c0c0">
-                  <NavigationLink href='employees'>{t("Common.Nav.browse_jobseekers")}</NavigationLink>
+                  <NavigationLink href="employees">
+                    {t("Common.Nav.browse_jobseekers")}
+                  </NavigationLink>
                 </Text>
                 <Text fontSize="14px" color="#c0c0c0">
-                  <NavigationLink href={role === 'JOBSEEKER' || role === null ? '/' : '/managejobs'}>{t("Common.Nav.manage_jobs")}</NavigationLink>
+                  <NavigationLink
+                    href={
+                      role === "JOBSEEKER" || role === null
+                        ? "/"
+                        : "/managejobs"
+                    }
+                  >
+                    {t("Common.Nav.manage_jobs")}
+                  </NavigationLink>
                 </Text>
                 <Text fontSize="14px" color="#c0c0c0">
-                  <NavigationLink href={role === 'JOBSEEKER' || role === null ? '/' : '/postJobs'}>{t("Common.Nav.post_a_job")}</NavigationLink>
+                  <NavigationLink
+                    href={
+                      role === "JOBSEEKER" || role === null ? "/" : "/postJobs"
+                    }
+                  >
+                    {t("Common.Nav.post_a_job")}
+                  </NavigationLink>
                 </Text>
               </Flex>
             </Box>
@@ -257,13 +276,21 @@ export const Footer = () => {
               </Text>
               <Flex flexDirection="column" rowGap="0.8rem">
                 <Text fontSize="14px" color="#c0c0c0">
-                  <NavigationLink href='/about'> {t("Common.Nav.about")}</NavigationLink>
+                  <NavigationLink href="/about">
+                    {" "}
+                    {t("Common.Nav.about")}
+                  </NavigationLink>
                 </Text>
                 <Text fontSize="14px" color="#c0c0c0">
-                  <NavigationLink href='/contact'> {t("Common.Nav.contact")}</NavigationLink>
+                  <NavigationLink href="/contact">
+                    {" "}
+                    {t("Common.Nav.contact")}
+                  </NavigationLink>
                 </Text>
                 <Text fontSize="14px" color="#c0c0c0">
-                  <NavigationLink href='privacy-police'>{t("Home.Footer.Nav.privacyPolice")}</NavigationLink>
+                  <NavigationLink href="privacy-police">
+                    {t("Home.Footer.Nav.privacyPolice")}
+                  </NavigationLink>
                 </Text>
               </Flex>
             </Box>
@@ -273,10 +300,14 @@ export const Footer = () => {
               </Text>
               <Flex flexDirection="column" rowGap="0.8rem">
                 <Text fontSize="14px" color="#c0c0c0">
-                  <NavigationLink href='/login'>{t("Common.Action.LOGIN")}</NavigationLink>
+                  <NavigationLink href="/login">
+                    {t("Common.Action.LOGIN")}
+                  </NavigationLink>
                 </Text>
                 <Text fontSize="14px" color="#c0c0c0">
-                  <NavigationLink href='/userProfile'>{t("Common.Menu.profile.label")}</NavigationLink>
+                  <NavigationLink href="/userProfile">
+                    {t("Common.Menu.profile.label")}
+                  </NavigationLink>
                 </Text>
               </Flex>
             </Box>

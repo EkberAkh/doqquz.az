@@ -1,12 +1,16 @@
 "use client";
 import { Box, Container, Flex, Text, FormControl, InputLeftElement, InputGroup, Input, FormErrorMessage, Textarea, Button } from '@chakra-ui/react'
 import React from 'react'
-import { FaRegEnvelope } from 'react-icons/fa'
+import { FaCheck, FaRegEnvelope } from 'react-icons/fa'
 import { FaRegUserCircle } from "react-icons/fa";
 import { FaBook } from "react-icons/fa";
 import { useState } from 'react';
 import { useForm } from "react-hook-form";
 import { useTranslations } from 'next-intl';
+import Cookies from 'js-cookie';
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 interface RegisterProps { }
@@ -15,7 +19,7 @@ interface FormData {
   name: string;
   email: string;
   topic: string;
-  textarea:string;
+  textarea: string;
 }
 
 
@@ -33,21 +37,78 @@ const Contact: React.FC<RegisterProps> = () => {
   const backgroundColor = isFocused ? "blue" : "gray";
   const backgroundColor2 = isFocused2 ? "blue" : "gray";
   const backgroundColor3 = isFocused3 ? "blue" : "gray";
+
   const t = useTranslations();
 
   const {
     handleSubmit,
     register,
     formState: { errors },
+    reset,
   } = useForm<FormData>();
 
-  const onSubmit = (values: FormData) => {
-    console.log("salam", values);
+  const token = Cookies.get("token");
+
+
+  const onSubmit = async (values: FormData) => {
+
+    const url = 'https://neo-814m.onrender.com/v1/contact/';
+    const method = 'POST';
+
+
+    const payload = {
+      fullname: values.name,
+      email: values.email,
+      subject: values.topic,
+      message: values.textarea
+    }
+
+
+    try {
+      const response = await fetch(url, {
+        method: method,
+        headers: {
+          'Content-type': 'application/json',
+          Token: `${token}`,
+        },
+        body: JSON.stringify(payload),
+      })
+
+      if (!response.ok) {
+        throw new Error(`HTTP Error! Status: ${response.status} `)
+      }
+
+      const data = await response.json();
+
+      toast.success(' Əməliyyat Uğurla icra olundu!', {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeButton: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        // transition: Bounce,
+        icon: <FaCheck style={{ backgroundColor: '#fff', color: '#5BB318', borderRadius: '100px', padding: '2px' }} />,
+        style: {
+          backgroundColor: '#5BB318',
+          color: '#fff'
+        }
+      });
+      console.log(data);
+
+      reset();
+
+    } catch (error) {
+      console.error('Data is not Posted', error.message)
+      toast.error('Əməliyyat icra olunmadi')
+    }
+
   };
 
-
   return (
-    <Container maxW="1200px" bg={"white"} boxShadow='2xl'  rounded='md'  >
+    <Container maxW="1200px" bg={"white"} boxShadow='2xl' rounded='md'  >
       <Text fontWeight="bold" fontSize="20px" padding="20px">{t("Common.Questions.contact")}</Text>
       <hr></hr>
       <Box m="50px 0" p="30px" >
@@ -96,7 +157,7 @@ const Contact: React.FC<RegisterProps> = () => {
                   })}
                   id='email'
                   type="email"
-                  placeholder= {t("Common.FormInputs.email.label")}
+                  placeholder={t("Common.FormInputs.email.label")}
                   p="25px 70px"
                   onFocus={handleFocus_2}
                   onBlur={handleBlur_2}
@@ -134,12 +195,12 @@ const Contact: React.FC<RegisterProps> = () => {
               {errors.topic && errors.topic.message}
             </FormErrorMessage>
           </FormControl>
-          <FormControl isInvalid= {!!errors.textarea}>
+          <FormControl isInvalid={!!errors.textarea}>
             <Textarea
-            {...register("textarea", {
-              required:"this is required"
-            })}
-            id='textarea'
+              {...register("textarea", {
+                required: "this is required"
+              })}
+              id='textarea'
               mt="50px"
               borderRadius="5px"
               placeholder={t("Common.FormInputs.message.label")}
@@ -152,13 +213,20 @@ const Contact: React.FC<RegisterProps> = () => {
             </FormErrorMessage>
           </FormControl>
           <Button bg="blue.500" _hover={{}} p="25px 40px" m="30px 0" type='submit'> {t("Common.Action.SEND")}</Button>
-
         </form>
-
       </Box>
-
-
-
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </Container>
   )
 }

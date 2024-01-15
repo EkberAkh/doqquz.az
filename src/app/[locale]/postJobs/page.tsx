@@ -8,6 +8,12 @@ import { jobcategory } from './const';
 import { salaryType } from './const';
 import { currencyType } from './const';
 import { locationType } from './const'
+import JobCategories from '../jobs/JobCategories';
+import Salary from '../jobs/Salary';
+import SalaryType from '../jobs/SalaryType';
+import CurrencyType from '../jobs/CurrencyType';
+import LocationInput from '../jobs/LocationInput';
+import KeywordInput from '../jobs/KeywordInput';
 
 const PostJobs = () => {
   const [title, setTitle] = useState("");
@@ -88,43 +94,10 @@ const PostJobs = () => {
                   options={jobType}
                 />
               </FormControl>
-
-              <FormControl >
-                <FormLabel>İş Kateqoriyası </FormLabel>
-                <Select
-                  styles={customStyles}
-                  onChange={(selectedOption) => {
-                    if (selectedOption) {
-                      setJob_category(selectedOption.value);
-                    } else {
-                      setJob_category(""); // Handle the case when the option is cleared
-                    }
-                  }}
-                  placeholder='İş Kateqoriyası'
-                  isClearable={isClearable}
-                  isSearchable={isSearchable}
-                  options={jobcategory}
-                />
-              </FormControl>
+<JobCategories/>
             </Flex>
             <Flex gap="30px">
-              <FormControl >
-                <FormLabel>Maaş Növü </FormLabel>
-                <Select
-                  styles={customStyles}
-                  onChange={(selectedOption) => {
-                    if (selectedOption) {
-                      setSalary_type(selectedOption.value);
-                    } else {
-                      setSalary_type(""); // Handle the case when the option is cleared
-                    }
-                  }}
-                  placeholder='Maaş Növü'
-                  isClearable={isClearable}
-                  isSearchable={isSearchable}
-                  options={salaryType}
-                />
-              </FormControl>
+              <SalaryType/>
               <Box>
                 <Flex gap="20px">
                   <FormControl>
@@ -145,42 +118,10 @@ const PostJobs = () => {
                   </FormControl>
                 </Flex>
               </Box>
-              <FormControl >
-                <FormLabel>Valyuta</FormLabel>
-                <Select
-                  styles={customStyles}
-                  onChange={(selectedOption) => {
-                    if (selectedOption) {
-                      setCurrency(selectedOption.value);
-                    } else {
-                      setCurrency(""); // Handle the case when the option is cleared
-                    }
-                  }}
-                  placeholder='Valyuta'
-                  isClearable={isClearable}
-                  isSearchable={isSearchable}
-                  options={currencyType}
-                />
-              </FormControl>
+             <CurrencyType />
             </Flex>
             <Flex gap="30px" m="30px 0">
-              <FormControl >
-                <FormLabel>Ünvan </FormLabel>
-                <Select
-                  styles={customStyles}
-                  onChange={(selectedOption) => {
-                    if (selectedOption) {
-                      setlocation(selectedOption.value);
-                    } else {
-                      setlocation(""); // Handle the case when the option is cleared
-                    }
-                  }}
-                  placeholder='Ünvan'
-                  isClearable={isClearable}
-                  isSearchable={isSearchable}
-                  options={locationType}
-                />
-              </FormControl>
+            <LocationInput/>
               <FormControl>
                 <FormLabel>Bildiriş üçün ünvan </FormLabel>
                 <Input
@@ -188,13 +129,7 @@ const PostJobs = () => {
                   onChange={(e) => { setNotify(e.target.value) }}
                   type='text' placeholder='Bildiriş üçün ünvan' />
               </FormControl>
-              <FormControl>
-                <FormLabel> Bacarıqlar</FormLabel>
-                <Input
-                  h="50px"
-                  onChange={(e) => { setSkills(e.target.value) }}
-                  type='text' placeholder='Bacarıqlar' />
-              </FormControl>
+              <KeywordInput/>
             </Flex>
             <FormLabel> Təsvir</FormLabel>
             <Textarea
