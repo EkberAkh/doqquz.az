@@ -8,7 +8,7 @@ import { useTranslations } from 'next-intl'
 import React from 'react'
 import { MdOutlineFaceUnlock } from 'react-icons/md'
 
-export function BookmarkedJoobseeker({bookmark}) {
+export function BookmarkedJoobseeker({bookmark, handleDelete}) {
     const t = useTranslations();
     return (
         <Card mt={'30px'} boxShadow='0 6px 10px rgba(1, 0, 0, 0.2)' w={'100%'}>
@@ -71,6 +71,7 @@ export function BookmarkedJoobseeker({bookmark}) {
                         borderRadius="4px"
                         p={'0.8rem'}
                         _hover={{}}
+                        onClick={()=>handleDelete(joobsearcher.id)}
                     >
                         <DeleteIcon width="20" height="50" color="#f50057" />
                     </Box>
