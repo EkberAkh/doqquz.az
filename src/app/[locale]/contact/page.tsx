@@ -212,7 +212,7 @@ const Contact: React.FC<RegisterProps> = () => {
               {errors.textarea && errors.textarea.message}
             </FormErrorMessage>
           </FormControl>
-          <Button bg="blue.500" _hover={{}} p="25px 40px" m="30px 0" type='submit'> {t("Common.Action.SEND")}</Button>
+          <Button color='white' bg="blue.500" _hover={{}} p="25px 40px" m="30px 0" type='submit'> {t("Common.Action.SEND")}</Button>
         </form>
       </Box>
       <ToastContainer

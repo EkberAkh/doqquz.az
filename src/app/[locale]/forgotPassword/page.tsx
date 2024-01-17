@@ -9,6 +9,7 @@ import { LockIcon } from '@chakra-ui/icons';
 import { FaRegEnvelope } from "react-icons/fa6";
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
+import { NavigationLink } from '@/components/NavigationLink';
 
 type FormData = {
   email: string;
@@ -48,7 +49,7 @@ const Login1: React.FC = () => {
         <Flex alignItems="center" flexDirection="column" m="30px" gap="10px">
           <Text fontWeight="bold" fontSize="26px">{t("Auth.Login.title")}</Text>
           <Text>    {t.rich("Auth.Login.subTitle", {
-            a: (chunks) => <a href="/az/register" style={{ color: "blue", cursor: "pointer" }}>{chunks}</a>,
+            NavigationLink: (chunks) => <NavigationLink href="/register" style={{ color: "blue", cursor: "pointer" }}>{chunks}</NavigationLink>,
             span: (chunks) => <span style={{ color: "gray" }}> {chunks}</span>
           })}</Text>
         </Flex>
