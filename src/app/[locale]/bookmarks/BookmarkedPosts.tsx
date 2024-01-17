@@ -7,9 +7,15 @@ import { Card, CardHeader, Flex, Heading, CardBody, VStack, HStack, Box, Text } 
 import { useTranslations } from 'next-intl'
 import React from 'react'
 import { MdOutlineBusinessCenter } from 'react-icons/md'
+import { format } from 'date-fns'
 
- function BookmarkedPosts({bookmark,handleDelete}) {
+function BookmarkedPosts({ bookmark, handleDelete }) {
     const t = useTranslations();
+
+    const formatCreatedAt = (createdAt) => {
+        const date = new Date(createdAt);
+        return format(date, "dd.MM.yyyy")
+    }
     return (
         <Card mt={'20px'} boxShadow='0 6px 10px rgba(1, 0, 0, 0.2)' w={'100%'}>
             <CardHeader borderBottom='1px solid #e4e4e4'>
@@ -18,7 +24,7 @@ import { MdOutlineBusinessCenter } from 'react-icons/md'
                     <Heading ml={'8px'} fontSize='1rem' fontWeight={700}> {t('Common.bookmark.post')}</Heading>
                 </Flex>
             </CardHeader>
-            {bookmark.map((markedpost)=> markedpost.post ? <CardBody p={'2.5rem 1rem'}>
+            {bookmark.map((markedpost) => markedpost.post ? <CardBody p={'2.5rem 1rem'}>
                 <Flex width={"100%"} justify={"space-between"}>
                     <Flex>
                         <Flex
@@ -50,7 +56,7 @@ import { MdOutlineBusinessCenter } from 'react-icons/md'
                                         height="25"
                                         color="rgb(119, 119, 119)"
                                     />
-                                    <Text>{markedpost.post.type}</Text>
+                                    <Text>{t(`Common.JobType.${markedpost.post.type}`)}</Text>
                                 </Flex>
                                 <Flex columnGap={"0.2rem"}>
                                     <OclockIcon
@@ -58,7 +64,7 @@ import { MdOutlineBusinessCenter } from 'react-icons/md'
                                         height="25"
                                         color="rgb(119, 119, 119)"
                                     />
-                                    <Text>{markedpost.post.createdAt}</Text>
+                                    <Text>{formatCreatedAt(markedpost.post.createdAt)}</Text>
                                 </Flex>
                             </HStack>
                         </VStack>
@@ -71,11 +77,11 @@ import { MdOutlineBusinessCenter } from 'react-icons/md'
                         borderRadius="4px"
                         p={'0.8rem'}
                         _hover={{}}
-                        onClick={()=>handleDelete(markedpost.post.id)}
+                        onClick={() => handleDelete(markedpost.id)}
                     >
                         <DeleteIcon width="20" height="50" color="#f50057" />
                     </Box>
-                </Flex> 
+                </Flex>
             </CardBody> : null)}
         </Card>
     )

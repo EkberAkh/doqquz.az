@@ -44,6 +44,7 @@ import { relative } from "path";
 import GhostPng from './../../public/images/ghost.png'
 
 import { useCurrentLang } from "@/hooks";
+import LetteredAvatar from 'react-lettered-avatar';
 
 
 interface IData {
@@ -281,13 +282,13 @@ function Header() {
                     _active={{}}
                     _hover={{}}
                   >
-                    <Avatar size="md"></Avatar>
+                    <LetteredAvatar name={`${data?.firstName || ''} ${data?.lastName || ''}`}/> 
                   </Box>
                 </PopoverTrigger>
                 <PopoverContent padding="10px" right={'1rem'} bg="white">
                   <PopoverCloseButton />
                   <PopoverHeader gap="10px" display="flex">
-                    <Avatar size="md"></Avatar>
+                    <LetteredAvatar name={`${data?.firstName || ''} ${data?.lastName || ''}`}/>
                     <Box>
                       {!isLoading && data && (
                         <Text>
