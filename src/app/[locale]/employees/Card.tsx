@@ -4,13 +4,14 @@ import { useTranslations } from "next-intl";
 import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
+// import LetteredAvatar from 'react-lettered-avatar';
 interface ICardProps {
   id: number;
   firstName: string;
   lastName: string;
   expectedSalary: string;
   salaryType: string;
-  userId:number;
+  userId: number;
 }
 const Card: React.FC<ICardProps> = ({
   id,
@@ -99,6 +100,9 @@ const Card: React.FC<ICardProps> = ({
         position="relative"
       >
         <Avatar marginBottom="14px" size="xl" />
+        {/* <Box ml={'14rem'} mb={'1rem'} >
+          <LetteredAvatar name={`${firstName || ''} ${lastName || ''}`}  radius={100}/>
+        </Box> */}
         <Text fontSize="20px" fontWeight="bold">
           {`${firstName} ${lastName}`}
         </Text>
@@ -156,9 +160,9 @@ const Card: React.FC<ICardProps> = ({
           </Box>
         </Box>
         <Button
-        onClick={()=>{
-          router.push(`profile?jobId=${encodeURIComponent(userId)}`)
-        }}
+          onClick={() => {
+            router.push(`profile?jobId=${encodeURIComponent(userId)}`)
+          }}
           onMouseLeave={() => {
             setisHover(false);
           }}
