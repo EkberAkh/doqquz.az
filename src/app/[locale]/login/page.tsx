@@ -26,6 +26,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { basicSchema } from "./const";
 import { useFormik } from "formik";
 import { useRouter } from "next/navigation";
+import { NavigationLink } from "@/components/NavigationLink";
 
 type FormData = {
   email: string;
@@ -80,7 +81,7 @@ const router = useRouter()
           progress: undefined,
           theme: "light",
         });
-router.push('/')
+        router.push('/')
       })
       .catch((error) => {
         console.error("username or password is wrong");
@@ -128,9 +129,9 @@ router.push('/')
         </Text>
         <Text p="15px 60px" color="gray.500" cursor="pointer">
           {" "}
-          <Link href="/az/register" _hover={{ color: "black" }}>
+          <NavigationLink href="/register" _hover={{ color: "black" }}>
             {t("Auth.tabs.register")}
-          </Link>
+          </NavigationLink>
         </Text>
       </Flex>
 
@@ -141,13 +142,13 @@ router.push('/')
         <Text>
           {" "}
           {t.rich("Auth.Login.subTitle", {
-            a: (chunks) => (
-              <a
-                href="/az/register"
+            NavigationLink: (chunks) => (
+              <NavigationLink
+                href="/register"
                 style={{ color: "blue", cursor: "pointer" }}
               >
                 {chunks}
-              </a>
+              </NavigationLink>
             ),
             span: (chunks) => <span style={{ color: "gray" }}> {chunks}</span>,
           })}
@@ -224,13 +225,13 @@ router.push('/')
             </FormControl>
 
             <FormHelperText m="20px 0 ">
-              <Link
+              <NavigationLink
                 fontSize="17px"
                 _hover={{ color: "blue", textDecoration: "none" }}
-                href="/az/forgotPassword"
+                href="/forgotPassword"
               >
                 {t("Auth.Login.question")}
-              </Link>
+              </NavigationLink>
             </FormHelperText>
 
             <Box

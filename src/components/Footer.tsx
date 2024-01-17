@@ -32,7 +32,7 @@ export const Footer = () => {
   const [selectedLanguage, setSelectedLanguage] = useState("Azərbaycanca");
   const router = useRouter();
   const currentPath = usePathname();
-  let role = typeof window !== "undefined" && localStorage.getItem("role");
+  let role = localStorage.getItem("role");
 
   useEffect(() => {
     if (currentPath.startsWith("/en")) {
@@ -226,7 +226,7 @@ export const Footer = () => {
                   </NavigationLink>
                 </Text>
                 <Text fontSize="14px" color="#c0c0c0">
-                  <NavigationLink href="/useProfile">
+                  <NavigationLink href="/userProfile">
                     {" "}
                     {t("Home.Footer.Nav.forCandidates.addResume")}
                   </NavigationLink>
@@ -244,7 +244,7 @@ export const Footer = () => {
               </Text>
               <Flex flexDirection="column" rowGap="0.8rem">
                 <Text fontSize="14px" color="#c0c0c0">
-                  <NavigationLink href="employees">
+                  <NavigationLink href="/employees">
                     {t("Common.Nav.browse_jobseekers")}
                   </NavigationLink>
                 </Text>
@@ -288,7 +288,7 @@ export const Footer = () => {
                   </NavigationLink>
                 </Text>
                 <Text fontSize="14px" color="#c0c0c0">
-                  <NavigationLink href="privacy-police">
+                  <NavigationLink href="/privacy-police">
                     {t("Home.Footer.Nav.privacyPolice")}
                   </NavigationLink>
                 </Text>
