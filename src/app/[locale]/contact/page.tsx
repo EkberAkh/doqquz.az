@@ -80,7 +80,7 @@ const Contact: React.FC<RegisterProps> = () => {
 
       const data = await response.json();
 
-      toast.success(' Əməliyyat Uğurla icra olundu!', {
+      toast.success(t('Common.Success.default'), {
         position: "top-center",
         autoClose: 3000,
         hideProgressBar: true,
@@ -102,7 +102,7 @@ const Contact: React.FC<RegisterProps> = () => {
 
     } catch (error) {
       console.error('Data is not Posted', error.message)
-      toast.error('Əməliyyat icra olunmadi')
+      toast.error(t('Common.Error.default'))
     }
 
   };

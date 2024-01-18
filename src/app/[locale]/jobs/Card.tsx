@@ -1,5 +1,5 @@
 import { StarIcon } from "@chakra-ui/icons";
-import { Avatar, Box, Flex, GridItem, Img, Text } from "@chakra-ui/react";
+import { Avatar, Box, Flex, GridItem, Img, Spinner, Text } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
@@ -29,12 +29,14 @@ const Card: React.FC<ICardProps> = ({
 }) => {
   const initialIsFav = localStorage.getItem(`fav-jobs-${id}`) === "true";
   const [isFav, setIsFav] = useState<boolean>(initialIsFav);
+  const [isLoading,setIsLoading] = useState<boolean>(false)
   const [bookmarkId, setBookmarkId] = useState<number | null>(null);
   useEffect(() => {
     // Update local storage when isFav changes
     localStorage.setItem(`fav-jobs-${id}`, isFav.toString());
   }, [isFav, id]);
   const handleFavClick = async () => {
+    setIsLoading(true); 
     setIsFav(!isFav);
     const token = Cookies.get("token");
     let url, method, payload;
@@ -52,6 +54,7 @@ const Card: React.FC<ICardProps> = ({
       // Preparing for DELETE request
       if (!bookmarkId) {
         console.error("No bookmark ID available for deletion");
+        setIsLoading(false); 
         return;
       }
       url = `https://neo-814m.onrender.com/v1/bookmark/${bookmarkId}`;
@@ -59,6 +62,7 @@ const Card: React.FC<ICardProps> = ({
       payload = null;
     }
     try {
+    
       const response = await fetch(url, {
         method: method,
         headers: {
@@ -74,16 +78,18 @@ const Card: React.FC<ICardProps> = ({
 
       if (!isFav) {
         const data = await response.json();
-        setBookmarkId(data.id); // Store the bookmark ID when adding a bookmark
+  
+        setBookmarkId(data.id); 
       }
 
-      // Toggle the favorite state only on successful request
       setIsFav(!isFav);
       console.log(
         isFav ? "Bookmark removed successfully" : "Bookmark added successfully"
       );
     } catch (error) {
       console.error("Error in updating bookmark:", error);
+    }finally {
+      setIsLoading(false); // Stop loading after the operation is complete
     }
   };
   const router = useRouter();
@@ -116,7 +122,16 @@ const Card: React.FC<ICardProps> = ({
           </Box>
         </Flex>
 
-        <StarIcon
+       {isLoading ? <Spinner  position="absolute"
+       height="36px"
+       width="36px"
+          right="0" 
+          top="50%"
+          transform="auto"
+          translateY="50%"
+          margin="36px 18px"
+          padding="7px 7px 9px 7px"/>
+          : <StarIcon
           margin="18px"
           onClick={handleFavClick}
           transition="all .4s"
@@ -133,7 +148,7 @@ const Card: React.FC<ICardProps> = ({
           width="36px"
           color={isFav ? "#fff" : "silver"}
           cursor="pointer"
-        />
+        />}
       </Box>
       <Box
         justifyContent="space-around"

@@ -76,7 +76,7 @@
     "completeAccount": "Hesabınızı tamamlayın"
   },
   "Error": {
-    "default": "Əməliyyat hazırda mümkün deyil. Əlavə məlumat üçün müraciət edin: {{contacts}}.",
+    "default": "Əməliyyat hazırda mümkün deyil",
     "contactToGetInfo": "Əlavə məlumat üçün müraciət edin: {{contacts}}.",
     "validation": {
       "empty": "Bu xana mütləqdir",
