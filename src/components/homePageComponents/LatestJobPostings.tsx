@@ -140,7 +140,7 @@ const router = useRouter()
                           height="25"
                           color="rgb(119, 119, 119)"
                         />
-                        <Text>{`${job.location.city}, ${job.location.country}`}</Text>
+                        {job.location && <Text>{`${job.location.city}, ${job.location.country}`}</Text>}
                       </Flex>
                       <Flex columnGap={"0.2rem"}>
                         <ExperienceIcon
