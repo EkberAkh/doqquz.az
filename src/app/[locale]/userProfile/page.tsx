@@ -1,5 +1,4 @@
 'use client'
-import Cookies from "js-cookie";
 import React, { useState } from 'react'
 import { useTranslations } from 'next-intl'
 import { Card, Box, CardBody, CardHeader, Heading, Flex, Button, Text, Input, useDisclosure, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, InputGroup, InputLeftAddon, InputRightAddon, FormControl, FormHelperText, FormLabel, Center, Divider, Textarea } from '@chakra-ui/react'
@@ -11,26 +10,32 @@ import { AddIcon } from '@chakra-ui/icons'
 import ScrollToTop from '@/components/ScrollToTop'
 // import "react-datepicker/dist/react-datepicker.css";
 // import DatePicker from "react-datepicker";
+import Cookies from "js-cookie";
+
 
 const Profile = () => {
     const userProfileId = Cookies.get('userProfileId')
     const t = useTranslations()
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [name, setName] = React.useState('Salam')
-    const [webUrl, setWebUrl] = React.useState('—')
-    const [establishmentDate, setEstablishmentDate] = React.useState('—')
-    const [endDate, setEndDate] = useState(new Date());
-    const [description, setDescription] = React.useState('—')
-    const [phoneNumber, setPhoneNumber] = useState('');
+    const [startingDate, setEstablishmentDate] = React.useState('—')
+    const [completionDate, setEndDate] = useState(new Date());
+
+    const [contactNumber, setPhoneNumber] = useState('');
+    const [email, setEmail] = useState("");
+
     const [valid, setValid] = useState(true)
     const [activeModal, setActiveModal] = useState('')
     const [universityName, setUniversityName] = useState('')
-    const [educationMajor, setEducationMajor] = useState('')
-    const [educationDegree, setEducationDegree] = useState('')
-    const [company, setCompany] = useState('')
+    const [major, setEducationMajor] = useState('')
+    const [certificateDegreeName, setEducationDegree] = useState('')
+    const [companyName, setCompany] = useState('')
     const [duty, setDuty] = useState('')
     // const [startDate, setStartDate] = useState(new Date());
     // const [endtDate, setEndDate] = useState(new Date());
+    const [description, setDescription] = React.useState('—')
+    const [websiteUrl, setWebUrl] = React.useState('—')
+    const [title, setTitle] = useState("")
 
     const handleOpenModal = (modalContent) => {
         setActiveModal(modalContent);
@@ -48,8 +53,94 @@ const Profile = () => {
         return phoneNumberPattern.test(phoneNumber);
         // return phoneNumber.match("^[0-9]{10}$")
     }
+    const token = Cookies.get('token')
 
-console.log(userProfileId);
+    const handleSubmitEducation = async (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+        const id = null;
+        const jobSeeker = userProfileId;
+
+        const data = { universityName, major, certificateDegreeName, startingDate, completionDate, id, jobSeeker };
+
+        fetch(`https://neo-814m.onrender.com/v1/education/${userProfileId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Token': `${token}`,
+            },
+            body: JSON.stringify(data),
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data); // Handle the response data as needed
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
+    }
+    const handleSubmitPortfolio = async (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+        const id = null;
+        const jobSeeker = userProfileId;
+
+        const data = { description, websiteUrl, title, id, jobSeeker };
+
+        fetch(`https://neo-814m.onrender.com/v1/portfolio/${userProfileId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Token': `${token}`,
+            },
+            body: JSON.stringify(data),
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data); // Handle the response data as needed
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
+    }
+    const handleSubmitInfo = async (e) => {
+        e.preventDefault();
+    
+        // Assuming 'email' and 'contactNumber' are state variables or have been defined elsewhere in your component
+        const data = { email: email, contactNumber: contactNumber };
+    
+        fetch("https://neo-814m.onrender.com/v1/user/100", {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json',
+                'Token': token, 
+            },
+            body: JSON.stringify({ rest: data }),
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data); // Handle the response data as needed
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+    }
+
+
+    console.log(userProfileId);
+
 
     return (
         <Flex justify={'center'}>
@@ -74,12 +165,12 @@ console.log(userProfileId);
                                 <Flex columnGap='30px' mb='30px'>
                                     <Box w='50%'>
                                         <Text mb='20px' fontSize='1.3rem'>{t('Common.FormInputs.email.label')}</Text>
-                                        <Input placeholder='example@domain.com' h='48px'></Input>
+                                        <Input placeholder='example@domain.com' onChange={(e) => { setEmail(e.target.value) }} h='48px'></Input>
                                     </Box>
 
                                     <Box w='50%'>
                                         <Text mb='20px' fontSize='1.3rem'>{t('Common.FormInputs.phoneNumber.label')}</Text>
-                                        <PhoneInput country={'az'} placeholder='+111 (11) 111-11-11' value={phoneNumber} onChange={handleChange} inputProps={{
+                                        <PhoneInput country={'az'} placeholder='+111 (11) 111-11-11' onChange={(value) => { setPhoneNumber(value) }}   inputProps={{
                                             required: 'true'
                                         }}
                                             inputStyle={{ height: '48px', width: '27rem', borderRadius: '0.3rem' }}
@@ -89,7 +180,9 @@ console.log(userProfileId);
                                     </Box>
 
                                 </Flex>
-                                <Button color={'#2a41e8'}
+                                <Button
+                                onClick={handleSubmitInfo}
+                                    color={'#2a41e8'}
                                     border={'2px solid #2a41e8'}
                                     p={'23px 19px'}
                                     borderRadius={'4px'}
@@ -147,12 +240,12 @@ console.log(userProfileId);
                                     </Box>
                                     <Box w='30%'>
                                         <Text mb='20px' fontSize='1.3rem'>{t('Common.FormInputs.websiteUrl.label')}</Text>
-                                        <Text mb='20px' fontSize='1.3rem'>{webUrl}</Text>
+                                        <Text mb='20px' fontSize='1.3rem'>{websiteUrl}</Text>
 
                                     </Box>
                                     <Box w='30%'>
                                         <Text mb='20px' fontSize='1.3rem'>{t('Profile.ProfileInfo.establishmentDate')}</Text>
-                                        <Text mb='20px' fontSize='1.3rem'>{establishmentDate}</Text>
+                                        <Text mb='20px' fontSize='1.3rem'>{startingDate}</Text>
 
                                     </Box>
                                     <Box w='30%' mt='30px'>
@@ -185,7 +278,7 @@ console.log(userProfileId);
                             <FormControl w='45%'>
                                 <FormLabel>{t('Common.FormInputs.websiteUrl.label')}</FormLabel>
                                 <InputGroup size='sm'>
-                                    <Input placeholder='mysite' value={webUrl} onChange={(e) => setWebUrl(e.target.value)} h='48px' />
+                                    <Input placeholder='mysite' onChange={(e) => setWebUrl(e.target.value)} h='48px' />
                                 </InputGroup>
                             </FormControl>
                             <FormControl w='50%'>
@@ -193,7 +286,7 @@ console.log(userProfileId);
                                 <InputGroup size='sm'>
                                     <Input
                                         h='48px'
-                                        value={establishmentDate} onChange={(e) => setEstablishmentDate(e.target.value)}
+                                        onChange={(e) => setEstablishmentDate(e.target.value)}
                                         size="md"
                                         type="datetime-local"
                                     />
@@ -246,40 +339,40 @@ console.log(userProfileId);
                             <Flex flexWrap={'wrap'} columnGap={'1.5rem'} width={'100%'}>
                                 <FormControl minH={'7.1rem'} flexBasis={'calc(50% - 0.8rem)'}>
                                     <FormLabel fontSize={'1.1rem'} mb={'0.9rem'}>{t('Profile.Education.name')}</FormLabel>
-                                    <Input type='text' value={universityName} onChange={(e) => setUniversityName(e.target.value)} placeholder={t('Profile.Education.name')} h={'3.1rem'}></Input>
+                                    <Input type='text' onChange={(e) => setUniversityName(e.target.value)} placeholder={t('Profile.Education.name')} h={'3.1rem'}></Input>
                                 </FormControl>
                                 <FormControl minH={'7.1rem'} flexBasis={'calc(50% - 0.8rem)'}>
                                     <FormLabel fontSize={'1.1rem'} mb={'0.9rem'}>{t('Profile.Education.major')}</FormLabel>
-                                    <Input type='text' value={educationMajor} onChange={(e) => setEducationMajor(e.target.value)} placeholder={t('Profile.Education.major')} h={'3.1rem'}></Input>
+                                    <Input type='text' onChange={(e) => setEducationMajor(e.target.value)} placeholder={t('Profile.Education.major')} h={'3.1rem'}></Input>
                                 </FormControl>
                                 <FormControl minH={'7.1rem'} flexBasis={'calc(50% - 0.8rem)'}>
                                     <FormLabel fontSize={'1.1rem'} mb={'0.9rem'}>{t('Common.FormInputs.startingDate.label')}</FormLabel>
                                     <Input
                                         h={'3.1rem'}
-                                        value={establishmentDate} onChange={(e) => setEstablishmentDate(e.target.value)}
+                                        onChange={(e) => setEstablishmentDate(e.target.value)}
                                         size="md"
-                                        type="datetime-local"
+                                        type="date"  // Change here
                                     />
                                 </FormControl>
                                 <FormControl minH={'7.1rem'} flexBasis={'calc(50% - 0.8rem)'}>
                                     <FormLabel fontSize={'1.1rem'} mb={'0.9rem'}>{t('Common.FormInputs.endDate.label')}</FormLabel>
                                     <Input
                                         h={'3.1rem'}
-                                        value={endDate} onChange={(e) => setEndDate(e.target.value)}
+                                        onChange={(e) => setEndDate(e.target.value)}
                                         size="md"
-                                        type="datetime-local"
+                                        type="date"  // Change here
                                     />
                                 </FormControl>
                                 <FormControl minH={'7.1rem'} flexBasis={'calc(50% - 0.8rem)'}>
                                     <FormLabel fontSize={'1.1rem'} mb={'0.9rem'}>{t('Profile.Education.degree')}</FormLabel>
-                                    <Input type='text' value={educationDegree} onChange={(e) => setEducationDegree(e.target.value)} placeholder={t('Profile.Education.degree')} h={'3.1rem'}></Input>
+                                    <Input type='text' onChange={(e) => setEducationDegree(e.target.value)} placeholder={t('Profile.Education.degree')} h={'3.1rem'}></Input>
                                 </FormControl>
                             </Flex>
                         </ModalBody>
                         <Divider />
                         <ModalFooter p={'1rem 7.4rem 1.5rem'}>
                             <Button
-                                onClick={onClose}
+                                onClick={handleSubmitEducation}
                                 color={'#fff'}
                                 bg={'#2a41e8'}
                                 border={'2px solid #2a41e8'}
@@ -336,28 +429,28 @@ console.log(userProfileId);
                             <Flex flexWrap={'wrap'} columnGap={'1.5rem'} width={'100%'}>
                                 <FormControl minH={'7.1rem'} flexBasis={'calc(50% - 0.8rem)'}>
                                     <FormLabel fontSize={'1.1rem'} mb={'0.9rem'}>{t('Profile.Experience.name')}</FormLabel>
-                                    <Input type='text' value={company} onChange={(e) => setCompany(e.target.value)} placeholder={t('Profile.Experience.name')} h={'3.1rem'}></Input>
+                                    <Input type='text' onChange={(e) => setCompany(e.target.value)} placeholder={t('Profile.Experience.name')} h={'3.1rem'}></Input>
                                 </FormControl>
                                 <FormControl minH={'7.1rem'} flexBasis={'calc(50% - 0.8rem)'}>
                                     <FormLabel fontSize={'1.1rem'} mb={'0.9rem'}>{t('Profile.Experience.title')}</FormLabel>
-                                    <Input type='text' value={duty} onChange={(e) => setDuty(e.target.value)} placeholder={t('Profile.Experience.title')} h={'3.1rem'}></Input>
+                                    <Input type='text' onChange={(e) => setDuty(e.target.value)} placeholder={t('Profile.Experience.title')} h={'3.1rem'}></Input>
                                 </FormControl>
                                 <FormControl minH={'7.1rem'} flexBasis={'calc(50% - 0.8rem)'}>
                                     <FormLabel fontSize={'1.1rem'} mb={'0.9rem'}>{t('Common.FormInputs.startingDate.label')}</FormLabel>
                                     <Input
                                         h={'3.1rem'}
-                                        value={establishmentDate} onChange={(event) => setEstablishmentDate(event.target.value)}
+                                        onChange={(e) => setEstablishmentDate(e.target.value)}
                                         size="md"
-                                        type="datetime-local"
+                                        type="date"  // Change here
                                     />
                                 </FormControl>
                                 <FormControl minH={'7.1rem'} flexBasis={'calc(50% - 0.8rem)'}>
                                     <FormLabel fontSize={'1.1rem'} mb={'0.9rem'}>{t('Common.FormInputs.endDate.label')}</FormLabel>
                                     <Input
                                         h={'3.1rem'}
-                                        value={endDate} onChange={(event) => setEndDate(event.target.value)}
+                                        onChange={(e) => setEndDate(e.target.value)}
                                         size="md"
-                                        type="datetime-local"
+                                        type="date"  // Change here
                                     />
                                 </FormControl>
                                 <FormControl minH={'7.1rem'} flexBasis={'calc(50% - 0.8rem)'}>
@@ -430,24 +523,24 @@ console.log(userProfileId);
 
                                 <FormControl minH={'7.1rem'} flexBasis={'calc(50% - 0.8rem)'}>
                                     <FormLabel fontSize={'1.1rem'} mb={'0.9rem'}>{t('Profile.Portfolio.title')}</FormLabel>
-                                    <Input type='text' placeholder={t('Profile.Portfolio.title')} _placeholder={{ opacity: '0.5' }} h={'3.1rem'}></Input>
+                                    <Input onChange={(e) => setTitle(e.target.value)} type='text' placeholder={t('Profile.Portfolio.title')} _placeholder={{ opacity: '0.5' }} h={'3.1rem'}></Input>
                                 </FormControl>
 
                                 <FormControl minH={'7.1rem'} flexBasis={'calc(50% - 0.8rem)'}>
                                     <FormLabel fontSize={'1.1rem'} mb={'0.9rem'}>{t('Common.FormInputs.websiteUrl.label')}</FormLabel>
-                                    <Input type='text' placeholder={'www.example.com'} _placeholder={{ opacity: '0.5' }} h={'3.1rem'}></Input>
+                                    <Input onChange={(e) => setWebUrl(e.target.value)} type='text' placeholder={'www.example.com'} _placeholder={{ opacity: '0.5' }} h={'3.1rem'}></Input>
                                 </FormControl>
 
                                 <FormControl minH={'10rem'} flexBasis={'100%'}>
                                     <FormLabel fontSize={'1.1rem'} mb={'0.9rem'}>{t('Common.FormInputs.description.label')}</FormLabel>
-                                    <Textarea placeholder={t('Common.FormInputs.description.label')} _placeholder={{ opacity: '0.5' }} minH={'5rem'} p={'1.1rem'} resize={'none'}></Textarea>
+                                    <Textarea onChange={(e) => setDescription(e.target.value)} placeholder={t('Common.FormInputs.description.label')} _placeholder={{ opacity: '0.5' }} minH={'5rem'} p={'1.1rem'} resize={'none'}></Textarea>
                                 </FormControl>
                             </Flex>
                         </ModalBody>
                         <Divider />
                         <ModalFooter p={'1rem 1.5rem'}>
                             <Button
-                                onClick={onClose}
+                                onClick={handleSubmitPortfolio}
                                 color={'#fff'}
                                 bg={'#2a41e8'}
                                 border={'2px solid #2a41e8'}
