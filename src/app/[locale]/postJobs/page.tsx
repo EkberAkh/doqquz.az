@@ -36,9 +36,13 @@ import { useTranslations } from "next-intl";
 import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
 import { EJobType } from "../jobs/enums";
 import Cookies from "js-cookie";
+import { ToastContainer, toast } from "react-toastify";
+import { FaCheck } from "react-icons/fa";
+import { useRouter } from "next/navigation";
 const PostJobs = () => {
   const token = Cookies.get('token')
   const t = useTranslations();
+  const router = useRouter()
   const [title, setTitle] = useState("");
   const [jobType, setJobType] = useState([]);
   const [jobCategory, setJobCategory] = useState("");
@@ -61,7 +65,7 @@ const PostJobs = () => {
       contactInformation: contact,
       currency: currency,
       description: description,
-      id: null, // Assuming this is to be null as per your example
+      id: null, 
       location: location === "" ? null : location,
       maxEstimatedBudget: salarymax,
       minEstimatedBudget: salarymin,
@@ -70,7 +74,7 @@ const PostJobs = () => {
       skills: selectedKeywords.map(skill => ({ id: null, name: skill })),
       title: title,
       type: jobType,
-      user: null // Assuming this is to be null as per your example
+      user: null
     };
     try {
       const response = await fetch('https://neo-814m.onrender.com/v1/post/', {
@@ -87,7 +91,9 @@ const PostJobs = () => {
       }
   
       const data = await response.json();
-      console.log(data); // Handle the response data as needed
+     
+   
+      router.push('jobs')
     } catch (error) {
       console.error('There was a problem with the fetch operation:', error);
     }
@@ -139,6 +145,7 @@ const PostJobs = () => {
               <FormControl>
                 <FormLabel>Vəzifə/Başlıq </FormLabel>
                 <Input
+               
                   onChange={(e) => {
                     setTitle(e.target.value);
                   }}
@@ -274,7 +281,9 @@ const PostJobs = () => {
               Yarat
             </Button>
           </Box>
+      
         </Box>
+       
       </Box>
     </>
   );

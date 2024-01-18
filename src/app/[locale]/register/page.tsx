@@ -11,6 +11,7 @@ import { useTranslations } from "next-intl";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { NavigationLink } from '@/components/NavigationLink'
+import { useRouter } from 'next/navigation'
 
 interface RegisterProps { }
 
@@ -25,7 +26,7 @@ interface FormData {
 
 const Register: React.FC<RegisterProps> = () => {
   const t = useTranslations();
-
+const router = useRouter()
   const [isFocused, setIsFocused] = useState(false);
   const [isFocused2, setIsFocused2] = useState(false);
   const [isFocused3, setIsFocused3] = useState(false);
@@ -51,7 +52,6 @@ const Register: React.FC<RegisterProps> = () => {
   const backgroundColor5 = isFocused5 ? 'blue' : 'gray';
 
 
-  const [companyName,setCompanyName] = useState("")
 
   const [role,setRole] = useState("JOBSEEKER");
 
@@ -70,9 +70,7 @@ const Register: React.FC<RegisterProps> = () => {
       if (!res.ok) {
         throw new Error(`HTTP error! Status: ${res.status}`);
       }
-      return res.json();
-    }).then(() => {
-      toast.success(`🚀 Login successful!`, {
+      toast.success(t('Common.Success.default'), {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -82,11 +80,8 @@ const Register: React.FC<RegisterProps> = () => {
         progress: undefined,
         theme: "light",
       });
-    
-    })
-    .then((responseData) => {
-      console.log('Response Data:', responseData);
-      // Handle the response data as needed
+      router.push('login')
+      return res.json();
     })
     .catch((error) => {
       console.error("Error during fetch:", error);

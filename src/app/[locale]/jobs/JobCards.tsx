@@ -64,7 +64,7 @@ console.log(allJobs);
           currency={job.currency}
           createdAt={job.createdAt}
           companyName={job.company[0].name}
-          city={job.location.city}
+          city={job.location && job.location.city}
         />
       ))}
      
