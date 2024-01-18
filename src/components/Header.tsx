@@ -92,6 +92,7 @@ function Header() {
         throw new Error(`Error: ${response.status}`);
       }
       const data = await response.json();
+      
       console.log(data.role);
       setRole(data.role);
       localStorage.setItem("role", data.role);
@@ -122,6 +123,9 @@ function Header() {
         throw new Error(`Error: ${response.status}`);
       }
       const jobseekerData = await response.json();
+      console.log(jobseekerData);
+      
+      Cookies.set('userProfileId',jobseekerData.id)
       setData(jobseekerData);
 
       return jobseekerData;

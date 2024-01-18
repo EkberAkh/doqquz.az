@@ -1,4 +1,5 @@
 'use client'
+import Cookies from "js-cookie";
 import React, { useState } from 'react'
 import { useTranslations } from 'next-intl'
 import { Card, Box, CardBody, CardHeader, Heading, Flex, Button, Text, Input, useDisclosure, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, InputGroup, InputLeftAddon, InputRightAddon, FormControl, FormHelperText, FormLabel, Center, Divider, Textarea } from '@chakra-ui/react'
@@ -12,6 +13,7 @@ import ScrollToTop from '@/components/ScrollToTop'
 // import DatePicker from "react-datepicker";
 
 const Profile = () => {
+    const userProfileId = Cookies.get('userProfileId')
     const t = useTranslations()
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [name, setName] = React.useState('Salam')
@@ -46,6 +48,8 @@ const Profile = () => {
         return phoneNumberPattern.test(phoneNumber);
         // return phoneNumber.match("^[0-9]{10}$")
     }
+
+console.log(userProfileId);
 
     return (
         <Flex justify={'center'}>
