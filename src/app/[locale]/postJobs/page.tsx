@@ -127,7 +127,7 @@ const PostJobs = () => {
     <>
       <Box w="1250px" m="auto">
         <Text fontWeight="bold" fontSize="24px">
-          Vakansiya elanı paylaş
+          {t('Company.ManageJobs.actions.postAJob')}
         </Text>
         <Box boxShadow="1px 1px 5px 1px gray" p="20px 30px" m="50px 0">
           <Box mb="50px">
@@ -135,7 +135,7 @@ const PostJobs = () => {
               <BiAddToQueue color="blue" size="20px" />
               <Text fontWeight="bold" fontSize="18px">
                 {" "}
-                Vakansiya Paylaşma Formu
+                {t('Company.PostAJob.subTitle')}
               </Text>
             </Flex>
             <hr></hr>
@@ -143,14 +143,14 @@ const PostJobs = () => {
           <Box >
             <Flex alignItems='center' gap="30px" m="30px 0">
               <FormControl>
-                <FormLabel>Vəzifə/Başlıq </FormLabel>
+                <FormLabel>{t('Company.PostAJob.fields.title')} </FormLabel>
                 <Input
-               
+               backgroundColor='#fff'
                   onChange={(e) => {
                     setTitle(e.target.value);
                   }}
                   type="text"
-                  placeholder="Vəzifə/Başlıq"
+                  placeholder={t('Company.PostAJob.fields.title')}
                   h="50px"
                 />
               </FormControl>
@@ -172,6 +172,7 @@ const PostJobs = () => {
                           outline="none"
                           boxShadow="0 0px 1px 1px rgb(0 0 0 / 12%)"
                           color="#808080"
+
                           maxW="100%"
                           variant="filled"
                           placeholder={t("Common.JobType.label")}
@@ -217,8 +218,9 @@ const PostJobs = () => {
               <Box>
                 <Flex alignItems='flex-end' gap="20px">
                   <FormControl>
-                    <FormLabel>Maaş </FormLabel>
+                    <FormLabel>{t('Common.Salary.label')} </FormLabel>
                     <Input
+                    backgroundColor='#fff'
                       width="180px"
                       h="50px"
                       onChange={(e) => {
@@ -230,6 +232,7 @@ const PostJobs = () => {
                   </FormControl>
                   <FormControl>
                     <Input
+                      backgroundColor='#fff'
                       mt="24px"
                       width="180px"
                       h="50px"
@@ -250,35 +253,38 @@ const PostJobs = () => {
             <Flex alignItems='center' gap="30px" m="30px 0">
               <LocationInput setSelectedLocation={setlocation} />
               <FormControl>
-                <FormLabel>Bildiriş üçün ünvan </FormLabel>
+                <FormLabel>{t('Company.PostAJob.fields.notificationEmail')} </FormLabel>
                 <Input
+                  backgroundColor='#fff'
                   h="50px"
                   onChange={(e) => {
                     setNotify(e.target.value);
                   }}
                   type="text"
-                  placeholder="Bildiriş üçün ünvan"
+                  placeholder={t('Company.PostAJob.fields.notificationEmail')}
                 />
               </FormControl>
               <KeywordInput setSelectedKeywords={setSelectedKeywords} />
             </Flex>
-            <FormLabel> Təsvir</FormLabel>
+            <FormLabel> {t('Common.FormInputs.description.label')}</FormLabel>
             <Textarea
+                  backgroundColor='#fff'
               onChange={(e) => {
                 setDscription(e.target.value);
               }}
               mb="30px"
               h="130px"
             />
-            <FormLabel> Müraciyyət üçün</FormLabel>
+            <FormLabel>{t('Common.FormInputs.contactInformation.label')}</FormLabel>
             <Textarea
+                  backgroundColor='#fff'
               onChange={(e) => {
                 setContact(e.target.value);
               }}
               h="130px"
             />
-            <Button mt="30px" bg="green" p="20px 35px" onClick={handleSubmit}>
-              Yarat
+            <Button mt="30px" _hover={{opacity:'.4'}} color='#fff' backgroundColor='#2a41e8' p="20px 35px" onClick={handleSubmit}>
+              {t('Common.Action.CREATE')}
             </Button>
           </Box>
       
