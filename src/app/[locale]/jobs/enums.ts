@@ -152,3 +152,11 @@ export enum ESalaryType {
     MONTHLY = 'MONTHLY',
     HOURLY = 'HOURLY',
 }
+
+export enum EJobType {
+    FULL = 'FULL',
+    PART = 'PART',
+    FREELANCE = 'FREELANCE',
+    INTERSHIP = 'INTERSHIP',
+    TEMPORARY = 'TEMPORARY',
+}
