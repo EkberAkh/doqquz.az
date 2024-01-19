@@ -5,7 +5,7 @@
         "title": "Управление вакансиями",
         "subTitle": "Мои вакансии",
         "empty": "У вас нет вакансии",
-        "postedOn":"Опубликовано {{date}}",
+        "postedOn":"Опубликовано",
         "actions": {
             "candidates":"Управлять кандидатами",
             "postAJob":"Опубликовать вакансию"
@@ -28,6 +28,6 @@
         "requiredSkills":"Требуемые навыки",
         "contactInformation": "Как подать заявку?",
         "description":"Описание вакансии",
-        "share":"Интересно? <0>Поделиться этим!</0>"
+        "share":"Интересно? <NavigationLink>Поделиться этим!</NavigationLink>"
     }
 }
