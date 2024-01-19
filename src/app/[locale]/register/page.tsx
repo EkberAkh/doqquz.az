@@ -76,7 +76,6 @@ const toast = useToast();
     
       toast({
         title: t('Common.Success.default'),
-        description: "Your application has been successfully submitted!",
         status: "success",
         duration: 2000,
         isClosable: true,
