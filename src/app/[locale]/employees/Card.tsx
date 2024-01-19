@@ -12,9 +12,11 @@ interface ICardProps {
   expectedSalary: string;
   salaryType: string;
   userId: number;
+  imageUrl:string
 }
 const Card: React.FC<ICardProps> = ({
   id,
+  imageUrl,
   firstName,
   lastName,
   expectedSalary,
@@ -28,6 +30,7 @@ const Card: React.FC<ICardProps> = ({
   const [bookmarkId, setBookmarkId] = useState<number | null>(null);
   const [isLoading,setIsLoading] = useState<boolean>(false)
   const router = useRouter()
+  let role = localStorage.getItem('role')
   useEffect(() => {
     // Update local storage when isFav changes
     localStorage.setItem(`fav-${id}`, isFav.toString());
@@ -104,7 +107,7 @@ const Card: React.FC<ICardProps> = ({
         textAlign="center"
         position="relative"
       >
-        <Avatar marginBottom="14px" size="xl" />
+        <Avatar src={imageUrl && imageUrl}  marginBottom="14px" size="xl" />
         {/* <Box ml={'14rem'} mb={'1rem'} >
           <LetteredAvatar name={`${firstName || ''} ${lastName || ''}`}  radius={100}/>
         </Box> */}
@@ -121,7 +124,7 @@ const Card: React.FC<ICardProps> = ({
         width="36px"/>:
            <StarIcon
           margin="14px"
-          onClick={handleFavClick}
+          onClick={role === 'COMPANY' || role === 'JOBSEEKER' ? handleFavClick : ()=>{router.push('login')}}
           transition="all .4s"
           _hover={isFav ? {} : { backgroundColor: "black", color: "white" }}
           borderRadius="50%"

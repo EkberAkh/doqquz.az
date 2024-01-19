@@ -13,6 +13,8 @@ import { useSearchParams } from "next/navigation";
 import Cookies from "js-cookie";
 import { useTranslations } from "next-intl";
 import { NavigationLink } from "@/components/NavigationLink";
+import { useToast } from "@chakra-ui/react";
+
 interface YourJobType {
   category: string;
   contactInformation:string;
@@ -36,8 +38,16 @@ salaryType:string
 }
 const ViewJobs = () => {
   const [job, setJob] = useState<YourJobType>({});
+  const [jobSeeker,setJobSeeker]=useState([])
   const searchParams = useSearchParams();
   const jobId = searchParams.get("jobId");
+  const token = Cookies.get("token");
+  const userId = Cookies.get("userId");
+  const storedJobString = localStorage.getItem("currentJob");
+  const storedJob = JSON.parse(storedJobString as string);
+  const toast = useToast();
+
+  const userRole = localStorage.getItem('role')
 const t = useTranslations()
   useEffect(() => {
     const fetchJobs = async () => {
@@ -59,24 +69,45 @@ const t = useTranslations()
     fetchJobs();
   }, []);
 
+  useEffect(()=>{
+    async function fetchUserData() {
+      // Assuming you have the token stored in cookies
+      const requestOptions = {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Token: `${token}`, // Include the token in the Authorization header
+        },
+      };
+      try {
+        const response = await fetch(
+          `https://neo-814m.onrender.com/v1/jobseeker/userId/${userId}`,
+          requestOptions
+        );
+        if (!response.ok) {
+          throw new Error(`Error: ${response.status}`);
+        }
+        const data = await response.json();
+        setJobSeeker(Array.isArray(data) ? data : [data]);
+      console.log('jobSeeker data:', data);
+        // Directly return the role and id from this functio
+      } catch (error) {
+        console.error("There was an error fetching the user data:", error);
+      }
+    }
+     fetchUserData()
+  },[])
 
+console.log(job);
 
-
-  const storedJobString = localStorage.getItem("currentJob");
-  const storedJob = JSON.parse(storedJobString as string);
-
-  const userRole = localStorage.getItem('role')
-
-  const token = Cookies.get("token");
+ console.log(jobSeeker);
+ 
   const handleApplyClick = async () => {
     try {
       const payload = {
-        type: "JOBSEEKER",
-        jobseeker: { storedJob },
-        post: null,
+       jobseekers:jobSeeker
       };
-  
-      const response = await fetch(`https://neo-814m.onrender.com/v1/post/apply/${storedJob.id}`, {
+      const response = await fetch(`https://neo-814m.onrender.com/v1/post/apply/${jobId}`, {
         method: 'POST',
         headers: {
           "Content-Type": "application/json",
@@ -84,12 +115,17 @@ const t = useTranslations()
         },
         body: JSON.stringify(payload),
       });
-  
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
-  
       console.log('Application submitted successfully!');
+      toast({
+        title: "Application submitted.",
+        description: "Your application has been successfully submitted!",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      });
     } catch (error) {
       console.error('Error submitting application:', error);
     }

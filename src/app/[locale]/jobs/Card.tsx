@@ -31,6 +31,7 @@ const Card: React.FC<ICardProps> = ({
   const [isFav, setIsFav] = useState<boolean>(initialIsFav);
   const [isLoading,setIsLoading] = useState<boolean>(false)
   const [bookmarkId, setBookmarkId] = useState<number | null>(null);
+  let role = localStorage.getItem('role')
   useEffect(() => {
     // Update local storage when isFav changes
     localStorage.setItem(`fav-jobs-${id}`, isFav.toString());
@@ -133,7 +134,7 @@ const Card: React.FC<ICardProps> = ({
           padding="7px 7px 9px 7px"/>
           : <StarIcon
           margin="18px"
-          onClick={handleFavClick}
+          onClick={role === 'COMPANY' || role === 'JOBSEEKER' ? handleFavClick : ()=>{router.push('login')}}
           transition="all .4s"
           _hover={isFav ? {} : { backgroundColor: "black", color: "white" }}
           borderRadius="50%"
