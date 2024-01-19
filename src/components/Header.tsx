@@ -290,15 +290,17 @@ console.log(path);
                     _active={{}}
                     _hover={{}}
                   >
+
                     {userData?.imageUrl ? <Avatar src={userData?.imageUrl}/>:<LetteredAvatar name={role === "JOBSEEKER"
                             ? `${data?.firstName} ${data?.lastName}`
                             : `${data?.name}`}/> }
-                     
+
                   </Box>
                 </PopoverTrigger>
                 <PopoverContent padding="10px" right={'1rem'} bg="white">
                   <PopoverCloseButton />
                   <PopoverHeader gap="10px" display="flex">
+
                   {userData?.imageUrl ? <Avatar src={userData?.imageUrl}/>:<LetteredAvatar name={role === "JOBSEEKER"
                             ? `${data?.firstName} ${data?.lastName}`
                             : `${data?.name}`}/> }
