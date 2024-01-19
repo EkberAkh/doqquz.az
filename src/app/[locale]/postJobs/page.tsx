@@ -58,6 +58,7 @@ const PostJobs = () => {
   const [jobTypeValue, setJobTypeValue] = useState("");
   
   const jobTypes = Object.entries(EJobType);
+  
   const handleSubmit = async (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     const payload = {
@@ -143,7 +144,7 @@ const PostJobs = () => {
           <Box >
             <Flex alignItems='center' gap="30px" m="30px 0">
               <FormControl>
-                <FormLabel>{t('Company.PostAJob.fields.title')} </FormLabel>
+                <FormLabel>{t('Company.PostAJob.fields.title')}</FormLabel>
                 <Input
                backgroundColor='#fff'
                   onChange={(e) => {
