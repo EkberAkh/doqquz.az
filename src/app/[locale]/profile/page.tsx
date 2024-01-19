@@ -1,6 +1,6 @@
 'use client'
 import { useTranslations } from 'next-intl'
-import { Card, Box, CardBody, CardHeader, Heading, Flex, Button, Text, Input, useDisclosure, Center } from '@chakra-ui/react'
+import { Card, Box, CardBody, CardHeader, Heading, Flex, Button, Text, Input, useDisclosure, Center, Avatar } from '@chakra-ui/react'
 import { colorObjects } from '@/consts'
 import { MdOutlineAccountCircle, MdOutlineFaceUnlock, MdOutlineDesktopMac, MdOutlineLibraryBooks } from "react-icons/md";
 import 'react-phone-input-2/lib/style.css'
@@ -30,7 +30,6 @@ const Profile = () => {
             const response = await fetch(`https://neo-814m.onrender.com/v1/user/${jobId}`);
             const data1 = await response.json();
             setData1(data1)
-            console.log(data1);
         } catch (error) {
             console.error(error);
         }
@@ -44,6 +43,8 @@ const Profile = () => {
     
     YourComponent();
 
+    console.log('data' , data);
+    console.log('data1', data1);
 
 
     return (
@@ -62,9 +63,10 @@ const Profile = () => {
 
                     <CardBody p='30px'>
                         <Flex >
-                            <Box w='138px' h='138px' borderRadius='100px' bgColor={colorObjects.gray.border} marginRight='30px' border={'1px solid #2a41e8'}>
+                            <Avatar src={data1?.imageUrl} size='2xl' marginRight='30px' />
+                            {/* <Box w='138px' h='138px' borderRadius='100px' bgColor={colorObjects.gray.border} marginRight='30px' border={'1px solid #2a41e8'}>
 
-                            </Box>
+                            </Box> */}
 
                            {data1 && <Box w='87%'>
                                 <Flex columnGap='30px' mb='30px'>
@@ -75,7 +77,7 @@ const Profile = () => {
 
                                     <Box w='50%'>
                                         <Text mb='20px' fontSize='1.3rem'>{t('Common.FormInputs.phoneNumber.label')}</Text>
-                                        <Text> ----</Text>
+                                        <Text> +{data1?.contactNumber}</Text>
                                     </Box>
 
                                 </Flex>
