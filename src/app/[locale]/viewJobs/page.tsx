@@ -1,5 +1,5 @@
 "use client";
-import { Box, Flex, Text, Button } from "@chakra-ui/react";
+import { Box, Flex, Text, Button, color } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { BiDollarCircle } from "react-icons/bi";
@@ -11,8 +11,12 @@ import { FaFacebookF } from "react-icons/fa";
 import { BsBagPlus } from "react-icons/bs";
 import { useSearchParams } from "next/navigation";
 import Cookies from "js-cookie";
+import { useTranslations } from "next-intl";
+import { NavigationLink } from "@/components/NavigationLink";
 interface YourJobType {
-  companyName: string;
+  category: string;
+  contactInformation:string;
+  description:string;
   title: string;
   city: string;
   type: string;
@@ -21,25 +25,32 @@ interface YourJobType {
   currency: string;
   createdAt: string;
   id: number;
-  location: any;
+  location:{
+    city:string;
+    country:string;
+  }
+salaryType:string
   company: any;
-  skills: any
+  skills: any;
 
 }
 const ViewJobs = () => {
-  const [allJobs, setAllJobs] = useState<YourJobType[]>([]);
-
+  const [job, setJob] = useState<YourJobType>({});
+  const searchParams = useSearchParams();
+  const jobId = searchParams.get("jobId");
+const t = useTranslations()
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const response = await fetch('https://neo-814m.onrender.com/v1/post/list');
+        const response = await fetch(`https://neo-814m.onrender.com/v1/post/${jobId}`);
 
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const data = await response.json();
+        setJob(data)
 
-        setAllJobs(data.list);
+
       } catch (error) {
         console.error('Fetching jobs failed:', error);
       }
@@ -48,8 +59,7 @@ const ViewJobs = () => {
     fetchJobs();
   }, []);
 
-  const searchParams = useSearchParams();
-  const jobId = searchParams.get("jobId");
+
 
 
   const storedJobString = localStorage.getItem("currentJob");
@@ -84,6 +94,8 @@ const ViewJobs = () => {
       console.error('Error submitting application:', error);
     }
   };
+
+  
   return (
     <>
       <>
@@ -97,21 +109,22 @@ const ViewJobs = () => {
                   </Box>
                   <Box mt="10px">
                     <Text fontWeight="bold" fontSize="30px">
-                      {storedJob.title}
+                      {job?.title}
                     </Text>
                     <Text fontWeight="bold" fontSize="20px">
-                      doktor
+                    {t(`Common.INDUSTRIES.${job?.category}`)}
                     </Text>
                     <Flex gap="10px" mt="10px">
-                      <FaMapMarkerAlt size="20px" />
-                      <Text> {storedJob?.location?.city}</Text>
+                     
+                     { job?.location?.country && <><FaMapMarkerAlt size="20px" />
+                      <Text>{job?.location?.country}  {job?.location?.city}</Text> </> }
                     </Flex>
                   </Box>
                 </Flex>
               </Box>
               <Box p="24px" bg="white" m="50px">
-                <Text>AYLIQ</Text>
-                <Text fontSize="30px">{storedJob?.maxEstimatedBudget} - {storedJob?.minEstimatedBudget} {storedJob?.currency}</Text>
+                <Text>{t(`Common.JobType.${job?.type}`)}</Text>
+                <Text fontSize="30px">{job?.maxEstimatedBudget} - {job?.minEstimatedBudget} {job?.currency}</Text>
               </Box>
             </Flex>
           </Box>
@@ -119,22 +132,25 @@ const ViewJobs = () => {
         <Box w="1200px" m="50px auto">
           <Flex>
             <Box w="800px">
-              <Text fontWeight="bold">Isin tesviri</Text>
-              <Text p="30px 40px 30px 0">{storedJob?.type}</Text>
-              <Text fontWeight="bold">Tələb olunan bacarıqlar</Text>
+              <Text fontWeight="bold">{t('Company.ViewJob.description')}</Text>
+              <Text p="30px 40px 30px 0">{job?.description}</Text>
+              <Text fontWeight="bold">{t('Company.ViewJob.requiredSkills')}</Text>
               <Box p="30px 40px 0 0">
-              <Text>{storedJob?.skills && storedJob.skills.length > 0 ? storedJob.skills[0].name : ''}</Text>
+              <Text>{Array.isArray(job.skills) && job.skills.length > 0 ? job.skills[0].name : '--' }</Text>
+
               </Box>
               <Text fontWeight="bold" p="30px 40px 30px 0">
-                Müraciyyət üçün{" "}
+                {t('Common.FormInputs.contactInformation.label')}
               </Text>
-              <Text>234354 zeng vur</Text>
+              <Text>{job?.contactInformation}</Text>
               <Flex
                 p="30px 40px 30px 0"
                 alignItems="center"
                 justifyContent="space-between"
               >
-                <Text>Maraqlıdır? Vakansiyanı paylaş!</Text>
+                <Text>{t.rich('Company.ViewJob.share',{
+                  NavigationLink:(chunks)=><NavigationLink style={{color:'blue'}} href='/postJobs'>{chunks}</NavigationLink>
+                })}</Text>
                 <Box display="flex">
                   <Box
                     ml="30px"
@@ -167,8 +183,11 @@ const ViewJobs = () => {
                     <FaTelegram color="blue" size="18px" />
                   </Box>
                   <Box
-                    ml="30px"
-                    cursor="pointer"
+                      ml="30px"
+                      bg="gray.100"
+                      p="18px"
+                      borderRadius="50%"
+                      cursor="pointer"
                     _hover={{ bg: "blue.300", color: "white" }}
                   >
                     <FaFacebookF color="blue" size="18px" />
@@ -195,17 +214,17 @@ const ViewJobs = () => {
               <LocationItem
                 icon={<FaMapMarkerAlt color="blue" size="20px" />}
                 label="Ünvan"
-                content={storedJob?.location?.city}
+                content={job?.location?.city}
               />
               <LocationItem
                 icon={<BsBagPlus color="blue" size="20px" />}
                 label="İş Növü"
-                content={storedJob?.salaryType}
+                content={t(`Common.SalaryType.${job?.salaryType}`)}
               />
               <LocationItem
                 icon={<BiDollarCircle color="blue" size="25px" />}
                 label="Maaş"
-                content={`${storedJob?.maxEstimatedBudget ? storedJob.maxEstimatedBudget : ''} ${storedJob?.currency ? storedJob.currency : ''}`.trim()}
+                content={`${job?.maxEstimatedBudget ? job.maxEstimatedBudget : ''} ${job?.currency ? job?.currency : ''}`.trim()}
               />
               <LocationItem
                 icon={<GoClock color="blue" size="22px" />}

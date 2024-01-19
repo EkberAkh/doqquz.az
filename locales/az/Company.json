@@ -5,7 +5,7 @@
         "title": "Vakansiyaları idarə et",
         "subTitle": "Vakansiya siyahım",
         "empty": "Vakansiya elanınız yoxdur",
-        "postedOn":"{{date}} -də paylaşılıb",
+        "postedOn":"-də paylaşılıb",
         "actions": {
             "candidates":"Namizədləri idarə et",
             "postAJob":"Vakansiya elanı paylaş"
@@ -28,6 +28,6 @@
         "requiredSkills":"Tələb olunan bacarıqlar",
         "contactInformation": "Müraciyyət üçün",
         "description":"İşin təsviri",
-        "share":"Maraqlıdır? <0>Vakansiyanı paylaş!</0>"
+        "share":"Maraqlıdır? <NavigationLink>Vakansiyanı paylaş!</NavigationLink>"
     }
 }
