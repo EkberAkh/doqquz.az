@@ -58,13 +58,14 @@ import { IoReorderThreeOutline } from "react-icons/io5";
 import { GoClock } from "react-icons/go";
 import Cookies from "js-cookie";
 import { EJobType } from "../jobs/enums";
-
+import { useToast } from "@chakra-ui/react";
 const Profile = () => {
   const userProfileId = Cookies.get("userProfileId");
   const userId = Cookies.get("userId");
-  
+  const toast = useToast();
   const token = Cookies.get("token");
   const t = useTranslations();
+  let role = localStorage.getItem("role")
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [name, setName] = React.useState("Salam");
   const [completionDate, setCompletionDate] = useState(new Date());
@@ -88,12 +89,47 @@ const Profile = () => {
   const [title, setTitle] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
   const fileInputRef = useRef(null);
-
+const [userInfo, setUserInfo] = useState()
 
   
+useEffect(()=>{
+  async function fetchUserData() {
+    // Assuming you have the token stored in cookies
 
+    const requestOptions = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Token: `${token}`,
+      },
+    };
 
+    try {
+      const response = await fetch(
+        "https://neo-814m.onrender.com/v1/user",
+        requestOptions
+      );
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status}`);
+      }
+      const data = await response.json();
+      setUserInfo(data)
+      
+      
+  
+    } catch (error) {
+      console.error("There was an error fetching the user data:", error);
+    }
+  }
+  fetchUserData()
+  
+},[])
 
+useEffect(()=>{
+  if (userInfo?.email) {
+    setEmail(userInfo.email);
+  }
+},[userInfo])
   const handleImageChange = (e) => {
     if (e.target.files && e.target.files[0]) {
       setSelectedImage(URL.createObjectURL(e.target.files[0]));
@@ -132,7 +168,17 @@ const Profile = () => {
         }
   
         const data = await response.json();
+        toast({
+          title: "Edit successful",
+          status: "success",
+          duration: 2000,
+          isClosable: true,
+        });
         console.log('Response data:', data);
+
+        if (data.imageUrl) {
+          setSelectedImage(data.imageUrl);
+        }
       } catch (error) {
         console.error('There was a problem with the fetch operation:', error);
       }
@@ -336,7 +382,7 @@ const Profile = () => {
     fetchData();
   }, []);
 
-  console.log(userProfileId);
+console.log(userInfo);
 
   return (
     <Flex justify={"center"}>
@@ -381,7 +427,11 @@ const Profile = () => {
               }}
               >
                  {!selectedImage && (
-   <Img src="../../../images/user.png"/>
+   userInfo?.imageUrl ? <Img  w="138px"
+   h="138px"
+   borderRadius="100px" src={ userInfo?.imageUrl}/>  : <Img  w="138px"
+   h="138px"
+   borderRadius="100px" src="../../../images/user.png"/>
   )}
   <input
     type="file"
@@ -398,6 +448,7 @@ const Profile = () => {
                       {t("Common.FormInputs.email.label")}
                     </Text>
                     <Input
+                    value={email}
                       placeholder="example@domain.com"
                       onChange={(e) => {
                         setEmail(e.target.value);
@@ -411,6 +462,7 @@ const Profile = () => {
                       {t("Common.FormInputs.phoneNumber.label")}
                     </Text>
                     <PhoneInput
+                    value={userInfo?.contactNumber}
                       country={"az"}
                       placeholder="+111 (11) 111-11-11"
                       onChange={(value) => {
@@ -540,7 +592,8 @@ const Profile = () => {
           </CardBody>
         </Card>
 
-        {activeModal === "profile" && (
+     {role === 'JOBSEEKER' &&  <Box>
+       {activeModal === "profile" && (
           <Modal onClose={onClose} size={"full"} isOpen={isOpen}>
             <ModalOverlay />
             <ModalContent>
@@ -1132,6 +1185,8 @@ const Profile = () => {
             </ModalContent>
           </Modal>
         )}
+        </Box> }
+      
       </Box>
       <ScrollToTop />
     </Flex>
