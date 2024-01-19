@@ -286,13 +286,20 @@ function Header() {
                     _active={{}}
                     _hover={{}}
                   >
-                    <LetteredAvatar name={`${data?.firstName || ''} ${data?.lastName || ''}`}/> 
+                   {role === 'JOBSEEKER' ? 
+                    <LetteredAvatar name={`${data?.firstName || ''} ${data?.lastName || ''}`}/> :
+                    <LetteredAvatar name={`${data?.name || ''}`}/>
+                  }
                   </Box>
                 </PopoverTrigger>
                 <PopoverContent padding="10px" right={'1rem'} bg="white">
                   <PopoverCloseButton />
                   <PopoverHeader gap="10px" display="flex">
-                    <LetteredAvatar name={`${data?.firstName || ''} ${data?.lastName || ''}`}/>
+
+                    {role === 'JOBSEEKER' ? 
+                    <LetteredAvatar name={`${data?.firstName || ''} ${data?.lastName || ''}`}/> :
+                    <LetteredAvatar name={`${data?.name || ''}`}/>
+                  }
                     <Box>
                       {!isLoading && data && (
                         <Text>
