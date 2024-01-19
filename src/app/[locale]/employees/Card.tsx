@@ -1,5 +1,5 @@
 import { ArrowForwardIcon, StarIcon } from "@chakra-ui/icons";
-import { Avatar, Box, Button, GridItem, Img, Text } from "@chakra-ui/react";
+import { Avatar, Box, Button, GridItem, Img, Spinner, Text } from "@chakra-ui/react";
 import { useTranslations } from "next-intl";
 import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
@@ -12,9 +12,11 @@ interface ICardProps {
   expectedSalary: string;
   salaryType: string;
   userId: number;
+  imageUrl:string
 }
 const Card: React.FC<ICardProps> = ({
   id,
+  imageUrl,
   firstName,
   lastName,
   expectedSalary,
@@ -26,13 +28,16 @@ const Card: React.FC<ICardProps> = ({
   );
   const [isHover, setisHover] = useState<boolean>(false);
   const [bookmarkId, setBookmarkId] = useState<number | null>(null);
+  const [isLoading,setIsLoading] = useState<boolean>(false)
   const router = useRouter()
+  let role = localStorage.getItem('role')
   useEffect(() => {
     // Update local storage when isFav changes
     localStorage.setItem(`fav-${id}`, isFav.toString());
   }, [isFav, id]);
   const t = useTranslations();
   const handleFavClick = async () => {
+    setIsLoading(true); 
     setIsFav(!isFav);
     const token = Cookies.get("token");
     let url, method, payload;
@@ -50,6 +55,7 @@ const Card: React.FC<ICardProps> = ({
       // Preparing for DELETE request
       if (!bookmarkId) {
         console.error("No bookmark ID available for deletion");
+        setIsLoading(false); 
         return;
       }
       url = `https://neo-814m.onrender.com/v1/bookmark/${bookmarkId}`;
@@ -82,6 +88,8 @@ const Card: React.FC<ICardProps> = ({
       );
     } catch (error) {
       console.error("Error in updating bookmark:", error);
+    }finally {
+      setIsLoading(false); // Stop loading after the operation is complete
     }
   };
 
@@ -99,7 +107,7 @@ const Card: React.FC<ICardProps> = ({
         textAlign="center"
         position="relative"
       >
-        <Avatar marginBottom="14px" size="xl" />
+        <Avatar src={imageUrl && imageUrl}  marginBottom="14px" size="xl" />
         {/* <Box ml={'14rem'} mb={'1rem'} >
           <LetteredAvatar name={`${firstName || ''} ${lastName || ''}`}  radius={100}/>
         </Box> */}
@@ -107,9 +115,16 @@ const Card: React.FC<ICardProps> = ({
           {`${firstName} ${lastName}`}
         </Text>
 
-        <StarIcon
+       {isLoading ? <Spinner  position="absolute"
+        padding="7px 7px 9px 7px"
+        margin="14px"
+        right="0"
+        top="0"
+        height="36px"
+        width="36px"/>:
+           <StarIcon
           margin="14px"
-          onClick={handleFavClick}
+          onClick={role === 'COMPANY' || role === 'JOBSEEKER' ? handleFavClick : ()=>{router.push('login')}}
           transition="all .4s"
           _hover={isFav ? {} : { backgroundColor: "black", color: "white" }}
           borderRadius="50%"
@@ -122,7 +137,7 @@ const Card: React.FC<ICardProps> = ({
           width="36px"
           color={isFav ? "#fff" : "silver"}
           cursor="pointer"
-        />
+        />}
       </Box>
       <Box
         justifyContent="space-around"

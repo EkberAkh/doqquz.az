@@ -12,6 +12,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { NavigationLink } from '@/components/NavigationLink'
 import { useRouter } from 'next/navigation'
+import { useToast } from "@chakra-ui/react";
 
 interface RegisterProps { }
 
@@ -27,6 +28,8 @@ interface FormData {
 const Register: React.FC<RegisterProps> = () => {
   const t = useTranslations();
 const router = useRouter()
+const toast = useToast();
+
   const [isFocused, setIsFocused] = useState(false);
   const [isFocused2, setIsFocused2] = useState(false);
   const [isFocused3, setIsFocused3] = useState(false);
@@ -70,15 +73,13 @@ const router = useRouter()
       if (!res.ok) {
         throw new Error(`HTTP error! Status: ${res.status}`);
       }
-      toast.success(t('Common.Success.default'), {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
+    
+      toast({
+        title: t('Common.Success.default'),
+        description: "Your application has been successfully submitted!",
+        status: "success",
+        duration: 2000,
+        isClosable: true,
       });
       router.push('login')
       return res.json();

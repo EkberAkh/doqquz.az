@@ -82,7 +82,7 @@ const Contact: React.FC<RegisterProps> = () => {
 
       toast.success(t('Common.Success.default'), {
         position: "top-center",
-        autoClose: 3000,
+        autoClose: 1000,
         hideProgressBar: true,
         closeButton: false,
         pauseOnHover: true,
@@ -217,7 +217,7 @@ const Contact: React.FC<RegisterProps> = () => {
       </Box>
       <ToastContainer
         position="top-right"
-        autoClose={5000}
+        autoClose={1000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick

@@ -11,7 +11,8 @@ interface Employee {
   expectedSalary: string;
   salaryType: string;
   user:{
-    id:number
+    id:number,
+    imageUrl:string
   }
 
 }
@@ -51,6 +52,7 @@ const Employees = () => {
     fetchJobs();
   }, [filterData]);
 
+  console.log(employees);
   
  
   
@@ -64,7 +66,7 @@ const Employees = () => {
         width="calc(100% - 379px)"
       >
    {employees.map((employee) =>(
-    <Card  key={employee.id} id={employee.id} userId={employee.user.id} firstName={employee.firstName} expectedSalary={employee.expectedSalary} lastName={employee.lastName} salaryType={employee.salaryType}/>
+    <Card  key={employee.id} id={employee.id} userId={employee.user.id} firstName={employee.firstName} expectedSalary={employee.expectedSalary} lastName={employee.lastName} salaryType={employee.salaryType} imageUrl={employee.user.imageUrl} />
    ))}
       </Grid>
     </Box>
