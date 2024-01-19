@@ -3,7 +3,7 @@ import { colorObjects } from "@/consts";
 import { useEffect } from "react";
 import { useState } from "react";
 
-import { Flex, Box, Text, Button, Center } from "@chakra-ui/react";
+import { Flex, Box, Text, Button, Center, Avatar } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import React from "react";
 import { DJobSeekers } from "../data/DJobSeekers";
@@ -103,7 +103,7 @@ export const LatestJobSeekers = () => {
                       flexDirection="column"
                       w="340px"
                     >
-                      <Box
+                      {/* <Box
                         position="absolute"
                         bgColor={colorObjects.gray.light}
                         w="39px"
@@ -111,16 +111,17 @@ export const LatestJobSeekers = () => {
                         top="15px"
                         right="15px"
                         borderRadius="100px"
-                      ></Box>
+                      ></Box> */}
                       <Center flexDirection="column">
-                        <Box
+                        <Avatar src={seeker.user.imageUrl} size='xl'/>
+                        {/* <Box
                           bgColor={colorObjects.gray.light}
                           w="104px"
                           height="104px"
                           borderRadius="100px"
                           flexDirection="column"
                           mb="8px"
-                        ></Box>
+                        ></Box> */}
                         <Text
                           fontSize="16px"
                           color={colorObjects.black.main}

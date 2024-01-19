@@ -8,16 +8,16 @@ const About = () => {
     <>
       <Box padding='20px' >
         <Box gap='20px' backgroundColor='white' boxShadow='0 2px 8px rgba(0,0,0,.08)' minH="384px" display="flex" mb='20px' >
-          <Box padding='20px' backgroundImage="url('../../../../images/underline.png')"
+          <Box padding='20px' backgroundPosition='center' backgroundImage="url('../../../../images/underline.png')"
             backgroundSize="contain"
             backgroundRepeat="no-repeat"
-
+gap='60px'
             display='flex'
             justifyContent='center'
             flexDirection='column'
             textAlign='center'>
-            <Heading fontSize='48px' fontWeight={500} mb='12px'>{t("About.mission.title")}</Heading>
-            <Text width='400px' fontSize='20px' fontWeight='400'>
+            <Heading fontSize='48px'  fontWeight={500} >{t("About.mission.title")}</Heading>
+            <Text  width='400px' fontSize='20px' fontWeight='400'>
               {t("About.mission.body")}
             </Text>
 

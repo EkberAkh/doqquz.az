@@ -27,6 +27,7 @@ import { basicSchema } from "./const";
 import { useFormik } from "formik";
 import { useRouter } from "next/navigation";
 import { NavigationLink } from "@/components/NavigationLink";
+import { useToast } from "@chakra-ui/react";
 
 type FormData = {
   email: string;
@@ -37,6 +38,7 @@ const Login1: React.FC = () => {
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const [isFocused2, setIsFocused2] = useState<boolean>(false);
   const [isHovered, setIsHovered] = useState<boolean>(false);
+  const toast = useToast();
 
   const handleFocus = () => setIsFocused(true);
   const handleBlur = () => setIsFocused(false);
@@ -71,30 +73,23 @@ const router = useRouter()
       .then((token1) => {
         setToken(token1);
         Cookies.set("token", token1, { expires: 7 }); // expires in 7 days
-        toast.success(`🚀 Login successful!`, {
-          position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
+        toast({
+          title: "Login successful",
+          status: "success",
+          duration: 2000,
+          isClosable: true,
         });
+    
         router.push('/')
       })
       .catch((error) => {
         console.error("username or password is wrong");
         setError("username or password is wrong");
-        toast.error(`🦄 ${error.message}`, {
-          position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
+        toast({
+          title: "Username or password is wrong",
+          status: "error",
+          duration: 2000,
+          isClosable: true,
         });
       });
 

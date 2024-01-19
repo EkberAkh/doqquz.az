@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import logo from "../../public/images/logo.svg";
-import dropdown from "../../public/images/down-arrow-square-outlined-button.png";
 import {
   Image,
   Button,
@@ -54,6 +53,7 @@ interface IData {
 }
 function Header() {
   const token = Cookies.get("token");
+  const [userData,setUserData] = useState()
   const [data, setData] = useState<IData>();
   const [isLoading, setIsLoading] = useState(true);
   const [role, setRole] = useState("");
@@ -62,6 +62,7 @@ function Header() {
   const router = useRouter();
   const currentLang = useCurrentLang();
   const path = usePathname();
+console.log(path);
 
   const t = useTranslations();
 
@@ -69,7 +70,7 @@ function Header() {
     Cookies.remove("token");
     Cookies.remove("userId");
     localStorage.removeItem("role");
-    location.reload();
+   location.reload()
   };
 
   async function fetchUserData() {
@@ -94,6 +95,7 @@ function Header() {
       const data = await response.json();
       
       console.log(data.role);
+      setUserData(data)
       setRole(data.role);
       localStorage.setItem("role", data.role);
       // Directly return the role and id from this function
@@ -151,6 +153,8 @@ function Header() {
       setIsLoading(false); // Set loading to false if there is no token
     }
   }, [token]);
+  console.log(userData);
+  
   return (
     <ThemeProvider theme={extendedTheme} >
       <HStack
@@ -228,12 +232,12 @@ function Header() {
                   </NavigationLink>
                 </MenuItem>
                 <MenuItem>
-                  <NavigationLink href="/managejobs">
+                  <NavigationLink href={role === 'COMPANY'? "/managejobs" : '/login'}>
                     {t("Common.Nav.manage_jobs")}
                   </NavigationLink>
                 </MenuItem>
                 <MenuItem>
-                  <NavigationLink href="/postJobs">
+                  <NavigationLink href={role === 'COMPANY' ? "/postJobs":'/login'}>
                     {t("Common.Nav.post_a_job")}
                   </NavigationLink>
                 </MenuItem>
@@ -286,17 +290,22 @@ function Header() {
                     _active={{}}
                     _hover={{}}
                   >
-                    <LetteredAvatar name={`${data?.firstName || ''} ${data?.lastName || ''}`}/> 
+                    {userData?.imageUrl ? <Avatar src={userData?.imageUrl}/>:<LetteredAvatar name={role === "JOBSEEKER"
+                            ? `${data?.firstName} ${data?.lastName}`
+                            : `${data?.name}`}/> }
+                     
                   </Box>
                 </PopoverTrigger>
                 <PopoverContent padding="10px" right={'1rem'} bg="white">
                   <PopoverCloseButton />
                   <PopoverHeader gap="10px" display="flex">
-                    <LetteredAvatar name={`${data?.firstName || ''} ${data?.lastName || ''}`}/>
+                  {userData?.imageUrl ? <Avatar src={userData?.imageUrl}/>:<LetteredAvatar name={role === "JOBSEEKER"
+                            ? `${data?.firstName} ${data?.lastName}`
+                            : `${data?.name}`}/> }
                     <Box>
                       {!isLoading && data && (
                         <Text>
-                          {" "}
+                        
                           {role === "JOBSEEKER"
                             ? `${data.firstName} ${data.lastName}`
                             : `${data.name}`}
