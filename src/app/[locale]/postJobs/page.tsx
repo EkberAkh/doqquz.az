@@ -39,6 +39,7 @@ import Cookies from "js-cookie";
 import { ToastContainer, toast } from "react-toastify";
 import { FaCheck } from "react-icons/fa";
 import { useRouter } from "next/navigation";
+import { useToast } from "@chakra-ui/react";
 const PostJobs = () => {
   const token = Cookies.get('token')
   const t = useTranslations();
@@ -56,7 +57,7 @@ const PostJobs = () => {
   const [description, setDscription] = useState("");
   const [contact, setContact] = useState("");
   const [jobTypeValue, setJobTypeValue] = useState("");
-  
+  const toast = useToast();
   const jobTypes = Object.entries(EJobType);
   
   const handleSubmit = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -92,7 +93,12 @@ const PostJobs = () => {
       }
   
       const data = await response.json();
-     
+      toast({
+        title: t('Common.Success.default'),
+        status: "success",
+        duration: 2000,
+        isClosable: true,
+      });
    
       router.push('jobs')
     } catch (error) {
