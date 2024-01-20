@@ -232,7 +232,7 @@ export const Footer = () => {
                   </NavigationLink>
                 </Text>
                 <Text fontSize="14px" color="#c0c0c0">
-                  <NavigationLink href="/companies">
+                  <NavigationLink href="/company">
                     {t("Common.Nav.browse_companies")}
                   </NavigationLink>
                 </Text>
