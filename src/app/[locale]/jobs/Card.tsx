@@ -3,6 +3,7 @@ import { Avatar, Box, Flex, GridItem, Img, Spinner, Text } from "@chakra-ui/reac
 import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
+import {format} from 'date-fns'
 
 interface ICardProps {
   companyName: string;
@@ -99,6 +100,12 @@ const Card: React.FC<ICardProps> = ({
   const clickHandler = () => {
     router.push(`viewJobs?jobId=${encodeURIComponent(id)}`);
   };
+
+  const formatCreatedAt = (createdAt) => {
+    const date = new Date(createdAt);
+    return format(date, 'dd.MM.yyyy')
+  }
+
   return (
     <GridItem
 
@@ -201,7 +208,7 @@ const Card: React.FC<ICardProps> = ({
             <Box gap="10px" alignItems="center" display="flex">
               <Img height="16px" width="16px" src="../../../images/clock.png" />
               <Text color="#777" fontSize="14px">
-                {createdAt}
+                {formatCreatedAt(createdAt)}
               </Text>
             </Box>
           </Box>
