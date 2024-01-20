@@ -14,6 +14,7 @@ interface ICardProps {
   currency: string;
   createdAt: string;
   id: number;
+  imageUrl:string;
 }
 
 const Card: React.FC<ICardProps> = ({
@@ -26,6 +27,7 @@ const Card: React.FC<ICardProps> = ({
   maxEstimatedBudget,
   currency,
   createdAt,
+  imageUrl
 }) => {
   const initialIsFav = localStorage.getItem(`fav-jobs-${id}`) === "true";
   const [isFav, setIsFav] = useState<boolean>(initialIsFav);
@@ -111,7 +113,7 @@ const Card: React.FC<ICardProps> = ({
         position="relative"
       >
         <Flex gap="20px" alignItems="center">
-          <Avatar size="md" />
+          <Avatar src={imageUrl} size="md" />
 
           <Box cursor="pointer" onClick={clickHandler} display="flex" flexDirection="column" alignItems="flex-start">
             <Text as="h4" color="grey" fontSize="16px">

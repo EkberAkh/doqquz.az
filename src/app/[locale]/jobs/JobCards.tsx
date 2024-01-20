@@ -57,6 +57,7 @@ const JobCards:React.FC<IJobCards> =  ({ filterData }) => {
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentJobs = allJobs.slice(indexOfFirstItem, indexOfLastItem);
 
+  console.log(currentJobs);
   
   return (
     <>
@@ -69,6 +70,7 @@ const JobCards:React.FC<IJobCards> =  ({ filterData }) => {
       
       {currentJobs.map((job: any) => (
           <Card
+          imageUrl={job.user.imageUrl}
           id={job.id}
           key={job.id}
           title={job.title}
