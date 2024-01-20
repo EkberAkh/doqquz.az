@@ -19,7 +19,7 @@ import { ESalaryType } from "./enums";
 interface IJobCategory {
   setSelectedSalary:Dispatch<SetStateAction<string>>
 }
-const SalaryType:React.FC<IJobCategory> = ({setSelectedSalary}) => {
+const SalaryType:React.FC<IJobCategory> = ({selectedSalary,setSelectedSalary}) => {
   const t = useTranslations();
   const salaries = Object.entries(ESalaryType);
 
@@ -59,7 +59,7 @@ const SalaryType:React.FC<IJobCategory> = ({setSelectedSalary}) => {
             
             >
               <AutoCompleteInput
-                 value={inputValue}
+                 value={selectedSalary}
                  onChange={handleInputChange}
                 id="salaryInput"
                 borderRadius="4px"

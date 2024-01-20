@@ -32,6 +32,7 @@ const CurrencyType:React.FC<ICurrency> = ({ selectedCurrency, setSelectedCurrenc
           <>
             <InputGroup>
               <AutoCompleteInput
+               value={selectedCurrency}
                 borderRadius="4px"
                 minH="48px"
                 fontSize="16px"

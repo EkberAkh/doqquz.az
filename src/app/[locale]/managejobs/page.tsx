@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react';
-import { Box, Flex, Text, Link } from '@chakra-ui/react';
+import { Box, Flex, Text,Button } from '@chakra-ui/react';
 import React from 'react'
 import { useEffect } from "react";
 import { BiAddToQueue } from "react-icons/bi";
@@ -11,14 +11,14 @@ import { FaPencil } from "react-icons/fa6";
 import Cookies from "js-cookie";
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
-
+import axios from 'axios';
 
 
 const ManageJobs = () => {
     const [jobdata, setJobdata] = useState([]);
     const userId = Cookies.get("userId");
     const t = useTranslations()
-const router = useRouter()
+    const router = useRouter()
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -38,6 +38,36 @@ const router = useRouter()
         fetchData();
     }, [userId]);
 
+    const token = Cookies.get('token');
+
+
+    const handleDelete = async (jobId) => {
+        console.log('Deleting job with id:', jobId);
+        try {
+            const response = await axios.delete(`https://neo-814m.onrender.com/v1/post/delete/${jobId}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    Token: token,                     // Include the token in the headers
+                },
+            });
+    
+            if (!response.data.success) {
+                // Check for specific error messages or handle different status codes
+                if (response.status === 404) {
+                    console.error('Job not found:', jobId);
+                } else {
+                    console.error('Delete request failed with status:', response.status);
+                }
+                throw new Error('Delete request failed');
+            }
+    
+            // Update UI state to remove the deleted item
+            setJobdata((prevJobdata) => prevJobdata.filter((item) => item.id !== jobId));
+        } catch (error) {
+            console.error('Delete error:', error.message);
+        }
+    };
+
     console.log(jobdata);
 
 
@@ -54,7 +84,7 @@ const router = useRouter()
                         <hr></hr>
                         <Box p="30px">
                             <Flex gap="10px">
-                                <Text cursor='pointer' onClick={()=>{
+                                <Text cursor='pointer' onClick={() => {
                                     router.push(`viewJobs?jobId=${encodeURIComponent(item.id)}`);
                                 }} fontWeight="bold" fontSize="18px" > {item.title}</Text>
                                 <Text
@@ -81,7 +111,7 @@ const router = useRouter()
                                     <FaPencil size="24px" />
                                 </Box>
                                 <Box borderRadius="50%" p="3px 4px" boxShadow="1px 1px 5px 1px gray">
-                                    <MdDeleteOutline size="30px" />
+                                    <MdDeleteOutline size="30px" onClick={() => handleDelete(item.id)} />
                                 </Box>
 
                             </Flex>
