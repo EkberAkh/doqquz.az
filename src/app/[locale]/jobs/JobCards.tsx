@@ -1,5 +1,5 @@
 "use client"
-import { Button, Flex, Grid, Text } from "@chakra-ui/react";
+import { Button, Flex, Grid, HStack, Text } from "@chakra-ui/react";
 import { useTranslations } from "next-intl";
 import React, { useEffect, useState } from "react";
 import Card from "./Card";
@@ -11,7 +11,8 @@ const JobCards:React.FC<IJobCards> =  ({ filterData }) => {
 
   const t = useTranslations();
   const [allJobs, setAllJobs] = useState([]); 
-  console.log(filterData);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
   useEffect(() => {
     const fetchJobs = async () => {
       try {
@@ -41,7 +42,20 @@ const JobCards:React.FC<IJobCards> =  ({ filterData }) => {
   }, [filterData]);
 
 
-console.log(allJobs);
+  const pageCount = Math.ceil(allJobs.length / itemsPerPage);
+  const changePage = (pageNumber: number) => {
+    if (pageNumber < 1) {
+      setCurrentPage(1); // Stay on the first page if the page number goes below 1
+    } else if (pageNumber > pageCount) {
+      setCurrentPage(pageCount); // Stay on the last page if the page number goes beyond the total page count
+    } else {
+      setCurrentPage(pageNumber);
+    }
+  };
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentJobs = allJobs.slice(indexOfFirstItem, indexOfLastItem);
 
   
   return (
@@ -53,9 +67,9 @@ console.log(allJobs);
         width="calc(100% - 379px)"
       >
       
-       {allJobs.map((job:any) => (
-        <Card
-        id={job.id}
+      {currentJobs.map((job: any) => (
+          <Card
+          id={job.id}
           key={job.id}
           title={job.title}
           minEstimatedBudget={job.minEstimatedBudget}
@@ -65,47 +79,28 @@ console.log(allJobs);
           createdAt={job.createdAt}
           companyName={job.company[0].name}
           city={job.location && job.location.city}
-        />
-      ))}
+          />
+        ))}
      
       </Grid>
-      {/* <Flex justifyContent="center" alignItems="center" marginTop="20px">
-        <Button
-          onClick={() => changePage(currentPage - 1)}
-          disabled={currentPage === 1}
-          marginRight="12px"
-        >
-          Previous
+      <HStack spacing="20px" justify="center" p="4">
+        <Button onClick={() => changePage(currentPage - 1)} disabled={currentPage === 1}>
+          Prev
         </Button>
-        <Text>
-          Page {currentPage} of {totalPages}
-        </Text>
-        <Button
-          onClick={() => changePage(currentPage + 1)}
-          disabled={currentPage === totalPages}
-          marginLeft="12px"
-        >
+        {Array.from({ length: pageCount }, (_, i) => i + 1).map((number) => (
+          <Button key={number} onClick={() => changePage(number)} isActive={number === currentPage}>
+            {number}
+          </Button>
+        ))}
+        <Button onClick={() => changePage(currentPage + 1)} disabled={currentPage === pageCount}>
           Next
         </Button>
-      </Flex> */}
-
-
-      {/* <Flex
-        justifyContent="center"
-        alignItems="center"
-        width="calc(100% - 379px)"
-        flexDirection="column"
-      >
-        <Img marginBottom="16px" src="../../../../images/noRecord.png" />
-        <Box textAlign="center">
-          {t.rich("Common.noRecord", {
-            div: (chunks) => <div>{chunks}</div>,
-            span: (chunks) => <span>{chunks}</span>,
-          })}
-        </Box>
-      </Flex> */}
+      </HStack>
+  
     </>
   );
 };
 
 export default JobCards;
+
+

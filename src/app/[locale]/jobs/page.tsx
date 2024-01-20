@@ -13,7 +13,7 @@ const Jobs = () => {
     setFilterData(newFilterData);
   };
   return (
-    <Box display="flex" w="100%" flexWrap="wrap">
+    <Box display="flex" justifyContent='center' w="100%" flexWrap="wrap">
       <JobsFilter locationInput jobType onFilterChange={handleFilterChange} />
       <JobCards filterData={filterData}/>
     </Box>
