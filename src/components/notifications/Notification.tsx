@@ -17,7 +17,7 @@ function Notification() {
                         <NotificationIcon width="28" height="28" />
                     </Box>
                 </PopoverTrigger>
-                <PopoverContent right={'1rem'} bg={'#fff'} width={'22rem'} border={'none'}>
+                <PopoverContent right={'1rem'} bg={'#fff'} width={'21rem'} border={'none'}>
                     <Flex borderBottom={'1px solid rgb(119, 119, 119)'}>
                         <Flex justify={'space-between'} w={'100%'} p={'1rem'} >
                             <PopoverHeader color={'red'} border={'none'} fontWeight={600} fontSize={'1.1rem'}>Notifications</PopoverHeader>

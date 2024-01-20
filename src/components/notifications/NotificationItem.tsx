@@ -48,7 +48,7 @@ function NotificationItem() {
         <HStack key={notification.id}  p={'1rem'}>
           <NotificationManIcon width='40' height='40' />
           <HStack alignItems={'flex-start'} ml={'0.2rem'} w={'95%'} flexWrap={'wrap'}>
-            <Text >{notification.meta.from.fullName} <Tag fontSize={'0.8rem'} color='red'> applied for a job </Tag> <Tag fontSize={'0.9rem'} color={'#2a41e8'} bg={'#fff'} margin={'0px'}> {notification.meta.post.title} </Tag></Text>
+            <Text >{notification.meta.from.fullName} <Text as={'span'} fontSize={'0.8rem'} color='red'> applied for a job </Text> <Tag fontSize={'0.9rem'} color={'#2a41e8'} bg={'#fff'} margin={'0px'}> {notification.meta.post.title} </Tag></Text>
             {/* <Text>dadc</Text> */}
           </HStack>
         </HStack>
