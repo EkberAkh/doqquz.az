@@ -46,7 +46,7 @@ const ViewJobs = () => {
   const storedJobString = localStorage.getItem("currentJob");
   const storedJob = JSON.parse(storedJobString as string);
   const toast = useToast();
-
+let role = localStorage.getItem('role')
   const userRole = localStorage.getItem('role')
 const t = useTranslations()
   useEffect(() => {
@@ -185,7 +185,7 @@ console.log(job);
                 justifyContent="space-between"
               >
                 <Text>{t.rich('Company.ViewJob.share',{
-                  NavigationLink:(chunks)=><NavigationLink style={{color:'blue'}} href='/postJobs'>{chunks}</NavigationLink>
+                  NavigationLink:(chunks)=><NavigationLink style={{color:'blue'}} href={role === 'COMPANY' ? '/postJobs':'/register'}>{chunks}</NavigationLink>
                 })}</Text>
                 <Box display="flex">
                   <Box

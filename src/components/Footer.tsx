@@ -252,7 +252,7 @@ export const Footer = () => {
                   <NavigationLink
                     href={
                       role === "JOBSEEKER" || role === null
-                        ? "/"
+                        ? "/register"
                         : "/managejobs"
                     }
                   >
@@ -262,7 +262,7 @@ export const Footer = () => {
                 <Text fontSize="14px" color="#c0c0c0">
                   <NavigationLink
                     href={
-                      role === "JOBSEEKER" || role === null ? "/" : "/postJobs"
+                      role === "JOBSEEKER" || role === null ? "/register" : "/postJobs"
                     }
                   >
                     {t("Common.Nav.post_a_job")}

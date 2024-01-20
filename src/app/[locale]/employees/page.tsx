@@ -1,5 +1,5 @@
 "use client";
-import { Box, Grid, GridItem } from "@chakra-ui/react";
+import { Box, Button, Grid, GridItem, HStack } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import JobsFilter from "../jobs/JobsFilter";
 import { useTranslations } from "next-intl";
@@ -18,12 +18,16 @@ interface Employee {
 }
 const Employees = () => {
   const [filterData, setFilterData] = useState<any>({});
+
+  const [employees, setEmployees] = useState<Employee[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 4;
+  const t = useTranslations();
   const handleFilterChange = (newFilterData: any) => {
     // Update the state with the new filter data
     setFilterData(newFilterData);
+    setCurrentPage(1);
   };
-  const [employees, setEmployees] = useState<Employee[]>([]);
-  const t = useTranslations();
   useEffect(() => {
     const fetchJobs = async () => {
       try {
@@ -54,10 +58,22 @@ const Employees = () => {
 
   console.log(employees);
   
- 
+  const pageCount = Math.ceil(employees.length / itemsPerPage);
+  const changePage = (pageNumber: number) => {
+    if (pageNumber < 1) {
+      setCurrentPage(1); // Stay on the first page if the page number goes below 1
+    } else if (pageNumber > pageCount) {
+      setCurrentPage(pageCount); // Stay on the last page if the page number goes beyond the total page count
+    } else {
+      setCurrentPage(pageNumber);
+    }
+  };
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentEmployees = employees.slice(indexOfFirstItem, indexOfLastItem);
   
   return (
-    <Box display="flex" w="100%" flexWrap="wrap">
+    <Box display="flex" justifyContent='center' w="100%" flexWrap="wrap">
       <JobsFilter onFilterChange={handleFilterChange} locationInput={false} jobType={false} />
       <Grid
         padding="18px"
@@ -65,10 +81,23 @@ const Employees = () => {
         gap="14px"
         width="calc(100% - 379px)"
       >
-   {employees.map((employee) =>(
-    <Card  key={employee.id} id={employee.id} userId={employee.user.id} firstName={employee.firstName} expectedSalary={employee.expectedSalary} lastName={employee.lastName} salaryType={employee.salaryType} imageUrl={employee.user.imageUrl} />
-   ))}
+    {currentEmployees.map((employee) => (
+          <Card key={employee.id} id={employee.id} userId={employee.user.id} firstName={employee.firstName} expectedSalary={employee.expectedSalary} lastName={employee.lastName} salaryType={employee.salaryType} imageUrl={employee.user.imageUrl}/>
+        ))}
       </Grid>
+      <HStack spacing="20px" justify="center" p="4">
+        <Button onClick={() => changePage(currentPage - 1)} disabled={currentPage === 1}>
+          Prev
+        </Button>
+        {Array.from({ length: pageCount }, (_, i) => i + 1).map((number) => (
+          <Button key={number} onClick={() => changePage(number)} isActive={number === currentPage}>
+            {number}
+          </Button>
+        ))}
+        <Button onClick={() => changePage(currentPage + 1)} disabled={currentPage === pageCount}>
+          Next
+        </Button>
+      </HStack>
     </Box>
   );
 };

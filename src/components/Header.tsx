@@ -165,13 +165,15 @@ console.log(path);
         boxShadow="0 0 18px 0 rgba(0, 0, 0, 0.12)"
       >
         <HStack color="rgb(102, 102, 102)">
-          <Image
+         <NavigationLink href='/'>
+         <Image
             src={logo.src}
             alt="Logo"
             h="60px"
             pr="16px"
             borderRight="1px solid rgb(102, 102, 102)"
           />
+         </NavigationLink>
           <NavigationLink href="/" style={{ padding: "6px 16px" }}>
             {t("Common.Nav.home")}
           </NavigationLink>
