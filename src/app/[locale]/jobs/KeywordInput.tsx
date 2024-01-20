@@ -40,7 +40,7 @@ const KeywordInput:React.FC<IKeyword> = ({setSelectedKeywords}) => {
   };
   setSelectedKeywords(selectedKeywordsLocal)
   return (
-    <FormControl marginBottom="16px" w="100%">
+    <FormControl maxHeight='93px' w="100%">
       <FormLabel marginBottom="16px" fontSize="18px">
         {t("Common.Keyword.label")}
       </FormLabel>

@@ -44,8 +44,9 @@ const JobsFilter: React.FC<IJobFilter> = ({ jobType, locationInput,onFilterChang
   };
 
   return (
-    <Flex overflowX="hidden" overflowY="auto" flexWrap="wrap">
+    <Flex overflowX="hidden"  overflowY="auto" flexWrap="wrap">
       <Box
+      gap='40px'
         backgroundColor="#fafafa"
         padding="24px"
         w="360px"

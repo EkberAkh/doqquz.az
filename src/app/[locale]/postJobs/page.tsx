@@ -150,7 +150,7 @@ const PostJobs = () => {
           <Box >
             <Flex alignItems='center' gap="30px" m="30px 0">
               <FormControl>
-                <FormLabel>{t('Company.PostAJob.fields.title')}</FormLabel>
+                <FormLabel fontSize='18px' marginBottom='16px'>{t('Company.PostAJob.fields.title')}</FormLabel>
                 <Input
                backgroundColor='#fff'
                   onChange={(e) => {
@@ -161,7 +161,7 @@ const PostJobs = () => {
                   h="50px"
                 />
               </FormControl>
-              <FormControl marginBottom="16px" w="100%">
+              <FormControl  w="100%">
                 <FormLabel marginBottom="16px" fontSize="18px">
                   {t("Common.JobType.label")}
                 </FormLabel>
@@ -260,7 +260,7 @@ const PostJobs = () => {
             <Flex alignItems='center' gap="30px" m="30px 0">
               <LocationInput setSelectedLocation={setlocation} />
               <FormControl>
-                <FormLabel>{t('Company.PostAJob.fields.notificationEmail')} </FormLabel>
+                <FormLabel marginBottom='16px' fontSize='18px'>{t('Company.PostAJob.fields.notificationEmail')} </FormLabel>
                 <Input
                   backgroundColor='#fff'
                   h="50px"

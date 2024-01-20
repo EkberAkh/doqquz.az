@@ -44,7 +44,7 @@ const JobCategories:React.FC<IJobCategory> = ({setSelectedJobCategory}) => {
     }
   };
   return (
-    <FormControl marginBottom="16px" w="100%">
+    <FormControl w="100%">
     <FormLabel marginBottom="16px" fontSize="18px">
       {t("Common.INDUSTRIES.label")}
     </FormLabel>
