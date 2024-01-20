@@ -4,6 +4,7 @@ import { Box, Popover, PopoverTrigger, PopoverContent, Flex, PopoverHeader, Popo
 import GhostPng from './../../../public/images/ghost.png'
 import React from 'react'
 import NotificationItem from './NotificationItem'
+let role = localStorage.getItem("role");
 
 function Notification() {
     return (
@@ -24,10 +25,13 @@ function Notification() {
                         </Flex>
                     </Flex>
                     <PopoverBody h={'23rem'} overflowY={'auto'} p={'0px'}>
-                        {/* <Flex justify={'center'} h={'100%'} align={'center'}>
-                            <Img src={GhostPng.src} w={'8rem'} />
-                        </Flex> */}
-                        <NotificationItem />
+                        {role === 'JOBSEEKER' ?
+                            <Flex justify={'center'} h={'100%'} align={'center'}>
+                                <Img src={GhostPng.src} w={'8rem'} />
+                            </Flex> :
+                            <NotificationItem />
+                        }
+
                     </PopoverBody>
                 </PopoverContent>
             </Popover>
