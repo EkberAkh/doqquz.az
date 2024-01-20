@@ -126,21 +126,22 @@ const router = useRouter()
                     width="56px"
                     height="56px"
                     bg="#bdbdbd"
+                    display={{base:"none",lg:"flex"}}
                   >
                     <CompanyIcon width="25" height="25" color="#fafafa" />
                   </Flex>
-                  <VStack ml={"2rem"}>
+                  <VStack ml={{base:"0",lg:"2rem"}}>
                     <Flex w={"96%"} justify={"flex-start"} fontWeight={700}>
                       {job.title}
                     </Flex>
                     <HStack columnGap={"1.3rem"}>
-                      <Flex columnGap={"0.2rem"}>
+                      <Flex columnGap={"0.2rem"} >
                         <PlaceIcon
                           width="25"
                           height="25"
                           color="rgb(119, 119, 119)"
                         />
-                        <Text>{`${job.location.city}, ${job.location.country}`}</Text>
+                        {/* <Text>{`${job.location.city}, ${job.location.country}`}</Text> */}
                       </Flex>
                       <Flex columnGap={"0.2rem"}>
                         <ExperienceIcon
@@ -150,7 +151,7 @@ const router = useRouter()
                         />
                         <Text>{job.type}</Text>
                       </Flex>
-                      <Flex columnGap={"0.2rem"}>
+                      <Flex columnGap={"0.2rem"} display={{base:"none",md:"flex"}}>
                         <OclockIcon
                           width="25"
                           height="25"
@@ -176,10 +177,31 @@ const router = useRouter()
                     setCurrentJobId(job.id)
                   }
                   }
+                  display={{base:"none",md:"block"}}
                 >
                   {t("Common.Action.REQUEST")}
                 </Button>
               </Flex>
+              <Button
+                  mt='20px'
+                  w="100%"
+                  h="40px"
+                  mr={"10px"}
+                  fontSize="14px"
+                  borderRadius="4px"
+                  color={hoverStates[job.id] ? "#fff" : "#000"}
+                  bg={hoverStates[job.id] ? "#2a41e8" : "#f0f0f0"}
+                  boxShadow=" 0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12)"
+                  _hover={{}}
+                  onClick={() => {
+                    router.push(`/${lang}/viewJobs?jobId=${job.id}`);
+                    setCurrentJobId(job.id)
+                  }
+                  }
+                 display={{base:"block",lg:"none"}}
+                >
+                  {t("Common.Action.REQUEST")}
+                </Button>
             </CardBody>
           </Card>
         ))}

@@ -46,9 +46,9 @@ const JobsFilter: React.FC<IJobFilter> = ({ jobType, locationInput,onFilterChang
   return (
     <Flex overflowX="hidden" overflowY="auto" flexWrap="wrap">
       <Box
-        backgroundColor="#fafafa"
+        backgroundColor={{base:"transparent",lg:"#fafafa"}}
         padding="24px"
-        w="360px"
+        w={{base:"100%",md:"360px"}}
         display="flex"
         flexDirection="column"
         flexShrink={0}

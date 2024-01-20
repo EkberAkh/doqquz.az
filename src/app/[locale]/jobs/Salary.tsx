@@ -8,6 +8,7 @@ import {
   RangeSliderThumb,
   RangeSliderTrack,
   VStack,
+  useMediaQuery,
 } from "@chakra-ui/react";
 import { useTranslations } from "next-intl";
 import React, { useState } from "react";
@@ -23,13 +24,14 @@ const Salary = ({ onSalaryChange }: { onSalaryChange: (min: number, max: number)
     setMaxSalary(max);
     onSalaryChange(min, max);
   };
+  const [maxWidth1100Media] = useMediaQuery("(max-width: 1100px)");
   return (
     <VStack marginBottom='16px' spacing={4} align="stretch">
       <FormControl>
         <FormLabel marginBottom="16px" fontSize="18px">
           {t("Common.Salary.label")}
         </FormLabel>
-        <Flex>
+        <Flex flexDirection={maxWidth1100Media ? 'column' : 'row'}>
           <Input
             minH="48px"
             fontSize="16px"

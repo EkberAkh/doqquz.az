@@ -123,38 +123,38 @@ const ViewJobs = () => {
   return (
     <>
       <>
-        <Box h="230px" bg="linear-gradient(to right, white , gray);">
-          <Box w="1200px" m="auto">
-            <Flex justifyContent="space-between">
-              <Box pt="40px">
-                <Flex gap="30px">
-                  <Box bg={"white"} p="30px" borderRadius="50%">
+        <Box h={{base:"auto",lg:"230px"}} bg="linear-gradient(to right, white , gray);">
+          <Box w={{base:"100%",lg:"1200px"}} m="auto">
+            <Flex justifyContent="space-between" flexDirection={{base:"column",lg:"row"}} padding={{base:"24px 80px",lg:"0"}}>
+              <Box pt="40px" >
+                <Flex gap="30px"  flexDirection={{base:"column",lg:"row"}}  w={{base:"100%",lg:"auto"}}>
+                  <Box bg={"white"} p="30px" borderRadius="50%" w='fit-content' >
                     <BsBagPlus size="70px" color="blue" />
                   </Box>
-                  <Box mt="10px">
-                    <Text fontWeight="bold" fontSize="30px">
-                      {storedJob.title}
+                  <Box mt="10px" borderTop={'3px solid rgb(224, 224, 224)'} w={{base:"100%",lg:"auto"}} py={{base:"20px",lg:"0"}} >
+                    <Text fontWeight="bold" fontSize="30px" mb={{base:"20px",lg:"0"}}>
+                    jjdjd
                     </Text>
-                    <Text fontWeight="bold" fontSize="20px">
+                    <Text fontWeight="bold" fontSize="20px" mb={{base:"20px",lg:"0"}}>
                       doktor
                     </Text>
                     <Flex gap="10px" mt="10px">
-                      <FaMapMarkerAlt size="20px" />
-                      <Text> {storedJob?.location?.city}</Text>
+                      <FaMapMarkerAlt size="20px" mb={{base:"20px",lg:"0"}} />
+                      <Text mb={{base:"20px",lg:"0"}}> kddkkd</Text>
                     </Flex>
                   </Box>
                 </Flex>
               </Box>
-              <Box p="24px" bg="white" m="50px">
+              <Box p={{base:"0",lg:"24px"}} bg={{base:"transparent",lg:"white"}} m={{base:"0",lg:"50px"}}>
                 <Text>AYLIQ</Text>
                 <Text fontSize="30px">{storedJob?.maxEstimatedBudget} - {storedJob?.minEstimatedBudget} {storedJob?.currency}</Text>
               </Box>
             </Flex>
           </Box>
         </Box>
-        <Box w="1200px" m="50px auto">
-          <Flex>
-            <Box w="800px">
+        <Box w={{base:"100%",lg:"1200px"}} m="50px auto">
+          <Flex flexDirection={{base:"column",lg:"row"}}>
+            <Box w={{base:'100%',lg:"800px"}} paddingX={{base:"10px",lg:"0"}}>
               <Text fontWeight="bold">Isin tesviri</Text>
               <Text p="30px 40px 30px 0">{storedJob?.type}</Text>
               <Text fontWeight="bold">Tələb olunan bacarıqlar</Text>
@@ -167,11 +167,12 @@ const ViewJobs = () => {
               <Text>234354 zeng vur</Text>
               <Flex
                 p="30px 40px 30px 0"
-                alignItems="center"
+                alignItems={{base:"start",lg:"center"}}
                 justifyContent="space-between"
+                flexDirection={{base:"column",lg:"row"}}
               >
-                <Text>Maraqlıdır? Vakansiyanı paylaş!</Text>
-                <Box display="flex">
+                <Text mb={{base:"30px",lg:"0"}}>Maraqlıdır? Vakansiyanı paylaş!</Text>
+                <Box display="flex" margin={{base:"0 auto",lg:"0"}} >
                   <Box
                     ml="30px"
                     bg="gray.100"
@@ -214,12 +215,12 @@ const ViewJobs = () => {
             </Box>
             <Box>
               {userRole === 'JOBSEEKER' ? (
-                <Button w="400px" p="25px 0" mb="30px" bgColor='#2a41e8' color='white'_hover={{ bgColor: '#3b4fad' }} onClick={handleApplyClick} >
+                <Button w={{base:"100%",lg:"400px"}} p="25px 0" mb="30px" bgColor='#2a41e8' color='white'_hover={{ bgColor: '#3b4fad' }} onClick={handleApplyClick} >
                   Muraciet et
                 </Button>
               ) : (
                 userRole === 'COMPANY' && (
-                  <Button w="400px" p="25px 0" mb="30px" disabled>
+                  <Button w={{base:"100%",lg:"400px"}} p="25px 0" mb="30px" disabled>
                     Muraciet et
                   </Button>
                 )

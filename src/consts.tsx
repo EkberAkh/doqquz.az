@@ -31,14 +31,6 @@ export const colorObjects = {
     },
 };
 export const extendedTheme = extendTheme({
-    breakpoints: {
-        base: "0px",
-        sm: "430px",
-        md: "768px",
-        lg: "960px",
-        xl: "1200px",
-        "2xl": "1536px",
-    },
     colors: {
         white: {
             main: " rgb(255, 255, 255)"

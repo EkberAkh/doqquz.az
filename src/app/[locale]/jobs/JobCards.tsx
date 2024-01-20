@@ -48,9 +48,9 @@ console.log(allJobs);
     <>
       <Grid
         padding="18px"
-        templateColumns="1fr 1fr"
+        templateColumns={{base:"2fr",lg:"1fr 1 fr"}}
         gap="14px"
-        width="calc(100% - 379px)"
+        width={{base:"100%",lg:"calc(100% - 379px)"}}
       >
       
        {allJobs.map((job:any) => (
@@ -64,7 +64,7 @@ console.log(allJobs);
           currency={job.currency}
           createdAt={job.createdAt}
           companyName={job.company[0].name}
-          city={job.location.city}
+          city={job?.location?.city}
         />
       ))}
      
