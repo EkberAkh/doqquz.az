@@ -12,6 +12,8 @@ const Jobs = () => {
     // Update the state with the new filter data
     setFilterData(newFilterData);
   };
+  console.log(filterData);
+  
   return (
     <Box display="flex" justifyContent='center' w="100%" flexWrap="wrap">
       <JobsFilter locationInput jobType onFilterChange={handleFilterChange} />

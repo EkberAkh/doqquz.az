@@ -12,7 +12,7 @@ const JobCards:React.FC<IJobCards> =  ({ filterData }) => {
   const t = useTranslations();
   const [allJobs, setAllJobs] = useState([]); 
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
+  const itemsPerPage = 12;
   useEffect(() => {
     const fetchJobs = async () => {
       try {
@@ -62,6 +62,7 @@ const JobCards:React.FC<IJobCards> =  ({ filterData }) => {
   return (
     <>
       <Grid
+      maxHeight='470px'
         padding="18px"
         templateColumns="1fr 1fr"
         gap="14px"
