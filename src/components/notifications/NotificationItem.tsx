@@ -2,6 +2,7 @@ import NotificationManIcon from '@/icons/NotificationManIcon'
 import { Box, HStack, VStack, Text, Tag, Flex } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import Cookies from 'js-cookie'
+import { NavigationLink } from '../NavigationLink'
 
 function NotificationItem() {
   const [notifications, setNotifications] = useState([])
@@ -44,7 +45,9 @@ function NotificationItem() {
     <Box >
     
       {notifications.map((notification) => (
-        <VStack borderLeft= '4px solid transparent' _hover={{backgroundColor: '#F3F8FF',borderLeftColor: '#2a41e8' ,}} >
+       <NavigationLink href='/managejobs'>
+
+<VStack  borderLeft= '4px solid transparent' _hover={{backgroundColor: '#F3F8FF',borderLeftColor: '#2a41e8' ,}} >
         <HStack key={notification.id}  p={'1rem'}>
           <NotificationManIcon width='40' height='40' />
           <HStack alignItems={'flex-start'} ml={'0.2rem'} w={'95%'} flexWrap={'wrap'}>
@@ -52,7 +55,9 @@ function NotificationItem() {
             {/* <Text>dadc</Text> */}
           </HStack>
         </HStack>
-        </VStack>))}
+        </VStack>
+       </NavigationLink>
+       ))}
   
     </Box>
   )
