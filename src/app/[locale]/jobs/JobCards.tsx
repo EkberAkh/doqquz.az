@@ -62,11 +62,11 @@ const JobCards:React.FC<IJobCards> =  ({ filterData }) => {
   return (
     <>
       <Grid
-      maxHeight='470px'
         padding="18px"
-        templateColumns="1fr 1fr"
+        templateColumns={{base:"2fr",lg:"1fr 1 fr"}}
         gap="14px"
-        width="calc(100% - 379px)"
+        width={{base:"100%",lg:"calc(100% - 379px)"}}
+        maxHeight='470px'
       >
       
       {currentJobs.map((job: any) => (

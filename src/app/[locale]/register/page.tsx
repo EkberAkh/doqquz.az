@@ -111,22 +111,26 @@ const toast = useToast();
 
   return (
     <>
-      <Box bg="white" w="600px" m="auto" pb="30px">
-        <Flex>
+      <Box bg="white" w={{base:"80%",lg:"600px"}} m="auto" pb="30px">
+        <Flex >
           <Text
-            p="15px 60px"
+            p={{base:"15px 20px",lg:"15px 60px"}}
             color="black.300"
             cursor="pointer"
             _hover={{ color: "black" }}
+            w={{base:"50%",lg:"auto"}}
+           textAlign='center'
           >
             <NavigationLink href="/login">{t("Auth.tabs.login")}</NavigationLink>
           </Text>
           <Text
-            p="15px 60px"
+            p={{base:"15px 20px",lg:"15px 60px"}}
             borderBottom="2px solid blue"
             color="blue"
             cursor="pointer"
             _hover={{ color: "black" }}
+            w={{base:"50%",lg:"auto"}}
+            textAlign='center'
           >
             {" "}
             {t("Auth.tabs.register")}
@@ -136,10 +140,10 @@ const toast = useToast();
         <Text fontSize="26px" mt="30px" textAlign="center" fontWeight="bold">
           {t("Auth.Register.title")}
         </Text>
-        <Box w="490px" m="auto">
+        <Box w={{base:"100%",lg:"490px"}} m="auto">
           <Flex justifyContent="space-between" mt="30px">
             <Button
-              w="240px"
+              w={{base:"50%",lg:"240px"}}
               onClick={toggleVisibility1}
               color={isVisible ? "blue" : "gray"}
               bg={isVisible ? "gray.200" : "white"}
@@ -150,7 +154,7 @@ const toast = useToast();
             </Button>
 
             <Button
-              w="240px"
+              w={{base:"50%",lg:"240px"}}
               onClick={toggleVisibility}
               color={isVisible ? "gray" : "blue"}
               bg={isVisible ? "white" : "gray.200"}
@@ -160,8 +164,8 @@ const toast = useToast();
               {t("Common.Role.COMPANY")}
             </Button>
           </Flex>
-
-          <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
+          <Box paddingX={{base:"20px",lg:"0"}}>
+          <form onSubmit={handleSubmit(onSubmit)} autoComplete="off" >
             <FormControl isInvalid={!!errors.firstName}>
               <InputGroup mt="30px">
                 <InputLeftElement
@@ -326,7 +330,7 @@ const toast = useToast();
                 onMouseLeave={() => setIsHovered(false)}
               >
                 <Button
-                  w="450px"
+                  w={{base:"100%",lg:"450px"}}
                   backgroundColor="blue"
                   color="white"
                   p="25px"
@@ -339,6 +343,7 @@ const toast = useToast();
               </Box>
             </FormControl>
           </form>
+          </Box>
         </Box>
         <ToastContainer
           position="top-right"

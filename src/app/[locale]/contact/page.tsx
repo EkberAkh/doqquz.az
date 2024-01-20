@@ -114,9 +114,9 @@ const Contact: React.FC<RegisterProps> = () => {
       <Box m="50px 0" p="30px" >
 
         <form onSubmit={handleSubmit(onSubmit)}>
-          <Flex gap='30px'>
+          <Flex gap='30px'display={{base:"block",lg:"flex"}}>
             <FormControl isInvalid={!!errors.name}>
-              <InputGroup>
+              <InputGroup  mb={{base:"50px",lg:"0"}}>
                 <InputLeftElement
                   w="50px"
                   backgroundColor='#eee'
@@ -212,7 +212,7 @@ const Contact: React.FC<RegisterProps> = () => {
               {errors.textarea && errors.textarea.message}
             </FormErrorMessage>
           </FormControl>
-          <Button color='white' bg="blue.500" _hover={{}} p="25px 40px" m="30px 0" type='submit'> {t("Common.Action.SEND")}</Button>
+          <Button color='white' bg="blue.500" _hover={{}} p="25px 40px" m="30px 0" type='submit' w={{base:"100%",lg:"auto"}}> {t("Common.Action.SEND")}</Button>
         </form>
       </Box>
       <ToastContainer

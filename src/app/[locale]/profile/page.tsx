@@ -59,20 +59,20 @@ const Profile = () => {
                     </CardHeader>
 
                     <CardBody p='30px'>
-                        <Flex >
-                            <Avatar src={data1?.imageUrl} size='2xl' marginRight='30px' />
+                        <Flex flexDirection={{base:"column",lg:"row"}} >
+                            <Avatar src={data1?.imageUrl} size='2xl' marginRight='30px' marginBottom={{base:"20px",lg:"0"}} />
                             {/* <Box w='138px' h='138px' borderRadius='100px' bgColor={colorObjects.gray.border} marginRight='30px' border={'1px solid #2a41e8'}>
 
                             </Box> */}
 
                            {data1 && <Box w='87%'>
-                                <Flex columnGap='30px' mb='30px'>
-                                    <Box w='50%'>
+                                <Flex columnGap='30px' mb='30px' flexDirection={{base:"column",lg:"row"}} rowGap='30px'>
+                                    <Box  w={{base:"100%",lg:"30%"}}>
                                         <Text mb='20px' fontSize='1.3rem'>{t('Common.FormInputs.email.label')}</Text>
                                         <Text>{data1.email}</Text>
                                     </Box>
 
-                                    <Box w='50%'>
+                                    <Box  w={{base:"100%",lg:"30%"}}>
                                         <Text mb='20px' fontSize='1.3rem'>{t('Common.FormInputs.phoneNumber.label')}</Text>
                                         <Text> +{data1?.contactNumber}</Text>
                                     </Box>
@@ -98,31 +98,31 @@ const Profile = () => {
                         <Flex >
 
                             <Box w='100%'>
-                                <Flex columnGap='30px' mb='30px' flexWrap='wrap'>
-                                    <Box w='30%'>
-                                        <Text mb='20px' fontSize='1.3rem'>{t('Profile.ProfileInfo.name')}</Text>
+                                <Flex columnGap='30px' mb='30px' flexWrap='wrap' flexDirection={{base:"column",lg:"row"}}>
+                                    <Box  w={{base:"100%",lg:"30%"}}>
+                                        <Text mb='20px' fontSize='1.3rem' fontWeight={600}>{t('Profile.ProfileInfo.name')}</Text>
                                         <Text mb='20px' fontSize='1.3rem'>{data.firstName}</Text>
                                     </Box>
-                                    <Box w='30%'>
-                                        <Text mb='20px' fontSize='1.3rem'>Soyad</Text>
+                                    <Box  w={{base:"100%",lg:"30%"}}>
+                                        <Text mb='20px' fontSize='1.3rem' fontWeight={600}>Soyad</Text>
                                         <Text mb='20px' fontSize='1.3rem'>{data.lastName}</Text>
 
                                     </Box>
-                                    <Box w='30%'>
-                                        <Text mb='20px' fontSize='1.3rem'>{t('Profile.ProfileInfo.birthday')}</Text>
+                                    <Box  w={{base:"100%",lg:"30%"}}>
+                                        <Text mb='20px' fontSize='1.3rem' fontWeight={600}>{t('Profile.ProfileInfo.birthday')}</Text>
                                         <Text mb='20px' fontSize='1.3rem'>----</Text>
 
                                     </Box>
-                                    <Box w='30%' mt='30px'>
-                                        <Text mb='20px' fontSize='1.3rem'>{t('Common.GENDER.label')}</Text>
+                                    <Box  w={{base:"100%",lg:"30%"}} mt='30px'>
+                                        <Text mb='20px' fontSize='1.3rem' fontWeight={600}>{t('Common.GENDER.label')}</Text>
                                         <Text mb='20px' fontSize='1.3rem'>-----</Text>
                                     </Box>
-                                    <Box w='30%' mt='30px'>
-                                        <Text mb='20px' fontSize='1.3rem'>{t('Common.SalaryType.label')}</Text>
+                                    <Box  w={{base:"100%",lg:"30%"}} mt='30px'>
+                                        <Text mb='20px' fontSize='1.3rem' fontWeight={600}>{t('Common.SalaryType.label')}</Text>
                                         <Text mb='20px' fontSize='1.3rem'>-----</Text>
                                     </Box>
-                                    <Box w='30%' mt='30px'>
-                                        <Text mb='20px' fontSize='1.3rem'>{t('Profile.ProfileInfo.expectedSalary')}</Text>
+                                    <Box  w={{base:"100%",lg:"30%"}} mt='30px'>
+                                        <Text mb='20px' fontSize='1.3rem' fontWeight={600}>{t('Profile.ProfileInfo.expectedSalary')}</Text>
                                         <Text mb='20px' fontSize='1.3rem'>-----</Text>
                                     </Box>
                                 </Flex>

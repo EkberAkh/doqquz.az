@@ -135,39 +135,39 @@ console.log(job);
   return (
     <>
       <>
-        <Box h="230px" bg="linear-gradient(to right, white , gray);">
-          <Box w="1200px" m="auto">
-            <Flex justifyContent="space-between">
+        <Box h={{base:"auto",lg:"230px"}} bg="linear-gradient(to right, white , gray);">
+          <Box w={{base:"100%",lg:"1200px"}} m="auto">
+            <Flex justifyContent="space-between"  flexDirection={{base:"column",lg:"row"}} padding={{base:"24px 80px",lg:"0"}}>
               <Box pt="40px">
-                <Flex gap="30px">
-                  <Box bg={"white"} p="30px" borderRadius="50%">
+                <Flex gap="30px"  flexDirection={{base:"column",lg:"row"}}  w={{base:"100%",lg:"auto"}}>
+                  <Box bg={"white"} p="30px" borderRadius="50%" w='130px' h='130px' margin='0 auto'>
                     <BsBagPlus size="70px" color="blue" />
                   </Box>
-                  <Box mt="10px">
-                    <Text fontWeight="bold" fontSize="30px">
+                  <Box mt="10px" w={{base:"100%",lg:"auto"}} py={{base:"20px",lg:"0"}} >
+                    <Text fontWeight="bold" fontSize="30px" mb={{base:"20px",lg:"0"}}>
                       {job?.title}
                     </Text>
-                    <Text fontWeight="bold" fontSize="20px">
+                    <Text fontWeight="bold" fontSize="20px" mb={{base:"20px",lg:"0"}}>
                     {t(`Common.INDUSTRIES.${job?.category}`)}
                     </Text>
                     <Flex gap="10px" mt="10px">
                      
-                     { job?.location?.country && <><FaMapMarkerAlt size="20px" />
-                      <Text>{job?.location?.country}  {job?.location?.city}</Text> </> }
+                     { job?.location?.country && <><FaMapMarkerAlt size="20px" mb={{base:"20px",lg:"0"}}/>
+                      <Text mb={{base:"20px",lg:"0"}}>{job?.location?.country}  {job?.location?.city}</Text> </> }
                     </Flex>
                   </Box>
                 </Flex>
               </Box>
-              <Box p="24px" bg="white" m="50px">
+              <Box  p={{base:"0",lg:"24px"}} bg={{base:"transparent",lg:"white"}} m={{base:"0",lg:"50px"}}>
                 <Text>{t(`Common.JobType.${job?.type}`)}</Text>
                 <Text fontSize="30px">{job?.maxEstimatedBudget} - {job?.minEstimatedBudget} {job?.currency}</Text>
               </Box>
             </Flex>
           </Box>
         </Box>
-        <Box w="1200px" m="50px auto">
-          <Flex>
-            <Box w="800px">
+        <Box  w={{base:"100%",lg:"1200px"}} m="50px auto">
+          <Flex flexDirection={{base:"column",lg:"row"}}>
+            <Box w={{base:'100%',lg:"800px"}} paddingX={{base:"10px",lg:"0"}}>
               <Text fontWeight="bold">{t('Company.ViewJob.description')}</Text>
               <Text p="30px 40px 30px 0">{job?.description}</Text>
               <Text fontWeight="bold">{t('Company.ViewJob.requiredSkills')}</Text>
@@ -181,13 +181,14 @@ console.log(job);
               <Text>{job?.contactInformation}</Text>
               <Flex
                 p="30px 40px 30px 0"
-                alignItems="center"
+                alignItems={{base:"start",lg:"center"}}
                 justifyContent="space-between"
+                flexDirection={{base:"column",lg:"row"}}
               >
-                <Text>{t.rich('Company.ViewJob.share',{
-                  NavigationLink:(chunks)=><NavigationLink style={{color:'blue'}} href={role === 'COMPANY' ? '/postJobs':'/register'}>{chunks}</NavigationLink>
+                <Text mb={{base:"30px",lg:"0"}}>{t.rich('Company.ViewJob.share',{
+                NavigationLink:(chunks)=><NavigationLink style={{color:'blue'}} href={role === 'COMPANY' ? '/postJobs':'/register'}>{chunks}</NavigationLink>
                 })}</Text>
-                <Box display="flex">
+                <Box display="flex" margin={{base:"0 auto",lg:"0"}} >
                   <Box
                     ml="30px"
                     bg="gray.100"
@@ -233,12 +234,12 @@ console.log(job);
             </Box>
             <Box>
               {userRole === 'JOBSEEKER' ? (
-                <Button w="400px" p="25px 0" mb="30px" bgColor='#2a41e8' color='white'_hover={{ bgColor: '#3b4fad' }} onClick={handleApplyClick} >
+                <Button w={{base:"100%",lg:"400px"}} p="25px 0" mb="30px" bgColor='#2a41e8' color='white'_hover={{ bgColor: '#3b4fad' }} onClick={handleApplyClick} >
                   Muraciet et
                 </Button>
               ) : (
                 userRole === 'COMPANY' && (
-                  <Button w="400px" p="25px 0" mb="30px" disabled>
+                  <Button w={{base:"100%",lg:"400px"}} p="25px 0" mb="30px" disabled>
                     Muraciet et
                   </Button>
                 )

@@ -40,10 +40,10 @@ const Login1: React.FC = () => {
   return (
     <>
 
-      <Box bg="white" w="600px" m="auto" pb="30px">
-        <Flex>
-          <Text p="15px 60px" color="gray.500" cursor="pointer"><Link _hover={{ color: "black" }} href="/az/login">{t("Auth.tabs.login")}</Link></Text>
-          <Text p="15px 60px" color="gray.500" cursor="pointer"> <Link _hover={{ color: "black" }} href="/az/register">{t("Auth.tabs.register")}</Link></Text>
+      <Box bg="white" w={{base:"80%",lg:"600px"}} m="auto" pb="30px">
+        <Flex  justifyContent={{base:"justify-content",lg:"start"}}>
+          <Text p={{base:"15px",lg:"15px 60px"}} color="gray.500" cursor="pointer"><Link _hover={{ color: "black" }} href="/az/login">{t("Auth.tabs.login")}</Link></Text>
+          <Text p={{base:"15px",lg:"15px 60px"}} color="gray.500" cursor="pointer"> <Link _hover={{ color: "black" }} href="/az/register">{t("Auth.tabs.register")}</Link></Text>
         </Flex>
 
         <Flex alignItems="center" flexDirection="column" m="30px" gap="10px">
@@ -54,7 +54,7 @@ const Login1: React.FC = () => {
           })}</Text>
         </Flex>
 
-        <Box w="490px" m="auto">
+        <Box w={{base:"80%",lg:"490px"}} m="auto">
           <FormControl>
             <form onSubmit={handleSubmit(onSubmit)} >
               <FormControl isInvalid={!!errors.email}>
@@ -98,9 +98,9 @@ const Login1: React.FC = () => {
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}>
                 {isHovered ? (
-                  <Button w="490px" backgroundColor="blue" color="white" _hover={{ backgroundColor: "blue" }} p="25px" type='submit'>{t("Auth.tabs.login")} <Icon as={FaArrowRight} /></Button>
+                   <Button w={{base:"80%",lg:"490px"}} backgroundColor="blue" color="white" _hover={{ backgroundColor: "blue" }} p="25px" type='submit'>{t("Auth.tabs.login")} <Icon as={FaArrowRight} /></Button>
                 ) :
-                  (<Button w="490px" backgroundColor="blue" color="white" p="25px" type='submit'>{t("Auth.tabs.login")}  </Button>)}
+                  ( <Button w={{base:"80%",lg:"490px"}} backgroundColor="blue" color="white" p="25px" type='submit'>{t("Auth.tabs.login")}  </Button>)}
               </Box>
 
 

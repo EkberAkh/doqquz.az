@@ -6,40 +6,60 @@ const About = () => {
   const t = useTranslations();
   return (
     <>
-      <Box padding='20px' >
-        <Box gap='20px' backgroundColor='white' boxShadow='0 2px 8px rgba(0,0,0,.08)' minH="384px" display="flex" mb='20px' >
-          <Box padding='20px' backgroundPosition='center' backgroundImage="url('../../../../images/underline.png')"
+      <Box padding="20px">
+        <Box
+          gap="20px"
+          backgroundColor="white"
+          boxShadow="0 2px 8px rgba(0,0,0,.08)"
+          minH="384px"
+          display="flex"
+          mb="20px"
+        >
+          <Box
+            padding="20px"
+            backgroundPosition="center"
+            backgroundImage="url('../../../../images/underline.png')"
             backgroundSize="contain"
             backgroundRepeat="no-repeat"
-gap='60px'
-            display='flex'
-            justifyContent='center'
-            flexDirection='column'
-            textAlign='center'>
-            <Heading fontSize='48px'  fontWeight={500} >{t("About.mission.title")}</Heading>
-            <Text  width='400px' fontSize='20px' fontWeight='400'>
+            gap="60px"
+            display="flex"
+            justifyContent="center"
+            flexDirection="column"
+            textAlign="center"
+          >
+            <Heading fontSize={{base:"40px",lg:"48px"}} fontWeight={500}>
+              {t("About.mission.title")}
+            </Heading>
+            <Text width={{base:"100%",lg:"400px"}} fontSize={{base:"18px",lg:"20px"}} fontWeight="400">
               {t("About.mission.body")}
             </Text>
-
           </Box>
           <Box
-            flex='1'
+            flex="1"
             backgroundImage="url('../../../../images/mission.png')"
             backgroundSize="cover"
             backgroundRepeat="no-repeat"
-            backgroundPosition='center'
+            backgroundPosition="center"
           ></Box>
         </Box>
-        <Box gap='20px' backgroundColor='white' boxShadow='0 2px 8px rgba(0,0,0,.08)' minH="384px" display="flex" >
-          <Box padding='20px'
-
-
-            display='flex'
-            justifyContent='center'
-            flexDirection='column'
-            textAlign='center'
-            w='50%'>
-            <Heading fontSize='48px' fontWeight={500} mb='12px'>{t("About.value.title")}</Heading>
+        <Box
+          gap="20px"
+          backgroundColor="white"
+          boxShadow="0 2px 8px rgba(0,0,0,.08)"
+          minH="384px"
+          display="flex"
+        >
+          <Box
+            padding="20px"
+            display="flex"
+            justifyContent="center"
+            flexDirection="column"
+            textAlign="center"
+            w={{base:"100%",lg:"50%"}}
+          >
+            <Heading fontSize="48px" fontWeight={500} mb="12px">
+              {t("About.value.title")}
+            </Heading>
 
             <Box marginY="10px">
               <Heading as="h4" size="md">
@@ -69,18 +89,15 @@ gap='60px'
             </Box>
           </Box>
           <Box
-            flex='1'
+            flex="1"
             backgroundImage="url('../../../../images/mission2.svg')"
             backgroundSize="cover"
             backgroundRepeat="no-repeat"
-            backgroundPosition='center'
+            backgroundPosition="center"
+            display={{base:"none",lg:"block"}}
           ></Box>
         </Box>
-
-
-
-
-      </Box >
+      </Box>
     </>
   );
 };

@@ -48,7 +48,7 @@ const Login1: React.FC = () => {
   const backgroundColor: string = isFocused ? "blue" : "gray";
   const backgroundColor2: string = isFocused2 ? "blue" : "gray";
   const t = useTranslations();
-const router = useRouter()
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassoword] = useState("");
 
@@ -79,8 +79,8 @@ const router = useRouter()
           duration: 2000,
           isClosable: true,
         });
-    
-        router.push('/')
+
+        router.push("/");
       })
       .catch((error) => {
         console.error("username or password is wrong");
@@ -108,13 +108,13 @@ const router = useRouter()
     <Box
       boxShadow="0 2px 8px rgba(0,0,0,.08)"
       bg="white"
-      w="600px"
+      w={{ base: "80%", lg: "600px" }}
       m="auto"
       pb="30px"
     >
-      <Flex>
+      <Flex justifyContent={{ base: "justify-content", lg: "start" }}>
         <Text
-          p="15px 60px"
+          p={{ base: "15px", lg: "15px 60px" }}
           borderBottom="2px solid blue"
           color="blue"
           cursor="pointer"
@@ -122,7 +122,11 @@ const router = useRouter()
         >
           {t("Auth.tabs.login")}
         </Text>
-        <Text p="15px 60px" color="gray.500" cursor="pointer">
+        <Text
+          p={{ base: "15px", lg: "15px 60px" }}
+          color="gray.500"
+          cursor="pointer"
+        >
           {" "}
           <NavigationLink href="/register" _hover={{ color: "black" }}>
             {t("Auth.tabs.register")}
@@ -131,10 +135,10 @@ const router = useRouter()
       </Flex>
 
       <Flex alignItems="center" flexDirection="column" m="30px" gap="10px">
-        <Text fontWeight="bold" fontSize="26px">
+        <Text fontWeight="bold" fontSize={{ base: "16px", lg: "26px" }}>
           {t("Auth.Login.title")}
         </Text>
-        <Text>
+        <Text fontSize={{ base: "13px", lg: "16px" }}>
           {" "}
           {t.rich("Auth.Login.subTitle", {
             NavigationLink: (chunks) => (
@@ -151,7 +155,7 @@ const router = useRouter()
         {/* <Text color="gray.500">Hesabınız yoxdur? <span style={{ color: "blue", cursor: "pointer" }}> <Link  _hover={{color:"black"}} href="/az/register">Qeydiyyatdan kecin</Link> </span></Text> */}
       </Flex>
 
-      <Box w="490px" m="auto">
+      <Box w={{ base: "80%", lg: "490px" }} m="auto">
         <FormControl>
           <form
             onSubmit={(e) => {
@@ -168,6 +172,7 @@ const router = useRouter()
                   borderRadius="5px"
                   p="25px 10px"
                   pointerEvents="none"
+                  display={{ base: "none", lg: "block" }}
                 >
                   <FaRegEnvelope color={backgroundColor} />
                 </InputLeftElement>
@@ -178,7 +183,7 @@ const router = useRouter()
                   placeholder="example@gmail.com"
                   onFocus={handleFocus}
                   onBlur={handleBlur}
-                  p="25px 70px"
+                  p={{ base: "25px 30px 25px 30px", lg: "25px 70px" }}
                   value={values.email}
                   onChange={handleChange}
                 />
@@ -198,6 +203,7 @@ const router = useRouter()
                   borderRadius="5px"
                   p="25px 10px"
                   pointerEvents="none"
+                  display={{ base: "none", lg: "block" }}
                 >
                   <LockIcon color={backgroundColor2} />
                 </InputLeftElement>
@@ -205,7 +211,7 @@ const router = useRouter()
                   id="password"
                   type="password"
                   placeholder={t("Common.FormInputs.password.placeholder")}
-                  p="25px 70px"
+                  p={{ base: "25px 30px 25px 30px", lg: "25px 70px" }}
                   onFocus={handleFocus_2}
                   onBlur={handleBlur_2}
                   value={values.password}
@@ -235,7 +241,7 @@ const router = useRouter()
             >
               {isHovered ? (
                 <Button
-                  w="450px"
+                  w={{ base: "100%", lg: "450px" }}
                   backgroundColor="blue"
                   color="white"
                   _hover={{ backgroundColor: "blue" }}
@@ -246,7 +252,7 @@ const router = useRouter()
                 </Button>
               ) : (
                 <Button
-                  w="450px"
+                  w={{ base: "100%", lg: "450px" }}
                   backgroundColor="blue"
                   color="white"
                   p="25px"
