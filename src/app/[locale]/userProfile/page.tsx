@@ -67,7 +67,6 @@ const Profile = () => {
   const t = useTranslations();
   let role = localStorage.getItem("role")
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [name, setName] = React.useState("Salam");
   const [completionDate, setCompletionDate] = useState(new Date());
 
   const [contactNumber, setPhoneNumber] = useState("");
@@ -90,6 +89,7 @@ const Profile = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const fileInputRef = useRef(null);
 const [userInfo, setUserInfo] = useState()
+const [primaryData, setPrimaryData] = useState()
 
   
 useEffect(()=>{
@@ -384,6 +384,42 @@ useEffect(()=>{
 
 console.log(userInfo);
 
+
+
+ useEffect(()=>{
+  async function fetchPrimaryData(id: number, role: string) {
+    const url =
+      role === "JOBSEEKER"
+        ? `https://neo-814m.onrender.com/v1/jobseeker/userId/${id}`
+        : `https://neo-814m.onrender.com/v1/company/userId/${id}`;
+    const requestOptions = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Token: `${token}`, // Include the token in the Authorization header
+      },
+    };
+  
+    try {
+      const response = await fetch(url, requestOptions);
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status}`);
+      }
+      const data = await response.json();
+      
+      setPrimaryData(data);
+  
+    } catch (error) {
+      console.error("There was an error fetching the jobseeker data:", error);
+    }
+  }
+
+  fetchPrimaryData(userId,role)
+ },[])
+
+ console.log(primaryData);
+ 
+
   return (
     <Flex justify={"center"}>
       <Box mx="15px" width={"81%"}>
@@ -553,13 +589,13 @@ console.log(userInfo);
           <CardBody p="30px">
             <Flex>
               <Box w="100%">
-                <Flex columnGap="30px" mb="30px" flexWrap="wrap">
+                {role==='COMPANY' && <Flex columnGap="30px" mb="30px" flexWrap="wrap">
                   <Box w="30%">
                     <Text mb="20px" fontSize="1.3rem">
                       {t("Profile.ProfileInfo.name")}
                     </Text>
                     <Text mb="20px" fontSize="1.3rem">
-                      {name}
+                      {primaryData?.name}
                     </Text>
                   </Box>
                   <Box w="30%">
@@ -567,7 +603,7 @@ console.log(userInfo);
                       {t("Common.FormInputs.websiteUrl.label")}
                     </Text>
                     <Text mb="20px" fontSize="1.3rem">
-                      {websiteUrl}
+                      {primaryData?.websiteUrl}
                     </Text>
                   </Box>
                   <Box w="30%">
@@ -575,7 +611,7 @@ console.log(userInfo);
                       {t("Profile.ProfileInfo.establishmentDate")}
                     </Text>
                     <Text mb="20px" fontSize="1.3rem">
-                      {startingDate}
+                      {primaryData?.establishmentDate}
                     </Text>
                   </Box>
                   <Box w="30%" mt="30px">
@@ -583,10 +619,76 @@ console.log(userInfo);
                       {t("Common.FormInputs.description.label")}
                     </Text>
                     <Text mb="20px" fontSize="1.3rem">
-                      {description}
+                      {primaryData?.description}
                     </Text>
                   </Box>
-                </Flex>
+                </Flex>}
+                {role==='JOBSEEKER' && <Flex columnGap="30px" mb="30px" flexWrap="wrap">
+                  <Box w="30%">
+                    <Text mb="20px" fontSize="1.3rem">
+                      {t("Profile.ProfileInfo.name")}
+                    </Text>
+                    <Text mb="20px" fontSize="1.3rem">
+                      {primaryData?.firstName}
+                    </Text>
+                  </Box>
+                  <Box w="30%">
+                    <Text mb="20px" fontSize="1.3rem">
+                      {t("Common.FormInputs.lastName.label")}
+                    </Text>
+                    <Text mb="20px" fontSize="1.3rem">
+                      {primaryData?.lastName}
+                    </Text>
+                  </Box>
+                  <Box w="30%">
+                    <Text mb="20px" fontSize="1.3rem">
+                      {t("Profile.ProfileInfo.birthday")}
+                    </Text>
+                    <Text mb="20px" fontSize="1.3rem">
+                      {primaryData?.birthDay===null && '--'}
+                    </Text>
+                  </Box>
+                  <Box w="30%" mt="30px">
+                    <Text mb="20px" fontSize="1.3rem">
+                      {t("Common.GENDER.label")}
+                    </Text>
+                    <Text mb="20px" fontSize="1.3rem">
+                      {primaryData?.gender === null && '--'}
+                    </Text>
+                  </Box>
+                  <Box w="30%" mt="30px">
+                    <Text mb="20px" fontSize="1.3rem">
+                      {t("Common.SalaryType.label")}
+                    </Text>
+                    <Text mb="20px" fontSize="1.3rem">
+                      {primaryData?.salaryType === null && '--'}
+                    </Text>
+                  </Box>
+                  <Box w="30%" mt="30px">
+                    <Text mb="20px" fontSize="1.3rem">
+                      {t("Profile.ProfileInfo.expectedSalary")}
+                    </Text>
+                    <Text mb="20px" fontSize="1.3rem">
+                      {primaryData?.expectedSalary === null && '--'}
+                    </Text>
+                  </Box>
+                  <Box w="30%" mt="30px">
+                    <Text mb="20px" fontSize="1.3rem">
+                      {t("Common.Currency.label")}
+                    </Text>
+                    <Text mb="20px" fontSize="1.3rem">
+                      {primaryData?.currency === null && '--'}
+                    </Text>
+                  </Box>
+                  <Box w="30%" mt="30px">
+                    <Text mb="20px" fontSize="1.3rem">
+                      {t("Common.INDUSTRIES.label")}
+                    </Text>
+                    <Text mb="20px" fontSize="1.3rem">
+                      {primaryData?.category === null && '--'}
+                    </Text>
+                  </Box>
+                </Flex>}
               </Box>
             </Flex>
           </CardBody>
