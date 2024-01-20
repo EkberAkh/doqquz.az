@@ -40,10 +40,10 @@ import NotificationIcon from "@/icons/NotificationIcon";
 import NotifiedIcon from "@/icons/NotifiedIcon";
 import { BiDockRight } from "react-icons/bi";
 import { relative } from "path";
-import GhostPng from './../../public/images/ghost.png'
 
 import { useCurrentLang } from "@/hooks";
 import LetteredAvatar from 'react-lettered-avatar';
+import Notification from "./notifications/Notification";
 
 
 interface IData {
@@ -255,31 +255,8 @@ console.log(path);
         </HStack>
         {token ? (
           <Flex >
-            <Box w={'4rem'} borderRight={'1px solid black'}>
-              <Popover>
-                <PopoverTrigger>
-                  <Box
-                    h={'100%'}
-                    textAlign={'center'}>
-                    <NotificationIcon width="28" height="28" />
-                  </Box>
-                </PopoverTrigger>
-                <PopoverContent right={'1rem'} bg={'#fff'}>
-                  <Flex borderBottom={'1px solid rgb(119, 119, 119)'}>
-                    <Flex justify={'space-between'} w={'100%'} p={'1rem'} >
-                      <PopoverHeader color={'red'} border={'none'} fontWeight={600} fontSize={'1.1rem'}>Notifications</PopoverHeader>
-                      <NotifiedIcon width="24" height="24" color="red" />
-                    </Flex>
-                  </Flex>
-                  <PopoverBody h={'25rem'}>
-                    <Flex justify={'center'} h={'100%'} align={'center'}>
-                      <Img src={GhostPng.src} w={'8rem'} />
-                    </Flex>
-                  </PopoverBody>
-                </PopoverContent>
-              </Popover>
-            </Box>
-
+            
+          <Notification/>
 
             <Box ml={'2rem'}>
               <Popover>
