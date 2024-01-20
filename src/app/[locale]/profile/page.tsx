@@ -1,7 +1,6 @@
 'use client'
 import { useTranslations } from 'next-intl'
 import { Card, Box, CardBody, CardHeader, Heading, Flex, Button, Text, Input, useDisclosure, Center, Avatar } from '@chakra-ui/react'
-import { colorObjects } from '@/consts'
 import { MdOutlineAccountCircle, MdOutlineFaceUnlock, MdOutlineDesktopMac, MdOutlineLibraryBooks } from "react-icons/md";
 import 'react-phone-input-2/lib/style.css'
 import ScrollToTop from '@/components/ScrollToTop'
@@ -17,7 +16,7 @@ const Profile = () => {
     const jobId = searchParams.get("jobId");
     const [data, setData] = useState(null); 
     const [data1,setData1] = useState(null)
-    
+    let role = localStorage.getItem("role");
     async function fetchData() {
         try {
             const response = await fetch(`https://neo-814m.onrender.com/v1/jobseeker/userId/${jobId}`);
@@ -56,9 +55,7 @@ const Profile = () => {
                             <MdOutlineAccountCircle color='rgb(42, 65, 232)' fontSize='1.4em' />
                             <Heading ml={'8px'} fontSize='1rem' fontWeight={700}>{t('Profile.titles.contactInfo')}</Heading>
                         </Flex>
-                        <Box bgColor='#e0f5d7' color='#449626' p='5px' borderRadius='5px'>
-                            {t('Common.Role.COMPANY')}
-                        </Box>
+                     
                     </CardHeader>
 
                     <CardBody p='30px'>
@@ -93,9 +90,7 @@ const Profile = () => {
                             <MdOutlineFaceUnlock color='rgb(42, 65, 232)' fontSize='1.4em' />
                             <Heading ml={'8px'} fontSize='1rem' fontWeight={700}> Profil Məlumatı</Heading>
                         </Flex>
-                        <Button bgColor='#e0f5d7' color='#449626' p='5px' borderRadius='5px'>
-                            Change
-                        </Button>
+                       
 
                     </CardHeader>
 
