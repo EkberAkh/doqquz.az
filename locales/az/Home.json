@@ -1,0 +1,45 @@
+{
+  "Header": {
+    "title": "Mütəxəssisləri tapın və ya istənilən vaxt özünüzə uyğun iş tapmağa hazır olun.",
+    "subTitle": "Biznes ideyalarınızı reallaşdırmaq üçün <span>Doqquz</span>dan istifadə edin",
+    "questions": {
+      "where": "Hara?",
+      "jobType": "Nə iş axtarırsan?"
+    },
+    "placeholders": {
+      "jobType": "Vəzifə və ya açar söz"
+    }
+  },
+  "JobAnnouncement": {
+    "title": "Ən son iş elanları",
+    "actions": {
+      "shortLink": "Bütün Vakansiyalar"
+    }
+  },
+  "RegisteredJobseekers": {
+    "title": "Ən son qeydiyyatdan keçmiş iş axtaranlar",
+    "actions": {
+      "shortLink": "Bütün İşaxtaranlar",
+      "viewProfile": "Profilə bax"
+    }
+  },
+  "Footer": {
+    "Nav": {
+      "forCandidates": {
+        "label": "İşaxtaranlar üçün",
+        "addResume": "CV əlavə edin"
+      },
+      "forEmployers": {
+        "label": "İşəgötürənlər üçün"
+      },
+      "helpfulLinks": "Faydalı Linklər",
+      "account": "Hesab",
+      "privacyPolice": "Məxfilik siyasəti"
+    },
+    "Subscribe": {
+      "title": "Yeniliklərə abunə ol",
+      "description": "İş axtaranlar üçün həftəlik yeniliklər, tədqiqat və qabaqcıl tövsiyələr.",
+      "placeholder": "Email ünvanı"
+    }
+  }
+}

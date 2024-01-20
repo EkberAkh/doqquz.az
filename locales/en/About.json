@@ -1,0 +1,28 @@
+{
+    "title": "About",
+    "mission": {
+        "title": "Our Mission",
+        "body": "To help people everywhere find a dream job and dedicated worker."
+    },
+    "value": {
+        "title": "Our Values",
+        "body": {
+            "transparent": {
+                "subtitle": "We are transparent.",
+                "caption": "We are open and honest. We share information – the good and the bad. We continuously learn from our experiences."
+            },
+            "innovative": {
+                "subtitle": "We are innovative.",
+                "caption": "We actively pursue new and different ways to further Doqquz’s mission. We forge our own path by challenging ourselves."
+            },
+            "team": {
+                "subtitle": "We are a team.",
+                "caption": "We work together with respect and care for one another. We have fun together. Our team works hard as we know our mission and goals."
+            },
+            "tenacity": {
+                "subtitle": "We have tenacity.",
+                "caption": "We are resilient, and resourceful. We see challenges as opportunities. With passion and courage, we come together to get the job done."
+            }
+        }
+    }
+}

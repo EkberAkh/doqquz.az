@@ -1,0 +1,33 @@
+{
+    "name": "Şirkət adı",
+    "candidates":"Namizədlər",
+    "ManageJobs": {
+        "title": "Vakansiyaları idarə et",
+        "subTitle": "Vakansiya siyahım",
+        "empty": "Vakansiya elanınız yoxdur",
+        "postedOn":"-də paylaşılıb",
+        "actions": {
+            "candidates":"Namizədləri idarə et",
+            "postAJob":"Vakansiya elanı paylaş"
+        }
+    },
+    "PostAJob":{
+        "title":{
+            "post":"Vakansiya elanı paylaş",
+            "update":"Vakansiya elanını yenilə"
+        },
+        "subTitle":"Vakansiya Paylaşma Formu",
+        "fields":{
+            "title":"Vəzifə/Başlıq",
+            "notificationEmail": "Bildiriş üçün ünvan"
+        }
+    },
+    "ViewJob":{
+        "summary":"İş Detalları",
+        "datePosted":"Paylaşıldığı Tarix",
+        "requiredSkills":"Tələb olunan bacarıqlar",
+        "contactInformation": "Müraciyyət üçün",
+        "description":"İşin təsviri",
+        "share":"Maraqlıdır? <NavigationLink>Vakansiyanı paylaş!</NavigationLink>"
+    }
+}
