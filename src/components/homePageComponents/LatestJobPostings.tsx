@@ -19,6 +19,7 @@ import { useEffect, useState } from "react";
 import { NavigationLink } from "../NavigationLink";
 import { useCurrentLang } from "@/hooks";
 import { useRouter } from "next/navigation";
+import { format } from "date-fns";
 interface ICardProps {
   title: string;
   id: number
@@ -80,6 +81,12 @@ const router = useRouter()
       localStorage.setItem("currentJob", JSON.stringify(currentJob));
     }
   }, [currentJobId, currentJob]);
+
+  const formatCreatedAt = (createdAt) => {
+    const date = new Date(createdAt);
+    return format(date, 'dd.MM.yyyy')
+  }
+  
 
 
   return (
@@ -156,7 +163,7 @@ const router = useRouter()
                           height="25"
                           color="rgb(119, 119, 119)"
                         />
-                        <Text>{job.createdAt}</Text>
+                        <Text>{formatCreatedAt(job.createdAt)}</Text>
                       </Flex>
                     </HStack>
                   </VStack>
