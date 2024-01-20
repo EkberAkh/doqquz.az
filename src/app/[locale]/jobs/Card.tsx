@@ -49,9 +49,9 @@ const Card: React.FC<ICardProps> = ({
       url = "https://neo-814m.onrender.com/v1/bookmark/";
       method = "POST";
       payload = {
-        type: "JOBSEEKER",
-        jobseeker: { id: id },
-        post: null,
+        type: "POST",
+        jobseeker: null,
+        post: { id: id },
       };
     } else {
       // Preparing for DELETE request
