@@ -104,7 +104,7 @@ const ManageJobs = () => {
           jobdata.map((item, key) => (
             <>
               <hr></hr>
-              <Box p="30px">
+              <Box key={item.id} p="30px">
                 <Flex gap="10px">
                   <Text
                     cursor="pointer"

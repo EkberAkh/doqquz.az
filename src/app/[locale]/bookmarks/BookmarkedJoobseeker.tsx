@@ -49,7 +49,7 @@ export function BookmarkedJoobseeker({
       </CardHeader>
       {bookmark.map((joobsearcher) =>
         joobsearcher.jobseeker ? (
-          <CardBody p={"2.5rem 1rem"}>
+          <CardBody key={joobsearcher.id} p={"2.5rem 1rem"}>
             <Flex width={"100%"} justify={"space-between"}>
               <Flex>
                 <Flex

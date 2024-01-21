@@ -16,9 +16,9 @@ import { useTranslations } from "next-intl";
 import React, { Dispatch, SetStateAction, useState } from "react";
 import { EINDUSTRY } from "./enums";
 interface IJobCategory {
-  setSelectedJobCategory:Dispatch<SetStateAction<string>>
+  setSelectedJobCategory: Dispatch<SetStateAction<string>>;
 }
-const JobCategories:React.FC<IJobCategory> = ({setSelectedJobCategory}) => {
+const JobCategories: React.FC<IJobCategory> = ({ setSelectedJobCategory }) => {
   const t = useTranslations();
   const jobs = Object.entries(EINDUSTRY);
   const [selectedLabel, setSelectedLabel] = useState("");
@@ -26,50 +26,49 @@ const JobCategories:React.FC<IJobCategory> = ({setSelectedJobCategory}) => {
 
   const handleCategorySelect = (label: string, originalValue: string) => {
     setInputValue(label);
-    setSelectedLabel(label); 
+    setSelectedLabel(label);
     const selectedEntry = jobs.find(([key, val]) => val === originalValue);
     if (selectedEntry) {
-    
-      setSelectedJobCategory(selectedEntry[1]); 
+      setSelectedJobCategory(selectedEntry[1]);
     }
   };
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = event.target.value;
-    setInputValue(newValue); 
+    setInputValue(newValue);
 
-    const found = jobs.some(([key, value]) => t(`Common.INDUSTRIES.${value}`) === newValue);
+    const found = jobs.some(
+      ([key, value]) => t(`Common.INDUSTRIES.${value}`) === newValue
+    );
     if (!found && newValue === "") {
       setSelectedLabel("");
-      setSelectedJobCategory(""); 
+      setSelectedJobCategory("");
     }
   };
   return (
     <FormControl w="100%">
-    <FormLabel marginBottom="16px" fontSize="18px">
-      {t("Common.INDUSTRIES.label")}
-    </FormLabel>
-    <AutoComplete openOnFocus>
-      {({ isOpen }:any) => (
-        <>
-          <InputGroup>
-            <AutoCompleteInput
-                  value={inputValue}
-                  onChange={handleInputChange}
-              borderRadius="4px"
-              minH="48px"
-              fontSize="16px"
-              backgroundColor="#fff"
-              outline="none"
-              boxShadow="0 0px 1px 1px rgb(0 0 0 / 12%)"
-              color="#808080"
-              maxW="100%"
-              variant="filled"
-              placeholder={t("Common.INDUSTRIES.label")}
-            
-            />
+      <FormLabel marginBottom="16px" fontSize="18px">
+        {t("Common.INDUSTRIES.label")}
+      </FormLabel>
+      <AutoComplete openOnFocus>
+        {({ isOpen }: any) => (
+          <>
+            <InputGroup>
+              <AutoCompleteInput
+                value={inputValue}
+                onChange={handleInputChange}
+                borderRadius="4px"
+                minH="48px"
+                fontSize="16px"
+                backgroundColor="#fff"
+                outline="none"
+                boxShadow="0 0px 1px 1px rgb(0 0 0 / 12%)"
+                color="#808080"
+                maxW="100%"
+                variant="filled"
+                placeholder={t("Common.INDUSTRIES.label")}
+              />
 
-            <InputRightElement
-              children={
+              <InputRightElement>
                 <Icon
                   cursor="pointer"
                   marginTop="5px"
@@ -77,25 +76,26 @@ const JobCategories:React.FC<IJobCategory> = ({setSelectedJobCategory}) => {
                   color="gray"
                   as={isOpen ? TriangleUpIcon : TriangleDownIcon}
                 />
-              }
-            />
-          </InputGroup>
-          <AutoCompleteList>
-            {jobs.map(([key, value], cid) => (
-              <AutoCompleteItem
-                key={`option-${cid}`}
-                value={value} // Original enum value
-                textTransform="capitalize"
-                onClick={() => handleCategorySelect(t(`Common.INDUSTRIES.${value}`), value)}
-              >
-                {t(`Common.INDUSTRIES.${value}`)}
-              </AutoCompleteItem>
-            ))}
-          </AutoCompleteList>
-        </>
-      )}
-    </AutoComplete>
-  </FormControl>
+              </InputRightElement>
+            </InputGroup>
+            <AutoCompleteList>
+              {jobs.map(([key, value], cid) => (
+                <AutoCompleteItem
+                  key={`option-${cid}`}
+                  value={value} // Original enum value
+                  textTransform="capitalize"
+                  onClick={() =>
+                    handleCategorySelect(t(`Common.INDUSTRIES.${value}`), value)
+                  }
+                >
+                  {t(`Common.INDUSTRIES.${value}`)}
+                </AutoCompleteItem>
+              ))}
+            </AutoCompleteList>
+          </>
+        )}
+      </AutoComplete>
+    </FormControl>
   );
 };
 
