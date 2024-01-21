@@ -11,6 +11,7 @@ import { FaPencil } from "react-icons/fa6";
 import Cookies from "js-cookie";
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
+import { format } from 'date-fns'
 
 
 
@@ -18,7 +19,7 @@ const ManageJobs = () => {
     const [jobdata, setJobdata] = useState([]);
     const userId = Cookies.get("userId");
     const t = useTranslations()
-const router = useRouter()
+    const router = useRouter()
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -40,6 +41,11 @@ const router = useRouter()
 
     console.log(jobdata);
 
+    const formatCreatedAt = (createdAt) => {
+        const date = new Date(createdAt);
+        return format(date, 'dd.MM.yyyy')
+    }
+
 
     return (
         <Box w="1200px" m="auto" pb="100px">
@@ -54,27 +60,28 @@ const router = useRouter()
                         <hr></hr>
                         <Box p="30px">
                             <Flex gap="10px">
-                                <Text cursor='pointer' onClick={()=>{
+                                <Text cursor='pointer' onClick={() => {
                                     router.push(`viewJobs?jobId=${encodeURIComponent(item.id)}`);
                                 }} fontWeight="bold" fontSize="18px" > {item.title}</Text>
                                 <Text
                                     borderRadius="5px"
                                     fontWeight="bold"
-                                    bg="gray.100"
-                                    color="green"
+                                    bg="rgb(224, 245, 215)"
+                                    color="rgb(68, 150, 38)"
                                     p=" 3px 5px">
-                                    Aktiv</Text>
+                                    {t('Common.PostStatus.ACTIVE')}
+                                </Text>
                             </Flex>
-                            <Flex m="15px 20px" gap="1px" alignItems="center">
+                            <Flex m="15px 0px" gap="1px" alignItems="center">
                                 <MdOutlineDateRange />
-                                <Text mt="3px">{item.createdAt} {t('Company.ManageJobs.postedOn')}</Text>
+                                <Text mt="3px">{formatCreatedAt(item.createdAt)} {t('Company.ManageJobs.postedOn')}</Text>
                             </Flex>
                             <Flex alignItems="center" gap="16px">
-                                <Box bg="blue.100" p="10px" borderRadius="6px">
-                                    <Flex gap="15px" alignItems="center">
-                                        <FaUserFriends />
+                                <Box bg="#2a41e8" p="10px" borderRadius="6px">
+                                    <Flex gap="15px" alignItems="center" color={'#fff'}>
+                                        <FaUserFriends/>
                                         <Text>{t('Company.ManageJobs.actions.candidates')}</Text>
-                                        <Text borderRadius="50%" bg="gray.400" fontSize="14px" color="white" p="0 5px ">0</Text>
+                                        <Text borderRadius="50%" bg="#8696FE" fontSize="14px" p="0 5px ">0</Text>
                                     </Flex>
                                 </Box>
                                 <Box borderRadius="50%" p="6px 6px" boxShadow="1px 1px 5px 1px gray">
