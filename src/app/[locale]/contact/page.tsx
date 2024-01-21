@@ -127,7 +127,7 @@ const Contact: React.FC<RegisterProps> = () => {
                 </InputLeftElement>
                 <Input
                   {...register("name", {
-                    required: "This is required"
+                    required: `${t('Common.Error.validation.empty')}`
                   })}
                   id='name'
                   type="text"
@@ -153,7 +153,7 @@ const Contact: React.FC<RegisterProps> = () => {
                 </InputLeftElement >
                 <Input
                   {...register("email", {
-                    required: "This is requiered"
+                    required: `${t('Common.Error.validation.empty')}`
                   })}
                   id='email'
                   type="email"
@@ -180,7 +180,7 @@ const Contact: React.FC<RegisterProps> = () => {
               </InputLeftElement>
               <Input
                 {...register("topic", {
-                  required: "this is required"
+                  required: `${t('Common.Error.validation.empty')}`
                 }
                 )}
                 id='topic'
@@ -198,7 +198,7 @@ const Contact: React.FC<RegisterProps> = () => {
           <FormControl isInvalid={!!errors.textarea}>
             <Textarea
               {...register("textarea", {
-                required: "this is required"
+                required: `${t('Common.Error.validation.empty')}`
               })}
               id='textarea'
               mt="50px"
