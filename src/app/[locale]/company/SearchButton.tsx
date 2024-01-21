@@ -6,9 +6,10 @@ import {
   InputRightElement,
   Button,
 } from "@chakra-ui/react";
+import { useState } from "react";
 
 const Search = ({ setQuery }) => {
-  let latestQuery;
+  const [latestQuery, setLatestQuery] = useState('')
   const t = useTranslations();
   const handleClick = () => {
     setQuery(latestQuery);
@@ -25,7 +26,7 @@ const Search = ({ setQuery }) => {
         type="text"
         placeholder="Şirkət adı"
         onChange={(e) => {
-          latestQuery = e.target.value;
+          setLatestQuery(e.target.value);
         }}
       />
       <Flex align="center">

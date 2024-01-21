@@ -594,7 +594,7 @@ const Profile = () => {
               <Box w="100%">
                 {role === "COMPANY" && (
                   <Flex columnGap="30px" mb="30px" flexWrap="wrap" flexDirection={{base:"column",lg:"row"}}>
-                    <Box w={{base:"100%",lg:"30%"}} display={{base:'flex',lg:"block"}} justifyContent={{base:"space-between",lg:"start"}}>>
+                    <Box w={{base:"100%",lg:"30%"}} display={{base:'flex',lg:"block"}} justifyContent={{base:"space-between",lg:"start"}}>
                       <Text mb="20px" fontSize="1.3rem" fontWeight={600}>
                         {t("Profile.ProfileInfo.name")}
                       </Text>
@@ -602,7 +602,7 @@ const Profile = () => {
                         {primaryData?.name}
                       </Text>
                     </Box>
-                    <Box w={{base:"100%",lg:"30%"}} display={{base:'flex',lg:"block"}} justifyContent={{base:"space-between",lg:"start"}}>>
+                    <Box w={{base:"100%",lg:"30%"}} display={{base:'flex',lg:"block"}} justifyContent={{base:"space-between",lg:"start"}}>
                       <Text mb="20px" fontSize="1.3rem" fontWeight={600}>
                         {t("Common.FormInputs.websiteUrl.label")}
                       </Text>
@@ -610,7 +610,7 @@ const Profile = () => {
                         {primaryData?.websiteUrl}
                       </Text>
                     </Box>
-                    <Box w={{base:"100%",lg:"30%"}} display={{base:'flex',lg:"block"}} justifyContent={{base:"space-between",lg:"start"}}>>
+                    <Box w={{base:"100%",lg:"30%"}} display={{base:'flex',lg:"block"}} justifyContent={{base:"space-between",lg:"start"}}>
                       <Text mb="20px" fontSize="1.3rem" fontWeight={600}>
                         {t("Profile.ProfileInfo.establishmentDate")}
                       </Text>
