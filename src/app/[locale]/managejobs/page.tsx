@@ -21,19 +21,46 @@ interface JobData {
 }
 
 const ManageJobs = () => {
-  const [jobdata, setJobdata] = useState<JobData[]>([]);
-  const userId = Cookies.get("userId");
-  const t = useTranslations();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        console.log(userId);
-        const response = await fetch(
-          `https://neo-814m.onrender.com/v1/post/userId/${userId}`
-        );
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
+    const [jobdata, setJobdata] = useState([]);
+    const userId = Cookies.get("userId");
+    const t = useTranslations()
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                console.log(userId);
+                const response = await fetch(`https://neo-814m.onrender.com/v1/post/userId/${userId}`);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                setJobdata(data);
+                console.log(data);
+            } catch (error) {
+                console.error('Fetch error:', error.message);
+            }
+        };
+
+        fetchData();
+    }, [userId]);
+
+    const token = Cookies.get('token');
+    const router = useRouter()
+
+
+
+    const handleDelete = async (id) => {
+        const url = `https://neo-814m.onrender.com/v1/post/delete/${id}`;
+        const token = Cookies.get("token");
+
+        const requestOptions = {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'Application/json',
+                Token: `${token}`
+            }
+
         }
         const data = await response.json();
         setJobdata(data);

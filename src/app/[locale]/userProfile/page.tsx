@@ -899,8 +899,6 @@ const Profile = () => {
                             </Box>
                             <Box m="50px">
                               <Flex gap="20px">
-                                <Button>EDIT</Button>
-                                <Button>DELETE</Button>
                               </Flex>
                             </Box>
                           </Flex>
@@ -1090,8 +1088,6 @@ const Profile = () => {
                             </Box>
                             <Box m="50px">
                               <Flex gap="20px">
-                                <Button>EDIT</Button>
-                                <Button>DELETE</Button>
                               </Flex>
                             </Box>
                           </Flex>
@@ -1331,8 +1327,6 @@ const Profile = () => {
                             </Box>
                             <Box m="50px">
                               <Flex gap="20px">
-                                <Button>EDIT</Button>
-                                <Button>DELETE</Button>
                               </Flex>
                             </Box>
                           </Flex>
