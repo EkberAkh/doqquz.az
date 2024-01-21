@@ -40,8 +40,8 @@ const LocationInput:React.FC<IJobCategory> = ({setSelectedLocation}) => {
   
 
   
-  const handleSelect = (value: string) => {
-    setSelectedLocation(value);
+  const handleSelect = (location: LocationItem) => {
+    setSelectedLocation(location);
   };
   return (
     <FormControl  w="100%">
@@ -95,7 +95,7 @@ const LocationInput:React.FC<IJobCategory> = ({setSelectedLocation}) => {
                   key={`option-${cid}`}
                   value={item.city}
                   textTransform="capitalize"
-                  onClick={() => handleSelect(item.city)}
+                  onClick={() => handleSelect(item)}
                 >
                   {item.city}
                 </AutoCompleteItem>
