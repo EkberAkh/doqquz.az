@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react';
-import { Box, Flex, Text, Link } from '@chakra-ui/react';
+import { Box, Flex, Text,Button } from '@chakra-ui/react';
 import React from 'react'
 import { useEffect } from "react";
 import { BiAddToQueue } from "react-icons/bi";
@@ -11,14 +11,14 @@ import { FaPencil } from "react-icons/fa6";
 import Cookies from "js-cookie";
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
-
+import axios from 'axios';
 
 
 const ManageJobs = () => {
     const [jobdata, setJobdata] = useState([]);
     const userId = Cookies.get("userId");
     const t = useTranslations()
-const router = useRouter()
+    const router = useRouter()
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -38,6 +38,36 @@ const router = useRouter()
         fetchData();
     }, [userId]);
 
+    const token = Cookies.get('token');
+
+
+    const handleDelete = async (id) => {
+        const url = `https://neo-814m.onrender.com/v1/post/delete/${id}`;
+        const token = Cookies.get("token");
+
+        const requestOptions = {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'Application/json',
+                Token: `${token}`
+            }
+        }
+
+        try {
+            const response = await fetch(url, requestOptions);
+            if (!response.ok) {
+                throw new Error(`Error: ${response.status}`)
+            }
+
+            setJobdata((prevBookmarks) => prevBookmarks.filter(bookmark => bookmark.id !== id));
+
+            console.log(`Bookmark with ID ${id} deleted successfully)`);
+
+        } catch (error) {
+            console.error("There was an error deleting the bookmark:", error)
+        }
+    }
+
     console.log(jobdata);
 
 
@@ -54,7 +84,7 @@ const router = useRouter()
                         <hr></hr>
                         <Box p="30px">
                             <Flex gap="10px">
-                                <Text cursor='pointer' onClick={()=>{
+                                <Text cursor='pointer' onClick={() => {
                                     router.push(`viewJobs?jobId=${encodeURIComponent(item.id)}`);
                                 }} fontWeight="bold" fontSize="18px" > {item.title}</Text>
                                 <Text
@@ -74,14 +104,14 @@ const router = useRouter()
                                     <Flex gap="15px" alignItems="center">
                                         <FaUserFriends />
                                         <Text>{t('Company.ManageJobs.actions.candidates')}</Text>
-                                        <Text borderRadius="50%" bg="gray.400" fontSize="14px" color="white" p="0 5px ">0</Text>
+                                        <Text borderRadius="50%" bg="gray.400" fontSize="14px" color="white" p="0 5px ">{item.jobseekers.length}</Text>
                                     </Flex>
                                 </Box>
                                 <Box borderRadius="50%" p="6px 6px" boxShadow="1px 1px 5px 1px gray">
                                     <FaPencil size="24px" />
                                 </Box>
                                 <Box borderRadius="50%" p="3px 4px" boxShadow="1px 1px 5px 1px gray">
-                                    <MdDeleteOutline size="30px" />
+                                    <MdDeleteOutline size="30px" onClick={() => handleDelete(item.id)} />
                                 </Box>
 
                             </Flex>
