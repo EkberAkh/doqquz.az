@@ -78,6 +78,10 @@ const EditJobs = () => {
                 setSalaryTypevalue(t(`Common.SalaryType.${dataa.salaryType}`))
                 setJobCategoryValue(t(`Common.INDUSTRIES.${dataa.category}`))
                 setSelectedKeywords(dataa.skills)
+                console.log(dataa);
+                console.log(dataa.currency);
+
+
 
             } catch (error) {
                 console.error('Fetch error:', error.message);
@@ -116,6 +120,13 @@ const EditJobs = () => {
                     Token: `${token}`,
                 },
                 body: JSON.stringify(payload),
+            }).then((res) => {
+                toast({
+                    title: "Login successful",
+                    status: "success",
+                    duration: 2000,
+                    isClosable: true,
+                });
             });
 
             if (!response.ok) {
@@ -125,7 +136,7 @@ const EditJobs = () => {
             const data = await response.json();
 
 
-            router.push('jobs')
+            router.push('/')
         } catch (error) {
             console.error('There was a problem with the fetch operation:', error);
         }
@@ -183,35 +194,37 @@ const EditJobs = () => {
             setSalaryType(""); // Clear the enum value if no match is found
         }
     };
-//-----------------------------------------------------------------------------------------------------------  jobCategory
-const [jobCategory, setJobCategory] = useState([]);
-const [jobCategoryValue, setJobCategoryValue] = useState("");
+    //-----------------------------------------------------------------------------------------------------------  jobCategory
+    const [jobCategory, setJobCategory] = useState([]);
+    const [jobCategoryValue, setJobCategoryValue] = useState("");
 
-const jobs = Object.entries(EINDUSTRY);
+    const jobs = Object.entries(EINDUSTRY);
 
-const handleJobCategorySelect = (label: string, originalValue: string) => {
-    setJobCategoryValue(label);
-    setJobCategory(originalValue);
-    const selectedEntry = jobs.find(([key, val]) => val === originalValue);
-    if (selectedEntry) {
+    const handleJobCategorySelect = (label: string, originalValue: string) => {
+        setJobCategoryValue(label);
+        setJobCategory(originalValue);
+        const selectedEntry = jobs.find(([key, val]) => val === originalValue);
+        if (selectedEntry) {
 
-        setJobCategory(selectedEntry[1]);
-    }
-};
-const handleInputChangeJob = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = event.target.value;
-    setJobCategoryValue(newValue);
+            setJobCategory(selectedEntry[1]);
+        }
+    };
+    const handleInputChangeJob = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const newValue = event.target.value;
+        setJobCategoryValue(newValue);
 
-    const found = salaries.some(([key, value]) => t(`Common.INDUSTRIES.${value}`) === newValue);
-    if (foundEntry) {
-        setJobCategory(foundEntry[0]); // Set the actual enum value
-    } else {
-        setJobCategory(""); // Clear the enum value if no match is found
-    }
-};
+        const found = salaries.some(([key, value]) => t(`Common.INDUSTRIES.${value}`) === newValue);
+        if (foundEntry) {
+            setJobCategory(foundEntry[0]); // Set the actual enum value
+        } else {
+            setJobCategory(""); // Clear the enum value if no match is found
+        }
+    };
 
-const searchParams = useSearchParams();
-const companyId = searchParams.get("companyId");
+    const currencies = ["AZN", "TL", "USD", "EUR", "STR"];
+
+    const searchParams = useSearchParams();
+    const companyId = searchParams.get("companyId");
 
     return (
         <>
@@ -304,6 +317,7 @@ const companyId = searchParams.get("companyId");
                                     </AutoComplete>
                                 </FormControl>
                                 {/* <JobCategories setSelectedJobCategory={setJobCategory} selectedCategory={jobCategory} /> */}
+
                                 <FormControl marginBottom="16px" w="100%">
                                     <FormLabel marginBottom="16px" fontSize="18px">
                                         {t("Common.INDUSTRIES.label")}
@@ -450,9 +464,58 @@ const companyId = searchParams.get("companyId");
                                         </FormControl>
                                     </Flex>
                                 </Box>
-                                <CurrencyType
+                                {/* <CurrencyType
                                     setSelectedCurrency={setCurrency}
-                                />
+                                /> */}
+                                <FormControl marginBottom="16px" w="100%">
+                                    <FormLabel marginBottom="16px" fontSize="18px">
+                                        {t("Common.Currency.label")}
+                                    </FormLabel>
+                                    <AutoComplete onChange={setCurrency} openOnFocus>
+                                        {({ isOpen }: any) => (
+                                            <>
+                                                <InputGroup>
+                                                    <AutoCompleteInput
+                                                        value={currency}
+                                                        borderRadius="4px"
+                                                        minH="48px"
+                                                        fontSize="16px"
+                                                        backgroundColor="#fff"
+                                                        outline="none"
+                                                        boxShadow="0 0px 1px 1px rgb(0 0 0 / 12%)"
+                                                        color="#808080"
+                                                        maxW="100%"
+                                                        variant="filled"
+                                                        placeholder={t("Common.Currency.label")}
+                                                    />
+
+                                                    <InputRightElement
+                                                        children={
+                                                            <Icon
+                                                                cursor="pointer"
+                                                                marginTop="5px"
+                                                                fontSize="10px"
+                                                                color="gray"
+                                                                as={isOpen ? TriangleUpIcon : TriangleDownIcon}
+                                                            />
+                                                        }
+                                                    />
+                                                </InputGroup>
+                                                <AutoCompleteList>
+                                                    {currencies.map((currency, cid) => (
+                                                        <AutoCompleteItem
+                                                            key={`option-${cid}`}
+                                                            value={currency}
+                                                            textTransform="capitalize"
+                                                        >
+                                                            {currency}
+                                                        </AutoCompleteItem>
+                                                    ))}
+                                                </AutoCompleteList>
+                                            </>
+                                        )}
+                                    </AutoComplete>
+                                </FormControl>
                             </Flex>
                             <Flex alignItems='center' gap="30px" m="30px 0">
                                 <LocationInput setSelectedLocation={setlocation} />
@@ -495,6 +558,18 @@ const companyId = searchParams.get("companyId");
                         </Box>}
 
                 </Box>
+                <ToastContainer
+                    position="top-right"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme="light"
+                />
 
             </Box>
         </>
