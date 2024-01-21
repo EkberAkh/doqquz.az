@@ -416,7 +416,7 @@ const Profile = () => {
 
   return (
     <Flex justify={"center"}>
-      <Box mx="15px" width={{base:"90%",lg:"81%"}}>
+      <Box mx="15px" width={{ base: "90%", lg: "81%" }}>
         <Card marginTop="30px" boxShadow="0 6px 10px rgba(1, 0, 0, 0.2)">
           <CardHeader
             borderBottom="1px solid #e4e4e4"
@@ -440,7 +440,7 @@ const Profile = () => {
           </CardHeader>
 
           <CardBody p="30px">
-            <Flex flexDirection={{base:"column",lg:"row"}}>
+            <Flex flexDirection={{ base: "column", lg: "row" }}>
               <Box
                 cursor="pointer"
                 w="138px"
@@ -455,7 +455,7 @@ const Profile = () => {
                   backgroundSize: "cover",
                   backgroundPosition: "center",
                 }}
-                marginBottom={{base:"20px",lg:"0"}}
+                marginBottom={{ base: "20px", lg: "0" }}
               >
                 {!selectedImage &&
                   (userInfo?.imageUrl ? (
@@ -481,9 +481,16 @@ const Profile = () => {
                   accept="image/*"
                 />
               </Box>
-              <Box w={{base:"100%",lg:"87%"}} >
-                <Flex columnGap="30px" mb="30px" flexDirection={{base:"column",lg:"row"}}>
-                  <Box w={{base:"100%",lg:"50%"}} marginBottom={{base:"15px",lg:"0"}}>
+              <Box w={{ base: "100%", lg: "87%" }}>
+                <Flex
+                  columnGap="30px"
+                  mb="30px"
+                  flexDirection={{ base: "column", lg: "row" }}
+                >
+                  <Box
+                    w={{ base: "100%", lg: "50%" }}
+                    marginBottom={{ base: "15px", lg: "0" }}
+                  >
                     <Text mb="20px" fontSize="1.3rem">
                       {t("Common.FormInputs.email.label")}
                     </Text>
@@ -497,7 +504,7 @@ const Profile = () => {
                     ></Input>
                   </Box>
 
-                  <Box w={{base:"100%",lg:"50%"}}>
+                  <Box w={{ base: "100%", lg: "50%" }}>
                     <Text mb="20px" fontSize="1.3rem">
                       {t("Common.FormInputs.phoneNumber.label")}
                     </Text>
@@ -513,7 +520,7 @@ const Profile = () => {
                       }}
                       inputStyle={{
                         height: "48px",
-                        width:  maxWidth1300Media ? '100%' : "27rem",
+                        width: maxWidth1300Media ? "100%" : "27rem",
                         borderRadius: "0.3rem",
                       }}
                       buttonStyle={{ background: "#fff", borderRight: "none" }}
@@ -594,8 +601,17 @@ const Profile = () => {
             <Flex>
               <Box w="100%">
                 {role === "COMPANY" && (
-                  <Flex columnGap="30px" mb="30px" flexWrap="wrap" flexDirection={{base:"column",lg:"row"}}>
-                    <Box w={{base:"100%",lg:"30%"}} display={{base:'flex',lg:"block"}} justifyContent={{base:"space-between",lg:"start"}}>
+                  <Flex
+                    columnGap="30px"
+                    mb="30px"
+                    flexWrap="wrap"
+                    flexDirection={{ base: "column", lg: "row" }}
+                  >
+                    <Box
+                      w={{ base: "100%", lg: "30%" }}
+                      display={{ base: "flex", lg: "block" }}
+                      justifyContent={{ base: "space-between", lg: "start" }}
+                    >
                       <Text mb="20px" fontSize="1.3rem" fontWeight={600}>
                         {t("Profile.ProfileInfo.name")}
                       </Text>
@@ -603,7 +619,11 @@ const Profile = () => {
                         {primaryData?.name}
                       </Text>
                     </Box>
-                    <Box w={{base:"100%",lg:"30%"}} display={{base:'flex',lg:"block"}} justifyContent={{base:"space-between",lg:"start"}}>
+                    <Box
+                      w={{ base: "100%", lg: "30%" }}
+                      display={{ base: "flex", lg: "block" }}
+                      justifyContent={{ base: "space-between", lg: "start" }}
+                    >
                       <Text mb="20px" fontSize="1.3rem" fontWeight={600}>
                         {t("Common.FormInputs.websiteUrl.label")}
                       </Text>
@@ -611,7 +631,11 @@ const Profile = () => {
                         {primaryData?.websiteUrl}
                       </Text>
                     </Box>
-                    <Box w={{base:"100%",lg:"30%"}} display={{base:'flex',lg:"block"}} justifyContent={{base:"space-between",lg:"start"}}>
+                    <Box
+                      w={{ base: "100%", lg: "30%" }}
+                      display={{ base: "flex", lg: "block" }}
+                      justifyContent={{ base: "space-between", lg: "start" }}
+                    >
                       <Text mb="20px" fontSize="1.3rem" fontWeight={600}>
                         {t("Profile.ProfileInfo.establishmentDate")}
                       </Text>
@@ -619,7 +643,11 @@ const Profile = () => {
                         {primaryData?.establishmentDate}
                       </Text>
                     </Box>
-                    <Box w={{base:"100%",lg:"30%"}} display={{base:'flex',lg:"block"}} justifyContent={{base:"space-between",lg:"start"}}> mt="30px">
+                    <Box
+                      w={{ base: "100%", lg: "30%" }}
+                      display={{ base: "flex", lg: "block" }}
+                      justifyContent={{ base: "space-between", lg: "start" }}
+                    >
                       <Text mb="20px" fontSize="1.3rem" fontWeight={600}>
                         {t("Common.FormInputs.description.label")}
                       </Text>
@@ -630,8 +658,17 @@ const Profile = () => {
                   </Flex>
                 )}
                 {role === "JOBSEEKER" && (
-                  <Flex columnGap="30px" mb="30px" flexWrap="wrap" flexDirection={{base:"column",lg:"row"}}>
-                    <Box w={{base:"100%",lg:"30%"}} display={{base:'flex',lg:"block"}} justifyContent={{base:"space-between",lg:"start"}}>
+                  <Flex
+                    columnGap="30px"
+                    mb="30px"
+                    flexWrap="wrap"
+                    flexDirection={{ base: "column", lg: "row" }}
+                  >
+                    <Box
+                      w={{ base: "100%", lg: "30%" }}
+                      display={{ base: "flex", lg: "block" }}
+                      justifyContent={{ base: "space-between", lg: "start" }}
+                    >
                       <Text mb="20px" fontSize="1.3rem" fontWeight={600}>
                         {t("Profile.ProfileInfo.name")}
                       </Text>
@@ -639,7 +676,11 @@ const Profile = () => {
                         {primaryData?.firstName}
                       </Text>
                     </Box>
-                    <Box  w={{base:"100%",lg:"30%"}} display={{base:'flex',lg:"block"}} justifyContent={{base:"space-between",lg:"start"}}>
+                    <Box
+                      w={{ base: "100%", lg: "30%" }}
+                      display={{ base: "flex", lg: "block" }}
+                      justifyContent={{ base: "space-between", lg: "start" }}
+                    >
                       <Text mb="20px" fontSize="1.3rem" fontWeight={600}>
                         {t("Common.FormInputs.lastName.label")}
                       </Text>
@@ -647,7 +688,11 @@ const Profile = () => {
                         {primaryData?.lastName}
                       </Text>
                     </Box>
-                    <Box  w={{base:"100%",lg:"30%"}} display={{base:'flex',lg:"block"}} justifyContent={{base:"space-between",lg:"start"}}>
+                    <Box
+                      w={{ base: "100%", lg: "30%" }}
+                      display={{ base: "flex", lg: "block" }}
+                      justifyContent={{ base: "space-between", lg: "start" }}
+                    >
                       <Text mb="20px" fontSize="1.3rem" fontWeight={600}>
                         {t("Profile.ProfileInfo.birthday")}
                       </Text>
@@ -655,7 +700,12 @@ const Profile = () => {
                         {primaryData?.birthDay === null && "--"}
                       </Text>
                     </Box>
-                    <Box  w={{base:"100%",lg:"30%"}} display={{base:'flex',lg:"block"}} justifyContent={{base:"space-between",lg:"start"}} mt="30px">
+                    <Box
+                      w={{ base: "100%", lg: "30%" }}
+                      display={{ base: "flex", lg: "block" }}
+                      justifyContent={{ base: "space-between", lg: "start" }}
+                      mt="30px"
+                    >
                       <Text mb="20px" fontSize="1.3rem" fontWeight={600}>
                         {t("Common.GENDER.label")}
                       </Text>
@@ -663,7 +713,12 @@ const Profile = () => {
                         {primaryData?.gender === null && "--"}
                       </Text>
                     </Box>
-                    <Box  w={{base:"100%",lg:"30%"}} display={{base:'flex',lg:"block"}} justifyContent={{base:"space-between",lg:"start"}} mt="30px">
+                    <Box
+                      w={{ base: "100%", lg: "30%" }}
+                      display={{ base: "flex", lg: "block" }}
+                      justifyContent={{ base: "space-between", lg: "start" }}
+                      mt="30px"
+                    >
                       <Text mb="20px" fontSize="1.3rem" fontWeight={600}>
                         {t("Common.SalaryType.label")}
                       </Text>
@@ -671,7 +726,12 @@ const Profile = () => {
                         {primaryData?.salaryType === null && "--"}
                       </Text>
                     </Box>
-                    <Box  w={{base:"100%",lg:"30%"}} display={{base:'flex',lg:"block"}} justifyContent={{base:"space-between",lg:"start"}} mt="30px">
+                    <Box
+                      w={{ base: "100%", lg: "30%" }}
+                      display={{ base: "flex", lg: "block" }}
+                      justifyContent={{ base: "space-between", lg: "start" }}
+                      mt="30px"
+                    >
                       <Text mb="20px" fontSize="1.3rem" fontWeight={600}>
                         {t("Profile.ProfileInfo.expectedSalary")}
                       </Text>
@@ -679,7 +739,12 @@ const Profile = () => {
                         {primaryData?.expectedSalary === null && "--"}
                       </Text>
                     </Box>
-                    <Box  w={{base:"100%",lg:"30%"}} display={{base:'flex',lg:"block"}} justifyContent={{base:"space-between",lg:"start"}} mt="30px">
+                    <Box
+                      w={{ base: "100%", lg: "30%" }}
+                      display={{ base: "flex", lg: "block" }}
+                      justifyContent={{ base: "space-between", lg: "start" }}
+                      mt="30px"
+                    >
                       <Text mb="20px" fontSize="1.3rem" fontWeight={600}>
                         {t("Common.Currency.label")}
                       </Text>
@@ -687,7 +752,12 @@ const Profile = () => {
                         {primaryData?.currency === null && "--"}
                       </Text>
                     </Box>
-                    <Box  w={{base:"100%",lg:"30%"}} display={{base:'flex',lg:"block"}} justifyContent={{base:"space-between",lg:"start"}} mt="30px">
+                    <Box
+                      w={{ base: "100%", lg: "30%" }}
+                      display={{ base: "flex", lg: "block" }}
+                      justifyContent={{ base: "space-between", lg: "start" }}
+                      mt="30px"
+                    >
                       <Text mb="20px" fontSize="1.3rem" fontWeight={600}>
                         {t("Common.INDUSTRIES.label")}
                       </Text>

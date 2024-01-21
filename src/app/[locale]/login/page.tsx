@@ -13,6 +13,7 @@ import {
   Button,
   Icon,
   FormErrorMessage,
+  LinkProps,
 } from "@chakra-ui/react";
 import { useTranslations } from "next-intl";
 import { FaArrowRight } from "react-icons/fa";
@@ -54,11 +55,9 @@ const Login1: React.FC = () => {
 
   const [token, setToken] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-  console.log(token);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   function onSubmit() {
-    console.log(values);
     fetch("https://neo-814m.onrender.com/v1/auth/login", {
       method: "POST",
       headers: { "content-type": "application/json" },
@@ -152,7 +151,6 @@ const Login1: React.FC = () => {
             span: (chunks) => <span style={{ color: "gray" }}> {chunks}</span>,
           })}
         </Text>
-        {/* <Text color="gray.500">Hesabınız yoxdur? <span style={{ color: "blue", cursor: "pointer" }}> <Link  _hover={{color:"black"}} href="/az/register">Qeydiyyatdan kecin</Link> </span></Text> */}
       </Flex>
 
       <Box w={{ base: "80%", lg: "490px" }} m="auto">
@@ -227,7 +225,7 @@ const Login1: React.FC = () => {
 
             <FormHelperText m="20px 0 ">
               <NavigationLink
-                fontSize="17px"
+                style={{ fontSize: "17px" }}
                 _hover={{ color: "blue", textDecoration: "none" }}
                 href="/forgotPassword"
               >

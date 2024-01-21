@@ -1,9 +1,17 @@
 import { StarIcon } from "@chakra-ui/icons";
-import { Avatar, Box, Flex, GridItem, Img, Spinner, Text } from "@chakra-ui/react";
+import {
+  Avatar,
+  Box,
+  Flex,
+  GridItem,
+  Img,
+  Spinner,
+  Text,
+} from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
-import {format} from 'date-fns'
+import { format } from "date-fns";
 
 interface ICardProps {
   companyName: string;
@@ -15,7 +23,7 @@ interface ICardProps {
   currency: string;
   createdAt: string;
   id: number;
-  imageUrl:string;
+  imageUrl: string;
 }
 
 const Card: React.FC<ICardProps> = ({
@@ -28,19 +36,19 @@ const Card: React.FC<ICardProps> = ({
   maxEstimatedBudget,
   currency,
   createdAt,
-  imageUrl
+  imageUrl,
 }) => {
   const initialIsFav = localStorage.getItem(`fav-jobs-${id}`) === "true";
   const [isFav, setIsFav] = useState<boolean>(initialIsFav);
-  const [isLoading,setIsLoading] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [bookmarkId, setBookmarkId] = useState<number | null>(null);
-  let role = localStorage.getItem('role')
+  let role = localStorage.getItem("role");
   useEffect(() => {
     // Update local storage when isFav changes
     localStorage.setItem(`fav-jobs-${id}`, isFav.toString());
   }, [isFav, id]);
   const handleFavClick = async () => {
-    setIsLoading(true); 
+    setIsLoading(true);
     setIsFav(!isFav);
     const token = Cookies.get("token");
     let url, method, payload;
@@ -58,7 +66,7 @@ const Card: React.FC<ICardProps> = ({
       // Preparing for DELETE request
       if (!bookmarkId) {
         console.error("No bookmark ID available for deletion");
-        setIsLoading(false); 
+        setIsLoading(false);
         return;
       }
       url = `https://neo-814m.onrender.com/v1/bookmark/${bookmarkId}`;
@@ -66,7 +74,6 @@ const Card: React.FC<ICardProps> = ({
       payload = null;
     }
     try {
-    
       const response = await fetch(url, {
         method: method,
         headers: {
@@ -82,8 +89,8 @@ const Card: React.FC<ICardProps> = ({
 
       if (!isFav) {
         const data = await response.json();
-  
-        setBookmarkId(data.id); 
+
+        setBookmarkId(data.id);
       }
 
       setIsFav(!isFav);
@@ -92,7 +99,7 @@ const Card: React.FC<ICardProps> = ({
       );
     } catch (error) {
       console.error("Error in updating bookmark:", error);
-    }finally {
+    } finally {
       setIsLoading(false); // Stop loading after the operation is complete
     }
   };
@@ -101,17 +108,13 @@ const Card: React.FC<ICardProps> = ({
     router.push(`viewJobs?jobId=${encodeURIComponent(id)}`);
   };
 
-  const formatCreatedAt = (createdAt) => {
+  const formatCreatedAt = (createdAt: string) => {
     const date = new Date(createdAt);
-    return format(date, 'dd.MM.yyyy')
-  }
+    return format(date, "dd.MM.yyyy");
+  };
 
   return (
-    <GridItem
-
-      maxHeight="210px"
-      boxShadow="0 2px 18px rgba(0,0,0,.14)"
-    >
+    <GridItem maxHeight="210px" boxShadow="0 2px 18px rgba(0,0,0,.14)">
       <Box
         backgroundColor="white"
         height="55%"
@@ -122,7 +125,13 @@ const Card: React.FC<ICardProps> = ({
         <Flex gap="20px" alignItems="center">
           <Avatar src={imageUrl} size="md" />
 
-          <Box cursor="pointer" onClick={clickHandler} display="flex" flexDirection="column" alignItems="flex-start">
+          <Box
+            cursor="pointer"
+            onClick={clickHandler}
+            display="flex"
+            flexDirection="column"
+            alignItems="flex-start"
+          >
             <Text as="h4" color="grey" fontSize="16px">
               {companyName}
             </Text>
@@ -132,33 +141,44 @@ const Card: React.FC<ICardProps> = ({
           </Box>
         </Flex>
 
-       {isLoading ? <Spinner  position="absolute"
-       height="36px"
-       width="36px"
-          right="0" 
-          top="50%"
-          transform="auto"
-          translateY="50%"
-          margin="36px 18px"
-          padding="7px 7px 9px 7px"/>
-          : <StarIcon
-          margin="18px"
-          onClick={role === 'COMPANY' || role === 'JOBSEEKER' ? handleFavClick : ()=>{router.push('login')}}
-          transition="all .4s"
-          _hover={isFav ? {} : { backgroundColor: "black", color: "white" }}
-          borderRadius="50%"
-          backgroundColor={isFav ? "gold" : "#eee"}
-          padding="7px 7px 9px 7px"
-          position="absolute"
-          right="0"
-          top="50%"
-          transform="auto"
-          translateY="50%"
-          height="36px"
-          width="36px"
-          color={isFav ? "#fff" : "silver"}
-          cursor="pointer"
-        />}
+        {isLoading ? (
+          <Spinner
+            position="absolute"
+            height="36px"
+            width="36px"
+            right="0"
+            top="50%"
+            transform="auto"
+            translateY="50%"
+            margin="36px 18px"
+            padding="7px 7px 9px 7px"
+          />
+        ) : (
+          <StarIcon
+            margin="18px"
+            onClick={
+              role === "COMPANY" || role === "JOBSEEKER"
+                ? handleFavClick
+                : () => {
+                    router.push("login");
+                  }
+            }
+            transition="all .4s"
+            _hover={isFav ? {} : { backgroundColor: "black", color: "white" }}
+            borderRadius="50%"
+            backgroundColor={isFav ? "gold" : "#eee"}
+            padding="7px 7px 9px 7px"
+            position="absolute"
+            right="0"
+            top="50%"
+            transform="auto"
+            translateY="50%"
+            height="36px"
+            width="36px"
+            color={isFav ? "#fff" : "silver"}
+            cursor="pointer"
+          />
+        )}
       </Box>
       <Box
         justifyContent="space-around"
