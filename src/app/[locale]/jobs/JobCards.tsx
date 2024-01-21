@@ -1,5 +1,5 @@
 "use client"
-import { Button, Flex, Grid, HStack, Text } from "@chakra-ui/react";
+import { Button, Flex, Grid, HStack, Text, useMediaQuery } from "@chakra-ui/react";
 import { useTranslations } from "next-intl";
 import React, { useEffect, useState } from "react";
 import Card from "./Card";
@@ -8,7 +8,7 @@ interface IJobCards {
   filterData: any;
 }
 const JobCards:React.FC<IJobCards> =  ({ filterData }) => {
-
+  const [maxWidth1100Media] = useMediaQuery("(max-width: 1100px)");
   const t = useTranslations();
   const [allJobs, setAllJobs] = useState([]); 
   const [currentPage, setCurrentPage] = useState(1);
@@ -63,10 +63,10 @@ const JobCards:React.FC<IJobCards> =  ({ filterData }) => {
     <>
       <Grid
         padding="18px"
-        templateColumns={{base:"2fr",lg:"1fr 1 fr"}}
+        templateColumns={maxWidth1100Media ? '2fr' : '1fr 1fr'}   
         gap="14px"
-        width={{base:"100%",lg:"calc(100% - 379px)"}}
-        maxHeight='470px'
+        width={maxWidth1100Media ? "100%" : "calc(100% - 379px)"}
+        maxHeight={maxWidth1100Media ? 'auto' : '470px'} 
       >
       
       {currentJobs.map((job: any) => (
@@ -86,8 +86,8 @@ const JobCards:React.FC<IJobCards> =  ({ filterData }) => {
         ))}
      
       </Grid>
-      <HStack spacing="20px" justify="center" p="4">
-        <Button onClick={() => changePage(currentPage - 1)} disabled={currentPage === 1}>
+      <HStack spacing="20px" justify="center" p="4" display={maxWidth1100Media ? 'none' : 'block'} margin='0 auto'>
+        <Button onClick={() => changePage(currentPage - 1)} disabled={currentPage === 1} marginRight='15px'>
           Prev
         </Button>
         {Array.from({ length: pageCount }, (_, i) => i + 1).map((number) => (
@@ -95,7 +95,7 @@ const JobCards:React.FC<IJobCards> =  ({ filterData }) => {
             {number}
           </Button>
         ))}
-        <Button onClick={() => changePage(currentPage + 1)} disabled={currentPage === pageCount}>
+        <Button onClick={() => changePage(currentPage + 1)} disabled={currentPage === pageCount} marginLeft='15px'>
           Next
         </Button>
       </HStack>
