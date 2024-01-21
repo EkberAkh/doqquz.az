@@ -168,11 +168,13 @@ const Login1: React.FC = () => {
               <InputGroup>
                 <InputLeftElement
                   w="50px"
+                  h={'97.5%'}
                   backgroundColor="#eee"
                   borderRadius="5px"
-                  p="25px 10px"
+                  p="17px"
                   pointerEvents="none"
-                  display={{ base: "none", lg: "flex" }}
+                  display={{ base: "none", lg: "block" }}
+                  mt={'0.5px'}
                 >
                   <FaRegEnvelope color={backgroundColor} />
                 </InputLeftElement>
@@ -183,7 +185,7 @@ const Login1: React.FC = () => {
                   placeholder="example@gmail.com"
                   onFocus={handleFocus}
                   onBlur={handleBlur}
-                  p={{ base: "25px 30px 25px 30px", lg: "25px 70px" }}
+                  p={{ base: "25px 30px", lg: "25px 70px" }}
                   value={values.email}
                   onChange={handleChange}
                 />
@@ -199,19 +201,22 @@ const Login1: React.FC = () => {
               <InputGroup mt="30px">
                 <InputLeftElement
                   w="50px"
+                  h={'98%'}
                   backgroundColor="#eee"
                   borderRadius="5px"
-                  p="25px 10px"
+                  // p="25px 10px"
                   pointerEvents="none"
-                  display={{ base: "none", lg: "flex" }}
+                  display={{ base: "none", lg: "block" }}
+                  textAlign={'center'}
+                  mt={'0.5px'}
                 >
-                  <LockIcon color={backgroundColor2} />
+                  <LockIcon color={backgroundColor2} mt={'1rem'}/>
                 </InputLeftElement>
                 <Input
                   id="password"
                   type="password"
                   placeholder={t("Common.FormInputs.password.placeholder")}
-                  p={{ base: "25px 30px 25px 30px", lg: "25px 70px" }}
+                  p={{ base: "25px 30px", lg: "25px 70px" }}
                   onFocus={handleFocus_2}
                   onBlur={handleBlur_2}
                   value={values.password}
