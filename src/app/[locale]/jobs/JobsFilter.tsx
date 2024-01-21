@@ -16,12 +16,16 @@ interface IJobFilter {
   locationInput: boolean;
   onFilterChange: (filterData: any) => void;
 }
-const JobsFilter: React.FC<IJobFilter> = ({ jobType, locationInput,onFilterChange  }) => {
+const JobsFilter: React.FC<IJobFilter> = ({
+  jobType,
+  locationInput,
+  onFilterChange,
+}) => {
   const t = useTranslations();
-  const [selectedCurrency, setSelectedCurrency] = useState('');
-  const [selectedJobCategory, setSelectedJobCategory] = useState('');
-  const [selectedLocation, setSelectedLocation] = useState('');
-  const [selectedSalary, setSelectedSalary] = useState('');
+  const [selectedCurrency, setSelectedCurrency] = useState("");
+  const [selectedJobCategory, setSelectedJobCategory] = useState("");
+  const [selectedLocation, setSelectedLocation] = useState("");
+  const [selectedSalary, setSelectedSalary] = useState("");
   const [selectedJobTypes, setSelectedJobTypes] = useState<string[]>([]);
   const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
   const [salaryRange, setSalaryRange] = useState({ min: 1, max: 100000 });
@@ -32,37 +36,48 @@ const JobsFilter: React.FC<IJobFilter> = ({ jobType, locationInput,onFilterChang
     const filterData = {
       currency: selectedCurrency,
       category: selectedJobCategory,
+      // @ts-ignore
       location: selectedLocation.id, // Use the location ID here
-      locObj: selectedLocation, 
+      locObj: selectedLocation,
 
       salaryType: selectedSalary,
-      type: selectedJobTypes[0] === undefined ? '' :selectedJobTypes[0]  ,
-      keyword: selectedKeywords[0] === undefined ? '': selectedKeywords[0],
+      type: selectedJobTypes[0] === undefined ? "" : selectedJobTypes[0],
+      keyword: selectedKeywords[0] === undefined ? "" : selectedKeywords[0],
       maxEstimatedBudget: salaryRange.max,
-      minEstimatedBudget:salaryRange.min 
+      minEstimatedBudget: salaryRange.min,
     };
 
     onFilterChange(filterData);
   };
 
   return (
-    <Flex overflowX="hidden"  overflowY="auto" flexWrap="wrap">
+    <Flex overflowX="hidden" overflowY="auto" flexWrap="wrap">
       <Box
-            gap='40px'
-     backgroundColor={{base:"transparent",lg:"#fafafa"}}
+        gap="40px"
+        backgroundColor={{ base: "transparent", lg: "#fafafa" }}
         padding="24px"
-        w={{base:"100%",md:"360px"}}
+        w={{ base: "100%", md: "360px" }}
         display="flex"
         flexDirection="column"
         flexShrink={0}
       >
-        {locationInput && <LocationInput setSelectedLocation={setSelectedLocation} />}
+        {locationInput && (
+          <LocationInput setSelectedLocation={setSelectedLocation} />
+        )}
         <KeywordInput setSelectedKeywords={setSelectedKeywords} />
         <JobCategories setSelectedJobCategory={setSelectedJobCategory} />
-        {jobType && <JobType selectedJobTypes={selectedJobTypes} setSelectedJobTypes={setSelectedJobTypes} />}
-        <SalaryType setSelectedSalary={setSelectedSalary}   />
-        <CurrencyType selectedCurrency={selectedCurrency} setSelectedCurrency={setSelectedCurrency}/>
-        <Salary  onSalaryChange={handleSalaryChange}/>
+        {jobType && (
+          <JobType
+            selectedJobTypes={selectedJobTypes}
+            setSelectedJobTypes={setSelectedJobTypes}
+          />
+        )}
+        <SalaryType setSelectedSalary={setSelectedSalary} />
+        <CurrencyType
+          selectedCurrency={selectedCurrency}
+          setSelectedCurrency={setSelectedCurrency}
+        />
+        <Salary onSalaryChange={handleSalaryChange} />
 
         <Button
           marginTop="16px"
