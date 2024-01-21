@@ -20,8 +20,6 @@ const ManageJobs = () => {
     const userId = Cookies.get("userId");
     const t = useTranslations()
 
-    const router = useRouter()
-
     useEffect(() => {
         const fetchData = async () => {
             try {
