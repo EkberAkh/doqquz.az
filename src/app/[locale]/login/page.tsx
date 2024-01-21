@@ -48,7 +48,7 @@ const Login1: React.FC = () => {
   const backgroundColor: string = isFocused ? "blue" : "gray";
   const backgroundColor2: string = isFocused2 ? "blue" : "gray";
   const t = useTranslations();
-  const router = useRouter();
+const router = useRouter()
   const [email, setEmail] = useState("");
   const [password, setPassoword] = useState("");
 
@@ -79,8 +79,8 @@ const Login1: React.FC = () => {
           duration: 2000,
           isClosable: true,
         });
-
-        router.push("/");
+    
+        router.push('/')
       })
       .catch((error) => {
         console.error("username or password is wrong");
