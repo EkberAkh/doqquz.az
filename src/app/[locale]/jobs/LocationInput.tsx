@@ -67,26 +67,23 @@ const LocationInput: React.FC<IJobCategory> = ({ setSelectedLocation }) => {
                   setInputValue(e.target.value)
                 }
               />
-              <InputLeftElement
-                children={
-                  <Img
-                    marginTop="5px"
-                    color="gray"
-                    src="../../../../images/image.png"
-                  />
-                }
-              />
-              <InputRightElement
-                children={
-                  <Icon
-                    cursor="pointer"
-                    marginTop="5px"
-                    fontSize="10px"
-                    color="gray"
-                    as={isOpen ? TriangleUpIcon : TriangleDownIcon}
-                  />
-                }
-              />
+              <InputLeftElement>
+                <Img
+                  marginTop="5px"
+                  color="gray"
+                  src="../../../../images/image.png"
+                />
+              </InputLeftElement>
+
+              <InputRightElement>
+                <Icon
+                  cursor="pointer"
+                  marginTop="5px"
+                  fontSize="10px"
+                  color="gray"
+                  as={isOpen ? TriangleUpIcon : TriangleDownIcon}
+                />
+              </InputRightElement>
             </InputGroup>
             <AutoCompleteList>
               {locations.map((item, cid) => (
