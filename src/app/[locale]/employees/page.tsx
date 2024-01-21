@@ -4,6 +4,7 @@ import {
   Button,
   Grid,
   GridItem,
+  HStack,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -65,7 +66,7 @@ const Employees = () => {
         console.log(data.list);
         setEmployees(data.list);
       } catch (error) {
-        console.error("Fetching jobs failed:", error);
+        console.error('Fetching jobs failed:', error);
       }
     };
 
@@ -89,7 +90,7 @@ const Employees = () => {
   const currentEmployees = employees.slice(indexOfFirstItem, indexOfLastItem);
   
   return (
-    <Box display="flex" w="100%" flexWrap="wrap">
+    <Box display="flex" justifyContent='center' w="100%" flexWrap="wrap">
             {maxWidth1100Media ? (
         <>
           <Grid
@@ -112,6 +113,7 @@ const Employees = () => {
               />
             ))}
           </Grid>
+         
           <Modal onClose={onClose} size={"full"} isOpen={isOpen}>
             <ModalOverlay />
             <ModalContent>
@@ -156,6 +158,19 @@ const Employees = () => {
             />
           ))}
         </Grid>
+        <HStack spacing="20px" justify="center" p="4">
+        <Button onClick={() => changePage(currentPage - 1)} disabled={currentPage === 1}>
+          Prev
+        </Button>
+        {Array.from({ length: pageCount }, (_, i) => i + 1).map((number) => (
+          <Button key={number} onClick={() => changePage(number)} isActive={number === currentPage}>
+            {number}
+          </Button>
+        ))}
+        <Button onClick={() => changePage(currentPage + 1)} disabled={currentPage === pageCount}>
+          Next
+        </Button>
+      </HStack>
         </>
       )}
       <Button
