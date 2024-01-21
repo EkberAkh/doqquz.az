@@ -8,7 +8,7 @@ const CompanyItem = ({companies}) => {
     // const [isLoading, setIsLoading] = useState(false);
 const router = useRouter()
     return (
-        <Flex gap={'1.875rem'} mt={'1.875rem'} flexWrap={'wrap'}>
+        <Flex gap={{base:"0",lg:"1.87rem"}} mt={'1.875rem'} flexWrap={'wrap'} justifyContent={{base:"space-between",lg:"start"}} flexDirection={{base:"column",sm:"row"}}>
 
             {companies.map((company) =>
                 <Card
@@ -20,12 +20,12 @@ const router = useRouter()
                     boxShadow={'0 2px 10px rgba(0,0,0,.1)'}
                     p='38px'
                     mb={'30px'}
-                    width='calc(33.3% - 20px)'
+                    width={{base:"100%", sm:"40%", lg:"calc(33.3% - 20px)"}}
                     cursor={'pointer'}
                     _hover={{ transform: 'translateY(-3px)' }}
                     transition={'0.3s'}>
 
-                    <CardBody textAlign={'center'} alignItems={'center'} justifyContent={'center'}>
+                    <CardBody textAlign={'center'} alignItems={'center'} justifyContent={'center'} display='flex' flexDirection='column'> 
                         <Flex
                             align={'center'}
                             justify={'center'}
