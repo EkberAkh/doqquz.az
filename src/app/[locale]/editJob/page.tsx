@@ -121,10 +121,10 @@ const EditJobs = () => {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       const data = await response.json();
-      router.push("/");
     } catch (error) {
       console.error("There was a problem with the fetch operation:", error);
     }
+    router.push("managejobs");
   };
   //--------------------------------------------------------------------------  jobType  full,part,frilans
   const handleCategorySelect = (label: string, originalValue: string) => {
