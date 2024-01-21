@@ -16,7 +16,6 @@ import {
   MenuList,
   MenuItem,
   Tag,
-  useMediaQuery,
 } from "@chakra-ui/react";
 import logo from "../../public/images/logo.svg";
 import { useTranslations } from "next-intl";
@@ -29,7 +28,6 @@ import { usePathname, useRouter } from "next/navigation";
 import { NavigationLink } from "./NavigationLink";
 
 export const Footer = () => {
-  const [responsiveHeader] = useMediaQuery("(max-width: 1100px)");
   const t = useTranslations();
   const [selectedLanguage, setSelectedLanguage] = useState("Azərbaycanca");
   const router = useRouter();
@@ -77,21 +75,18 @@ export const Footer = () => {
         w={"100%"}
         minH={"6rem"}
         display={"flex"}
-        paddingBottom={responsiveHeader ? "20px" : "0"}
       >
         <Flex
-          alignItems={responsiveHeader ? "start" : "center"}
+          alignItems="center"
           justifyContent="space-between"
           w="78%"
           margin="0 auto"
-          flexDirection={responsiveHeader ? "column" : "row"}
-          rowGap={responsiveHeader ? "20px" : "0"}
         >
           <Flex
-          w="66%"
-          borderRight={ responsiveHeader ? 'none' : "2px solid #444"}
-          h={"100%"}
-          align={"center"}
+            w="66%"
+            borderRight={"2px solid #444"}
+            h={"100%"}
+            align={"center"}
           >
             <Image
               src={logo.src}
@@ -174,10 +169,10 @@ export const Footer = () => {
             </Flex>
           </Box>
           <Flex
-          borderLeft={responsiveHeader ? 'none' : "2px solid #444"}
-          h={"100%"}
-          align={"center"}
-          pl={responsiveHeader ? "0" : "2rem"}
+            borderLeft={"2px solid #444"}
+            h={"100%"}
+            align={"center"}
+            pl={"2rem"}
           >
             <Menu>
               <MenuButton
@@ -217,9 +212,9 @@ export const Footer = () => {
         </Flex>
       </Box>
       <Divider position="absolute" left="0" right="0" borderColor="#484848" />
-      <Box w={"100%"} minH={"19rem"} display={"flex"} alignItems={"center"} paddingTop={responsiveHeader ? '20px' :'0'}>
-      <Flex justify="space-between" w={"78%"} margin={"0 auto"} flexDirection={ responsiveHeader ?'column' : 'row'} rowGap={responsiveHeader ?'30px' : '0'}>
-      <Flex columnGap="40px" h={"100%"} flexDirection={ responsiveHeader ?'column' : 'row'} rowGap={responsiveHeader ?'30px' : '0'}>
+      <Box w={"100%"} minH={"19rem"} display={"flex"} alignItems={"center"}>
+        <Flex justify="space-between" w={"78%"} margin={"0 auto"}>
+          <Flex columnGap="40px" h={"100%"}>
             <Box>
               <Text fontSize="18px" color="#fff" mb="15px" fontWeight={500}>
                 {t("Home.Footer.Nav.forCandidates.label")}
@@ -237,7 +232,7 @@ export const Footer = () => {
                   </NavigationLink>
                 </Text>
                 <Text fontSize="14px" color="#c0c0c0">
-                  <NavigationLink href="/company">
+                  <NavigationLink href="/companies">
                     {t("Common.Nav.browse_companies")}
                   </NavigationLink>
                 </Text>
@@ -257,7 +252,7 @@ export const Footer = () => {
                   <NavigationLink
                     href={
                       role === "JOBSEEKER" || role === null
-                        ? "/register"
+                        ? "/"
                         : "/managejobs"
                     }
                   >
@@ -267,7 +262,7 @@ export const Footer = () => {
                 <Text fontSize="14px" color="#c0c0c0">
                   <NavigationLink
                     href={
-                      role === "JOBSEEKER" || role === null ? "/register" : "/postJobs"
+                      role === "JOBSEEKER" || role === null ? "/" : "/postJobs"
                     }
                   >
                     {t("Common.Nav.post_a_job")}
@@ -318,7 +313,7 @@ export const Footer = () => {
             </Box>
           </Flex>
 
-          <Box width={responsiveHeader ?'100%' : '32%'}>
+          <Box width={"32%"}>
             <Text fontSize="18px" color="#fff" mb="15px" ml={"3px"}>
               {t("Home.Footer.Subscribe.title")}
             </Text>
@@ -366,7 +361,7 @@ export const Footer = () => {
       <Divider position="absolute" left="0" right="0" borderColor="#484848" />
       <Container
         w="100%"
-        fontSize={{base:"12px",lg:"0.9rem"}}
+        fontSize="0.9rem"
         color={"silver"}
         textAlign="center"
         paddingY="23px"

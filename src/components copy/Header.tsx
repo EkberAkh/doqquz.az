@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import logo from "../../public/images/logo.svg";
-
 import {
   Image,
   Button,
@@ -22,13 +21,7 @@ import {
   PopoverBody,
   Avatar,
   Flex,
-  Img,
-  useMediaQuery,
-  Drawer,
-  DrawerBody,
-  DrawerContent,
-  DrawerOverlay,
-  useDisclosure
+  Img
 } from "@chakra-ui/react";
 import ChevronDownIcon from "@/icons/ChewronDownIcon";
 import ArrowForwardIcon from "@/icons/ArrowForwardIcon";
@@ -37,18 +30,17 @@ import { useTranslations } from "next-intl";
 import Cookies from "js-cookie";
 import { usePathname, useRouter } from "next/navigation";
 import { NavigationLink } from "./NavigationLink";
-import { EditIcon, HamburgerIcon } from "@chakra-ui/icons";
+import { EditIcon } from "@chakra-ui/icons";
 import { setMaxIdleHTTPParsers } from "http";
 
 import NotificationIcon from "@/icons/NotificationIcon";
 import NotifiedIcon from "@/icons/NotifiedIcon";
 import { BiDockRight } from "react-icons/bi";
 import { relative } from "path";
+import GhostPng from './../../public/images/ghost.png'
 
 import { useCurrentLang } from "@/hooks";
 import LetteredAvatar from 'react-lettered-avatar';
-import { HeaderMobile } from "./HeaderMobile";
-import Notification from "./notifications/Notification";
 
 
 interface IData {
@@ -57,7 +49,6 @@ interface IData {
   name: string;
 }
 function Header() {
-  const { isOpen, onOpen, onClose } = useDisclosure()
   const token = Cookies.get("token");
   const [userData,setUserData] = useState()
   const [data, setData] = useState<IData>();
@@ -160,30 +151,24 @@ console.log(path);
     }
   }, [token]);
   console.log(userData);
-  const [responsiveHeader] = useMediaQuery("(max-width: 1100px)");
+  
   return (
     <ThemeProvider theme={extendedTheme} >
       <HStack
-      align={{base:"start",lg:"center"}}
-        alignItems='center'
+        align={"center"}
         minH={20}
         p="10px 25px"
         justifyContent={"space-between"}
         boxShadow="0 0 18px 0 rgba(0, 0, 0, 0.12)"
       >
-           {responsiveHeader ? (
-          <HeaderMobile />
-        ) :(
         <HStack color="rgb(102, 102, 102)">
-         <NavigationLink href='/'>
-         <Image
+          <Image
             src={logo.src}
             alt="Logo"
             h="60px"
             pr="16px"
             borderRight="1px solid rgb(102, 102, 102)"
           />
-         </NavigationLink>
           <NavigationLink href="/" style={{ padding: "6px 16px" }}>
             {t("Common.Nav.home")}
           </NavigationLink>
@@ -265,11 +250,33 @@ console.log(path);
             {t("Common.Nav.contact")}
           </NavigationLink>
         </HStack>
-        )}
         {token ? (
           <Flex >
-            
-          <Notification/>
+            <Box w={'4rem'} borderRight={'1px solid black'}>
+              <Popover>
+                <PopoverTrigger>
+                  <Box
+                    h={'100%'}
+                    textAlign={'center'}>
+                    <NotificationIcon width="28" height="28" />
+                  </Box>
+                </PopoverTrigger>
+                <PopoverContent right={'1rem'} bg={'#fff'}>
+                  <Flex borderBottom={'1px solid rgb(119, 119, 119)'}>
+                    <Flex justify={'space-between'} w={'100%'} p={'1rem'} >
+                      <PopoverHeader color={'red'} border={'none'} fontWeight={600} fontSize={'1.1rem'}>Notifications</PopoverHeader>
+                      <NotifiedIcon width="24" height="24" color="red" />
+                    </Flex>
+                  </Flex>
+                  <PopoverBody h={'25rem'}>
+                    <Flex justify={'center'} h={'100%'} align={'center'}>
+                      <Img src={GhostPng.src} w={'8rem'} />
+                    </Flex>
+                  </PopoverBody>
+                </PopoverContent>
+              </Popover>
+            </Box>
+
 
             <Box ml={'2rem'}>
               <Popover>
@@ -346,35 +353,8 @@ console.log(path);
                 </PopoverContent>
               </Popover>
             </Box>
-          {  responsiveHeader && (
-            <Flex alignItems='center' columnGap='20px'>
-             <HStack
-               align={"center"}
-               color="rgb(102, 102, 102)"
-               _hover={{ color: "rgb(42, 65, 232)" }}
-               fontWeight={"500"}
-             >
-             </HStack>
-             <HamburgerIcon onClick={onOpen} _hover={{ color: "rgb(42, 65, 232)" }} cursor='pointer'/>
-             </Flex>
-           )}
           </Flex>
-         
-        ) : responsiveHeader ? (
-          <Flex alignItems='center' columnGap='20px'>
-           <HStack
-             align={"center"}
-             color="rgb(102, 102, 102)"
-             _hover={{ color: "rgb(42, 65, 232)" }}
-             fontWeight={"500"}
-           >
-             <NavigationLink href="/login">
-               <ArrowForwardIcon width={"20"} height={"24"} mr={""} />
-             </NavigationLink>
-           </HStack>
-           <HamburgerIcon onClick={onOpen} _hover={{ color: "rgb(42, 65, 232)" }} cursor='pointer'/>
-           </Flex>
-         ) : (
+        ) : (
           <HStack
             align={"center"}
             color="rgb(102, 102, 102)"
@@ -390,99 +370,6 @@ console.log(path);
           </HStack>
         )}
       </HStack>
-      <Drawer
-        isOpen={isOpen}
-        placement='left'
-        onClose={onClose}
-        
-      >
-        <DrawerOverlay />
-        <DrawerContent bgColor='white'>
-
-          <DrawerBody display={'flex'} flexDirection='column' alignItems='flex-start' padding='40px' fontSize='20px' rowGap='20px'>
-          <NavigationLink href="/" style={{ padding: "6px 16px" }}>
-              {t("Common.Nav.home")}
-            </NavigationLink>
-            <Menu>
-              <MenuButton
-                as={Button}
-                fontSize={'20px'}
-                fontWeight={500}
-                bgColor="transparent"
-                rightIcon={<ChevronDownIcon width={"20"} height={"22"} />}
-                _hover={{ textDecoration: "none", color: "rgb(42, 65, 232)" }}
-              >
-                {t("Common.Nav.jobs")}
-              </MenuButton>
-              <MenuList>
-                <MenuItem>
-                  <NavigationLink href="/jobs">
-                    {t("Common.Nav.browse_jobs")}
-                  </NavigationLink>
-                </MenuItem>
-                <MenuItem>
-                  <NavigationLink href="/company">
-                    {t("Common.Nav.browse_companies")}
-                  </NavigationLink>{" "}
-                </MenuItem>
-              </MenuList>
-            </Menu>
-            <Menu >
-              {role === "COMPANY" ? (
-                <MenuButton
-                  as={Button}
-                  fontWeight={500}
-                  style={{ padding: "6px 16px" }}
-                  bgColor="transparent"
-                  {...(role === "COMPANY" && {
-                    rightIcon: <ChevronDownIcon width={"20"} height={"22"} />,
-                  })}
-                  _hover={{ textDecoration: "none", color: "rgb(42, 65, 232)" }}
-                  p='6px 16px'
-                >
-                  {t("Common.Nav.employees")}
-                </MenuButton>
-              ) : (
-                <Box
-                style={{ padding: "6px 16px" }}
-                  bgColor="transparent"
-                  _hover={{ textDecoration: "none", color: "rgb(42, 65, 232)" }}
-                >
-                  <NavigationLink href="/employees">
-                    {t("Common.Nav.employees")}
-                  </NavigationLink>
-                </Box>
-              )}
-              {role === "COMPANY" && (
-                <MenuList   style={{ padding: "6px 16px" }}>
-                  <MenuItem>
-                    <NavigationLink href="/employees">
-                      {t("Common.Nav.browse_jobseekers")}
-                    </NavigationLink>
-                  </MenuItem>
-                  <MenuItem>
-                    <NavigationLink href="/managejobs">
-                      {t("Common.Nav.manage_jobs")}
-                    </NavigationLink>
-                  </MenuItem>
-                  <MenuItem>
-                    <NavigationLink href="/postJobs">
-                      {t("Common.Nav.post_a_job")}
-                    </NavigationLink>
-                  </MenuItem>
-                </MenuList>
-              )}
-            </Menu>
-            <NavigationLink
-              href="/contact"
-              style={{ padding: "6px 16px" }}
-              // _hover={{ textDecoration: "none", color: "rgb(42, 65, 232)" }}
-            >
-              {t("Common.Nav.contact")}
-            </NavigationLink>
-          </DrawerBody>
-        </DrawerContent>
-      </Drawer>
     </ThemeProvider>
   );
 }

@@ -62,19 +62,19 @@ const Profile = () => {
                     </CardHeader>
 
                     <CardBody p='30px'>
-                        <Flex >
-                            <Box w='138px' h='138px' borderRadius='100px' bgColor={colorObjects.gray.border} marginRight='30px' border={'1px solid #2a41e8'}>
+                        <Flex flexDirection={{base:"column",lg:'row'}} >
+                            <Box w='138px' h='138px' borderRadius='100px' bgColor={colorObjects.gray.border} marginRight='30px' border={'1px solid #2a41e8'} mb={{base:"30px",lg:"0"}}>
 
                             </Box>
 
                            {data && <Box w='87%'>
-                                <Flex columnGap='30px' mb='30px'>
-                                    <Box w='50%'>
+                                <Flex columnGap='30px' mb='30px' flexDirection={{base:'column',lg:"row"}} rowGap='30px'>
+                                    <Box w={{base:"100%",lg:"50%"}}>
                                         <Text mb='20px' fontSize='1.3rem'>{t('Common.FormInputs.email.label')}</Text>
                                         <Text>{data.email}</Text>
                                     </Box>
 
-                                    <Box w='50%'>
+                                    <Box w={{base:"100%",lg:"50%"}}>
                                         <Text mb='20px' fontSize='1.3rem'>{t('Common.FormInputs.phoneNumber.label')}</Text>
                                         <Text> ----</Text>
                                     </Box>
@@ -102,22 +102,22 @@ const Profile = () => {
                         <Flex >
 
                             <Box w='100%'>
-                                <Flex columnGap='30px' mb='30px' flexWrap='wrap'>
-                                    <Box w='30%'>
+                                <Flex columnGap='30px' mb='30px' flexWrap='wrap' flexDirection={{base:"column",lg:"row"}}>
+                                    <Box w={{base:"100%",lg:"30%"}}>
                                         <Text mb='20px' fontSize='1.3rem'>{t('Profile.ProfileInfo.name')}</Text>
                                         <Text mb='20px' fontSize='1.3rem'>{data1.name}</Text>
                                     </Box>
-                                    <Box w='30%'>
+                                    <Box w={{base:"100%",lg:"30%"}}>
                                         <Text mb='20px' fontSize='1.3rem'> {t('Common.FormInputs.websiteUrl.label')}</Text>
                                         <Text mb='20px' fontSize='1.3rem'>----</Text>
 
                                     </Box>
-                                    <Box w='30%'>
+                                    <Box w={{base:"100%",lg:"30%"}}>
                                         <Text mb='20px' fontSize='1.3rem'> {t("Profile.ProfileInfo.establishmentDate")}</Text>
                                         <Text mb='20px' fontSize='1.3rem'>----</Text>
 
                                     </Box>
-                                    <Box w='30%' mt='30px'>
+                                    <Box w={{base:"100%",lg:"30%"}} mt='30px'>
                                         <Text mb='20px' fontSize='1.3rem'>{t('Common.FormInputs.description.label')}</Text>
                                         <Text mb='20px' fontSize='1.3rem'>-----</Text>
                                     </Box>

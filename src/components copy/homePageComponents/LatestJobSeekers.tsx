@@ -3,7 +3,7 @@ import { colorObjects } from "@/consts";
 import { useEffect } from "react";
 import { useState } from "react";
 
-import { Flex, Box, Text, Button, Center, Avatar, useMediaQuery } from "@chakra-ui/react";
+import { Flex, Box, Text, Button, Center, Avatar } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import React from "react";
 import { DJobSeekers } from "../data/DJobSeekers";
@@ -12,10 +12,8 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 import { IoIosArrowRoundForward } from "react-icons/io";
 import { useRouter } from "next/navigation";
 import { useCurrentLang } from "@/hooks";
-import { JobSeekersSlider } from "./JobSeekersSlider";
 
 export const LatestJobSeekers = () => {
-  const [maxWidth1100Media] = useMediaQuery("(max-width: 1100px)");
   const t = useTranslations();
   const MotionBox = motion(Box);
   const router = useRouter();
@@ -66,7 +64,7 @@ export const LatestJobSeekers = () => {
 
   return (
     <Flex justify={"center"}>
-      < Box paddingX="24px" paddingBottom="80px" width={ maxWidth1100Media ? '100%' : "90%"}>
+      <Box paddingX="24px" paddingBottom="80px" width={"90%"}>
         <Flex
           marginBottom="40px"
           marginTop="60px"
@@ -75,17 +73,16 @@ export const LatestJobSeekers = () => {
           <Text color={colorObjects.black.main} fontSize="1.5rem">
             {t("Home.RegisteredJobseekers.title")}
           </Text>
-          <Text color={colorObjects.black.secondary} fontSize="1rem" display={{base:'none',lg:"fl"}}>
+          <Text color={colorObjects.black.secondary} fontSize="1rem">
             {t("Home.RegisteredJobseekers.actions.shortLink")}
           </Text>
         </Flex>
         <Flex alignItems="center" w="100%" justifyContent="space-between">
-          <Button onClick={handlePrevSlide} display={maxWidth1100Media ? 'none' :'block'}>
+          <Button onClick={handlePrevSlide}>
             <ChevronLeftIcon height="20px" width="20px" />
           </Button>
-          <Flex paddingX="40px" columnGap="30px" overflowX='scroll' paddingBottom={maxWidth1100Media ? '20px' : '0'} paddingLeft={{base:"0",lg:"40px"}}>
-            {maxWidth1100Media ?  <JobSeekersSlider data={data}/> :
-            (data &&
+          <Flex paddingX="40px" columnGap="30px">
+            {data &&
               data
                 .slice(currentIndex, currentIndex + 3)
                 .map((seeker, index) => (
@@ -171,9 +168,9 @@ export const LatestJobSeekers = () => {
                       </Box>
                     </Center>
                   </MotionBox>
-                )))}
+                ))}
           </Flex>
-          <Button onClick={handleNextSlide} display={maxWidth1100Media ? 'none' :'block'}>>
+          <Button onClick={handleNextSlide}>
             <ChevronRightIcon height="20px" width="20px" />
           </Button>
         </Flex>

@@ -32,21 +32,20 @@ export const Banner = () => {
 
    return (
       <Flex width='100%'
-         height='93vh'
-         p='105px 0'
-         justify={'center'}
+      height={{base:"auto",lg:"93vh"}}
+      p={{base:"60px 0",lg:"105px 0"}}
+         justify={'center'} 
          backgroundImage={backgroundImage}
          backgroundSize="cover"
          backgroundRepeat="no-repeat"
          backgroundPosition='center'
-
-      >
-         <Box paddingX='1.5rem' w={'90%'}>
+         >
+         <Box paddingX='1.5rem' w={'90%'}  >
             <Text color={colorObjects.black.main} fontWeight={700} fontSize='1.7rem' marginY='0.5rem' lineHeight='1.5' maxW='41rem'
             >{t('Home.Header.title')}
             </Text>
 
-            <Text color={colorObjects.black.secondary} fontSize='1.6rem' maxW='649px'>
+            <Text color={colorObjects.black.secondary} fontSize={{base:"20px",lg:"1.6rem"}}  maxW='649px'>
                {t.rich('Home.Header.subTitle', {
                   span: (chunks) => <span style={{ color: colorObjects.blue.main, fontWeight: 600 }}>{chunks}</span>
                })}

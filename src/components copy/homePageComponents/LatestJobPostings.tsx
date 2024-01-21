@@ -19,7 +19,6 @@ import { useEffect, useState } from "react";
 import { NavigationLink } from "../NavigationLink";
 import { useCurrentLang } from "@/hooks";
 import { useRouter } from "next/navigation";
-import { format } from "date-fns";
 interface ICardProps {
   title: string;
   id: number
@@ -82,12 +81,6 @@ const router = useRouter()
     }
   }, [currentJobId, currentJob]);
 
-  const formatCreatedAt = (createdAt) => {
-    const date = new Date(createdAt);
-    return format(date, 'dd.MM.yyyy')
-  }
-  
-
 
   return (
     <>
@@ -124,7 +117,7 @@ const router = useRouter()
             borderLeft={`2px solid ${hoverStates[job.id] ? "#2a41e8" : "transparent"}`}
           >
             <CardBody>
-              <Flex width={"100%"} justify={"space-between"} flexDirection={{base:"column",lg:"row"}}>
+              <Flex width={"100%"} justify={"space-between"}>
                 <Flex>
                   <Flex
                     align={"center"}
@@ -133,11 +126,10 @@ const router = useRouter()
                     width="56px"
                     height="56px"
                     bg="#bdbdbd"
-                    display={{base:"none",lg:"flex"}}
                   >
                     <CompanyIcon width="25" height="25" color="#fafafa" />
                   </Flex>
-                  <VStack  ml={{base:"0",lg:"2rem"}}>
+                  <VStack ml={"2rem"}>
                     <Flex w={"96%"} justify={"flex-start"} fontWeight={700}>
                       {job.title}
                     </Flex>
@@ -158,13 +150,13 @@ const router = useRouter()
                         />
                         <Text>{job.type}</Text>
                       </Flex>
-                      <Flex columnGap={"0.2rem"} display={{base:"none",md:"flex"}}>
+                      <Flex columnGap={"0.2rem"}>
                         <OclockIcon
                           width="25"
                           height="25"
                           color="rgb(119, 119, 119)"
                         />
-                        <Text>{formatCreatedAt(job.createdAt)}</Text>
+                        <Text>{job.createdAt}</Text>
                       </Flex>
                     </HStack>
                   </VStack>
@@ -173,7 +165,6 @@ const router = useRouter()
                   w="7rem"
                   h="3rem"
                   mr={"10px"}
-                  mt={{base:"20px",lg:"0"}}
                   fontSize="14px"
                   borderRadius="4px"
                   color={hoverStates[job.id] ? "#fff" : "#000"}
@@ -185,8 +176,6 @@ const router = useRouter()
                     setCurrentJobId(job.id)
                   }
                   }
-                  width={{base:"100%",lg:"auto"}}
-               
                 >
                   {t("Common.Action.REQUEST")}
                 </Button>
