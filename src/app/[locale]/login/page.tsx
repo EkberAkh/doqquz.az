@@ -172,7 +172,7 @@ const Login1: React.FC = () => {
                   borderRadius="5px"
                   p="25px 10px"
                   pointerEvents="none"
-                  display={{ base: "none", lg: "block" }}
+                  display={{ base: "none", lg: "flex" }}
                 >
                   <FaRegEnvelope color={backgroundColor} />
                 </InputLeftElement>
@@ -203,7 +203,7 @@ const Login1: React.FC = () => {
                   borderRadius="5px"
                   p="25px 10px"
                   pointerEvents="none"
-                  display={{ base: "none", lg: "block" }}
+                  display={{ base: "none", lg: "flex" }}
                 >
                   <LockIcon color={backgroundColor2} />
                 </InputLeftElement>

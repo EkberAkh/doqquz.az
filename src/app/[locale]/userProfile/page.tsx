@@ -62,6 +62,7 @@ import { EJobType } from "../jobs/enums";
 import { useToast } from "@chakra-ui/react";
 const Profile = () => {
   const [maxWidth1100Media] = useMediaQuery("(max-width: 1100px)");
+  const [maxWidth1300Media] = useMediaQuery("(max-width: 1300px)");
   const userProfileId = Cookies.get("userProfileId");
   const userId = Cookies.get("userId");
   const toast = useToast();
@@ -512,7 +513,7 @@ const Profile = () => {
                       }}
                       inputStyle={{
                         height: "48px",
-                        width:  maxWidth1100Media ? '100%' : "27rem",
+                        width:  maxWidth1300Media ? '100%' : "27rem",
                         borderRadius: "0.3rem",
                       }}
                       buttonStyle={{ background: "#fff", borderRight: "none" }}
