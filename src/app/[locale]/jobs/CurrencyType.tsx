@@ -15,10 +15,10 @@ import {
 import { useTranslations } from "next-intl";
 import React, { Dispatch, SetStateAction } from "react";
 interface ICurrency {
-  selectedCurrency:string;
+  selectedCurrency: string;
   setSelectedCurrency: Dispatch<SetStateAction<string>>;
 }
-const CurrencyType:React.FC<ICurrency> = ({  setSelectedCurrency }) => {
+const CurrencyType: React.FC<ICurrency> = ({ setSelectedCurrency }) => {
   const t = useTranslations();
   const currencies = ["AZN", "TL", "USD", "EUR", "STR"];
 
@@ -27,7 +27,7 @@ const CurrencyType:React.FC<ICurrency> = ({  setSelectedCurrency }) => {
       <FormLabel marginBottom="16px" fontSize="18px">
         {t("Common.Currency.label")}
       </FormLabel>
-      <AutoComplete  onChange={setSelectedCurrency} openOnFocus>
+      <AutoComplete onChange={setSelectedCurrency} openOnFocus>
         {({ isOpen }: any) => (
           <>
             <InputGroup>
@@ -44,17 +44,15 @@ const CurrencyType:React.FC<ICurrency> = ({  setSelectedCurrency }) => {
                 placeholder={t("Common.Currency.label")}
               />
 
-              <InputRightElement
-                children={
-                  <Icon
-                    cursor="pointer"
-                    marginTop="5px"
-                    fontSize="10px"
-                    color="gray"
-                    as={isOpen ? TriangleUpIcon : TriangleDownIcon}
-                  />
-                }
-              />
+              <InputRightElement>
+                <Icon
+                  cursor="pointer"
+                  marginTop="5px"
+                  fontSize="10px"
+                  color="gray"
+                  as={isOpen ? TriangleUpIcon : TriangleDownIcon}
+                />
+              </InputRightElement>
             </InputGroup>
             <AutoCompleteList>
               {currencies.map((currency, cid) => (

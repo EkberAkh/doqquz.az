@@ -185,8 +185,8 @@ const PostJobs = () => {
                           placeholder={t("Common.JobType.label")}
                         />
 
-                        <InputRightElement
-                          children={
+                        <InputRightElement>
+                         
                             <Icon
                               cursor="pointer"
                               marginTop="5px"
@@ -194,8 +194,7 @@ const PostJobs = () => {
                               color="gray"
                               as={isOpen ? TriangleUpIcon : TriangleDownIcon}
                             />
-                          }
-                        />
+                         </InputRightElement>
                       </InputGroup>
                       <AutoCompleteList>
                         {jobTypes.map(([key, value], cid) => (
