@@ -204,6 +204,7 @@ const Profile = () => {
     e: React.MouseEvent<HTMLButtonElement>
   ) => {
     e.preventDefault();
+    onClose();
     const id = null;
     const jobSeeker = userProfileId;
 
@@ -242,6 +243,7 @@ const Profile = () => {
     e: React.MouseEvent<HTMLButtonElement>
   ) => {
     e.preventDefault();
+    onClose();
     const id = null;
     const jobSeeker = userProfileId;
 
@@ -273,6 +275,7 @@ const Profile = () => {
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
     e.preventDefault();
+    onClose();
     const payload = {
       companyName: companyName,
       companyUser: null,
@@ -1026,6 +1029,7 @@ const Profile = () => {
                       fontWeight={400}
                       box-shadow={"0 5px 10px rgba(0, 0, 0, 0.1)"}
                       variant="primary"
+                      
                     >
                       {t("Common.Action.SAVE")}{" "}
                     </Button>
