@@ -80,7 +80,7 @@ const toast = useToast();
         duration: 2000,
         isClosable: true,
       });
-      router.push('login')
+      router.push('/login')
       return res.json();
     })
     .catch((error) => {

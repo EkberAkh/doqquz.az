@@ -12,16 +12,21 @@ import {
   TagLabel,
 } from "@chakra-ui/react";
 import { useTranslations } from "next-intl";
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 interface IKeyword {
   setSelectedKeywords: Dispatch<SetStateAction<string[]>>;
 
 
   
 }
-const KeywordInput:React.FC<IKeyword> = ({setSelectedKeywords}) => {
+const KeywordInput:React.FC<IKeyword> = ({selectedKeywords,setSelectedKeywords}) => {
+  // useEffect(() => {
+  //   setSelectedKeywordsLocal(selectedKeywords);
+  // }, []);
   const t = useTranslations();
-  const [selectedKeywordsLocal, setSelectedKeywordsLocal] = useState<any>([]);
+  console.log("aaabbb",selectedKeywords.map((item)=>item.name));
+  
+  const [selectedKeywordsLocal, setSelectedKeywordsLocal] = useState<any>(selectedKeywords);
   const [inputValue, setInputValue] = useState<any>("");
   const addKeyword = (newKeyword: any) => {
     if (newKeyword) {
@@ -84,7 +89,7 @@ const KeywordInput:React.FC<IKeyword> = ({setSelectedKeywords}) => {
       </InputGroup>
       <HStack flexWrap="wrap" spacing={4} mt={2}>
         {selectedKeywordsLocal.map((keyword: any, index: any) => (
-          <Tag
+          <Tag 
             color="#fff"
             padding="4px 8px"
             backgroundColor="#2a41e8"
