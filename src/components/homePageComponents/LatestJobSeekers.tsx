@@ -83,7 +83,7 @@ export const LatestJobSeekers = () => {
           <Button onClick={handlePrevSlide} display={maxWidth1100Media ? 'none' :'block'}>
             <ChevronLeftIcon height="20px" width="20px" />
           </Button>
-          <Flex paddingX="40px" columnGap="30px" overflowX='scroll' paddingBottom={maxWidth1100Media ? '20px' : '0'} paddingLeft={{base:"0",lg:"40px"}}>
+          <Flex paddingX="40px" columnGap="30px" overflowX={{base:"scroll",lg:"clip"}} paddingBottom={maxWidth1100Media ? '20px' : '0'} paddingLeft={{base:"0",lg:"40px"}}>
             {maxWidth1100Media ?  <JobSeekersSlider data={data}/> :
             (data &&
               data
@@ -173,7 +173,7 @@ export const LatestJobSeekers = () => {
                   </MotionBox>
                 )))}
           </Flex>
-          <Button onClick={handleNextSlide} display={maxWidth1100Media ? 'none' :'block'}>>
+          <Button onClick={handleNextSlide} display={maxWidth1100Media ? 'none' :'block'}>
             <ChevronRightIcon height="20px" width="20px" />
           </Button>
         </Flex>
