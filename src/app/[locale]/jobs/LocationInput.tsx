@@ -17,34 +17,33 @@ import {
 import { useTranslations } from "next-intl";
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 interface IJobCategory {
-  setSelectedLocation:Dispatch<SetStateAction<string>>
+  setSelectedLocation: Dispatch<SetStateAction<string>>;
 }
 interface LocationItem {
   city: string;
   // include other properties if needed
 }
-const LocationInput:React.FC<IJobCategory> = ({setSelectedLocation}) => {
+const LocationInput: React.FC<IJobCategory> = ({ setSelectedLocation }) => {
   const [locations, setLocations] = useState<LocationItem[]>([]);
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState("");
   useEffect(() => {
     if (inputValue) {
       fetch(`https://neo-814m.onrender.com/v1/location/${inputValue}`)
-        .then(response => response.json())
-        .then(data => setLocations(data.list))
-        .catch(error => console.error('Error fetching locations:', error));
+        .then((response) => response.json())
+        .then((data) => setLocations(data.list))
+        .catch((error) => console.error("Error fetching locations:", error));
     }
   }, [inputValue]);
 
   const t = useTranslations();
   console.log(locations);
-  
 
-  
   const handleSelect = (location: LocationItem) => {
+    // @ts-ignore
     setSelectedLocation(location);
   };
   return (
-    <FormControl  w="100%">
+    <FormControl w="100%">
       <FormLabel marginBottom="16px" fontSize="18px">
         {t("Common.location")}
       </FormLabel>
@@ -64,7 +63,9 @@ const LocationInput:React.FC<IJobCategory> = ({setSelectedLocation}) => {
                 maxW="100%"
                 variant="filled"
                 placeholder={t("Common.location")}
-                onChange={(e:React.ChangeEvent<HTMLInputElement>) => setInputValue(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setInputValue(e.target.value)
+                }
               />
               <InputLeftElement
                 children={
@@ -89,8 +90,6 @@ const LocationInput:React.FC<IJobCategory> = ({setSelectedLocation}) => {
             </InputGroup>
             <AutoCompleteList>
               {locations.map((item, cid) => (
-
-  
                 <AutoCompleteItem
                   key={`option-${cid}`}
                   value={item.city}

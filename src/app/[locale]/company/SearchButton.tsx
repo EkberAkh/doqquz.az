@@ -6,9 +6,13 @@ import {
   InputRightElement,
   Button,
 } from "@chakra-ui/react";
-
-const Search = ({ setQuery }) => {
-  let latestQuery;
+import { useState } from "react";
+interface SearchProps {
+  query: string;
+  setQuery: React.Dispatch<React.SetStateAction<string>>;
+}
+const Search: React.FC<SearchProps> = ({ query, setQuery }) => {
+  const [latestQuery, setLatestQuery] = useState("");
   const t = useTranslations();
   const handleClick = () => {
     setQuery(latestQuery);
@@ -25,7 +29,7 @@ const Search = ({ setQuery }) => {
         type="text"
         placeholder="Şirkət adı"
         onChange={(e) => {
-          latestQuery = e.target.value;
+          setLatestQuery(e.target.value);
         }}
       />
       <Flex align="center">
@@ -37,7 +41,11 @@ const Search = ({ setQuery }) => {
             borderRadius="4px"
             mr={"0.6rem"}
             color="#fff"
-            bg="#2a41e8"
+            // bg="#2a41e8"
+            backgroundColor={"#0abcf9"}
+            backgroundImage="linear-gradient(315deg, #0abcf9 0%, #2c69d1 74%)"
+            // background-color: #0abcf9;
+            // background-image: linear-gradient(315deg, #0abcf9 0%, #2c69d1 74%);
             boxShadow=" 0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12)"
             _hover={{}}
             onClick={handleClick}

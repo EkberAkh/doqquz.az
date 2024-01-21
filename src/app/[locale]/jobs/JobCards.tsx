@@ -1,5 +1,12 @@
-"use client"
-import { Button, Flex, Grid, HStack, Text, useMediaQuery } from "@chakra-ui/react";
+"use client";
+import {
+  Button,
+  Flex,
+  Grid,
+  HStack,
+  Text,
+  useMediaQuery,
+} from "@chakra-ui/react";
 import { useTranslations } from "next-intl";
 import React, { useEffect, useState } from "react";
 import Card from "./Card";
@@ -7,10 +14,10 @@ import Card from "./Card";
 interface IJobCards {
   filterData: any;
 }
-const JobCards:React.FC<IJobCards> =  ({ filterData }) => {
+const JobCards: React.FC<IJobCards> = ({ filterData }) => {
   const [maxWidth1100Media] = useMediaQuery("(max-width: 1100px)");
   const t = useTranslations();
-  const [allJobs, setAllJobs] = useState([]); 
+  const [allJobs, setAllJobs] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 12;
   useEffect(() => {
@@ -31,16 +38,14 @@ const JobCards:React.FC<IJobCards> =  ({ filterData }) => {
         }
 
         const data = await response.json();
-        console.log(data.list);
         setAllJobs(data.list);
       } catch (error) {
-        console.error('Fetching jobs failed:', error);
+        console.error("Fetching jobs failed:", error);
       }
     };
 
     fetchJobs();
   }, [filterData]);
-
 
   const pageCount = Math.ceil(allJobs.length / itemsPerPage);
   const changePage = (pageNumber: number) => {
@@ -57,53 +62,64 @@ const JobCards:React.FC<IJobCards> =  ({ filterData }) => {
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentJobs = allJobs.slice(indexOfFirstItem, indexOfLastItem);
 
-  console.log(currentJobs);
-  
   return (
     <>
       <Grid
         padding="18px"
-        templateColumns={maxWidth1100Media ? '2fr' : '1fr 1fr'}   
+        templateColumns={maxWidth1100Media ? "2fr" : "1fr 1fr"}
         gap="14px"
         width={maxWidth1100Media ? "100%" : "calc(100% - 379px)"}
-        maxHeight={maxWidth1100Media ? 'auto' : '470px'} 
+        maxHeight={maxWidth1100Media ? "auto" : "470px"}
       >
-      
-      {currentJobs.map((job: any) => (
+        {currentJobs.map((job: any) => (
           <Card
-          imageUrl={job.user.imageUrl}
-          id={job.id}
-          key={job.id}
-          title={job.title}
-          minEstimatedBudget={job.minEstimatedBudget}
-          maxEstimatedBudget={job.maxEstimatedBudget}
-          type={job.type}
-          currency={job.currency}
-          createdAt={job.createdAt}
-          companyName={job.company[0].name}
-          city={job.location && job.location.city}
+            imageUrl={job.user.imageUrl}
+            id={job.id}
+            key={job.id}
+            title={job.title}
+            minEstimatedBudget={job.minEstimatedBudget}
+            maxEstimatedBudget={job.maxEstimatedBudget}
+            type={job.type}
+            currency={job.currency}
+            createdAt={job.createdAt}
+            companyName={job.company[0].name}
+            city={job.location && job.location.city}
           />
         ))}
-     
       </Grid>
-      <HStack spacing="20px" justify="center" p="4" display={maxWidth1100Media ? 'none' : 'block'} margin='0 auto'>
-        <Button onClick={() => changePage(currentPage - 1)} disabled={currentPage === 1} marginRight='15px'>
+      <HStack
+        spacing="20px"
+        justify="center"
+        p="4"
+        display={maxWidth1100Media ? "none" : "block"}
+        margin="0 auto"
+      >
+        <Button
+          onClick={() => changePage(currentPage - 1)}
+          disabled={currentPage === 1}
+          marginRight="15px"
+        >
           Prev
         </Button>
         {Array.from({ length: pageCount }, (_, i) => i + 1).map((number) => (
-          <Button key={number} onClick={() => changePage(number)} isActive={number === currentPage}>
+          <Button
+            key={number}
+            onClick={() => changePage(number)}
+            isActive={number === currentPage}
+          >
             {number}
           </Button>
         ))}
-        <Button onClick={() => changePage(currentPage + 1)} disabled={currentPage === pageCount} marginLeft='15px'>
+        <Button
+          onClick={() => changePage(currentPage + 1)}
+          disabled={currentPage === pageCount}
+          marginLeft="15px"
+        >
           Next
         </Button>
       </HStack>
-  
     </>
   );
 };
 
 export default JobCards;
-
-

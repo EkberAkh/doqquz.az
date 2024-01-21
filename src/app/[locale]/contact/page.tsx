@@ -1,19 +1,30 @@
 "use client";
-import { Box, Container, Flex, Text, FormControl, InputLeftElement, InputGroup, Input, FormErrorMessage, Textarea, Button } from '@chakra-ui/react'
-import React from 'react'
-import { FaCheck, FaRegEnvelope } from 'react-icons/fa'
+import {
+  Box,
+  Container,
+  Flex,
+  Text,
+  FormControl,
+  InputLeftElement,
+  InputGroup,
+  Input,
+  FormErrorMessage,
+  Textarea,
+  Button,
+} from "@chakra-ui/react";
+import React from "react";
+import { FaCheck, FaRegEnvelope } from "react-icons/fa";
 import { FaRegUserCircle } from "react-icons/fa";
 import { FaBook } from "react-icons/fa";
-import { useState } from 'react';
+import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useTranslations } from 'next-intl';
-import Cookies from 'js-cookie';
+import { useTranslations } from "next-intl";
+import Cookies from "js-cookie";
 
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-
-interface RegisterProps { }
+interface RegisterProps {}
 
 interface FormData {
   name: string;
@@ -21,7 +32,6 @@ interface FormData {
   topic: string;
   textarea: string;
 }
-
 
 const Contact: React.FC<RegisterProps> = () => {
   const [isFocused, setIsFocused] = useState(false);
@@ -49,38 +59,34 @@ const Contact: React.FC<RegisterProps> = () => {
 
   const token = Cookies.get("token");
 
-
   const onSubmit = async (values: FormData) => {
-
-    const url = 'https://neo-814m.onrender.com/v1/contact/';
-    const method = 'POST';
-
+    const url = "https://neo-814m.onrender.com/v1/contact/";
+    const method = "POST";
 
     const payload = {
       fullname: values.name,
       email: values.email,
       subject: values.topic,
-      message: values.textarea
-    }
-
+      message: values.textarea,
+    };
 
     try {
       const response = await fetch(url, {
         method: method,
         headers: {
-          'Content-type': 'application/json',
+          "Content-type": "application/json",
           Token: `${token}`,
         },
         body: JSON.stringify(payload),
-      })
+      });
 
       if (!response.ok) {
-        throw new Error(`HTTP Error! Status: ${response.status} `)
+        throw new Error(`HTTP Error! Status: ${response.status} `);
       }
 
       const data = await response.json();
 
-      toast.success(t('Common.Success.default'), {
+      toast.success(t("Common.Success.default"), {
         position: "top-center",
         autoClose: 1000,
         hideProgressBar: true,
@@ -90,46 +96,65 @@ const Contact: React.FC<RegisterProps> = () => {
         progress: undefined,
         theme: "light",
         // transition: Bounce,
-        icon: <FaCheck style={{ backgroundColor: '#fff', color: '#5BB318', borderRadius: '100px', padding: '2px' }} />,
+        icon: (
+          <FaCheck
+            style={{
+              backgroundColor: "#fff",
+              color: "#5BB318",
+              borderRadius: "100px",
+              padding: "2px",
+            }}
+          />
+        ),
         style: {
-          backgroundColor: '#5BB318',
-          color: '#fff'
-        }
+          backgroundColor: "#5BB318",
+          color: "#fff",
+        },
       });
-      console.log(data);
 
       reset();
-
     } catch (error) {
-      console.error('Data is not Posted', error.message)
-      toast.error(t('Common.Error.default'))
+      if (error instanceof Error) {
+        console.error("Data is not Posted", error.message);
+        toast.error(t("Common.Error.default"));
+      } else {
+        console.error("Data is not Posted", error);
+        toast.error(t("Common.Error.default"));
+      }
     }
-
   };
 
   return (
-    <Container maxW="1200px" bg={"white"} boxShadow='2xl' rounded='md'  >
-      <Text fontWeight="bold" fontSize="20px" padding="20px">{t("Common.Questions.contact")}</Text>
+    <Container maxW="1200px" bg={"white"} boxShadow="2xl" rounded="md">
+      <Text fontWeight="bold" fontSize="20px" padding="20px">
+        {t("Common.Questions.contact")}
+      </Text>
       <hr></hr>
-      <Box m="50px 0" p="30px" >
-
+      <Box m="50px 0" p="30px">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <Flex gap='30px'display={{base:"block",lg:"flex"}}>
+
+          <Flex gap='30px' display={{ base: "block", lg: "flex" }}>
+
             <FormControl isInvalid={!!errors.name}>
-              <InputGroup  mb={{base:"50px",lg:"0"}}>
+              <InputGroup mb={{ base: "50px", lg: "0" }}>
                 <InputLeftElement
                   w="50px"
+
+                  h={'98%'}
+                  mt={'0.3px'}
                   backgroundColor='#eee'
-                  borderRadius='5px'
-                  p="25px 10px"
+                  borderRadius='5px 0px 0px 5px'
+                  borderRight={'1px solid #D1D1D1'}
+                  // p="25px 10px"
                   pointerEvents="none" >
+
                   <FaRegUserCircle color={backgroundColor} />
                 </InputLeftElement>
                 <Input
                   {...register("name", {
-                    required: "This is required"
+                    required: `${t("Common.Error.validation.empty")}`,
                   })}
-                  id='name'
+                  id="name"
                   type="text"
                   placeholder={t("Common.FormInputs.fullname.label")}
                   p="25px 70px"
@@ -145,17 +170,21 @@ const Contact: React.FC<RegisterProps> = () => {
               <InputGroup>
                 <InputLeftElement
                   w="50px"
+
+                  h={'98%'}
+                  mt={'0.3px'}
                   backgroundColor='#eee'
-                  borderRadius='5px'
-                  p="25px 10px"
+                  borderRadius='5px 0px 0px 5px'
+                  borderRight={'1px solid #D1D1D1'}
                   pointerEvents="none" >
+
                   <FaRegEnvelope color={backgroundColor2} />
-                </InputLeftElement >
+                </InputLeftElement>
                 <Input
                   {...register("email", {
-                    required: "This is requiered"
+                    required: `${t("Common.Error.validation.empty")}`,
                   })}
-                  id='email'
+                  id="email"
                   type="email"
                   placeholder={t("Common.FormInputs.email.label")}
                   p="25px 70px"
@@ -172,18 +201,21 @@ const Contact: React.FC<RegisterProps> = () => {
             <InputGroup m="50px 0 0 0 ">
               <InputLeftElement
                 w="50px"
+
+                h={'98%'}
+                mt={'0.6px'}
                 backgroundColor='#eee'
-                borderRadius='5px'
-                p="25px 10px"
+                borderRadius='5px 0px 0px 5px'
+                borderRight={'1px solid #D1D1D1'}
                 pointerEvents="none" >
+
                 <FaBook color={backgroundColor3} />
               </InputLeftElement>
               <Input
                 {...register("topic", {
-                  required: "this is required"
-                }
-                )}
-                id='topic'
+                  required: `${t("Common.Error.validation.empty")}`,
+                })}
+                id="topic"
                 type="text"
                 placeholder={t("Common.FormInputs.subject.label")}
                 p="25px 70px"
@@ -198,21 +230,26 @@ const Contact: React.FC<RegisterProps> = () => {
           <FormControl isInvalid={!!errors.textarea}>
             <Textarea
               {...register("textarea", {
-                required: "this is required"
+                required: `${t("Common.Error.validation.empty")}`,
               })}
-              id='textarea'
+              id="textarea"
               mt="50px"
               borderRadius="5px"
               placeholder={t("Common.FormInputs.message.label")}
+
               size='m'
-              minHeight="150px"
+              minHeight="110px"
+              resize={'none'}
+
               p="20px"
             />
             <FormErrorMessage>
               {errors.textarea && errors.textarea.message}
             </FormErrorMessage>
           </FormControl>
-          <Button color='white' bg="blue.500" _hover={{}} p="25px 40px" m="30px 0" type='submit' w={{base:"100%",lg:"auto"}}> {t("Common.Action.SEND")}</Button>
+
+          <Button color='white' bg="#2a41e8" _hover={{}} p="25px 40px" m="30px 0" type='submit' w={{ base: "100%", lg: "auto" }}> {t("Common.Action.SEND")}</Button>
+
         </form>
       </Box>
       <ToastContainer
@@ -228,7 +265,7 @@ const Contact: React.FC<RegisterProps> = () => {
         theme="light"
       />
     </Container>
-  )
-}
+  );
+};
 
-export default Contact
+export default Contact;

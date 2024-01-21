@@ -59,7 +59,7 @@ const PostJobs = () => {
   const [jobTypeValue, setJobTypeValue] = useState("");
   const toast = useToast();
   const jobTypes = Object.entries(EJobType);
-  
+
   const handleSubmit = async (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     const payload = {
@@ -67,7 +67,7 @@ const PostJobs = () => {
       contactInformation: contact,
       currency: currency,
       description: description,
-      id: null, 
+      id: null,
       location: location.id,
       maxEstimatedBudget: salarymax,
       minEstimatedBudget: salarymin,
@@ -87,11 +87,11 @@ const PostJobs = () => {
         },
         body: JSON.stringify(payload),
       });
-  
+
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-  
+
       const data = await response.json();
       toast({
         title: t('Common.Success.default'),
@@ -99,44 +99,44 @@ const PostJobs = () => {
         duration: 2000,
         isClosable: true,
       });
-   
+
       router.push('jobs')
     } catch (error) {
       console.error('There was a problem with the fetch operation:', error);
     }
   };
 
-  
+
   const handleCategorySelect = (label: string, originalValue: string) => {
-    setJobTypeValue(label); 
+    setJobTypeValue(label);
     setJobType(originalValue);
     const selectedEntry = jobTypes.find(([key, val]) => val === originalValue);
     if (selectedEntry) {
-    
-      setJobType(selectedEntry[1]); 
+
+      setJobType(selectedEntry[1]);
     }
   };
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = event.target.value;
-    setJobTypeValue(newValue); 
+    setJobTypeValue(newValue);
 
-    const foundEntry = jobTypes.find(([key, value]) => 
-    t(`Common.INDUSTRIES.${value}`) === newValue
-  );
+    const foundEntry = jobTypes.find(([key, value]) =>
+      t(`Common.INDUSTRIES.${value}`) === newValue
+    );
 
-  if (foundEntry) {
-    setJobType(foundEntry[0]); // Set the actual enum value
-  } else {
-    setJobType(""); // Clear the enum value if no match is found
-  }
+    if (foundEntry) {
+      setJobType(foundEntry[0]); // Set the actual enum value
+    } else {
+      setJobType(""); // Clear the enum value if no match is found
+    }
   };
   return (
     <>
-      <Box w="1250px" m="auto">
-        <Text fontWeight="bold" fontSize="24px">
+      <Box w={{base:"100%",lg:"1250px"}} m="auto">
+        <Text fontWeight="bold" fontSize="24px" ml={{base:"20px",lg:"0"}}>
           {t('Company.ManageJobs.actions.postAJob')}
         </Text>
-        <Box boxShadow="1px 1px 5px 1px gray" p="20px 30px" m="50px 0">
+        <Box boxShadow={{base:"none",lg:"1px 1px 5px 1px gray"}} p="20px 30px" m="50px 0">
           <Box mb="50px">
             <Flex gap="10px" p="10px 10px">
               <BiAddToQueue color="blue" size="20px" />
@@ -148,11 +148,11 @@ const PostJobs = () => {
             <hr></hr>
           </Box>
           <Box >
-            <Flex alignItems='center' gap="30px" m="30px 0">
+            <Flex alignItems='center' gap="30px" m="30px 0" flexDirection={{base:"column",lg:"row"}}>
               <FormControl>
                 <FormLabel fontSize='18px' marginBottom='16px'>{t('Company.PostAJob.fields.title')}</FormLabel>
                 <Input
-               backgroundColor='#fff'
+                  backgroundColor='#fff'
                   onChange={(e) => {
                     setTitle(e.target.value);
                   }}
@@ -161,7 +161,7 @@ const PostJobs = () => {
                   h="50px"
                 />
               </FormControl>
-              <FormControl  w="100%">
+              <FormControl w="100%">
                 <FormLabel marginBottom="16px" fontSize="18px">
                   {t("Common.JobType.label")}
                 </FormLabel>
@@ -220,14 +220,14 @@ const PostJobs = () => {
               </FormControl>
               <JobCategories setSelectedJobCategory={setJobCategory} />
             </Flex>
-            <Flex alignItems='center' gap="30px">
+            <Flex alignItems='center' gap="30px" flexDirection={{base:"column",lg:"row"}}>
               <SalaryType setSelectedSalary={setSalaryType} />
               <Box>
                 <Flex alignItems='flex-end' gap="20px">
                   <FormControl>
                     <FormLabel>{t('Common.Salary.label')} </FormLabel>
                     <Input
-                    backgroundColor='#fff'
+                      backgroundColor='#fff'
                       width="180px"
                       h="50px"
                       onChange={(e) => {
@@ -257,7 +257,7 @@ const PostJobs = () => {
                 setSelectedCurrency={setCurrency}
               />
             </Flex>
-            <Flex alignItems='center' gap="30px" m="30px 0">
+            <Flex alignItems='center' gap="30px" m="30px 0" flexDirection={{base:"column",lg:"row"}}>
               <LocationInput setSelectedLocation={setlocation} />
               <FormControl>
                 <FormLabel marginBottom='16px' fontSize='18px'>{t('Company.PostAJob.fields.notificationEmail')} </FormLabel>
@@ -275,7 +275,9 @@ const PostJobs = () => {
             </Flex>
             <FormLabel> {t('Common.FormInputs.description.label')}</FormLabel>
             <Textarea
-                  backgroundColor='#fff'
+              backgroundColor='#fff'
+              resize={'none'}
+              placeholder= {t('Common.FormInputs.description.label')}
               onChange={(e) => {
                 setDscription(e.target.value);
               }}
@@ -284,19 +286,21 @@ const PostJobs = () => {
             />
             <FormLabel>{t('Common.FormInputs.contactInformation.label')}</FormLabel>
             <Textarea
-                  backgroundColor='#fff'
+              backgroundColor='#fff'
+              resize={'none'}
+              placeholder= {t('Common.FormInputs.contactInformation.label')}
               onChange={(e) => {
                 setContact(e.target.value);
               }}
               h="130px"
             />
-            <Button mt="30px" _hover={{opacity:'.4'}} color='#fff' backgroundColor='#2a41e8' p="20px 35px" onClick={handleSubmit}>
+            <Button mt="30px" _hover={{ opacity: '.4' }} color='#fff' backgroundColor='#2a41e8' p="20px 35px" onClick={handleSubmit}>
               {t('Common.Action.CREATE')}
             </Button>
           </Box>
-      
+
         </Box>
-       
+
       </Box>
     </>
   );
