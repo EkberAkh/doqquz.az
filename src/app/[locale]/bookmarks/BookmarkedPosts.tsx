@@ -57,7 +57,7 @@ const BookmarkedPosts: React.FC<BookmarkedPostsProps> = ({
       </CardHeader>
       {bookmark.map((markedpost) =>
         markedpost.post ? (
-          <CardBody p={"2.5rem 1rem"}>
+          <CardBody key={markedpost.id} p={"2.5rem 1rem"}>
             <Flex width={"100%"} justify={"space-between"}>
               <Flex>
                 <Flex
