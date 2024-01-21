@@ -439,6 +439,7 @@ export const Footer = () => {
         borderTop={"2px solid #444"}
       >
         © 2024 <Tag color={"#fff"}> Doqquz</Tag>.Bütün hüquqlar qorunur.
+        {/* {t('Common.Copyrights')} */}
       </Container>
       <ScrollToTop />
     </Box>

@@ -114,14 +114,17 @@ const Contact: React.FC<RegisterProps> = () => {
       <Box m="50px 0" p="30px" >
 
         <form onSubmit={handleSubmit(onSubmit)}>
-          <Flex gap='30px'display={{base:"block",lg:"flex"}}>
+          <Flex gap='30px' display={{ base: "block", lg: "flex" }}>
             <FormControl isInvalid={!!errors.name}>
-              <InputGroup  mb={{base:"50px",lg:"0"}}>
+              <InputGroup mb={{ base: "50px", lg: "0" }}>
                 <InputLeftElement
                   w="50px"
+                  h={'98%'}
+                  mt={'0.3px'}
                   backgroundColor='#eee'
-                  borderRadius='5px'
-                  p="25px 10px"
+                  borderRadius='5px 0px 0px 5px'
+                  borderRight={'1px solid #D1D1D1'}
+                  // p="25px 10px"
                   pointerEvents="none" >
                   <FaRegUserCircle color={backgroundColor} />
                 </InputLeftElement>
@@ -145,9 +148,11 @@ const Contact: React.FC<RegisterProps> = () => {
               <InputGroup>
                 <InputLeftElement
                   w="50px"
+                  h={'98%'}
+                  mt={'0.3px'}
                   backgroundColor='#eee'
-                  borderRadius='5px'
-                  p="25px 10px"
+                  borderRadius='5px 0px 0px 5px'
+                  borderRight={'1px solid #D1D1D1'}
                   pointerEvents="none" >
                   <FaRegEnvelope color={backgroundColor2} />
                 </InputLeftElement >
@@ -172,9 +177,11 @@ const Contact: React.FC<RegisterProps> = () => {
             <InputGroup m="50px 0 0 0 ">
               <InputLeftElement
                 w="50px"
+                h={'98%'}
+                mt={'0.6px'}
                 backgroundColor='#eee'
-                borderRadius='5px'
-                p="25px 10px"
+                borderRadius='5px 0px 0px 5px'
+                borderRight={'1px solid #D1D1D1'}
                 pointerEvents="none" >
                 <FaBook color={backgroundColor3} />
               </InputLeftElement>
@@ -205,14 +212,15 @@ const Contact: React.FC<RegisterProps> = () => {
               borderRadius="5px"
               placeholder={t("Common.FormInputs.message.label")}
               size='m'
-              minHeight="150px"
+              minHeight="110px"
+              resize={'none'}
               p="20px"
             />
             <FormErrorMessage>
               {errors.textarea && errors.textarea.message}
             </FormErrorMessage>
           </FormControl>
-          <Button color='white' bg="blue.500" _hover={{}} p="25px 40px" m="30px 0" type='submit' w={{base:"100%",lg:"auto"}}> {t("Common.Action.SEND")}</Button>
+          <Button color='white' bg="#2a41e8" _hover={{}} p="25px 40px" m="30px 0" type='submit' w={{ base: "100%", lg: "auto" }}> {t("Common.Action.SEND")}</Button>
         </form>
       </Box>
       <ToastContainer

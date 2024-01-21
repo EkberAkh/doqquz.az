@@ -156,7 +156,7 @@ const router = useRouter()
                           height="25"
                           color="rgb(119, 119, 119)"
                         />
-                        <Text>{job.type}</Text>
+                        <Text>{t(`Common.JobType.${job.type}`)}</Text>
                       </Flex>
                       <Flex columnGap={"0.2rem"} display={{base:"none",md:"flex"}}>
                         <OclockIcon
