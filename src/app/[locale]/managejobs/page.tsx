@@ -11,14 +11,13 @@ import { FaPencil } from "react-icons/fa6";
 import Cookies from "js-cookie";
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
-import axios from 'axios';
+
 
 
 const ManageJobs = () => {
     const [jobdata, setJobdata] = useState([]);
     const userId = Cookies.get("userId");
     const t = useTranslations()
-    const router = useRouter()
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -39,6 +38,8 @@ const ManageJobs = () => {
     }, [userId]);
 
     const token = Cookies.get('token');
+    const router = useRouter()
+
 
 
     const handleDelete = async (id) => {
@@ -108,7 +109,9 @@ const ManageJobs = () => {
                                     </Flex>
                                 </Box>
                                 <Box borderRadius="50%" p="6px 6px" boxShadow="1px 1px 5px 1px gray">
-                                    <FaPencil size="24px" />
+                                    <FaPencil size="24px"    
+                                    onClick={()=>{router.push(`editJob?companyId=${encodeURIComponent(item.id)}`)
+                }} />
                                 </Box>
                                 <Box borderRadius="50%" p="3px 4px" boxShadow="1px 1px 5px 1px gray">
                                     <MdDeleteOutline size="30px" onClick={() => handleDelete(item.id)} />

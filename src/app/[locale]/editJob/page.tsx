@@ -32,6 +32,8 @@ import { FaCheck } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import { ESalaryType } from "../jobs/enums";
 import { EINDUSTRY } from "../jobs/enums";
+import { useSearchParams } from "next/navigation";
+
 
 
 const EditJobs = () => {
@@ -60,7 +62,7 @@ const EditJobs = () => {
         const fetchData = async () => {
 
             try {
-                const response = await fetch("https://neo-814m.onrender.com/v1/post/47")
+                const response = await fetch(`https://neo-814m.onrender.com/v1/post/${companyId}`)
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -107,7 +109,7 @@ const EditJobs = () => {
             user: null
         };
         try {
-            const response = await fetch('https://neo-814m.onrender.com/v1/post/47', {
+            const response = await fetch(`https://neo-814m.onrender.com/v1/post/${companyId}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -207,6 +209,9 @@ const handleInputChangeJob = (event: React.ChangeEvent<HTMLInputElement>) => {
         setJobCategory(""); // Clear the enum value if no match is found
     }
 };
+
+const searchParams = useSearchParams();
+const companyId = searchParams.get("companyId");
 
     return (
         <>
