@@ -17,34 +17,34 @@ import { useTranslations } from "next-intl";
 import React, { Dispatch, SetStateAction, useState } from "react";
 import { ESalaryType } from "./enums";
 interface IJobCategory {
-  setSelectedSalary:Dispatch<SetStateAction<string>>
+  setSelectedSalary: Dispatch<SetStateAction<string>>;
 }
-const SalaryType:React.FC<IJobCategory> = ({setSelectedSalary}) => {
+const SalaryType: React.FC<IJobCategory> = ({ setSelectedSalary }) => {
   const t = useTranslations();
   const salaries = Object.entries(ESalaryType);
 
-  
   const [salaryInputValue, setSalaryInputValue] = useState<any>("");
   const [selectedLabel, setSelectedLabel] = useState("");
   const [inputValue, setInputValue] = useState("");
 
   const handleCategorySelect = (label: string, originalValue: string) => {
     setInputValue(label);
-    setSelectedLabel(label); 
+    setSelectedLabel(label);
     const selectedEntry = salaries.find(([key, val]) => val === originalValue);
     if (selectedEntry) {
-    
-      setSelectedSalary(selectedEntry[1]); 
+      setSelectedSalary(selectedEntry[1]);
     }
   };
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = event.target.value;
-    setInputValue(newValue); 
+    setInputValue(newValue);
 
-    const found = salaries.some(([key, value]) => t(`Common.INDUSTRIES.${value}`) === newValue);
+    const found = salaries.some(
+      ([key, value]) => t(`Common.INDUSTRIES.${value}`) === newValue
+    );
     if (!found && newValue === "") {
       setSelectedLabel("");
-      setSelectedSalary(""); 
+      setSelectedSalary("");
     }
   };
   return (
@@ -55,12 +55,10 @@ const SalaryType:React.FC<IJobCategory> = ({setSelectedSalary}) => {
       <AutoComplete openOnFocus>
         {({ isOpen }: any) => (
           <>
-            <InputGroup
-            
-            >
+            <InputGroup>
               <AutoCompleteInput
-                 value={inputValue}
-                 onChange={handleInputChange}
+                value={inputValue}
+                onChange={handleInputChange}
                 id="salaryInput"
                 borderRadius="4px"
                 minH="48px"
@@ -72,21 +70,17 @@ const SalaryType:React.FC<IJobCategory> = ({setSelectedSalary}) => {
                 maxW="100%"
                 variant="filled"
                 placeholder={t("Common.SalaryType.label")}
-                
               />
 
-              <InputRightElement
-                children={
-                  <Icon
-                    cursor="pointer"
-                    marginTop="5px"
-                    fontSize="10px"
-                    color="gray"
-                    as={isOpen ? TriangleUpIcon : TriangleDownIcon}
-                  />
-                }
-              />
-            
+              <InputRightElement>
+                <Icon
+                  cursor="pointer"
+                  marginTop="5px"
+                  fontSize="10px"
+                  color="gray"
+                  as={isOpen ? TriangleUpIcon : TriangleDownIcon}
+                />
+              </InputRightElement>
             </InputGroup>
             <AutoCompleteList>
               {salaries.map(([key, value], cid) => (

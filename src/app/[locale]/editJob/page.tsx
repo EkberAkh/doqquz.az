@@ -79,7 +79,12 @@ const EditJobs = () => {
         setJobCategoryValue(t(`Common.INDUSTRIES.${dataa.category}`));
         setSelectedKeywords(dataa.skills);
       } catch (error) {
-        console.error("Fetch error:", error.message);
+        if (error instanceof Error) {
+          console.error("Fetch error:", error.message);
+        } else {
+          // Handle cases where the error is not an Error instance
+          console.error("Unknown fetch error:", error);
+        }
       }
     };
     fetchData();
@@ -267,17 +272,15 @@ const EditJobs = () => {
                             placeholder={t("Common.JobType.label")}
                           />
 
-                          <InputRightElement
-                            children={
-                              <Icon
-                                cursor="pointer"
-                                marginTop="5px"
-                                fontSize="10px"
-                                color="gray"
-                                as={isOpen ? TriangleUpIcon : TriangleDownIcon}
-                              />
-                            }
-                          />
+                          <InputRightElement>
+                            <Icon
+                              cursor="pointer"
+                              marginTop="5px"
+                              fontSize="10px"
+                              color="gray"
+                              as={isOpen ? TriangleUpIcon : TriangleDownIcon}
+                            />
+                          </InputRightElement>
                         </InputGroup>
                         <AutoCompleteList>
                           {jobTypes.map(([key, value], cid) => (
@@ -324,17 +327,15 @@ const EditJobs = () => {
                             placeholder={t("Common.INDUSTRIES.label")}
                           />
 
-                          <InputRightElement
-                            children={
-                              <Icon
-                                cursor="pointer"
-                                marginTop="5px"
-                                fontSize="10px"
-                                color="gray"
-                                as={isOpen ? TriangleUpIcon : TriangleDownIcon}
-                              />
-                            }
-                          />
+                          <InputRightElement>
+                            <Icon
+                              cursor="pointer"
+                              marginTop="5px"
+                              fontSize="10px"
+                              color="gray"
+                              as={isOpen ? TriangleUpIcon : TriangleDownIcon}
+                            />
+                          </InputRightElement>
                         </InputGroup>
                         <AutoCompleteList>
                           {jobs.map(([key, value], cid) => (
@@ -383,17 +384,15 @@ const EditJobs = () => {
                             placeholder={t("Common.SalaryType.label")}
                           />
 
-                          <InputRightElement
-                            children={
-                              <Icon
-                                cursor="pointer"
-                                marginTop="5px"
-                                fontSize="10px"
-                                color="gray"
-                                as={isOpen ? TriangleUpIcon : TriangleDownIcon}
-                              />
-                            }
-                          />
+                          <InputRightElement>
+                            <Icon
+                              cursor="pointer"
+                              marginTop="5px"
+                              fontSize="10px"
+                              color="gray"
+                              as={isOpen ? TriangleUpIcon : TriangleDownIcon}
+                            />
+                          </InputRightElement>
                         </InputGroup>
                         <AutoCompleteList>
                           {salaries.map(([key, value], cid) => (

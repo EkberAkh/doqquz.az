@@ -44,7 +44,7 @@ function NotificationItem() {
   return (
     <Box>
       {notifications.map((notification) => (
-        <NavigationLink href="/managejobs">
+        <NavigationLink key={notification?.id} href="/managejobs">
           <VStack
             borderLeft="4px solid transparent"
             _hover={{ backgroundColor: "#F3F8FF", borderLeftColor: "#2a41e8" }}
