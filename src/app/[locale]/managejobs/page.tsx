@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react';
-import { Box, Flex, Text, Link } from '@chakra-ui/react';
+import { Box, Flex, Text,Button } from '@chakra-ui/react';
 import React from 'react'
 import { useEffect } from "react";
 import { BiAddToQueue } from "react-icons/bi";
@@ -19,7 +19,9 @@ const ManageJobs = () => {
     const [jobdata, setJobdata] = useState([]);
     const userId = Cookies.get("userId");
     const t = useTranslations()
+
     const router = useRouter()
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -38,6 +40,38 @@ const ManageJobs = () => {
 
         fetchData();
     }, [userId]);
+
+    const token = Cookies.get('token');
+    const router = useRouter()
+
+
+
+    const handleDelete = async (id) => {
+        const url = `https://neo-814m.onrender.com/v1/post/delete/${id}`;
+        const token = Cookies.get("token");
+
+        const requestOptions = {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'Application/json',
+                Token: `${token}`
+            }
+        }
+
+        try {
+            const response = await fetch(url, requestOptions);
+            if (!response.ok) {
+                throw new Error(`Error: ${response.status}`)
+            }
+
+            setJobdata((prevBookmarks) => prevBookmarks.filter(bookmark => bookmark.id !== id));
+
+            console.log(`Bookmark with ID ${id} deleted successfully)`);
+
+        } catch (error) {
+            console.error("There was an error deleting the bookmark:", error)
+        }
+    }
 
     console.log(jobdata);
 
@@ -81,14 +115,18 @@ const ManageJobs = () => {
                                     <Flex gap="15px" alignItems="center" color={'#fff'}>
                                         <FaUserFriends/>
                                         <Text>{t('Company.ManageJobs.actions.candidates')}</Text>
-                                        <Text borderRadius="50%" bg="#8696FE" fontSize="14px" p="0 5px ">0</Text>
+
+                                        <Text borderRadius="50%" bg="gray.400" fontSize="14px" color="white" p="0 5px ">{item.jobseekers.length}</Text>
+
                                     </Flex>
                                 </Box>
                                 <Box borderRadius="50%" p="6px 6px" boxShadow="1px 1px 5px 1px gray">
-                                    <FaPencil size="24px" />
+                                    <FaPencil size="24px"    
+                                    onClick={()=>{router.push(`editJob?companyId=${encodeURIComponent(item.id)}`)
+                }} />
                                 </Box>
                                 <Box borderRadius="50%" p="3px 4px" boxShadow="1px 1px 5px 1px gray">
-                                    <MdDeleteOutline size="30px" />
+                                    <MdDeleteOutline size="30px" onClick={() => handleDelete(item.id)} />
                                 </Box>
 
                             </Flex>

@@ -18,7 +18,7 @@ interface ICurrency {
   selectedCurrency:string;
   setSelectedCurrency: Dispatch<SetStateAction<string>>;
 }
-const CurrencyType:React.FC<ICurrency> = ({ selectedCurrency, setSelectedCurrency }) => {
+const CurrencyType:React.FC<ICurrency> = ({  setSelectedCurrency }) => {
   const t = useTranslations();
   const currencies = ["AZN", "TL", "USD", "EUR", "STR"];
 
