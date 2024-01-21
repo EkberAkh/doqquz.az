@@ -68,7 +68,7 @@ const PostJobs = () => {
       currency: currency,
       description: description,
       id: null, 
-      location: location === "" ? null : location,
+      location: location.id,
       maxEstimatedBudget: salarymax,
       minEstimatedBudget: salarymin,
       notificationEmail: notify,

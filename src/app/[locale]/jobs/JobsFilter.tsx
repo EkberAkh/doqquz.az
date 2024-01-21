@@ -32,7 +32,9 @@ const JobsFilter: React.FC<IJobFilter> = ({ jobType, locationInput,onFilterChang
     const filterData = {
       currency: selectedCurrency,
       category: selectedJobCategory,
-      locObj: selectedLocation,
+      location: selectedLocation.id, // Use the location ID here
+      locObj: selectedLocation, 
+
       salaryType: selectedSalary,
       type: selectedJobTypes[0] === undefined ? '' :selectedJobTypes[0]  ,
       keyword: selectedKeywords[0] === undefined ? '': selectedKeywords[0],
