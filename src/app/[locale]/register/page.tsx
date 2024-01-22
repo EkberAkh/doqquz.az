@@ -178,10 +178,10 @@ const toast = useToast();
 
                 <Input
                   {...register("firstName", {
-                    required: "This is required",
+                    required: `${t("Common.Error.validation.empty")}`,
                     minLength: {
                       value: 3,
-                      message: "Minimum length should be 3",
+                      message: "Minimum  3 simvol",
                     },
                   })}
                   id="firstName"
@@ -210,10 +210,10 @@ const toast = useToast();
 
                   <Input
                     {...register("lastName", {
-                      required: "This is required",
+                      required: `${t("Common.Error.validation.empty")}`,
                       minLength: {
                         value: 3,
-                        message: "Minimum length should be 3",
+                        message: "Minimum 3 simvol",
                       },
                     })}
                     id="lastName"
@@ -239,10 +239,10 @@ const toast = useToast();
                   </InputLeftElement>
                   <Input
                     {...register("companyName", {
-                      required: salam ? false : "This is required", // Conditionally set the requirement
+                      required: salam ? false : `${t("Common.Error.validation.empty")}`, // Conditionally set the requirement
                       minLength: {
                         value: 3,
-                        message: "Minimum length should be 3",
+                        message: "Minimum  3 simvol",
                       },
                     })}
                     id="companyName"
@@ -271,7 +271,7 @@ const toast = useToast();
 
                   <Input
                     {...register("email", {
-                      required: "This is required",
+                      required: `${t("Common.Error.validation.empty")}`,
                       validate: {
                         containsAt: (value) =>
                           (value.includes("@") && value.includes(".")) ||
@@ -301,15 +301,15 @@ const toast = useToast();
                   </InputLeftElement>
                   <Input
                     {...register("password", {
-                      required: "This is required",
+                      required: `${t("Common.Error.validation.empty")}`,
                       minLength: {
                         value: 6,
-                        message: "Minimum length should be 6",
+                        message: "Minimum  6 simvol",
                       },
                       validate: {
                         containsLetterAndNumber: (value) =>
                           (/[a-z]/.test(value) && /[0-9]/.test(value)) ||
-                          "Password must contain both letters (a-z) and numbers (0-9)",
+                          "Parolda həm hərflər (a-z) və rəqəmlər (0-9) olmalıdır",
                       },
                     })}
                     id="password"
