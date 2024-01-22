@@ -19,6 +19,7 @@ import JobsFilter from "../jobs/JobsFilter";
 import { useTranslations } from "next-intl";
 import Card from "./Card";
 import { SettingsIcon } from "@chakra-ui/icons";
+import NotFound from "../company/NotFound";
 interface Employee {
   id: number;
   firstName: string;
@@ -94,11 +95,12 @@ const Employees = () => {
         <>
           <Grid
             padding="18px"
-            templateColumns={{ base: "2fr", lg: "1fr 1 fr" }}
+            templateColumns={ currentEmployees.length || maxWidth1100Media ? "2fr" : "1fr 1 fr" }
             gap="14px"
-            width={{ base: "100%", lg: "calc(100% - 379px)" }}
+            width={ maxWidth1100Media  ? '100%' : "calc(100% - 379px)"}
+            maxHeight={maxWidth1100Media ? "auto" : "470px"}
           >
-            {employees.map((employee) => (
+            {currentEmployees.length===0 ? <NotFound message={""}/> : currentEmployees.map((employee) => (
               <Card
                 key={employee.id}
                 id={employee.id}
