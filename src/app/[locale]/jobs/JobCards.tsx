@@ -10,6 +10,7 @@ import {
 import { useTranslations } from "next-intl";
 import React, { useEffect, useState } from "react";
 import Card from "./Card";
+import NotFound from "../company/NotFound";
 
 interface IJobCards {
   filterData: any;
@@ -61,17 +62,18 @@ const JobCards: React.FC<IJobCards> = ({ filterData }) => {
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentJobs = allJobs.slice(indexOfFirstItem, indexOfLastItem);
-
+ 
   return (
     <>
+
       <Grid
         padding="18px"
-        templateColumns={maxWidth1100Media ? "2fr" : "1fr 1fr"}
+        templateColumns={maxWidth1100Media || currentJobs.length===0  ? "2fr" : "1fr 1fr"}
         gap="14px"
         width={maxWidth1100Media ? "100%" : "calc(100% - 379px)"}
         maxHeight={maxWidth1100Media ? "auto" : "470px"}
       >
-        {currentJobs.map((job: any) => (
+        {currentJobs.length===0 ? <NotFound message={""}/> : currentJobs.map((job: any) => (
           <Card
             imageUrl={job.user.imageUrl}
             id={job.id}
@@ -91,13 +93,14 @@ const JobCards: React.FC<IJobCards> = ({ filterData }) => {
         spacing="20px"
         justify="center"
         p="4"
-        display={maxWidth1100Media ? "none" : "block"}
+        display={maxWidth1100Media || currentJobs.length===0 ? "none" : "block"}
         margin="0 auto"
       >
         <Button
           onClick={() => changePage(currentPage - 1)}
           disabled={currentPage === 1}
           marginRight="15px"
+        
         >
           Prev
         </Button>
