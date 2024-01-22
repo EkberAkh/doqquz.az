@@ -37,7 +37,7 @@ const JobsFilter: React.FC<IJobFilter> = ({
       currency: selectedCurrency,
       category: selectedJobCategory,
       // @ts-ignore
-      location: selectedLocation.id, // Use the location ID here
+      location: selectedLocation.id === undefined ? "" : selectedLocation.id,
       locObj: selectedLocation,
 
       salaryType: selectedSalary,
