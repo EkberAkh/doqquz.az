@@ -583,7 +583,7 @@ const Profile = () => {
               <MdOutlineFaceUnlock color="rgb(42, 65, 232)" fontSize="1.4em" />
               <Heading ml={"8px"} fontSize="1rem" fontWeight={700}>
                 {" "}
-                Profil Məlumatı
+                {t("Profile.titles.profileInfo")}
               </Heading>
             </Flex>
             {/* <Button
