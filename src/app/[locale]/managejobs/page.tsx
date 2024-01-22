@@ -66,11 +66,11 @@ const ManageJobs = () => {
     return format(date, "dd.MM.yyyy");
   };
   return (
-    <Box w="1200px" m="auto" pb="100px">
+    <Box w={{base:"100%",lg:"1200px"}} m="auto" pb="100px">
       <Text m="30px 0" fontWeight="bold" fontSize="30px">
         {t("Company.ManageJobs.title")}
       </Text>
-      <Box boxShadow="1px 1px 5px 1px gray">
+      <Box boxShadow={{base:"none",lg:"1px 1px 5px 1px gray"}}>
         <Flex gap="10px" p="30px">
           <BiAddToQueue color="blue" size="20px" />
           <Text fontWeight="bold" fontSize="18px">
