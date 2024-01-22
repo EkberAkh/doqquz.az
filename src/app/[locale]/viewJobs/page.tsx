@@ -200,7 +200,7 @@ const ViewJobs = () => {
               >
                 <Text>{t(`Common.JobType.${job?.type}`)}</Text>
                 <Text fontSize="30px">
-                  {job?.maxEstimatedBudget} - {job?.minEstimatedBudget}{" "}
+                  {job?.minEstimatedBudget} - {job?.maxEstimatedBudget}
                   {job?.currency}
                 </Text>
               </Box>
