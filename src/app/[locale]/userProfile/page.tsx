@@ -437,9 +437,6 @@ const Profile = () => {
                 {t("Profile.titles.contactInfo")}
               </Heading>
             </Flex>
-            <Box bgColor="#e0f5d7" color="#449626" p="5px" borderRadius="5px">
-              {t("Common.Role.COMPANY")}
-            </Box>
           </CardHeader>
 
           <CardBody p="30px">
@@ -589,7 +586,7 @@ const Profile = () => {
                 Profil Məlumatı
               </Heading>
             </Flex>
-            <Button
+            {/* <Button
               bgColor="#e0f5d7"
               color="#449626"
               p="5px"
@@ -597,7 +594,7 @@ const Profile = () => {
               onClick={() => handleOpenModal("profile")}
             >
               Change
-            </Button>
+            </Button> */}
           </CardHeader>
 
           <CardBody p="30px">
@@ -901,8 +898,7 @@ const Profile = () => {
                               </Flex>
                             </Box>
                             <Box m="50px">
-                              <Flex gap="20px">
-                              </Flex>
+                              <Flex gap="20px"></Flex>
                             </Box>
                           </Flex>
                         </Box>
@@ -1027,7 +1023,6 @@ const Profile = () => {
                       fontWeight={400}
                       box-shadow={"0 5px 10px rgba(0, 0, 0, 0.1)"}
                       variant="primary"
-                      
                     >
                       {t("Common.Action.SAVE")}{" "}
                     </Button>
@@ -1091,8 +1086,7 @@ const Profile = () => {
                               </Flex>
                             </Box>
                             <Box m="50px">
-                              <Flex gap="20px">
-                              </Flex>
+                              <Flex gap="20px"></Flex>
                             </Box>
                           </Flex>
                         </Box>
@@ -1330,8 +1324,7 @@ const Profile = () => {
                               </Flex>
                             </Box>
                             <Box m="50px">
-                              <Flex gap="20px">
-                              </Flex>
+                              <Flex gap="20px"></Flex>
                             </Box>
                           </Flex>
                         </Box>

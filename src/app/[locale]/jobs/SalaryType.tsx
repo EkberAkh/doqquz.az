@@ -40,7 +40,7 @@ const SalaryType: React.FC<IJobCategory> = ({ setSelectedSalary }) => {
     setInputValue(newValue);
 
     const found = salaries.some(
-      ([key, value]) => t(`Common.INDUSTRIES.${value}`) === newValue
+      ([key, value]) => t(`Common.SalaryType.${value}`) === newValue
     );
     if (!found && newValue === "") {
       setSelectedLabel("");

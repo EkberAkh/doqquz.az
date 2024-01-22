@@ -14,6 +14,7 @@ import Cookies from "js-cookie";
 import { useTranslations } from "next-intl";
 import { NavigationLink } from "@/components/NavigationLink";
 import { useToast } from "@chakra-ui/react";
+import Link from "next/link";
 
 interface YourJobType {
   category: string;
@@ -115,7 +116,7 @@ const ViewJobs = () => {
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
-      console.log("Application submitted successfully!");
+      ("Application submitted successfully!");
       toast({
         title: "Application submitted.",
         description: "Your application has been successfully submitted!",
@@ -255,7 +256,9 @@ const ViewJobs = () => {
                     cursor="pointer"
                     _hover={{ bg: "green.300", color: "white" }}
                   >
-                    <FaWhatsapp color="blue" size="18px" />
+                    <Link target="_blank" href="https://web.whatsapp.com/">
+                      <FaWhatsapp color="blue" size="18px" />
+                    </Link>
                   </Box>
                   <Box
                     ml="30px"
@@ -265,7 +268,9 @@ const ViewJobs = () => {
                     cursor="pointer"
                     _hover={{ bg: "blue.300", color: "white" }}
                   >
-                    <FaTwitter color="blue" size="18px" />
+                    <Link target="_blank" href="https://twitter.com/9_doqquz">
+                      <FaTwitter color="blue" size="18px" />
+                    </Link>
                   </Box>
                   <Box
                     ml="30px"
@@ -275,7 +280,9 @@ const ViewJobs = () => {
                     cursor="pointer"
                     _hover={{ bg: "gray.300", color: "white" }}
                   >
-                    <FaTelegram color="blue" size="18px" />
+                    <Link target="_blank" href="https://t.me/doqquzbaku">
+                      <FaTelegram color="blue" size="18px" />
+                    </Link>
                   </Box>
                   <Box
                     ml="30px"
@@ -285,7 +292,12 @@ const ViewJobs = () => {
                     cursor="pointer"
                     _hover={{ bg: "blue.300", color: "white" }}
                   >
-                    <FaFacebookF color="blue" size="18px" />
+                    <Link
+                      target="_blank"
+                      href="https://www.facebook.com/doqquz"
+                    >
+                      <FaFacebookF color="blue" size="18px" />
+                    </Link>
                   </Box>
                 </Box>
               </Flex>
