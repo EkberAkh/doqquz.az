@@ -202,11 +202,11 @@ const EditJobs = () => {
   const companyId = searchParams.get("companyId");
   return (
     <>
-      <Box w="1250px" m="auto">
-        <Text fontWeight="bold" fontSize="24px">
+      <Box w={{base:"100%",lg:"1250px"}} m="auto">
+        <Text fontWeight="bold" fontSize="24px" ml={{base:"20px",lg:"0"}}>
           {t("Company.ManageJobs.actions.postAJob")}
         </Text>
-        <Box boxShadow="1px 1px 5px 1px gray" p="20px 30px" m="50px 0">
+        <Box boxShadow={{base:"none",lg:"1px 1px 5px 1px gray"}}p="20px 30px" m="50px 0">
           <Box mb="50px">
             <Flex gap="10px" p="10px 10px">
               <BiAddToQueue color="blue" size="20px" />
@@ -219,7 +219,7 @@ const EditJobs = () => {
           </Box>
           {data && (
             <Box>
-              <Flex alignItems="center" gap="30px" m="30px 0">
+              <Flex alignItems="center" gap="30px" m="30px 0" flexDirection={{base:"column",lg:"row"}}>
                 <FormControl>
                   <FormLabel>{t("Company.PostAJob.fields.title")}</FormLabel>
                   <Input
@@ -345,7 +345,7 @@ const EditJobs = () => {
                   </AutoComplete>
                 </FormControl>
               </Flex>
-              <Flex alignItems="center" gap="30px">
+              <Flex alignItems="center" gap="30px" flexDirection={{base:"column",lg:"row"}}>
                 <FormControl marginBottom="16px" w="100%">
                   <FormLabel marginBottom="16px" fontSize="18px">
                     {t("Common.SalaryType.label")}
@@ -483,7 +483,7 @@ const EditJobs = () => {
                   </AutoComplete>
                 </FormControl>
               </Flex>
-              <Flex alignItems="center" gap="30px" m="30px 0">
+              <Flex alignItems="center" gap="30px" m="30px 0" flexDirection={{base:"column",lg:"row"}}>
                 <LocationInput setSelectedLocation={setlocation} />
                 <FormControl>
                   <FormLabel>
