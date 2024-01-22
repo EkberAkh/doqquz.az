@@ -204,6 +204,7 @@ const Profile = () => {
     e: React.MouseEvent<HTMLButtonElement>
   ) => {
     e.preventDefault();
+    onClose();
     const id = null;
     const jobSeeker = userProfileId;
 
@@ -242,6 +243,7 @@ const Profile = () => {
     e: React.MouseEvent<HTMLButtonElement>
   ) => {
     e.preventDefault();
+    onClose();
     const id = null;
     const jobSeeker = userProfileId;
 
@@ -273,6 +275,7 @@ const Profile = () => {
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
     e.preventDefault();
+    onClose();
     const payload = {
       companyName: companyName,
       companyUser: null,
@@ -434,9 +437,6 @@ const Profile = () => {
                 {t("Profile.titles.contactInfo")}
               </Heading>
             </Flex>
-            <Box bgColor="#e0f5d7" color="#449626" p="5px" borderRadius="5px">
-              {t("Common.Role.COMPANY")}
-            </Box>
           </CardHeader>
 
           <CardBody p="30px">
@@ -583,10 +583,10 @@ const Profile = () => {
               <MdOutlineFaceUnlock color="rgb(42, 65, 232)" fontSize="1.4em" />
               <Heading ml={"8px"} fontSize="1rem" fontWeight={700}>
                 {" "}
-                Profil Məlumatı
+                {t("Profile.titles.profileInfo")}
               </Heading>
             </Flex>
-            <Button
+            {/* <Button
               bgColor="#e0f5d7"
               color="#449626"
               p="5px"
@@ -594,7 +594,7 @@ const Profile = () => {
               onClick={() => handleOpenModal("profile")}
             >
               Change
-            </Button>
+            </Button> */}
           </CardHeader>
 
           <CardBody p="30px">
@@ -898,10 +898,7 @@ const Profile = () => {
                               </Flex>
                             </Box>
                             <Box m="50px">
-                              <Flex gap="20px">
-                                <Button>EDIT</Button>
-                                <Button>DELETE</Button>
-                              </Flex>
+                              <Flex gap="20px"></Flex>
                             </Box>
                           </Flex>
                         </Box>
@@ -1089,10 +1086,7 @@ const Profile = () => {
                               </Flex>
                             </Box>
                             <Box m="50px">
-                              <Flex gap="20px">
-                                <Button>EDIT</Button>
-                                <Button>DELETE</Button>
-                              </Flex>
+                              <Flex gap="20px"></Flex>
                             </Box>
                           </Flex>
                         </Box>
@@ -1330,10 +1324,7 @@ const Profile = () => {
                               </Flex>
                             </Box>
                             <Box m="50px">
-                              <Flex gap="20px">
-                                <Button>EDIT</Button>
-                                <Button>DELETE</Button>
-                              </Flex>
+                              <Flex gap="20px"></Flex>
                             </Box>
                           </Flex>
                         </Box>

@@ -22,7 +22,8 @@ export type Post = {
   id: number;
   title: string;
   type: string;
-  createdAt: string; // or Date, depending on how you receive this data
+  createdAt: string;
+  location: string;
 };
 
 type MarkedPost = {
@@ -44,6 +45,7 @@ const BookmarkedPosts: React.FC<BookmarkedPostsProps> = ({
     const date = new Date(createdAt);
     return format(date, "dd.MM.yyyy");
   };
+
   return (
     <Card mt={"20px"} boxShadow="0 6px 10px rgba(1, 0, 0, 0.2)" w={"100%"}>
       <CardHeader borderBottom="1px solid #e4e4e4">
@@ -75,14 +77,6 @@ const BookmarkedPosts: React.FC<BookmarkedPostsProps> = ({
                     {markedpost.post.title}
                   </Flex>
                   <HStack columnGap={"1.3rem"}>
-                    <Flex columnGap={"0.2rem"}>
-                      <PlaceIcon
-                        width="25"
-                        height="25"
-                        color="rgb(119, 119, 119)"
-                      />
-                      <Text>----</Text>
-                    </Flex>
                     <Flex columnGap={"0.2rem"}>
                       <ExperienceIcon
                         width="25"

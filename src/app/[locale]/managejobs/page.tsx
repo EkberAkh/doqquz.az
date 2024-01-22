@@ -12,19 +12,10 @@ import Cookies from "js-cookie";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { format } from "date-fns";
-interface JobData {
-  id: number;
-  title: string;
-  createdAt: string;
-  jobseekers: any[]; // Replace 'any[]' with a more specific type if you know the structure of jobseekers
-  // ... add other relevant properties
-}
-
 const ManageJobs = () => {
-  const [jobdata, setJobdata] = useState<JobData[]>([]);
+  const [jobdata, setJobdata] = useState([]);
   const userId = Cookies.get("userId");
   const t = useTranslations();
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -37,26 +28,18 @@ const ManageJobs = () => {
         }
         const data = await response.json();
         setJobdata(data);
+        console.log(data);
       } catch (error) {
-        if (error instanceof Error) {
-          console.error("Fetch error:", error.message);
-        } else {
-          // Handle cases where the error is not an Error instance
-          console.error("Unknown fetch error:", error);
-        }
+        console.error("Fetch error:", error.message);
       }
     };
-
     fetchData();
   }, [userId]);
-
   const token = Cookies.get("token");
   const router = useRouter();
-
-  const handleDelete = async (id: number) => {
+  const handleDelete = async (id) => {
     const url = `https://neo-814m.onrender.com/v1/post/delete/${id}`;
     const token = Cookies.get("token");
-
     const requestOptions = {
       method: "PATCH",
       headers: {
@@ -64,36 +47,30 @@ const ManageJobs = () => {
         Token: `${token}`,
       },
     };
-
     try {
       const response = await fetch(url, requestOptions);
       if (!response.ok) {
         throw new Error(`Error: ${response.status}`);
       }
-
       setJobdata((prevBookmarks) =>
         prevBookmarks.filter((bookmark) => bookmark.id !== id)
       );
-
       console.log(`Bookmark with ID ${id} deleted successfully)`);
     } catch (error) {
       console.error("There was an error deleting the bookmark:", error);
     }
   };
-
   console.log(jobdata);
-
-  const formatCreatedAt = (createdAt: string) => {
+  const formatCreatedAt = (createdAt) => {
     const date = new Date(createdAt);
     return format(date, "dd.MM.yyyy");
   };
-
   return (
-    <Box w="1200px" m="auto" pb="100px">
+    <Box w={{base:"100%",lg:"1200px"}} m="auto" pb="100px">
       <Text m="30px 0" fontWeight="bold" fontSize="30px">
         {t("Company.ManageJobs.title")}
       </Text>
-      <Box boxShadow="1px 1px 5px 1px gray">
+      <Box boxShadow={{base:"none",lg:"1px 1px 5px 1px gray"}}>
         <Flex gap="10px" p="30px">
           <BiAddToQueue color="blue" size="20px" />
           <Text fontWeight="bold" fontSize="18px">
@@ -104,7 +81,7 @@ const ManageJobs = () => {
           jobdata.map((item, key) => (
             <>
               <hr></hr>
-              <Box key={item.id} p="30px">
+              <Box p="30px">
                 <Flex gap="10px">
                   <Text
                     cursor="pointer"
@@ -137,11 +114,10 @@ const ManageJobs = () => {
                   </Text>
                 </Flex>
                 <Flex alignItems="center" gap="16px">
-                  <Box bg="#2a41e8" p="10px" borderRadius="6px">
+                  <Box bg="#2A41E8" p="10px" borderRadius="6px">
                     <Flex gap="15px" alignItems="center" color={"#fff"}>
                       <FaUserFriends />
                       <Text>{t("Company.ManageJobs.actions.candidates")}</Text>
-
                       <Text
                         borderRadius="50%"
                         bg="gray.400"
@@ -185,5 +161,4 @@ const ManageJobs = () => {
     </Box>
   );
 };
-
 export default ManageJobs;

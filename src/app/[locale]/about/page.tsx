@@ -17,20 +17,28 @@ const About = () => {
         >
           <Box
             padding="20px"
-            backgroundPosition="center"
-            backgroundImage="url('../../../../images/underline.png')"
-            backgroundSize="contain"
-            backgroundRepeat="no-repeat"
             gap="60px"
             display="flex"
             justifyContent="center"
             flexDirection="column"
             textAlign="center"
           >
-            <Heading fontSize={{base:"40px",lg:"48px"}} fontWeight={500}>
+            <Heading
+              backgroundImage="url('../../../../images/underline.png')"
+              backgroundPosition="bottom"
+              backgroundSize="contain"
+              backgroundRepeat="no-repeat"
+              fontSize={{ base: "40px", lg: "48px" }}
+              fontWeight={500}
+              minHeight="76px"
+            >
               {t("About.mission.title")}
             </Heading>
-            <Text width={{base:"100%",lg:"400px"}} fontSize={{base:"18px",lg:"20px"}} fontWeight="400">
+            <Text
+              width={{ base: "100%", lg: "400px" }}
+              fontSize={{ base: "18px", lg: "20px" }}
+              fontWeight="400"
+            >
               {t("About.mission.body")}
             </Text>
           </Box>
@@ -55,7 +63,7 @@ const About = () => {
             justifyContent="center"
             flexDirection="column"
             textAlign="center"
-            w={{base:"100%",lg:"50%"}}
+            w={{ base: "100%", lg: "50%" }}
           >
             <Heading fontSize="48px" fontWeight={500} mb="12px">
               {t("About.value.title")}
@@ -94,7 +102,7 @@ const About = () => {
             backgroundSize="cover"
             backgroundRepeat="no-repeat"
             backgroundPosition="center"
-            display={{base:"none",lg:"block"}}
+            display={{ base: "none", lg: "block" }}
           ></Box>
         </Box>
       </Box>

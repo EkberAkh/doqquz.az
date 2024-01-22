@@ -89,7 +89,7 @@ export const Footer = () => {
         >
           <Flex
             w="66%"
-            borderRight={responsiveHeader ? 'none' : "2px solid #444"}
+            borderRight={responsiveHeader ? "none" : "2px solid #444"}
             h={"100%"}
             align={"center"}
           >
@@ -174,7 +174,7 @@ export const Footer = () => {
             </Flex>
           </Box>
           <Flex
-            borderLeft={responsiveHeader ? 'none' : "2px solid #444"}
+            borderLeft={responsiveHeader ? "none" : "2px solid #444"}
             h={"100%"}
             align={"center"}
             pl={responsiveHeader ? "0" : "2rem"}
@@ -217,44 +217,100 @@ export const Footer = () => {
         </Flex>
       </Box>
       <Divider position="absolute" left="0" right="0" borderColor="#484848" />
-      <Box w={"100%"} minH={"19rem"} display={"flex"} alignItems={"center"} paddingTop={responsiveHeader ? '20px' : '0'}>
-        <Flex justify="space-between" w={"78%"} margin={"0 auto"} flexDirection={responsiveHeader ? 'column' : 'row'} rowGap={responsiveHeader ? '30px' : '0'}>
-          <Flex columnGap="40px" h={"100%"} flexDirection={responsiveHeader ? 'column' : 'row'} rowGap={responsiveHeader ? '30px' : '0'}>
-            <Box >
+      <Box
+        w={"100%"}
+        minH={"19rem"}
+        display={"flex"}
+        alignItems={"center"}
+        paddingTop={responsiveHeader ? "20px" : "0"}
+      >
+        <Flex
+          justify="space-between"
+          w={"78%"}
+          margin={"0 auto"}
+          flexDirection={responsiveHeader ? "column" : "row"}
+          rowGap={responsiveHeader ? "30px" : "0"}
+        >
+          <Flex
+            columnGap="40px"
+            h={"100%"}
+            flexDirection={responsiveHeader ? "column" : "row"}
+            rowGap={responsiveHeader ? "30px" : "0"}
+          >
+            <Box>
               <Text fontSize="18px" color="#fff" mb="15px" fontWeight={500}>
                 {t("Home.Footer.Nav.forCandidates.label")}
               </Text>
               <Flex flexDirection="column" rowGap="0.8rem">
-                <Text position={'relative'} fontSize="14px" color="#c0c0c0" _before={{
-                  content: '""', position: 'absolute', bottom: '-2px', height: '2.5px', width: '0%', background: '#2a41e8', borderRadius: '3rem', transition: 'width 0.1s linear',
-                }} _hover={{
-                  _before: {
-                    width: '85%'
-                  }
-                }}>
+                <Text
+                  position={"relative"}
+                  fontSize="14px"
+                  color="#c0c0c0"
+                  _before={{
+                    content: '""',
+                    position: "absolute",
+                    bottom: "-2px",
+                    height: "2.5px",
+                    width: "0%",
+                    background: "#2a41e8",
+                    borderRadius: "3rem",
+                    transition: "width 0.1s linear",
+                  }}
+                  _hover={{
+                    _before: {
+                      width: "85%",
+                    },
+                  }}
+                >
                   <NavigationLink href="/jobs">
                     {t("Common.Nav.browse_jobs")}
                   </NavigationLink>
                 </Text>
-                <Text position={'relative'} fontSize="14px" color="#c0c0c0" _before={{
-                  content: '""', position: 'absolute', bottom: '-2px', height: '2.5px', width: '0%', background: '#2a41e8', borderRadius: '3rem', transition: 'width 0.1s linear',
-                }} _hover={{
-                  _before: {
-                    width: '65%'
-                  }
-                }}>
+                <Text
+                  position={"relative"}
+                  fontSize="14px"
+                  color="#c0c0c0"
+                  _before={{
+                    content: '""',
+                    position: "absolute",
+                    bottom: "-2px",
+                    height: "2.5px",
+                    width: "0%",
+                    background: "#2a41e8",
+                    borderRadius: "3rem",
+                    transition: "width 0.1s linear",
+                  }}
+                  _hover={{
+                    _before: {
+                      width: "65%",
+                    },
+                  }}
+                >
                   <NavigationLink href="/userProfile">
                     {" "}
                     {t("Home.Footer.Nav.forCandidates.addResume")}
                   </NavigationLink>
                 </Text>
-                <Text position={'relative'} fontSize="14px" color="#c0c0c0" _before={{
-                  content: '""', position: 'absolute', bottom: '-2px', height: '2.5px', width: '0%', background: '#2a41e8', borderRadius: '3rem', transition: 'width 0.1s linear',
-                }} _hover={{
-                  _before: {
-                    width: '68%'
-                  }
-                }}>
+                <Text
+                  position={"relative"}
+                  fontSize="14px"
+                  color="#c0c0c0"
+                  _before={{
+                    content: '""',
+                    position: "absolute",
+                    bottom: "-2px",
+                    height: "2.5px",
+                    width: "0%",
+                    background: "#2a41e8",
+                    borderRadius: "3rem",
+                    transition: "width 0.1s linear",
+                  }}
+                  _hover={{
+                    _before: {
+                      width: "68%",
+                    },
+                  }}
+                >
                   <NavigationLink href="/company">
                     {t("Common.Nav.browse_companies")}
                   </NavigationLink>
@@ -266,24 +322,50 @@ export const Footer = () => {
                 {t("Home.Footer.Nav.forEmployers.label")}
               </Text>
               <Flex flexDirection="column" rowGap="0.8rem">
-                <Text position={'relative'} fontSize="14px" color="#c0c0c0" _before={{
-                  content: '""', position: 'absolute', bottom: '-2px', height: '2.5px', width: '0%', background: '#2a41e8', borderRadius: '3rem', transition: 'width 0.1s linear',
-                }} _hover={{
-                  _before: {
-                    width: '67%'
-                  }
-                }}>
+                <Text
+                  position={"relative"}
+                  fontSize="14px"
+                  color="#c0c0c0"
+                  _before={{
+                    content: '""',
+                    position: "absolute",
+                    bottom: "-2px",
+                    height: "2.5px",
+                    width: "0%",
+                    background: "#2a41e8",
+                    borderRadius: "3rem",
+                    transition: "width 0.1s linear",
+                  }}
+                  _hover={{
+                    _before: {
+                      width: "67%",
+                    },
+                  }}
+                >
                   <NavigationLink href="/employees">
                     {t("Common.Nav.browse_jobseekers")}
                   </NavigationLink>
                 </Text>
-                <Text position={'relative'} fontSize="14px" color="#c0c0c0" _before={{
-                  content: '""', position: 'absolute', bottom: '-2px', height: '2.5px', width: '0%', background: '#2a41e8', borderRadius: '3rem', transition: 'width 0.1s linear',
-                }} _hover={{
-                  _before: {
-                    width : '88%'
-                  }
-                }}>
+                <Text
+                  position={"relative"}
+                  fontSize="14px"
+                  color="#c0c0c0"
+                  _before={{
+                    content: '""',
+                    position: "absolute",
+                    bottom: "-2px",
+                    height: "2.5px",
+                    width: "0%",
+                    background: "#2a41e8",
+                    borderRadius: "3rem",
+                    transition: "width 0.1s linear",
+                  }}
+                  _hover={{
+                    _before: {
+                      width: "88%",
+                    },
+                  }}
+                >
                   <NavigationLink
                     href={
                       role === "JOBSEEKER" || role === null
@@ -294,16 +376,31 @@ export const Footer = () => {
                     {t("Common.Nav.manage_jobs")}
                   </NavigationLink>
                 </Text>
-                <Text position={'relative'} fontSize="14px" color="#c0c0c0" _before={{
-                  content: '""', position: 'absolute', bottom: '-2px', height: '2.5px', width: '0%', background: '#2a41e8', borderRadius: '3rem', transition: 'width 0.1s linear',
-                }} _hover={{
-                  _before: {
-                    width : '92%'
-                  }
-                }}>
+                <Text
+                  position={"relative"}
+                  fontSize="14px"
+                  color="#c0c0c0"
+                  _before={{
+                    content: '""',
+                    position: "absolute",
+                    bottom: "-2px",
+                    height: "2.5px",
+                    width: "0%",
+                    background: "#2a41e8",
+                    borderRadius: "3rem",
+                    transition: "width 0.1s linear",
+                  }}
+                  _hover={{
+                    _before: {
+                      width: "92%",
+                    },
+                  }}
+                >
                   <NavigationLink
                     href={
-                      role === "JOBSEEKER" || role === null ? "/register" : "/postJobs"
+                      role === "JOBSEEKER" || role === null
+                        ? "/register"
+                        : "/postJobs"
                     }
                   >
                     {t("Common.Nav.post_a_job")}
@@ -316,37 +413,76 @@ export const Footer = () => {
                 {t("Home.Footer.Nav.helpfulLinks")}
               </Text>
               <Flex flexDirection="column" rowGap="0.8rem">
-              <Text position={'relative'} fontSize="14px" color="#c0c0c0" _before={{
-                  content: '""', position: 'absolute', bottom: '-2px', height: '2.5px', width: '0%', background: '#2a41e8', borderRadius: '3rem', transition: 'width 0.1s linear',
-                }} _hover={{
-                  _before: {
-                    width : '65%'
-                  }
-                }}>
+                <Text
+                  position={"relative"}
+                  fontSize="14px"
+                  color="#c0c0c0"
+                  _before={{
+                    content: '""',
+                    position: "absolute",
+                    bottom: "-2px",
+                    height: "2.5px",
+                    width: "0%",
+                    background: "#2a41e8",
+                    borderRadius: "3rem",
+                    transition: "width 0.1s linear",
+                  }}
+                  _hover={{
+                    _before: {
+                      width: "65%",
+                    },
+                  }}
+                >
                   <NavigationLink href="/about">
                     {" "}
                     {t("Common.Nav.about")}
                   </NavigationLink>
                 </Text>
-                <Text position={'relative'} fontSize="14px" color="#c0c0c0" _before={{
-                  content: '""', position: 'absolute', bottom: '-2px', height: '2.5px', width: '0%', background: '#2a41e8', borderRadius: '3rem', transition: 'width 0.1s linear',
-                }} _hover={{
-                  _before: {
-                    width : '30%'
-                  }
-                }}>
+                <Text
+                  position={"relative"}
+                  fontSize="14px"
+                  color="#c0c0c0"
+                  _before={{
+                    content: '""',
+                    position: "absolute",
+                    bottom: "-2px",
+                    height: "2.5px",
+                    width: "0%",
+                    background: "#2a41e8",
+                    borderRadius: "3rem",
+                    transition: "width 0.1s linear",
+                  }}
+                  _hover={{
+                    _before: {
+                      width: "30%",
+                    },
+                  }}
+                >
                   <NavigationLink href="/contact">
                     {" "}
                     {t("Common.Nav.contact")}
                   </NavigationLink>
                 </Text>
-                <Text position={'relative'} fontSize="14px" color="#c0c0c0" _before={{
-                  content: '""', position: 'absolute', bottom: '-2px', height: '2.5px', width: '0%', background: '#2a41e8', borderRadius: '3rem', transition: 'width 0.1s linear',
-                }} _hover={{
-                  _before: {
-                    width : '85%'
-                  }
-                }}>
+                <Text
+                  position={"relative"}
+                  fontSize="14px"
+                  color="#c0c0c0"
+                  _before={{
+                    content: '""',
+                    position: "absolute",
+                    bottom: "-2px",
+                    height: "2.5px",
+                    width: "0%",
+                    background: "#2a41e8",
+                    borderRadius: "3rem",
+                    transition: "width 0.1s linear",
+                  }}
+                  _hover={{
+                    _before: {
+                      width: "85%",
+                    },
+                  }}
+                >
                   <NavigationLink href="/privacy-police">
                     {t("Home.Footer.Nav.privacyPolice")}
                   </NavigationLink>
@@ -358,24 +494,50 @@ export const Footer = () => {
                 {t("Home.Footer.Nav.account")}
               </Text>
               <Flex flexDirection="column" rowGap="0.8rem">
-              <Text position={'relative'} fontSize="14px" color="#c0c0c0" _before={{
-                  content: '""', position: 'absolute', bottom: '-2px', height: '2.5px', width: '0%', background: '#2a41e8', borderRadius: '3rem', transition: 'width 0.1s linear',
-                }} _hover={{
-                  _before: {
-                    width : '50%'
-                  }
-                }}>
+                <Text
+                  position={"relative"}
+                  fontSize="14px"
+                  color="#c0c0c0"
+                  _before={{
+                    content: '""',
+                    position: "absolute",
+                    bottom: "-2px",
+                    height: "2.5px",
+                    width: "0%",
+                    background: "#2a41e8",
+                    borderRadius: "3rem",
+                    transition: "width 0.1s linear",
+                  }}
+                  _hover={{
+                    _before: {
+                      width: "50%",
+                    },
+                  }}
+                >
                   <NavigationLink href="/login">
                     {t("Common.Action.LOGIN")}
                   </NavigationLink>
                 </Text>
-                <Text position={'relative'} fontSize="14px" color="#c0c0c0" _before={{
-                  content: '""', position: 'absolute', bottom: '-2px', height: '2px', width: '0%', background: '#2a41e8', borderRadius: '3rem', transition: 'width 0.1s linear',
-                }} _hover={{
-                  _before: {
-                    width : '100%'
-                  }
-                }}>
+                <Text
+                  position={"relative"}
+                  fontSize="14px"
+                  color="#c0c0c0"
+                  _before={{
+                    content: '""',
+                    position: "absolute",
+                    bottom: "-2px",
+                    height: "2px",
+                    width: "0%",
+                    background: "#2a41e8",
+                    borderRadius: "3rem",
+                    transition: "width 0.1s linear",
+                  }}
+                  _hover={{
+                    _before: {
+                      width: "100%",
+                    },
+                  }}
+                >
                   <NavigationLink href="/userProfile">
                     {t("Common.Menu.profile.label")}
                   </NavigationLink>
@@ -384,7 +546,7 @@ export const Footer = () => {
             </Box>
           </Flex>
 
-          <Box width={responsiveHeader ? '100%' : '32%'}>
+          <Box width={responsiveHeader ? "100%" : "32%"}>
             <Text fontSize="18px" color="#fff" mb="15px" ml={"3px"}>
               {t("Home.Footer.Subscribe.title")}
             </Text>
@@ -438,8 +600,9 @@ export const Footer = () => {
         paddingY="23px"
         borderTop={"2px solid #444"}
       >
-        © 2024 <Tag color={"#fff"}> Doqquz</Tag>.Bütün hüquqlar qorunur.
-        {/* {t('Common.Copyrights')} */}
+        {t.rich("Common.Copyrights", {
+          b: (chunks) => <b>{chunks}</b>,
+        })}
       </Container>
       <ScrollToTop />
     </Box>

@@ -33,7 +33,6 @@ import { useRouter } from "next/navigation";
 import { ESalaryType } from "../jobs/enums";
 import { EINDUSTRY } from "../jobs/enums";
 import { useSearchParams } from "next/navigation";
-
 const EditJobs = () => {
   const t = useTranslations();
   const router = useRouter();
@@ -46,17 +45,11 @@ const EditJobs = () => {
   const [selectedKeywords, setSelectedKeywords] = useState([]);
   const [description, setDscription] = useState("");
   const [contact, setContact] = useState("");
-
   const [jobType, setJobType] = useState([]);
   const [jobTypeValue, setJobTypeValue] = useState("");
-
   const [data, setData] = useState({});
-
   const jobTypes = Object.entries(EJobType);
-
   const token = Cookies.get("token");
-  const searchParams = useSearchParams();
-  const companyId = searchParams.get("companyId");
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -78,18 +71,14 @@ const EditJobs = () => {
         setSalaryTypevalue(t(`Common.SalaryType.${dataa.salaryType}`));
         setJobCategoryValue(t(`Common.INDUSTRIES.${dataa.category}`));
         setSelectedKeywords(dataa.skills);
+        console.log(dataa);
+        console.log(dataa.currency);
       } catch (error) {
-        if (error instanceof Error) {
-          console.error("Fetch error:", error.message);
-        } else {
-          // Handle cases where the error is not an Error instance
-          console.error("Unknown fetch error:", error);
-        }
+        console.error("Fetch error:", error.message);
       }
     };
     fetchData();
-  }, [companyId]);
-
+  }, []);
   const handleSubmit = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const token = Cookies.get("token");
     e.preventDefault();
@@ -120,22 +109,24 @@ const EditJobs = () => {
           },
           body: JSON.stringify(payload),
         }
-      );
-
+      ).then((res) => {
+        toast({
+          title: "Login successful",
+          status: "success",
+          duration: 2000,
+          isClosable: true,
+        });
+      });
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-
       const data = await response.json();
-
-      router.push("jobs");
     } catch (error) {
       console.error("There was a problem with the fetch operation:", error);
     }
+    router.push("managejobs");
   };
-
   //--------------------------------------------------------------------------  jobType  full,part,frilans
-
   const handleCategorySelect = (label: string, originalValue: string) => {
     setJobTypeValue(label);
     setJobType(originalValue);
@@ -147,24 +138,19 @@ const EditJobs = () => {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = event.target.value;
     setJobTypeValue(newValue);
-
     const foundEntry = jobTypes.find(
       ([key, value]) => t(`Common.INDUSTRIES.${value}`) === newValue
     );
-
     if (foundEntry) {
       setJobType(foundEntry[0]); // Set the actual enum value
     } else {
       setJobType(""); // Clear the enum value if no match is found
     }
   };
-
   //----------------------------------------------------------------------------------   salaryType ayliq,illik
-
   const [salaryType, setSalaryType] = useState([]);
   const [salaryTypevalue, setSalaryTypevalue] = useState("");
   const salaries = Object.entries(ESalaryType);
-
   const handleSalaryCategorySelect = (label: string, originalValue: string) => {
     setSalaryTypevalue(label);
     setSalaryType(originalValue);
@@ -178,7 +164,6 @@ const EditJobs = () => {
   ) => {
     const newValue = event.target.value;
     setSalaryTypevalue(newValue);
-
     const found = salaries.some(
       ([key, value]) => t(`Common.INDUSTRIES.${value}`) === newValue
     );
@@ -191,9 +176,7 @@ const EditJobs = () => {
   //-----------------------------------------------------------------------------------------------------------  jobCategory
   const [jobCategory, setJobCategory] = useState([]);
   const [jobCategoryValue, setJobCategoryValue] = useState("");
-
   const jobs = Object.entries(EINDUSTRY);
-
   const handleJobCategorySelect = (label: string, originalValue: string) => {
     setJobCategoryValue(label);
     setJobCategory(originalValue);
@@ -205,7 +188,6 @@ const EditJobs = () => {
   const handleInputChangeJob = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = event.target.value;
     setJobCategoryValue(newValue);
-
     const found = salaries.some(
       ([key, value]) => t(`Common.INDUSTRIES.${value}`) === newValue
     );
@@ -215,14 +197,16 @@ const EditJobs = () => {
       setJobCategory(""); // Clear the enum value if no match is found
     }
   };
-
+  const currencies = ["AZN", "TL", "USD", "EUR", "STR"];
+  const searchParams = useSearchParams();
+  const companyId = searchParams.get("companyId");
   return (
     <>
-      <Box w="1250px" m="auto">
-        <Text fontWeight="bold" fontSize="24px">
+      <Box w={{base:"100%",lg:"1250px"}} m="auto">
+        <Text fontWeight="bold" fontSize="24px" ml={{base:"20px",lg:"0"}}>
           {t("Company.ManageJobs.actions.postAJob")}
         </Text>
-        <Box boxShadow="1px 1px 5px 1px gray" p="20px 30px" m="50px 0">
+        <Box boxShadow={{base:"none",lg:"1px 1px 5px 1px gray"}}p="20px 30px" m="50px 0">
           <Box mb="50px">
             <Flex gap="10px" p="10px 10px">
               <BiAddToQueue color="blue" size="20px" />
@@ -235,7 +219,7 @@ const EditJobs = () => {
           </Box>
           {data && (
             <Box>
-              <Flex alignItems="center" gap="30px" m="30px 0">
+              <Flex alignItems="center" gap="30px" m="30px 0" flexDirection={{base:"column",lg:"row"}}>
                 <FormControl>
                   <FormLabel>{t("Company.PostAJob.fields.title")}</FormLabel>
                   <Input
@@ -271,16 +255,17 @@ const EditJobs = () => {
                             variant="filled"
                             placeholder={t("Common.JobType.label")}
                           />
-
-                          <InputRightElement>
-                            <Icon
-                              cursor="pointer"
-                              marginTop="5px"
-                              fontSize="10px"
-                              color="gray"
-                              as={isOpen ? TriangleUpIcon : TriangleDownIcon}
-                            />
-                          </InputRightElement>
+                          <InputRightElement
+                            children={
+                              <Icon
+                                cursor="pointer"
+                                marginTop="5px"
+                                fontSize="10px"
+                                color="gray"
+                                as={isOpen ? TriangleUpIcon : TriangleDownIcon}
+                              />
+                            }
+                          />
                         </InputGroup>
                         <AutoCompleteList>
                           {jobTypes.map(([key, value], cid) => (
@@ -326,16 +311,17 @@ const EditJobs = () => {
                             variant="filled"
                             placeholder={t("Common.INDUSTRIES.label")}
                           />
-
-                          <InputRightElement>
-                            <Icon
-                              cursor="pointer"
-                              marginTop="5px"
-                              fontSize="10px"
-                              color="gray"
-                              as={isOpen ? TriangleUpIcon : TriangleDownIcon}
-                            />
-                          </InputRightElement>
+                          <InputRightElement
+                            children={
+                              <Icon
+                                cursor="pointer"
+                                marginTop="5px"
+                                fontSize="10px"
+                                color="gray"
+                                as={isOpen ? TriangleUpIcon : TriangleDownIcon}
+                              />
+                            }
+                          />
                         </InputGroup>
                         <AutoCompleteList>
                           {jobs.map(([key, value], cid) => (
@@ -359,7 +345,7 @@ const EditJobs = () => {
                   </AutoComplete>
                 </FormControl>
               </Flex>
-              <Flex alignItems="center" gap="30px">
+              <Flex alignItems="center" gap="30px" flexDirection={{base:"column",lg:"row"}}>
                 <FormControl marginBottom="16px" w="100%">
                   <FormLabel marginBottom="16px" fontSize="18px">
                     {t("Common.SalaryType.label")}
@@ -383,16 +369,17 @@ const EditJobs = () => {
                             variant="filled"
                             placeholder={t("Common.SalaryType.label")}
                           />
-
-                          <InputRightElement>
-                            <Icon
-                              cursor="pointer"
-                              marginTop="5px"
-                              fontSize="10px"
-                              color="gray"
-                              as={isOpen ? TriangleUpIcon : TriangleDownIcon}
-                            />
-                          </InputRightElement>
+                          <InputRightElement
+                            children={
+                              <Icon
+                                cursor="pointer"
+                                marginTop="5px"
+                                fontSize="10px"
+                                color="gray"
+                                as={isOpen ? TriangleUpIcon : TriangleDownIcon}
+                              />
+                            }
+                          />
                         </InputGroup>
                         <AutoCompleteList>
                           {salaries.map(([key, value], cid) => (
@@ -447,9 +434,56 @@ const EditJobs = () => {
                     </FormControl>
                   </Flex>
                 </Box>
-                <CurrencyType setSelectedCurrency={setCurrency} />
+                <FormControl marginBottom="16px" w="100%">
+                  <FormLabel marginBottom="16px" fontSize="18px">
+                    {t("Common.Currency.label")}
+                  </FormLabel>
+                  <AutoComplete onChange={setCurrency} openOnFocus>
+                    {({ isOpen }: any) => (
+                      <>
+                        <InputGroup>
+                          <AutoCompleteInput
+                            value={currency}
+                            borderRadius="4px"
+                            minH="48px"
+                            fontSize="16px"
+                            backgroundColor="#fff"
+                            outline="none"
+                            boxShadow="0 0px 1px 1px rgb(0 0 0 / 12%)"
+                            color="#808080"
+                            maxW="100%"
+                            variant="filled"
+                            placeholder={t("Common.Currency.label")}
+                          />
+                          <InputRightElement
+                            children={
+                              <Icon
+                                cursor="pointer"
+                                marginTop="5px"
+                                fontSize="10px"
+                                color="gray"
+                                as={isOpen ? TriangleUpIcon : TriangleDownIcon}
+                              />
+                            }
+                          />
+                        </InputGroup>
+                        <AutoCompleteList>
+                          {currencies.map((currency, cid) => (
+                            <AutoCompleteItem
+                              key={`option-${cid}`}
+                              value={currency}
+                              textTransform="capitalize"
+                            >
+                              {currency}
+                            </AutoCompleteItem>
+                          ))}
+                        </AutoCompleteList>
+                      </>
+                    )}
+                  </AutoComplete>
+                </FormControl>
               </Flex>
-              <Flex alignItems="center" gap="30px" m="30px 0">
+              <Flex alignItems="center" gap="30px" m="30px 0" flexDirection={{base:"column",lg:"row"}}>
                 <LocationInput setSelectedLocation={setlocation} />
                 <FormControl>
                   <FormLabel>
@@ -495,7 +529,7 @@ const EditJobs = () => {
                 mt="30px"
                 _hover={{ opacity: ".4" }}
                 color="#fff"
-                backgroundColor="#2a41e8"
+                backgroundColor="#2A41E8"
                 p="20px 35px"
                 onClick={handleSubmit}
               >
@@ -504,9 +538,20 @@ const EditJobs = () => {
             </Box>
           )}
         </Box>
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
       </Box>
     </>
   );
 };
-
 export default EditJobs;

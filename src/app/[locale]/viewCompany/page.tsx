@@ -150,14 +150,6 @@ const Profile = () => {
                 Profil Məlumatı
               </Heading>
             </Flex>
-            <Button
-              bgColor="#e0f5d7"
-              color="#449626"
-              p="5px"
-              borderRadius="5px"
-            >
-              Change
-            </Button>
           </CardHeader>
 
           {data1 && (
