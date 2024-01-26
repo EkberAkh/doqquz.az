@@ -16,8 +16,9 @@ import {
 } from "@choc-ui/chakra-autocomplete";
 import { useTranslations } from "next-intl";
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { LocationType } from "../postJobs/page";
 interface IJobCategory {
-  setSelectedLocation: Dispatch<SetStateAction<string>>;
+  setSelectedLocation: Dispatch<SetStateAction<LocationType | null>>;
 }
 interface LocationItem {
   city: string;
