@@ -1,4 +1,6 @@
+// @ts-nocheck
 "use client";
+
 import { BiAddToQueue } from "react-icons/bi";
 import React, { useEffect, useState } from "react";
 import {
@@ -14,7 +16,6 @@ import {
   InputRightElement,
   Icon,
 } from "@chakra-ui/react";
-import CurrencyType from "../jobs/CurrencyType";
 import LocationInput from "../jobs/LocationInput";
 import KeywordInput from "../jobs/KeywordInput";
 import {
@@ -27,7 +28,6 @@ import { useTranslations } from "next-intl";
 import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
 import { EJobType } from "../jobs/enums";
 import Cookies from "js-cookie";
-import { ToastContainer, toast } from "react-toastify";
 import { FaCheck } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import { ESalaryType } from "../jobs/enums";
@@ -74,7 +74,11 @@ const EditJobs = () => {
         console.log(dataa);
         console.log(dataa.currency);
       } catch (error) {
-        console.error("Fetch error:", error.message);
+        if (error instanceof Error) {
+          console.error("Fetch error:", error.message);
+        } else {
+          console.error("An unexpected error occurred");
+        }
       }
     };
     fetchData();
@@ -109,14 +113,7 @@ const EditJobs = () => {
           },
           body: JSON.stringify(payload),
         }
-      ).then((res) => {
-        toast({
-          title: "Login successful",
-          status: "success",
-          duration: 2000,
-          isClosable: true,
-        });
-      });
+      );
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -142,12 +139,12 @@ const EditJobs = () => {
       ([key, value]) => t(`Common.INDUSTRIES.${value}`) === newValue
     );
     if (foundEntry) {
-      setJobType(foundEntry[0]); // Set the actual enum value
+      setJobType(foundEntry[0]);
     } else {
-      setJobType(""); // Clear the enum value if no match is found
+      setJobType("");
     }
   };
-  //----------------------------------------------------------------------------------   salaryType ayliq,illik
+
   const [salaryType, setSalaryType] = useState([]);
   const [salaryTypevalue, setSalaryTypevalue] = useState("");
   const salaries = Object.entries(ESalaryType);
@@ -168,12 +165,12 @@ const EditJobs = () => {
       ([key, value]) => t(`Common.INDUSTRIES.${value}`) === newValue
     );
     if (foundEntry) {
-      setSalaryType(foundEntry[0]); // Set the actual enum value
+      setSalaryType(foundEntry[0]);
     } else {
-      setSalaryType(""); // Clear the enum value if no match is found
+      setSalaryType("");
     }
   };
-  //-----------------------------------------------------------------------------------------------------------  jobCategory
+
   const [jobCategory, setJobCategory] = useState([]);
   const [jobCategoryValue, setJobCategoryValue] = useState("");
   const jobs = Object.entries(EINDUSTRY);
@@ -192,9 +189,9 @@ const EditJobs = () => {
       ([key, value]) => t(`Common.INDUSTRIES.${value}`) === newValue
     );
     if (foundEntry) {
-      setJobCategory(foundEntry[0]); // Set the actual enum value
+      setJobCategory(foundEntry[0]);
     } else {
-      setJobCategory(""); // Clear the enum value if no match is found
+      setJobCategory("");
     }
   };
   const currencies = ["AZN", "TL", "USD", "EUR", "STR"];
@@ -288,7 +285,7 @@ const EditJobs = () => {
                     )}
                   </AutoComplete>
                 </FormControl>
-                {/* <JobCategories setSelectedJobCategory={setJobCategory} selectedCategory={jobCategory} /> */}
+
                 <FormControl marginBottom="16px" w="100%">
                   <FormLabel marginBottom="16px" fontSize="18px">
                     {t("Common.INDUSTRIES.label")}
@@ -538,18 +535,6 @@ const EditJobs = () => {
             </Box>
           )}
         </Box>
-        <ToastContainer
-          position="top-right"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="light"
-        />
       </Box>
     </>
   );

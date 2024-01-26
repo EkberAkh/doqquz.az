@@ -12,8 +12,19 @@ import Cookies from "js-cookie";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { format } from "date-fns";
+type JobData = {
+  id: number;
+  title: string;
+  createdAt: string;
+  jobseekers: {
+    /* Define properties of jobseekers if needed */
+  }[];
+  // Add other properties as needed
+};
+
 const ManageJobs = () => {
-  const [jobdata, setJobdata] = useState([]);
+  const [jobdata, setJobdata] = useState<JobData[]>([]);
+
   const userId = Cookies.get("userId");
   const t = useTranslations();
   useEffect(() => {
@@ -30,14 +41,18 @@ const ManageJobs = () => {
         setJobdata(data);
         console.log(data);
       } catch (error) {
-        console.error("Fetch error:", error.message);
+        if (error instanceof Error) {
+          console.error("Fetch error:", error.message);
+        } else {
+          console.error("An unexpected error occurred");
+        }
       }
     };
     fetchData();
   }, [userId]);
   const token = Cookies.get("token");
   const router = useRouter();
-  const handleDelete = async (id) => {
+  const handleDelete = async (id: number) => {
     const url = `https://neo-814m.onrender.com/v1/post/delete/${id}`;
     const token = Cookies.get("token");
     const requestOptions = {
@@ -61,7 +76,7 @@ const ManageJobs = () => {
     }
   };
   console.log(jobdata);
-  const formatCreatedAt = (createdAt) => {
+  const formatCreatedAt = (createdAt: string) => {
     const date = new Date(createdAt);
     return format(date, "dd.MM.yyyy");
   };
