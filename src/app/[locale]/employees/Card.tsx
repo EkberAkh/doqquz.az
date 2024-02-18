@@ -1,12 +1,98 @@
 import { ArrowForwardIcon, StarIcon } from "@chakra-ui/icons";
-import { Avatar, Box, Button, GridItem, Img, Text } from "@chakra-ui/react";
+import { Avatar, Box, Button, GridItem, Img, Spinner, Text } from "@chakra-ui/react";
 import { useTranslations } from "next-intl";
-import React, { useState } from "react";
-
-const Card = () => {
-  const [isFav, setIsFav] = useState<boolean>(false);
+import React, { useEffect, useState } from "react";
+import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
+// import LetteredAvatar from 'react-lettered-avatar';
+interface ICardProps {
+  id: number;
+  firstName: string;
+  lastName: string;
+  expectedSalary: string;
+  salaryType: string;
+  userId: number;
+  imageUrl:string
+}
+const Card: React.FC<ICardProps> = ({
+  id,
+  imageUrl,
+  firstName,
+  lastName,
+  expectedSalary,
+  salaryType,
+  userId
+}) => {
+  const [isFav, setIsFav] = useState<boolean>(
+    localStorage.getItem(`fav-${id}`) === "true"
+  );
   const [isHover, setisHover] = useState<boolean>(false);
+  const [bookmarkId, setBookmarkId] = useState<number | null>(null);
+  const [isLoading,setIsLoading] = useState<boolean>(false)
+  const router = useRouter()
+  let role = localStorage.getItem('role')
+  useEffect(() => {
+    // Update local storage when isFav changes
+    localStorage.setItem(`fav-${id}`, isFav.toString());
+  }, [isFav, id]);
   const t = useTranslations();
+  const handleFavClick = async () => {
+    setIsLoading(true); 
+    setIsFav(!isFav);
+    const token = Cookies.get("token");
+    let url, method, payload;
+
+    if (!isFav) {
+      // Preparing for POST request
+      url = "https://neo-814m.onrender.com/v1/bookmark/";
+      method = "POST";
+      payload = {
+        type: "JOBSEEKER",
+        jobseeker: { id: id },
+        post: null,
+      };
+    } else {
+      // Preparing for DELETE request
+      if (!bookmarkId) {
+        console.error("No bookmark ID available for deletion");
+        setIsLoading(false); 
+        return;
+      }
+      url = `https://neo-814m.onrender.com/v1/bookmark/${bookmarkId}`;
+      method = "DELETE";
+      payload = null;
+    }
+    try {
+      const response = await fetch(url, {
+        method: method,
+        headers: {
+          "Content-Type": "application/json",
+          Token: `${token}`,
+        },
+        body: payload ? JSON.stringify(payload) : null,
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      if (!isFav) {
+        const data = await response.json();
+        setBookmarkId(data.id); // Store the bookmark ID when adding a bookmark
+      }
+
+      // Toggle the favorite state only on successful request
+      setIsFav(!isFav);
+      console.log(
+        isFav ? "Bookmark removed successfully" : "Bookmark added successfully"
+      );
+    } catch (error) {
+      console.error("Error in updating bookmark:", error);
+    }finally {
+      setIsLoading(false); // Stop loading after the operation is complete
+    }
+  };
+
   return (
     <GridItem
       maxHeight="450px"
@@ -14,17 +100,31 @@ const Card = () => {
       _hover={{ transform: "auto", translateY: "-4px" }}
       boxShadow="0 2px 18px rgba(0,0,0,.14)"
     >
-      <Box height="55%" padding="20px" textAlign="center" position="relative">
-        <Avatar marginBottom="14px" size="xl" />
+      <Box
+        backgroundColor="white"
+        height="55%"
+        padding="20px"
+        textAlign="center"
+        position="relative"
+      >
+        <Avatar src={imageUrl && imageUrl}  marginBottom="14px" size="xl" />
+        {/* <Box ml={'14rem'} mb={'1rem'} >
+          <LetteredAvatar name={`${firstName || ''} ${lastName || ''}`}  radius={100}/>
+        </Box> */}
         <Text fontSize="20px" fontWeight="bold">
-          Akhundov Akbar
+          {`${firstName} ${lastName}`}
         </Text>
 
-        <StarIcon
+       {isLoading ? <Spinner  position="absolute"
+        padding="7px 7px 9px 7px"
+        margin="14px"
+        right="0"
+        top="0"
+        height="36px"
+        width="36px"/>:
+           <StarIcon
           margin="14px"
-          onClick={() => {
-            setIsFav(!isFav);
-          }}
+          onClick={role === 'COMPANY' || role === 'JOBSEEKER' ? handleFavClick : ()=>{router.push('login')}}
           transition="all .4s"
           _hover={isFav ? {} : { backgroundColor: "black", color: "white" }}
           borderRadius="50%"
@@ -37,7 +137,7 @@ const Card = () => {
           width="36px"
           color={isFav ? "#fff" : "silver"}
           cursor="pointer"
-        />
+        />}
       </Box>
       <Box
         justifyContent="space-around"
@@ -57,7 +157,7 @@ const Card = () => {
                 width="16px"
                 src="../../../images/briefcase.png"
               />
-              <Text fontWeight="bold">--</Text>
+              <Text fontWeight="bold">{salaryType ? salaryType : "--"}</Text>
             </Box>
           </Box>
           <Box display="flex" flexDirection="column">
@@ -68,11 +168,16 @@ const Card = () => {
                 width="16px"
                 src="../../../images/wallet.png"
               />
-              <Text fontWeight="bold">--</Text>
+              <Text fontWeight="bold">
+                {expectedSalary ? expectedSalary : "--"}
+              </Text>
             </Box>
           </Box>
         </Box>
         <Button
+          onClick={() => {
+            router.push(`profile?jobId=${encodeURIComponent(userId)}`)
+          }}
           onMouseLeave={() => {
             setisHover(false);
           }}

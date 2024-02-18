@@ -1,193 +1,64 @@
-import { Box, Text, Heading, Container } from "@chakra-ui/react";
-
+import { Box, Container, Divider, Heading, Link, Text } from "@chakra-ui/react";
 import { useTranslations } from "next-intl";
-import Link from "next/link";
-
-import React from "react";
-//
 
 const Privacy = () => {
-  const t = useTranslations();
+  const t = useTranslations("PrivacyPolice");
+
   return (
-    <Box bg="white" width="100%">
+    <Container
+      borderRadius="4px"
+      boxShadow="0 2px 8px rgba(0,0,0,.08)"
+      maxW="container.lg"
+      bg="whiteAlpha.900"
+      p="12px"
+    >
       <Box>
-        <Heading>{t("PrivacyPolice.header")}</Heading>
+        <Heading ml="12px" size="md">
+          {t("header")}
+        </Heading>
+        <Divider variant="solid" my="12px" />
         <Text>
-          {t.rich("PrivacyPolice.mainSection", {
-            span: (chunks) => <span>{chunks}</span>,
-            b: (chunks) => <b>{chunks}</b>,
-            Link: (chunks) => <Link href={""}>{chunks}</Link>,
-          })}
-        </Text>
-        <Text>
-          {t.rich("PrivacyPolice.1", {
-            b: (chunks) => <b>{chunks}</b>,
-
-            div: (chunks) => (
-              <div style={{ marginBottom: "6px" }}>{chunks}</div>
-            ),
-            span: (chunks) => (
-              <span style={{ fontSize: "1.25rem" }}>{chunks}</span>
-            ),
-          })}
-        </Text>
-        <Text>
-          {t.rich("PrivacyPolice.2", {
-            b: (chunks) => <b>{chunks}</b>,
-            div: (chunks) => (
-              <div style={{ marginBottom: "6px" }}>{chunks}</div>
-            ),
-            span: (chunks) => (
-              <span style={{ fontSize: "1.25rem" }}>{chunks}</span>
-            ),
-          })}
-        </Text>
-        <Text>
-          {t.rich("PrivacyPolice.3", {
-            b: (chunks) => <b>{chunks}</b>,
-            div: (chunks) => (
-              <div style={{ marginBottom: "6px" }}>{chunks}</div>
-            ),
-            span: (chunks) => (
-              <span style={{ fontSize: "1.25rem" }}>{chunks}</span>
-            ),
-          })}
-        </Text>
-
-        <Text>
-          {t.rich("PrivacyPolice.2", {
-            b: (chunks) => <b>{chunks}</b>,
-            div: (chunks) => (
-              <div style={{ marginBottom: "6px" }}>{chunks}</div>
-            ),
-            span: (chunks) => (
-              <span style={{ fontSize: "1.25rem" }}>{chunks}</span>
-            ),
-          })}
-        </Text>
-        <Text>
-          {t.rich("PrivacyPolice.3", {
-            b: (chunks) => <b>{chunks}</b>,
-            div: (chunks) => (
-              <div style={{ marginBottom: "6px" }}>{chunks}</div>
-            ),
-            span: (chunks) => (
-              <span style={{ fontSize: "1.25rem" }}>{chunks}</span>
-            ),
-          })}
-        </Text>
-        <Text>
-          {t.rich("PrivacyPolice.4", {
-            b: (chunks) => <b>{chunks}</b>,
-            div: (chunks) => (
-              <div style={{ marginBottom: "6px" }}>{chunks}</div>
-            ),
-            span: (chunks) => (
-              <span style={{ fontSize: "1.25rem" }}>{chunks}</span>
-            ),
-          })}
-        </Text>
-        <Text>
-          {t.rich("PrivacyPolice.5", {
-            b: (chunks) => <b>{chunks}</b>,
-            div: (chunks) => (
-              <div style={{ marginBottom: "6px" }}>{chunks}</div>
-            ),
-            span: (chunks) => (
-              <span style={{ fontSize: "1.25rem" }}>{chunks}</span>
-            ),
-          })}
-        </Text>
-        <Text>
-          {t.rich("PrivacyPolice.7", {
-            b: (chunks) => <b>{chunks}</b>,
-            div: (chunks) => (
-              <div style={{ marginBottom: "6px" }}>{chunks}</div>
-            ),
-            span: (chunks) => (
-              <span style={{ fontSize: "1.25rem" }}>{chunks}</span>
-            ),
-          })}
-        </Text>
-        <Text>
-          {t.rich("PrivacyPolice.8", {
-            b: (chunks) => <b>{chunks}</b>,
-            div: (chunks) => (
-              <div style={{ marginBottom: "6px" }}>{chunks}</div>
-            ),
-            span: (chunks) => (
-              <span style={{ fontSize: "1.25rem" }}>{chunks}</span>
-            ),
-          })}
-        </Text>
-        <Text>
-          {t.rich("PrivacyPolice.9", {
-            b: (chunks) => <b>{chunks}</b>,
-            div: (chunks) => (
-              <div style={{ marginBottom: "6px" }}>{chunks}</div>
-            ),
-            span: (chunks) => (
-              <span style={{ fontSize: "1.25rem" }}>{chunks}</span>
-            ),
-          })}
-        </Text>
-        <Text>
-          {t.rich("PrivacyPolice.10", {
-            div: (chunks) => (
-              <div style={{ marginBottom: "6px" }}>{chunks}</div>
-            ),
-            span: (chunks) => (
-              <span style={{ fontSize: "1.25rem" }}>{chunks}</span>
-            ),
-          })}
-        </Text>
-        <Text>
-          {t.rich("PrivacyPolice.11", {
-            b: (chunks) => <b>{chunks}</b>,
-            div: (chunks) => (
-              <div style={{ marginBottom: "6px" }}>{chunks}</div>
-            ),
-            span: (chunks) => (
-              <span style={{ fontSize: "1.25rem" }}>{chunks}</span>
-            ),
-          })}
-        </Text>
-        <Text>
-          {t.rich("PrivacyPolice.12", {
-            b: (chunks) => <b>{chunks}</b>,
-            div: (chunks) => (
-              <div style={{ marginBottom: "6px" }}>{chunks}</div>
-            ),
-            span: (chunks) => (
-              <span style={{ fontSize: "1.25rem" }}>{chunks}</span>
-            ),
-          })}
-        </Text>
-        <Text>
-          {t.rich("PrivacyPolice.13", {
-            b: (chunks) => <b>{chunks}</b>,
-
-            span: (chunks) => (
-              <span style={{ fontSize: "1.25rem", marginBottom: "6px" }}>
+          {t.rich("mainSection", {
+            strong: (chunks) => <strong>{chunks}</strong>,
+            br: () => <br />,
+            a: (chunks) => (
+              <Link fontWeight="500" color="gray.700" href={chunks as string}>
                 {chunks}
-              </span>
-            ),
-          })}
-        </Text>
-        <Text>
-          {t.rich("PrivacyPolice.14", {
-            div: (chunks) => (
-              <div style={{ marginBottom: "6px" }}>{chunks}</div>
+              </Link>
             ),
             span: (chunks) => (
-              <span style={{ fontSize: "1.25rem", marginBottom: "6px" }}>
+              <Text color="blackAlpha.800" fontSize="sm" mb="8px">
                 {chunks}
-              </span>
+              </Text>
             ),
           })}
         </Text>
+        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14].map((item) => (
+          <Text mb="12px" key={item}>
+            {t.rich(`${item}`, {
+              h6: (chunks) => (
+                <Heading mb="4px" as="h6" size="l">
+                  {chunks}
+                </Heading>
+              ),
+              subtitle1: (chunks) => (
+                <>
+                  <Text as="strong" fontSize="sm">
+                    {chunks}
+                  </Text>
+                  <br />
+                </>
+              ),
+              p: (chunks) => (
+                <Text my="8px" color="blackAlpha.800" fontSize="sm">
+                  {chunks}
+                </Text>
+              ),
+            })}
+          </Text>
+        ))}
       </Box>
-    </Box>
+    </Container>
   );
 };
 

@@ -12,7 +12,7 @@ export const colorObjects = {
         secondary: "rgb(119, 119, 119)",
     },
     blue: {
-        main: "#2058BB",
+        main: "#2a41e8",
         secondary: "#3B8DD4",
         secondaryLight: "#3B8DD41F",
     },

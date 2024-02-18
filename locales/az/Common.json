@@ -68,7 +68,7 @@
     "BOOKMARKED": "Gözaltı edilib"
   },
   "Contacts": "{{email}} / {{phone}} / {{hotLine}}",
-  "Copyrights": "© {{year}} <0>Doqquz</0>.Bütün hüquqlar qorunur.",
+  "Copyrights": "© 2024 <b>Doqquz</b>.Bütün hüquqlar qorunur.",
   "CountrySelect": {
     "emptyList": "Ölkə tapılmadı"
   },
@@ -76,7 +76,7 @@
     "completeAccount": "Hesabınızı tamamlayın"
   },
   "Error": {
-    "default": "Əməliyyat hazırda mümkün deyil. Əlavə məlumat üçün müraciət edin: {{contacts}}.",
+    "default": "Əməliyyat hazırda mümkün deyil",
     "contactToGetInfo": "Əlavə məlumat üçün müraciət edin: {{contacts}}.",
     "validation": {
       "empty": "Bu xana mütləqdir",
@@ -255,7 +255,7 @@
   },
   "present": "Halhazırda",
   "location": "Ünvan",
-  "noRecord": "<emoji>Ups! 😔</emoji><span></span><b>Heç bir məlumat tapılmadı</b>",
+  "noRecord": "<div>Ups! 😔</div><span></span><span>Heç bir məlumat tapılmadı</span>",
   "noData": "Bu bölmədə heç bir qeyd yoxdur",
   "bookmark": {
     "post": "Gözaltı etdiyim Vakansiyalar",

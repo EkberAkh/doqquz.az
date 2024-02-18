@@ -12,15 +12,17 @@ import {
   TagLabel,
 } from "@chakra-ui/react";
 import { useTranslations } from "next-intl";
-import React, { useState } from "react";
-
-const KeywordInput = () => {
+import React, { Dispatch, SetStateAction, useState } from "react";
+interface IKeyword {
+  setSelectedKeywords: Dispatch<SetStateAction<string[]>>;
+}
+const KeywordInput: React.FC<IKeyword> = ({ setSelectedKeywords }) => {
   const t = useTranslations();
-  const [selectedKeywords, setSelectedKeywords] = useState<any>([]);
+  const [selectedKeywordsLocal, setSelectedKeywordsLocal] = useState<any>([]);
   const [inputValue, setInputValue] = useState<any>("");
   const addKeyword = (newKeyword: any) => {
     if (newKeyword) {
-      setSelectedKeywords([...selectedKeywords, newKeyword]);
+      setSelectedKeywordsLocal([...selectedKeywordsLocal, newKeyword]);
       setInputValue("");
     }
   };
@@ -31,10 +33,13 @@ const KeywordInput = () => {
     addKeyword(inputValue);
   };
   const handleRemoveKeyword = (keyword: any) => {
-    setSelectedKeywords(selectedKeywords.filter((k: string) => k !== keyword));
+    setSelectedKeywordsLocal(
+      selectedKeywordsLocal.filter((k: string) => k !== keyword)
+    );
   };
+  setSelectedKeywords(selectedKeywordsLocal);
   return (
-    <FormControl marginBottom="16px" w="100%">
+    <FormControl maxHeight="93px" w="100%">
       <FormLabel marginBottom="16px" fontSize="18px">
         {t("Common.Keyword.label")}
       </FormLabel>
@@ -56,28 +61,26 @@ const KeywordInput = () => {
             event.key === "Enter" && handleAddKeyword(event)
           }
         />
-        <InputRightElement
-          children={
-            <Icon
-              cursor="pointer"
-              marginTop="7px"
-              fontSize="24px"
-              color="#fff"
-              backgroundColor="#2a41e8"
-              w="36px"
-              h="36px"
-              padding="9px"
-              boxShadow=" 0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12)"
-              borderRadius="4px"
-              marginRight="10px"
-              as={AddIcon}
-              onClick={handleButtonClick}
-            />
-          }
-        />
+        <InputRightElement>
+          <Icon
+            cursor="pointer"
+            marginTop="7px"
+            fontSize="24px"
+            color="#fff"
+            backgroundColor="#2a41e8"
+            w="36px"
+            h="36px"
+            padding="9px"
+            boxShadow=" 0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12)"
+            borderRadius="4px"
+            marginRight="10px"
+            as={AddIcon}
+            onClick={handleButtonClick}
+          />
+        </InputRightElement>
       </InputGroup>
       <HStack flexWrap="wrap" spacing={4} mt={2}>
-        {selectedKeywords.map((keyword: any, index: any) => (
+        {selectedKeywordsLocal.map((keyword: any, index: any) => (
           <Tag
             color="#fff"
             padding="4px 8px"

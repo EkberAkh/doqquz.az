@@ -13,21 +13,39 @@ import {
   AutoCompleteList,
 } from "@choc-ui/chakra-autocomplete";
 import { useTranslations } from "next-intl";
-import React from "react";
-
-const JobCategories = () => {
+import React, { Dispatch, SetStateAction, useState } from "react";
+import { EINDUSTRY } from "./enums";
+interface IJobCategory {
+  setSelectedJobCategory: Dispatch<SetStateAction<string>>;
+}
+const JobCategories: React.FC<IJobCategory> = ({ setSelectedJobCategory }) => {
   const t = useTranslations();
-  const jobs = [
-    "INDUSTRY",
-    "ACCOUNTING",
-    "AIRLINES_OR_AVIATION",
-    "ARTS_OR_CRAFTS",
-    "AUTOMOTIVE",
-    "AVIATION_OR_AEROSPACE",
-    "BUSINESS_SUPPLIES_OR_EQUIPMENT",
-  ];
+  const jobs = Object.entries(EINDUSTRY);
+  const [selectedLabel, setSelectedLabel] = useState("");
+  const [inputValue, setInputValue] = useState("");
+
+  const handleCategorySelect = (label: string, originalValue: string) => {
+    setInputValue(label);
+    setSelectedLabel(label);
+    const selectedEntry = jobs.find(([key, val]) => val === originalValue);
+    if (selectedEntry) {
+      setSelectedJobCategory(selectedEntry[1]);
+    }
+  };
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = event.target.value;
+    setInputValue(newValue);
+
+    const found = jobs.some(
+      ([key, value]) => t(`Common.INDUSTRIES.${value}`) === newValue
+    );
+    if (!found && newValue === "") {
+      setSelectedLabel("");
+      setSelectedJobCategory("");
+    }
+  };
   return (
-    <FormControl marginBottom="16px" w="100%">
+    <FormControl w="100%">
       <FormLabel marginBottom="16px" fontSize="18px">
         {t("Common.INDUSTRIES.label")}
       </FormLabel>
@@ -36,6 +54,8 @@ const JobCategories = () => {
           <>
             <InputGroup>
               <AutoCompleteInput
+                value={inputValue}
+                onChange={handleInputChange}
                 borderRadius="4px"
                 minH="48px"
                 fontSize="16px"
@@ -48,26 +68,27 @@ const JobCategories = () => {
                 placeholder={t("Common.INDUSTRIES.label")}
               />
 
-              <InputRightElement
-                children={
-                  <Icon
-                    cursor="pointer"
-                    marginTop="5px"
-                    fontSize="10px"
-                    color="gray"
-                    as={isOpen ? TriangleUpIcon : TriangleDownIcon}
-                  />
-                }
-              />
+              <InputRightElement>
+                <Icon
+                  cursor="pointer"
+                  marginTop="5px"
+                  fontSize="10px"
+                  color="gray"
+                  as={isOpen ? TriangleUpIcon : TriangleDownIcon}
+                />
+              </InputRightElement>
             </InputGroup>
             <AutoCompleteList>
-              {jobs.map((job, cid) => (
+              {jobs.map(([key, value], cid) => (
                 <AutoCompleteItem
                   key={`option-${cid}`}
-                  value={t(`Common.INDUSTRIES.${job}`)}
+                  value={value} // Original enum value
                   textTransform="capitalize"
+                  onClick={() =>
+                    handleCategorySelect(t(`Common.INDUSTRIES.${value}`), value)
+                  }
                 >
-                  {t(`Common.INDUSTRIES.${job}`)}
+                  {t(`Common.INDUSTRIES.${value}`)}
                 </AutoCompleteItem>
               ))}
             </AutoCompleteList>

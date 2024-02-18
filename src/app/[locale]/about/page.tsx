@@ -13,18 +13,34 @@ const About = () => {
           boxShadow="0 2px 8px rgba(0,0,0,.08)"
           minH="384px"
           display="flex"
+          mb="20px"
         >
           <Box
             padding="20px"
-            backgroundImage="url('../../../../images/underline.png')"
-            backgroundSize="contain"
-            backgroundRepeat="no-repeat"
+            gap="60px"
+            display="flex"
+            justifyContent="center"
+            flexDirection="column"
+            textAlign="center"
           >
-            <Heading as="h2">{t("About.value.title")}</Heading>
-            <Container width="400px">
-              <Box>{t("About.mission.title")}</Box>
-              <Box>{t("About.mission.body")}</Box>
-            </Container>
+            <Heading
+              backgroundImage="url('../../../../images/underline.png')"
+              backgroundPosition="bottom"
+              backgroundSize="contain"
+              backgroundRepeat="no-repeat"
+              fontSize={{ base: "40px", lg: "48px" }}
+              fontWeight={500}
+              minHeight="76px"
+            >
+              {t("About.mission.title")}
+            </Heading>
+            <Text
+              width={{ base: "100%", lg: "400px" }}
+              fontSize={{ base: "18px", lg: "20px" }}
+              fontWeight="400"
+            >
+              {t("About.mission.body")}
+            </Text>
           </Box>
           <Box
             flex="1"
@@ -34,10 +50,7 @@ const About = () => {
             backgroundPosition="center"
           ></Box>
         </Box>
-      </Box>
-      <Box padding="20px">
         <Box
-          backgroundImage="url('../../../../images/panel-bg.png')"
           gap="20px"
           backgroundColor="white"
           boxShadow="0 2px 8px rgba(0,0,0,.08)"
@@ -46,45 +59,51 @@ const About = () => {
         >
           <Box
             padding="20px"
-            backgroundImage="url('../../../../images/underline.png')"
-            backgroundSize="contain"
-            backgroundRepeat="no-repeat"
+            display="flex"
+            justifyContent="center"
+            flexDirection="column"
+            textAlign="center"
+            w={{ base: "100%", lg: "50%" }}
           >
-            {/* <Heading as="h2">{t("About.value.title")}</Heading> */}
-            <Box>
-              <Text width="400px">
-                <Heading as="h2">{t("About.value.title")}</Heading>
-                <Text width="400px"></Text>
-                <Box>{t("About.value.body.transparent.caption")}</Box>
-                <Text> {t("About.value.body.transparent.caption")} </Text>
-              </Text>
+            <Heading fontSize="48px" fontWeight={500} mb="12px">
+              {t("About.value.title")}
+            </Heading>
+
+            <Box marginY="10px">
+              <Heading as="h4" size="md">
+                {t("About.value.body.transparent.subtitle")}
+              </Heading>
+
+              <Text> {t("About.value.body.transparent.caption")}</Text>
             </Box>
-            <Box
-              display="flex"
-              flexDirection="column"
-              flex="1"
-              backgroundImage="url('../../../../images/panel-bg.png')"
-            ></Box>
-            <Box>
+            <Box marginY="10px">
               <Heading as="h4" size="md">
                 {t("About.value.body.innovative.subtitle")}
               </Heading>
 
               <Text>{t("About.value.body.innovative.caption")}</Text>
             </Box>
-            <Box>
+            <Box marginY="10px">
               <Heading as="h4" size="md">
                 {t("About.value.body.team.subtitle")}
               </Heading>
               <Text>{t("About.value.body.team.caption")}</Text>
             </Box>
-            <Box>
+            <Box marginY="10px">
               <Heading as="h4" size="md">
                 {t("About.value.body.tenacity.subtitle")}
               </Heading>
               <Text>{t("About.value.body.tenacity.caption")}</Text>
             </Box>
           </Box>
+          <Box
+            flex="1"
+            backgroundImage="url('../../../../images/mission2.svg')"
+            backgroundSize="cover"
+            backgroundRepeat="no-repeat"
+            backgroundPosition="center"
+            display={{ base: "none", lg: "block" }}
+          ></Box>
         </Box>
       </Box>
     </>

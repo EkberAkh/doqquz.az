@@ -5,7 +5,7 @@
         "title": "Manage Jobs",
         "subTitle": "My Job Listings",
         "empty": "You don't have any job post",
-        "postedOn":"Posted on {{date}}",
+        "postedOn":"Posted on",
         "actions": {
             "candidates":"Manage Candidates",
             "postAJob":"Post a Job"
@@ -28,6 +28,6 @@
         "requiredSkills":"Required Skills",
         "contactInformation": "How to apply?",
         "description":"Job Description",
-        "share":"Interesting? <0>Share It!</0>"
+        "share":"Interesting? <NavigationLink>Share It!</NavigationLink>"
     }
 }

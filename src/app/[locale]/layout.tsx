@@ -29,12 +29,16 @@ export default function RootLayout({ children, params: { locale } }: IProps) {
       <body className={inter.className}>
 
         <NextIntlClientProvider locale={locale} messages={messages}>
+    
+
           <Header />
           <Box padding='24px 0' bgColor='#f9f9f9'>
             <Providers>{children}</Providers>
           </Box>
 
           <Footer />
+   
+
         </NextIntlClientProvider>
 
       </body>

@@ -2,7 +2,7 @@
 import { Box, Button, Flex } from "@chakra-ui/react";
 
 import { useTranslations } from "next-intl";
-import React from "react";
+import React, { useState } from "react";
 import LocationInput from "./LocationInput";
 import KeywordInput from "./KeywordInput";
 import JobCategories from "./JobCategories";
@@ -12,44 +12,81 @@ import CurrencyType from "./CurrencyType";
 import Salary from "./Salary";
 
 interface IJobFilter {
-  jobType:boolean
+  jobType: boolean;
+  locationInput: boolean;
+  onFilterChange: (filterData: any) => void;
 }
-const JobsFilter: React.FC<IJobFilter> = ({jobType}) => {
+const JobsFilter: React.FC<IJobFilter> = ({
+  jobType,
+  locationInput,
+  onFilterChange,
+}) => {
   const t = useTranslations();
+  const [selectedCurrency, setSelectedCurrency] = useState("");
+  const [selectedJobCategory, setSelectedJobCategory] = useState("");
+  const [selectedLocation, setSelectedLocation] = useState("");
+  const [selectedSalary, setSelectedSalary] = useState("");
+  const [selectedJobTypes, setSelectedJobTypes] = useState<string[]>([]);
+  const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
+  const [salaryRange, setSalaryRange] = useState({ min: 1, max: 100000 });
+  const handleSalaryChange = (min: number, max: number) => {
+    setSalaryRange({ min, max });
+  };
+  const handleSearchClick = () => {
+    const filterData = {
+      currency: selectedCurrency,
+      category: selectedJobCategory,
+      // @ts-ignore
+      location: selectedLocation.id === undefined ? "" : selectedLocation.id,
+      locObj: selectedLocation,
+
+      salaryType: selectedSalary,
+      type: selectedJobTypes[0] === undefined ? "" : selectedJobTypes[0],
+      keyword: selectedKeywords[0] === undefined ? "" : selectedKeywords[0],
+      maxEstimatedBudget: salaryRange.max,
+      minEstimatedBudget: salaryRange.min,
+    };
+
+    onFilterChange(filterData);
+  };
 
   return (
-    <Flex
-      overflowX="hidden"
-      overflowY="auto"
-      flexWrap="wrap"
-      height="calc(100vh - 82px)"
-    >
+    <Flex overflowX="hidden" overflowY="auto" flexWrap="wrap">
       <Box
-        backgroundColor="#fafafa"
+        gap="40px"
+        backgroundColor={{ base: "transparent", lg: "#fafafa" }}
         padding="24px"
-        w="360px"
+        w={{ base: "100%", md: "360px" }}
         display="flex"
         flexDirection="column"
         flexShrink={0}
       >
-        <LocationInput />
-        <KeywordInput />
-        <JobCategories />
-       {jobType && <JobType /> } 
-        <SalaryType />
-        <CurrencyType />
-        <Salary />
+        {locationInput && (
+          <LocationInput setSelectedLocation={setSelectedLocation} />
+        )}
+        <KeywordInput setSelectedKeywords={setSelectedKeywords} />
+        <JobCategories setSelectedJobCategory={setSelectedJobCategory} />
+        {jobType && (
+          <JobType
+            selectedJobTypes={selectedJobTypes}
+            setSelectedJobTypes={setSelectedJobTypes}
+          />
+        )}
+        <SalaryType setSelectedSalary={setSelectedSalary} />
+        <CurrencyType
+          selectedCurrency={selectedCurrency}
+          setSelectedCurrency={setSelectedCurrency}
+        />
+        <Salary onSalaryChange={handleSalaryChange} />
 
         <Button
+          marginTop="16px"
           height="52px"
           _hover={{}}
-          margin="0 0 12px 12px"
-          left="0"
-          w="352px"
-          bottom="0"
+          w="100%"
           color="#fff"
-          position="fixed"
           backgroundColor="#2a41e8"
+          onClick={handleSearchClick}
         >
           {t("Common.Action.SEARCH")}
         </Button>

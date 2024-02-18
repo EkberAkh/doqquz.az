@@ -15,14 +15,36 @@ import {
   AutoCompleteList,
 } from "@choc-ui/chakra-autocomplete";
 import { useTranslations } from "next-intl";
-import React from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { LocationType } from "../postJobs/page";
+interface IJobCategory {
+  setSelectedLocation: Dispatch<SetStateAction<LocationType | null>>;
+}
+interface LocationItem {
+  city: string;
+  // include other properties if needed
+}
+const LocationInput: React.FC<IJobCategory> = ({ setSelectedLocation }) => {
+  const [locations, setLocations] = useState<LocationItem[]>([]);
+  const [inputValue, setInputValue] = useState("");
+  useEffect(() => {
+    if (inputValue) {
+      fetch(`https://neo-814m.onrender.com/v1/location/${inputValue}`)
+        .then((response) => response.json())
+        .then((data) => setLocations(data.list))
+        .catch((error) => console.error("Error fetching locations:", error));
+    }
+  }, [inputValue]);
 
-const LocationInput = () => {
-  const locations = ["Yasamal", "Bayil", "Genclik"];
   const t = useTranslations();
+  console.log(locations);
 
+  const handleSelect = (location: LocationItem) => {
+    // @ts-ignore
+    setSelectedLocation(location);
+  };
   return (
-    <FormControl marginBottom="16px" w="100%">
+    <FormControl w="100%">
       <FormLabel marginBottom="16px" fontSize="18px">
         {t("Common.location")}
       </FormLabel>
@@ -42,36 +64,37 @@ const LocationInput = () => {
                 maxW="100%"
                 variant="filled"
                 placeholder={t("Common.location")}
-              />
-              <InputLeftElement
-                children={
-                  <Img
-                    marginTop="5px"
-                    color="gray"
-                    src="../../../../images/image.png"
-                  />
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setInputValue(e.target.value)
                 }
               />
-              <InputRightElement
-                children={
-                  <Icon
-                    cursor="pointer"
-                    marginTop="5px"
-                    fontSize="10px"
-                    color="gray"
-                    as={isOpen ? TriangleUpIcon : TriangleDownIcon}
-                  />
-                }
-              />
+              <InputLeftElement>
+                <Img
+                  marginTop="5px"
+                  color="gray"
+                  src="../../../../images/image.png"
+                />
+              </InputLeftElement>
+
+              <InputRightElement>
+                <Icon
+                  cursor="pointer"
+                  marginTop="5px"
+                  fontSize="10px"
+                  color="gray"
+                  as={isOpen ? TriangleUpIcon : TriangleDownIcon}
+                />
+              </InputRightElement>
             </InputGroup>
             <AutoCompleteList>
-              {locations.map((country, cid) => (
+              {locations.map((item, cid) => (
                 <AutoCompleteItem
                   key={`option-${cid}`}
-                  value={country}
+                  value={item.city}
                   textTransform="capitalize"
+                  onClick={() => handleSelect(item)}
                 >
-                  {country}
+                  {item.city}
                 </AutoCompleteItem>
               ))}
             </AutoCompleteList>

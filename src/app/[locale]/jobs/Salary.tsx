@@ -12,18 +12,19 @@ import {
 import { useTranslations } from "next-intl";
 import React, { useState } from "react";
 
-const Salary = () => {
+const Salary = ({ onSalaryChange }: { onSalaryChange: (min: number, max: number) => void }) => {
   const t = useTranslations();
 
-  const [minSalary, setMinSalary] = useState(30000);
+  const [minSalary, setMinSalary] = useState(1);
   const [maxSalary, setMaxSalary] = useState(100000);
 
   const handleSliderChange = ([min, max]: any) => {
     setMinSalary(min);
     setMaxSalary(max);
+    onSalaryChange(min, max);
   };
   return (
-    <VStack spacing={4} align="stretch">
+    <VStack marginBottom='16px' spacing={4} align="stretch">
       <FormControl>
         <FormLabel marginBottom="16px" fontSize="18px">
           {t("Common.Salary.label")}
@@ -64,9 +65,9 @@ const Salary = () => {
       <RangeSlider
         aria-label={["min", "max"]}
         defaultValue={[minSalary, maxSalary]}
-        min={10000}
+        min={1}
         max={200000}
-        step={1000}
+        step={10}
         onChange={handleSliderChange}
       >
         <RangeSliderTrack>
